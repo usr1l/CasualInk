@@ -6,9 +6,9 @@ import "./LoginForm.css";
 
 function LoginFormModal() {
   const dispatch = useDispatch();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState([]);
+  const [ email, setEmail ] = useState("");
+  const [ password, setPassword ] = useState("");
+  const [ errors, setErrors ] = useState([]);
   const { closeModal } = useModal();
 
   const handleSubmit = async (e) => {
@@ -17,7 +17,7 @@ function LoginFormModal() {
     if (data) {
       setErrors(data);
     } else {
-        closeModal()
+      closeModal()
     }
   };
 

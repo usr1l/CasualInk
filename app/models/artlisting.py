@@ -23,6 +23,9 @@ class ArtListing(db.Model):
 
     owner = db.relationship("User", back_populates="art_listings")
 
+    def check_owner(self, user_id):
+        return self.owner_id == user_id
+
     @classmethod
     def create(cls, items):
         if isinstance(items, list):

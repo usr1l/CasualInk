@@ -1,16 +1,20 @@
+import enum
 from app.models import db, environment, SCHEMA, add_prefix_for_prod
-from enum import Enum
+from sqlalchemy import Enum
 
 
-class ArtWorkTypesEnum(Enum):
-    OIL = "oil"
-    ACRYLIC = "acrylic"
-    MULTIMEDIA = "multimedia"
-    BALLPOINT_PEN = "ballpoint pen"
-    CHARCOAL = "charcoal"
-    WATERCOLOR = "watercolor"
-    PENCIL = "pencil"
-    COLOR_PENCIL = "color pencil"
+class ArtWorkTypesEnum(enum.Enum):
+    OIL = "Oil"
+    ACRYLIC = "Acrylic"
+    MULTIMEDIA = "Multimedia"
+    BALLPOINT_PEN = "Ballpoint Pen"
+    CHARCOAL = "Charcoal"
+    WATERCOLOR = "Watercolor"
+    PENCIL = "Pencil"
+    COLOR_PENCIL = "Color Pencil"
+
+    def __str__(self):
+        return self.name
 
 
 class Artwork(db.Model):
@@ -23,7 +27,7 @@ class Artwork(db.Model):
     title = db.Column(db.String(50), nullable=False)
     artist_name = db.Column(db.String(50), nullable=False)
     year = db.Column(db.Date, nullable=False)
-    height = db.Column(db.Numeric(10, 2), nullable=False)
+    height = db.Column(db.Numeric(6, 2), nullable=False)
     width = db.Column(db.Numeric(6, 2), nullable=False)
     available = db.Column(db.Boolean, nullable=False, default=False)
     type = db.Column(db.Enum(ArtWorkTypesEnum), nullable=False)
@@ -43,6 +47,10 @@ class Artwork(db.Model):
     for_auction_listing = db.relationship(
         "AuctionListing", back_populates="artwork", single_parent=True, cascade="all, delete-orphan"
     )
+
+
+    def check_owner(self, user_id):
+        return self.owner_id == user_id
 
     @classmethod
     def create(cls, items):
@@ -82,7 +90,7 @@ class Artwork(db.Model):
             "year": self.year.year,
             "height": self.height,
             "width": self.width,
-            "type": self.type,
+            "type": self.type.name,
             "available": self.available,
             "owner_id": self.owner_id,
         }
