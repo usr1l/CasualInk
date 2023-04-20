@@ -6,7 +6,7 @@ const LandingPage = () => {
   const { allArtworks } = useSelector(state => state.artworks);
   const { allArtlistings } = useSelector(state => state.artlistings);
   const artworks = Object.values(allArtworks)
-  console.log(artworks)
+
   return (
     <>
       <div>Hi</div>
