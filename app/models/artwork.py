@@ -25,7 +25,7 @@ class Artwork(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(50), nullable=False, default='Untitled')
-    artist_name = db.Column(db.String(50), nullable=False, default='Uknown')
+    artist_name = db.Column(db.String(50), nullable=False, default='Unknown')
     year = db.Column(db.Date, nullable=False)
     height = db.Column(db.Numeric(6, 2), nullable=False)
     width = db.Column(db.Numeric(6, 2), nullable=False)
@@ -87,7 +87,7 @@ class Artwork(db.Model):
             "id": self.id,
             "title": self.title,
             "artist_name": self.artist_name,
-            "year": self.year.year,
+            "year": self.year,
             "height": self.height,
             "width": self.width,
             "type": self.type.value,

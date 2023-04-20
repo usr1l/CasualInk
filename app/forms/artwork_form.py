@@ -14,4 +14,4 @@ class ArtworkForm(FlaskForm):
                         DataRequired(message="Width required.")])
     available = SelectField("Available for sale: ", choices=['Yes', 'No'])
     type = SelectField("Artwork Type: ", choices=[c.value for c in ArtWorkTypesEnum],
-                       validators=(DataRequired()))
+                       validators=[DataRequired()])
