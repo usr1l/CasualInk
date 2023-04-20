@@ -24,8 +24,8 @@ class Artwork(db.Model):
         __table_args__ = {"schema": SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(50), nullable=False)
-    artist_name = db.Column(db.String(50), nullable=False)
+    title = db.Column(db.String(50), nullable=False, default='Untitled')
+    artist_name = db.Column(db.String(50), nullable=False, default='Uknown')
     year = db.Column(db.Date, nullable=False)
     height = db.Column(db.Numeric(6, 2), nullable=False)
     width = db.Column(db.Numeric(6, 2), nullable=False)
@@ -35,7 +35,8 @@ class Artwork(db.Model):
         db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False
     )
 
-    owner = db.relationship("User", back_populates="artworks", single_parent=True)
+    owner = db.relationship(
+        "User", back_populates="artworks", single_parent=True)
 
     for_sale_listing = db.relationship(
         "ArtListing",
@@ -47,7 +48,6 @@ class Artwork(db.Model):
     for_auction_listing = db.relationship(
         "AuctionListing", back_populates="artwork", single_parent=True, cascade="all, delete-orphan"
     )
-
 
     def check_owner(self, user_id):
         return self.owner_id == user_id
@@ -90,7 +90,7 @@ class Artwork(db.Model):
             "year": self.year.year,
             "height": self.height,
             "width": self.width,
-            "type": self.type.name,
+            "type": self.type.value,
             "available": self.available,
             "owner_id": self.owner_id,
         }
