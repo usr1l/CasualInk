@@ -3,6 +3,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from datetime import datetime, date
 
+
 class User(db.Model, UserMixin):
     __tablename__ = "users"
 
@@ -14,6 +15,7 @@ class User(db.Model, UserMixin):
     firstname = db.Column(db.String(50), nullable=False)
     lastname = db.Column(db.String(50), nullable=False)
     email = db.Column(db.String(255), nullable=False, unique=True)
+    profile_pic = db.Column(db.String(255))
     bio = db.Column(db.Text, nullable=False)
     join_date = db.Column(db.Date, nullable=False, default=date.today)
     hashed_password = db.Column(db.String(255), nullable=False)
@@ -27,7 +29,8 @@ class User(db.Model, UserMixin):
     auction_listings = db.relationship(
         "AuctionListing", back_populates="owner", cascade="all, delete-orphan"
     )
-    shopping_cart = db.relationship("ShoppingCart", back_populates="owner", cascade="all, delete-orphan")
+    shopping_cart = db.relationship(
+        "ShoppingCart", back_populates="owner", cascade="all, delete-orphan")
 
     if environment == "production":
         reviews = db.relationship(
@@ -45,7 +48,6 @@ class User(db.Model, UserMixin):
             secondaryjoin=Review.receiver_id == id,
             overlaps="reveiver",
         )
-
 
     @property
     def password(self):
@@ -67,6 +69,7 @@ class User(db.Model, UserMixin):
             "lastname": self.lastname,
             "bio": self.bio,
             "join_date": self.join_date,
+            "profile_pic": self.profile_pic
         }
 
     def __repr__(self):

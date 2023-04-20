@@ -31,6 +31,7 @@ class Artwork(db.Model):
     width = db.Column(db.Numeric(6, 2), nullable=False)
     available = db.Column(db.Boolean, nullable=False, default=False)
     type = db.Column(db.Enum(ArtWorkTypesEnum), nullable=False)
+    image = db.Column(db.String(255))
     owner_id = db.Column(
         db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False
     )
@@ -93,6 +94,7 @@ class Artwork(db.Model):
             "type": self.type.value,
             "available": self.available,
             "owner_id": self.owner_id,
+            "image": self.image
         }
 
     def __repr__(self):

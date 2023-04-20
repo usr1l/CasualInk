@@ -2,6 +2,8 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SelectField, DateField
 from wtforms.validators import DataRequired
 from app.models import ArtWorkTypesEnum
+from flask_wtf.file import FileField, FileAllowed, FileRequired
+from app.forms import ALLOWED_EXTENSIONS
 
 
 class ArtworkForm(FlaskForm):
@@ -15,3 +17,5 @@ class ArtworkForm(FlaskForm):
     available = SelectField("Available for sale: ", choices=['Yes', 'No'])
     type = SelectField("Artwork Type: ", choices=[c.value for c in ArtWorkTypesEnum],
                        validators=[DataRequired()])
+    image = FileField("Image File", validators=[
+                      FileRequired(), FileAllowed(list(ALLOWED_EXTENSIONS))])
