@@ -3,7 +3,7 @@ from app.models import db, environment, SCHEMA
 from .artlistings import seed_artlistings, unseed_artlistings
 from .artworks import seed_artworks, unseed_artworks
 from .users import seed_users, undo_users
-
+from .shoppingcart import seed_shopping_carts, unseed_shopping_carts
 # Creates a seed group to hold our commands
 # So we can type `flask seed --help`
 seed_commands = AppGroup('seed')
@@ -19,8 +19,10 @@ def seed():
         # Make sure to add all your other model's undo functions below
         unseed_artlistings()
         unseed_artworks()
+        unseed_shopping_carts()
         undo_users()
     seed_users()
+    seed_shopping_carts()
     seed_artworks()
     seed_artlistings()
     # Add other seed functions here
@@ -31,5 +33,6 @@ def seed():
 def undo():
     unseed_artlistings()
     unseed_artworks()
+    unseed_shopping_carts()
     undo_users()
     # Add other undo functions here

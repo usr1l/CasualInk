@@ -27,6 +27,7 @@ class User(db.Model, UserMixin):
     auction_listings = db.relationship(
         "AuctionListing", back_populates="owner", cascade="all, delete-orphan"
     )
+    shopping_cart = db.relationship("ShoppingCart", back_populates="owner", cascade="all, delete-orphan")
 
     if environment == "production":
         reviews = db.relationship(

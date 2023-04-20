@@ -1,0 +1,73 @@
+:root {
+  --primary: white;
+}
+
+.btn {
+  padding: 8px 20px;
+  border-radius: 2px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  letter-spacing: 1px;
+}
+
+.btn--medium {
+  padding: 8px 20px;
+  font-size: 14px;
+}
+
+.btn--medium {
+  padding: 8px 20px;
+  font-size: 14px;
+}
+
+.btn--splash {
+  padding: 8px 20px;
+  font-size: 16px;
+  width: 240px;
+  height: 40px;
+}
+
+.btn--demo {
+  background-color: var(--site-green);
+  border-radius: 1rem;
+  background-color: black;
+  transition: 0.3s;
+  color: white;
+}
+
+.btn--primary {
+  background-color: var(--primary);
+  color: #242424;
+  border: 1px solid var(--primary);
+}
+
+.btn--demo:enabled:hover {
+  color: rgb(11, 117, 153);
+  box-shadow: -2px 2px 8px -3px black;
+  transition: 0.3s;
+}
+
+.btn--login {
+  background-color: rgb(3, 101, 167);
+  border-radius: 0.25rem;
+  height: 36px;
+  margin-top: 20px;
+  color: white;
+  transition: 0.3s;
+}
+
+.btn--wide {
+  width: 440px;
+  box-sizing: border-box;
+}
+
+.btn--login:enabled:hover {
+  transition: 0.3s;
+  background: rgb(67, 67, 187);
+}
+
+.btn[disabled] {
+  opacity: 0.5;
+  cursor: default;
+}
