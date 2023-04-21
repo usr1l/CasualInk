@@ -73,10 +73,10 @@ function Navigation({ isLoaded }) {
 				<div id='navbar-bot-container'>
 					<div id='navbar-bot-navbar'>
 						<NavLink exact to={`/`} className="navbar-bot-navbar-item" activeClassName='navbar-bot-navlink-active'>
-							Sellers
+							Artworks
 						</NavLink>
 						<NavLink exact to={`/`} className="navbar-bot-navbar-item" activeClassName='navbar-bot-navlink-active'>
-							Artworks
+							Collect
 						</NavLink>
 					</div>
 				</div>
