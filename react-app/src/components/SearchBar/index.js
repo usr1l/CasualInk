@@ -1,8 +1,17 @@
-import React from 'react';
+
+import React, { useState } from 'react';
+import "./SearchBar.css";
 
 const SearchBar = () => {
+  const [ searchContext, setSearchContext ] = useState("")
+
   return (
-    <div className="search-bar"></div>
+    <input
+      className="search-bar"
+      placeholder='Search for works by name, artist or year'
+      value={searchContext}
+      onChange={e => setSearchContext(e.target.value)}>
+    </input>
   )
 };
 
