@@ -4,7 +4,8 @@ import './Button.css';
 const STYLES = [
   'btn--primary',
   'btn--demo',
-  'btn--login'
+  'btn--login',
+  'btn--dropdown'
 ];
 const SIZES = [
   'btn--medium',

@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { logout } from "../../store/session";
-import OpenModalButton from "../OpenModalButton";
-import LoginFormModal from "../LoginFormModal";
-import SignupFormModal from "../SignupFormModal";
+import { useHistory } from "react-router-dom";
+import IconLabel from "../IconLabel";
+import Button from "../Button";
 
 function ProfileButton({ user }) {
+  const history = useHistory();
   const dispatch = useDispatch();
   const [ showMenu, setShowMenu ] = useState(false);
   const ulRef = useRef();
@@ -31,43 +32,29 @@ function ProfileButton({ user }) {
 
   const handleLogout = (e) => {
     e.preventDefault();
-    dispatch(logout());
+    dispatch(logout())
+      .then(() => history.push("/"));
   };
 
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
   const closeMenu = () => setShowMenu(false);
 
   return (
-    <>
-      <button className="btn btn-" onClick={openMenu}>
+    <div className="btn-mobile">
+      <button className="btn signed-in-icons" onClick={openMenu}>
         <i class="fa-regular fa-user"></i>
       </button >
-      <ul className={ulClassName} ref={ulRef}>
-        {user ? (
-          <>
-            <li>{user.username}</li>
-            <li>{user.email}</li>
-            <li>
-              <button onClick={handleLogout}>Log Out</button>
-            </li>
-          </>
-        ) : (
-          <>
-            <OpenModalButton
-              buttonText="Log In"
-              onItemClick={closeMenu}
-              modalComponent={<LoginFormModal />}
-            />
-
-            <OpenModalButton
-              buttonText="Sign Up"
-              onItemClick={closeMenu}
-              modalComponent={<SignupFormModal />}
-            />
-          </>
-        )}
-      </ul>
-    </>
+      <div className={ulClassName} ref={ulRef}>
+        <IconLabel iconClass={"fa-regular fa-user"} labelText={user.username} />
+        <IconLabel iconClass={"fa-regular fa-envelope"} labelText={user.email} />
+        <div className="icon-label-component">
+          <div className="icon-label-item-image-container">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+          </div>
+          <Button buttonStyle={'btn--dropdown'} onClick={handleLogout}>Log Out</Button>
+        </div>
+      </div>
+    </div>
   );
 }
 

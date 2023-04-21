@@ -44,7 +44,7 @@
 }
 
 .btn--demo:enabled:hover {
-  color: var(--site-sage);
+  background-color: var(--site-sage);
   box-shadow: -2px 2px 8px -3px black;
   transition: 0.3s;
 }
@@ -55,7 +55,7 @@
   transition: 0.3s;
   color: black;
   box-sizing: border-box;
-  border: 2px solid black;
+  border: 1px solid black;
 }
 
 .btn--wide {
@@ -82,8 +82,25 @@
   width: 95px;
 }
 
+button.btn--dropdown {
+  all: unset;
+  background: transparent;
+  width: 100px;
+  font-size: 13px;
+  font-weight: 300;
+  color: #212121;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
 
 .btn--login.btn--small,
 .btn--demo.btn--small {
   margin-left: 10px;
+}
+
+button.btn--dropdown:hover {
+  color: var(--site-sage);
+  transition: 0.5s;
 }

@@ -1,0 +1,25 @@
+.icon-label-component {
+  height: 38px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  width: 80%;
+
+}
+
+.icon-label-item-image-container {
+  height: 20px;
+  width: 30px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-right: 1px;
+}
+
+.icon-label-item-text {
+  font-size: 13px;
+  font-weight: 300;
+  color: #212121;
+  letter-spacing: 1px;
+}

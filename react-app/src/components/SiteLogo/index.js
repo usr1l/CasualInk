@@ -5,8 +5,8 @@ import './SiteLogo.css';
 
 const SiteLogo = () => {
   return (
-    <Link to="/" className='site-logo'>
-      <img id='site-logo' src={''} alt='logo' />
+    <Link to="/" id='site-logo'>
+      <img src={''} alt='home' />
     </Link>
   )
 };

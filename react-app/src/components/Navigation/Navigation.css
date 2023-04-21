@@ -1,15 +1,27 @@
 .profile-dropdown {
-  list-style: none;
+  display: flex;
+  flex-direction: column;
   position: absolute;
-  top: 80px;
-  right: 20px;
-  border-radius: 6px;
+  top: 50px;
+  right: 40px;
+  border-radius: .25rem;
+  box-sizing: border-box;
   height: auto;
-  width: auto;
-  box-shadow: -3px 3px 10px 1px #888888;
+  width: 230px;
   background-color: white;
   align-items: left;
-  padding: 0;
+  padding: 10px 0;
+  border: 1px solid lightgrey;
+  align-items: center;
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  font-size: 12pt;
+  font-weight: 300;
 }
 
 .hidden {
@@ -48,7 +60,6 @@
   min-width: 400px;
   box-sizing: border-box;
   padding: 0 40px;
-  border: 1px solid green;
 }
 
 
@@ -70,12 +81,22 @@
   font-weight: 300;
   margin-right: 35px;
   color: black;
+  transition: 0.5s;
 }
 
+.signed-in-icons {
+  background: white;
+  font-size: 12pt;
+  transition: 0.5s;
+}
+
+.navbar-bot-navbar-item:hover,
 .navbar-bot-navlink-active {
-  color: grey;
+  color: var(--site-sage);
+  transition: 0.5s;
 }
 
+#site-logo,
 #navbar-icons-container,
 #navbar-icons,
 #navbar-shortcuts,
@@ -85,6 +106,7 @@
   flex-direction: row;
   align-items: center;
   transition: 0.3s;
+  box-sizing: border-box;
 }
 
 #navbar-icons {
@@ -99,4 +121,9 @@
 #navbar-shortcuts {
   width: 300px;
   border: solid brown 1px;
+}
+
+.signed-in-icons:hover {
+  color: var(--site-sage);
+  transition: 0.5s;
 }

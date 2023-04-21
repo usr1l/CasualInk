@@ -6,12 +6,15 @@ const SearchBar = () => {
   const [ searchContext, setSearchContext ] = useState("")
 
   return (
-    <input
-      className="search-bar"
-      placeholder='Search for works by name, artist or year'
-      value={searchContext}
-      onChange={e => setSearchContext(e.target.value)}>
-    </input>
+    <div id="navbar-search-bar">
+      <input
+        id="search-bar"
+        placeholder='Search feature coming soon'
+        value={searchContext}
+        onChange={e => setSearchContext(e.target.value)}>
+      </input>
+      <i id='search-icon' class="fa-solid fa-magnifying-glass"></i>
+    </div>
   )
 };
 

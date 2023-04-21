@@ -1,6 +1,7 @@
 /* TODO Add site wide styles */
 :root {
   --site-sage: rgb(47, 102, 32);
+  --site-gray: rgb(180, 180, 180);
 }
 
 body {
@@ -19,5 +20,6 @@ body {
   min-height: 100vh;
   background-size: cover;
   letter-spacing: 1px;
-  min-width: 400px
+  min-width: 400px;
+  box-sizing: border-box;
 }

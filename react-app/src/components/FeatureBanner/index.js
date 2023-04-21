@@ -3,8 +3,6 @@ import './FeatureBanner.css'
 
 const FeatureBanner = ({
   cardStyle,
-  iconClass,
-  iconId,
   heading,
   subHeading,
   children
@@ -16,7 +14,9 @@ const FeatureBanner = ({
   return (
     <div className="banner-container" id={checkDivStyle}>
       <div className="banner">
-        <i className={`${iconClass} banner-element`} id={iconId} />
+        <div className="banner-element" id="banner-image-container">
+          <img />
+        </div>
         <div className="banner-element">
           <div className="banner-element-heading">{heading}</div>
           <div className="banner-element-subheading">{subHeading}</div>

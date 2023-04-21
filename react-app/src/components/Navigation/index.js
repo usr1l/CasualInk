@@ -14,14 +14,15 @@ import SearchBar from '../SearchBar';
 function Navigation({ isLoaded }) {
 	const sessionUser = useSelector(state => state.session.user);
 	const dispatch = useDispatch();
-	const history = useHistory()
+	const history = useHistory();
 
 	const [ showMenu, setShowMenu ] = useState(false);
 	const demoUser = () => {
 		dispatch(login("demo@aa.io", "password"))
-	}
+			.then(() => history.push('/'));
+	};
 
-	const closeMenu = () => setShowMenu(false)
+	const closeMenu = () => setShowMenu(false);
 
 	return (
 		<nav id='navbar'>
@@ -37,12 +38,12 @@ function Navigation({ isLoaded }) {
 							{sessionUser ? (
 								<>
 									<Button >
-										<i class="fa-regular fa-envelope"></i>
+										<i class="fa-regular fa-paper-plane signed-in-icons"></i>
 									</Button>
 									<Button>
-										<i class="fa-solid fa-cart-shopping"></i>
+										<i class="fa-solid fa-cart-shopping signed-in-icons"></i>
 									</Button>
-									<ProfileButton user={sessionUser} />
+									<ProfileButton className="signed-in-icons" user={sessionUser} />
 								</>
 							) : (
 								<>
@@ -72,10 +73,10 @@ function Navigation({ isLoaded }) {
 			<div id='navbar-bot'>
 				<div id='navbar-bot-container'>
 					<div id='navbar-bot-navbar'>
-						<NavLink exact to={`/`} className="navbar-bot-navbar-item" activeClassName='navbar-bot-navlink-active'>
+						<NavLink exact to={`/artworks`} className="navbar-bot-navbar-item" activeClassName='navbar-bot-navlink-active'>
 							Artworks
 						</NavLink>
-						<NavLink exact to={`/`} className="navbar-bot-navbar-item" activeClassName='navbar-bot-navlink-active'>
+						<NavLink exact to={`/collections`} className="navbar-bot-navbar-item" activeClassName='navbar-bot-navlink-active'>
 							Collect
 						</NavLink>
 					</div>
