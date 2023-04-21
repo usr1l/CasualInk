@@ -30,7 +30,7 @@ class Artwork(db.Model):
     height = db.Column(db.Numeric(6, 2), nullable=False)
     width = db.Column(db.Numeric(6, 2), nullable=False)
     available = db.Column(db.Boolean, nullable=False, default=False)
-    type = db.Column(db.Enum(ArtWorkTypesEnum), nullable=False)
+    materials = db.Column(db.Enum(ArtWorkTypesEnum), nullable=False)
     image = db.Column(db.String(255))
     owner_id = db.Column(
         db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False
@@ -64,7 +64,7 @@ class Artwork(db.Model):
                     height=item["height"],
                     width=item["width"],
                     available=item["available"],
-                    type=item["type"],
+                    materials=item["materials"],
                     owner_id=item["owner_id"],
                 )
                 for item in items
@@ -78,7 +78,7 @@ class Artwork(db.Model):
                 height=items["height"],
                 width=items["width"],
                 available=items["available"],
-                type=items["type"],
+                materials=items["materials"],
                 owner_id=items["owner_id"],
             )
             return new_item
@@ -91,7 +91,7 @@ class Artwork(db.Model):
             "year": self.year,
             "height": self.height,
             "width": self.width,
-            "type": self.type.value,
+            "materials": self.materials.value,
             "available": self.available,
             "owner_id": self.owner_id,
             "image": self.image

@@ -2,6 +2,7 @@ from app.models import db, environment, SCHEMA, Artwork, ArtWorkTypesEnum
 from datetime import date
 from sqlalchemy.sql import text
 
+
 def seed_artworks():
     artwork_seed_data = [
         {
@@ -11,7 +12,7 @@ def seed_artworks():
             "height": 81.0,
             "width": 65.5,
             "available": True,
-            "type": ArtWorkTypesEnum.OIL,
+            "materials": ArtWorkTypesEnum.OIL,
             "owner_id": 1
         },
         {
@@ -21,7 +22,7 @@ def seed_artworks():
             "height": 77.0,
             "width": 53.0,
             "available": True,
-            "type": ArtWorkTypesEnum.OIL,
+            "materials": ArtWorkTypesEnum.OIL,
             "owner_id": 2
         },
         {
@@ -31,7 +32,7 @@ def seed_artworks():
             "height": 74.0,
             "width": 92.0,
             "available": True,
-            "type": ArtWorkTypesEnum.OIL,
+            "materials": ArtWorkTypesEnum.OIL,
             "owner_id": 3
         },
         {
@@ -41,7 +42,7 @@ def seed_artworks():
             "height": 24.0,
             "width": 33.0,
             "available": True,
-            "type": ArtWorkTypesEnum.OIL,
+            "materials": ArtWorkTypesEnum.OIL,
             "owner_id": 1
         },
         {
@@ -51,7 +52,7 @@ def seed_artworks():
             "height": 46.5,
             "width": 40.0,
             "available": True,
-            "type": ArtWorkTypesEnum.OIL,
+            "materials": ArtWorkTypesEnum.OIL,
             "owner_id": 2
         },
         {
@@ -61,7 +62,7 @@ def seed_artworks():
             "height": 91.0,
             "width": 73.5,
             "available": True,
-            "type": ArtWorkTypesEnum.OIL,
+            "materials": ArtWorkTypesEnum.OIL,
             "owner_id": 3
         },
         {
@@ -71,7 +72,7 @@ def seed_artworks():
             "height": 349.0,
             "width": 776.0,
             "available": True,
-            "type": ArtWorkTypesEnum.OIL,
+            "materials": ArtWorkTypesEnum.OIL,
             "owner_id": 3
         },
         {
@@ -81,7 +82,7 @@ def seed_artworks():
             "height": 460.0,
             "width": 880.0,
             "available": True,
-            "type": ArtWorkTypesEnum.OIL,
+            "materials": ArtWorkTypesEnum.OIL,
             "owner_id": 1
         },
         {
@@ -91,7 +92,7 @@ def seed_artworks():
             "height": 278.5,
             "width": 172.5,
             "available": True,
-            "type": ArtWorkTypesEnum.OIL,
+            "materials": ArtWorkTypesEnum.OIL,
             "owner_id": 2
         },
         {
@@ -101,7 +102,7 @@ def seed_artworks():
             "height": 363.0,
             "width": 437.0,
             "available": True,
-            "type": ArtWorkTypesEnum.OIL,
+            "materials": ArtWorkTypesEnum.OIL,
             "owner_id": 3
         },
         {
@@ -111,7 +112,7 @@ def seed_artworks():
             "height": 200.0,
             "width": 425.0,
             "available": True,
-            "type": ArtWorkTypesEnum.OIL,
+            "materials": ArtWorkTypesEnum.OIL,
             "owner_id": 1
         },
         {
@@ -121,7 +122,7 @@ def seed_artworks():
             "height": 180.0,
             "width": 180.0,
             "available": True,
-            "type": ArtWorkTypesEnum.OIL,
+            "materials": ArtWorkTypesEnum.OIL,
             "owner_id": 2
         },
         {
@@ -131,7 +132,7 @@ def seed_artworks():
             "height": 74.3,
             "width": 62.4,
             "available": True,
-            "type": ArtWorkTypesEnum.OIL,
+            "materials": ArtWorkTypesEnum.OIL,
             "owner_id": 1
         }
     ]
@@ -142,9 +143,11 @@ def seed_artworks():
 
     return new_items
 
+
 def unseed_artworks():
     if environment == "production":
-        db.session.execute(f"TRUNCATE table {SCHEMA}.artworks RESTART IDENTITY CASCADE;")
+        db.session.execute(
+            f"TRUNCATE table {SCHEMA}.artworks RESTART IDENTITY CASCADE;")
     else:
         db.session.execute(text("DELETE FROM artworks"))
 

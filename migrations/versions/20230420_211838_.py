@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 4ef6b94df46d
+Revision ID: a8582ae1e9b8
 Revises: 
-Create Date: 2023-04-19 20:56:04.848633
+Create Date: 2023-04-20 21:18:38.025723
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '4ef6b94df46d'
+revision = 'a8582ae1e9b8'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -24,6 +24,7 @@ def upgrade():
     sa.Column('firstname', sa.String(length=50), nullable=False),
     sa.Column('lastname', sa.String(length=50), nullable=False),
     sa.Column('email', sa.String(length=255), nullable=False),
+    sa.Column('profile_pic', sa.String(length=255), nullable=True),
     sa.Column('bio', sa.Text(), nullable=False),
     sa.Column('join_date', sa.Date(), nullable=False),
     sa.Column('hashed_password', sa.String(length=255), nullable=False),
@@ -39,7 +40,8 @@ def upgrade():
     sa.Column('height', sa.Numeric(precision=6, scale=2), nullable=False),
     sa.Column('width', sa.Numeric(precision=6, scale=2), nullable=False),
     sa.Column('available', sa.Boolean(), nullable=False),
-    sa.Column('type', sa.Enum('OIL', 'ACRYLIC', 'MULTIMEDIA', 'BALLPOINT_PEN', 'CHARCOAL', 'WATERCOLOR', 'PENCIL', 'COLOR_PENCIL', name='artworktypesenum'), nullable=False),
+    sa.Column('materials', sa.Enum('OIL', 'ACRYLIC', 'MULTIMEDIA', 'BALLPOINT_PEN', 'CHARCOAL', 'WATERCOLOR', 'PENCIL', 'COLOR_PENCIL', name='artworktypesenum'), nullable=False),
+    sa.Column('image', sa.String(length=255), nullable=True),
     sa.Column('owner_id', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['owner_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
