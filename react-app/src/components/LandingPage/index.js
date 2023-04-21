@@ -9,9 +9,8 @@ const LandingPage = () => {
 
   return (
     <>
-      <div>Hi</div>
       <HorizontalShowcase items={artworks} />
-      <HorizontalShowcase items={artworks} />
+      {/* <HorizontalShowcase items={artworks} /> */}
     </>
   )
 };

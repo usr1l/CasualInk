@@ -1,0 +1,17 @@
+.bottom-nav-wrapper {
+  width: 100vw;
+  height: 90px;
+  background: #48505c;
+  position: relative;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  margin-top: auto;
+  justify-content: center;
+}
+
+.page-bottom-nav-wrapper {
+  display: flex;
+  justify-content: space-between;
+  width: 1100px;
+}

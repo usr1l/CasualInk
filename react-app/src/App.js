@@ -7,6 +7,7 @@ import { thunkGetArtworks } from "./store/artworks";
 import { thunkGetArtlistings } from "./store/artlistings";
 import { thunkSetShoppingCart } from "./store/shoppingcarts";
 import LandingPage from "./components/LandingPage";
+import UploadArtworkForm from "./components/UploadArtworkForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -29,7 +30,8 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
-          <Route path="/" component={LandingPage} />
+          <Route exact path="/" component={LandingPage} />
+          <Route exact path="/artworks/new" component={UploadArtworkForm} />
         </Switch>
       )}
     </>
