@@ -30,8 +30,8 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
-          <Route path="/" component={LandingPage} />
-          <Route path="/artwork/new" component={UploadArtworkForm} />
+          <Route exact path="/" component={LandingPage} />
+          <Route exact path="/artworks/new" component={UploadArtworkForm} />
         </Switch>
       )}
     </>

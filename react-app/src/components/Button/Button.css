@@ -11,6 +11,13 @@
   letter-spacing: 1px;
 }
 
+.btn-mobile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+}
+
 .btn--medium {
   padding: 8px 20px;
   font-size: 14px;
@@ -24,7 +31,6 @@
 }
 
 .btn--demo {
-  background-color: var(--site-green);
   border-radius: 1rem;
   background-color: black;
   transition: 0.3s;
@@ -38,18 +44,18 @@
 }
 
 .btn--demo:enabled:hover {
-  color: rgb(11, 117, 153);
+  color: var(--site-sage);
   box-shadow: -2px 2px 8px -3px black;
   transition: 0.3s;
 }
 
 .btn--login {
-  background-color: rgb(3, 101, 167);
-  border-radius: 0.25rem;
-  height: 36px;
-  margin-top: 20px;
-  color: white;
+  border-radius: 1rem;
+  background-color: white;
   transition: 0.3s;
+  color: black;
+  box-sizing: border-box;
+  border: 2px solid black;
 }
 
 .btn--wide {
@@ -59,10 +65,25 @@
 
 .btn--login:enabled:hover {
   transition: 0.3s;
-  background: rgb(67, 67, 187);
+  background-color: var(--site-sage);
+  box-shadow: -2px 2px 8px -3px black;
+  color: white;
 }
 
 .btn[disabled] {
   opacity: 0.5;
   cursor: default;
+}
+
+.btn--small {
+  padding: 3px 12px;
+  font-size: 12px;
+  height: 30px;
+  width: 95px;
+}
+
+
+.btn--login.btn--small,
+.btn--demo.btn--small {
+  margin-left: 10px;
 }

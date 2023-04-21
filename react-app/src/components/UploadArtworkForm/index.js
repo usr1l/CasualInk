@@ -73,7 +73,7 @@ const UploadArtworkForm = () => {
               <InputDiv divStyle="" labelStyle="" labelFor="height" label='Height of this piece?'>
                 <input
                   name="height"
-                  type="text"
+                  type="number"
                   onChange={(e) => setHeight(e.target.value)}
                   value={height}
                   placeholder='What is the height? (h)'
@@ -82,7 +82,7 @@ const UploadArtworkForm = () => {
               <InputDiv divStyle="" labelStyle="" labelFor="width" label='Width of this piece?'>
                 <input
                   name="width"
-                  type="text"
+                  type="number"
                   onChange={(e) => setWidth(e.target.value)}
                   value={width}
                   placeholder='What is the width? (w)'
@@ -107,6 +107,7 @@ const UploadArtworkForm = () => {
                 <select
                   name="materials"
                   className=""
+                  type="text"
                   onChange={(e) => setMaterials(e.target.value)}
                   value={materials}
                 >

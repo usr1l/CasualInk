@@ -9,7 +9,8 @@ const STYLES = [
 const SIZES = [
   'btn--medium',
   'btn--splash',
-  'btn--wide'
+  'btn--wide',
+  'btn--small'
 ];
 
 

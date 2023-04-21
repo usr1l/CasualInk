@@ -3,12 +3,14 @@ import "./HorizontalShowcase.css";
 
 const HorizontalShowcase = ({ items }) => {
   return (
-    <>
-      <div>Hi2</div>
-      {items.map(item => (
-        <div>{item.title}</div>
-      ))}
-    </>
+    <div className='horizontal-scroll'>
+      <div>Featured Artworks</div>
+      <div className='scroll-container'>
+        {items.map(item => (
+          <div className='scroll-container-item'>{item.title}</div>
+        ))}
+      </div>
+    </div>
   )
 };
 

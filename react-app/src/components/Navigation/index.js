@@ -9,17 +9,16 @@ import SiteLogo from '../SiteLogo';
 import { login } from '../../store/session';
 import './Navigation.css';
 import Button from '../Button';
+import SearchBar from '../SearchBar';
 
 function Navigation({ isLoaded }) {
 	const sessionUser = useSelector(state => state.session.user);
-
 	const dispatch = useDispatch();
-
 	const history = useHistory()
+
 	const [ showMenu, setShowMenu ] = useState(false);
 	const demoUser = () => {
 		dispatch(login("demo@aa.io", "password"))
-			.then(() => window.location.reload())
 	}
 
 	const closeMenu = () => setShowMenu(false)
@@ -27,45 +26,60 @@ function Navigation({ isLoaded }) {
 	return (
 		<nav id='navbar'>
 			<div id='navbar-top'>
-				{/* <SiteLogo /> */}
-				<NavLink exact to="/">Home</NavLink>
-				<div></div>
-				<div id='navbar-container'>
-					{/* <SearchBar /> */}
-					<div></div>
-					<div>
-					</div>
+				<div id='home-search-nav'>
+					<SiteLogo />
+					<SearchBar />
+				</div>
+				<div id='navbar-icons-container'>
+					<div id='navbar-shortcuts'></div>
 					{isLoaded && (
-						<div>
-							{sessionUser && (
-								<ProfileButton user={sessionUser} />
+						<div id='navbar-icons'>
+							{sessionUser ? (
+								<>
+									<Button >
+										<i class="fa-regular fa-envelope"></i>
+									</Button>
+									<Button>
+										<i class="fa-solid fa-cart-shopping"></i>
+									</Button>
+									<ProfileButton user={sessionUser} />
+								</>
+							) : (
+								<>
+									<Button
+										buttonStyle={'btn--demo'}
+										buttonSize={'btn--small'}
+										onClick={demoUser}
+									>Demo User</Button>
+									<OpenModalButton
+										buttonText={'Log In'}
+										onButtonClick={closeMenu}
+										modalComponent={<LoginFormModal />}
+										modalCSSClass={'btn btn--login btn--small'}
+									/>
+									<OpenModalButton
+										buttonText={'Sign Up'}
+										onButtonClick={closeMenu}
+										modalComponent={<SignupFormModal />}
+										modalCSSClass={'btn btn--demo btn--small'}
+									/>
+								</>
 							)}
-							{/* {!sessionUser && (
-								<> */}
-							<Button
-								buttonSize={'btn--medium'}
-								buttonStyle={'btn--demo'}
-								onClick={demoUser}
-							>Demo User</Button>
-							<OpenModalButton
-								buttonText={'Log In'}
-								onButtonClick={closeMenu}
-								modalComponent={<LoginFormModal />}
-								modalCSSClass={'btn btn--demo btn-medium'}
-							/>
-							<OpenModalButton
-								buttonText={'Sign Up'}
-								onButtonClick={closeMenu}
-								modalComponent={<SignupFormModal />}
-								modalCSSClass={'btn btn--demo btn-medium'}
-							/>
-							{/* </>
-							)} */}
 						</div>
 					)}
 				</div >
 			</div>
 			<div id='navbar-bot'>
+				<div id='navbar-bot-container'>
+					<div id='navbar-bot-navbar'>
+						<NavLink exact to={`/`} className="navbar-bot-navbar-item" activeClassName='navbar-bot-navlink-active'>
+							Artworks
+						</NavLink>
+						<NavLink exact to={`/`} className="navbar-bot-navbar-item" activeClassName='navbar-bot-navlink-active'>
+							Events
+						</NavLink>
+					</div>
+				</div>
 			</div>
 		</nav>
 	);
