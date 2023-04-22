@@ -14,7 +14,7 @@ const FeatureBanner = ({
   buttonId,
 }) => {
 
-  const STYLES = [ '' ];
+  const STYLES = [ '', 'overlap-banner', 'overlap-banner-fadein', 'overlap-banner-fadeout', 'overlap-banner-hidden' ];
   const checkDivStyle = STYLES.includes(cardStyle) ? cardStyle : STYLES[ 0 ];
 
   return (

@@ -10,7 +10,7 @@ const LandingPage = () => {
   const { allArtworks } = useSelector(state => state.artworks);
   const artworks = Object.values(allArtworks);
 
-  const [ currBanner, setCurrBanner ] = useState('1');
+  const [ currBanner, setCurrBanner ] = useState('overlap-banner-hidden');
   const [ banner1, setBanner1 ] = useState('banner-slider focused');
   const [ banner2, setBanner2 ] = useState('banner-slider');
 
@@ -20,11 +20,11 @@ const LandingPage = () => {
       if (dataId === "1") {
         setBanner1('banner-slider focused')
         setBanner2('banner-slider')
-        setCurrBanner("1");
+        setCurrBanner("overlap-banner");
       } else {
         setBanner1('banner-slider')
         setBanner2('banner-slider focused')
-        setCurrBanner("2");
+        setCurrBanner("overlap-banner-hidden");
       };
     };
   };
@@ -39,7 +39,6 @@ const LandingPage = () => {
             h1text={"Curator's Picks: Emerging"}
             h2text={"Explore works by talented and emerging artists."}
             buttonText={'Browse Works'}
-            cardStyle={'under-banner'}
             buttonId={'banner-button'}
           />
           <FeatureBanner
@@ -48,7 +47,7 @@ const LandingPage = () => {
             h1text={"Collect, Sell, and Auction"}
             h2text={"Find works for sale and auction by both rising and established artists."}
             buttonText={'Browse Works'}
-            cardStyle={'overlap-banner'}
+            cardStyle={currBanner}
             buttonId={'banner-button'}
           />
         </div>
