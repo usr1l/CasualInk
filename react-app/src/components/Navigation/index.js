@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { NavLink, useHistory } from 'react-router-dom';
+import { Link, NavLink, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import OpenModalButton from '../OpenModalButton';
@@ -32,7 +32,14 @@ function Navigation({ isLoaded }) {
 					<SearchBar />
 				</div>
 				<div id='navbar-icons-container'>
-					<div id='navbar-shortcuts'></div>
+					<div id='navbar-shortcuts'>
+						{sessionUser ? (
+
+							<Link to={'/artworks/new'} className="navbar-bot-navbar-item" >Upload New Artwork</Link>
+						) : (
+							<div className="navbar-bot-navbar-item" >Welcome to Casual Ink</div>
+						)}
+					</div>
 					{isLoaded && (
 						<div id='navbar-icons'>
 							{sessionUser ? (

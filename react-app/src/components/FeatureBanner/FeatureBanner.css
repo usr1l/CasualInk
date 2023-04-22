@@ -12,9 +12,9 @@
 
 #overlap-banner-hidden {
   transform: translateX(100%);
-  transition: 1s ease-in-out;
+  transition: 1.5s ease-in-out;
 }
 
 #overlap-banner {
-  transition: 1s ease-in-out;
+  transition: 1.5s ease-in-out;
 }

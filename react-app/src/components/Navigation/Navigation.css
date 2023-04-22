@@ -103,6 +103,9 @@
   transition: 0.5s;
 }
 
+
+
+
 #site-logo,
 #navbar-icons-container,
 #navbar-icons,
@@ -125,9 +128,15 @@
   width: 100%
 }
 
+#navbar-shortcuts>.navbar-bot-navbar-item {
+  margin: 0;
+}
+
 #navbar-shortcuts {
   width: 300px;
   border: solid black 1px;
+  align-items: center;
+  justify-content: center;
 }
 
 #dropdown-bot-item {
