@@ -38,11 +38,11 @@ function Navigation({ isLoaded }) {
 							{sessionUser ? (
 								<>
 									<Button >
-										<i class="fa-regular fa-paper-plane signed-in-icons"></i>
+										<i className="fa-regular fa-paper-plane signed-in-icons"></i>
 									</Button>
 									<Button
 										onClick={() => history.push("/shopping-cart")}>
-										<i class="fa-solid fa-cart-shopping signed-in-icons"></i>
+										<i className="fa-solid fa-cart-shopping signed-in-icons"></i>
 									</Button>
 									<ProfileButton className="signed-in-icons" user={sessionUser} />
 								</>

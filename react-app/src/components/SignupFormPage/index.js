@@ -13,35 +13,57 @@ function SignupFormPage() {
   const [ firstname, setFirstName ] = useState("");
   const [ lastname, setLastName ] = useState("");
   const [ password, setPassword ] = useState("");
+  const [ image, setImage ] = useState("");
   const [ confirmPassword, setConfirmPassword ] = useState("");
-  const [ profilePic, setProfilePic ] = useState("");
   const [ bio, setBio ] = useState("");
-  const [ disabled, setDisabled ] = useState(true);
   const [ errors, setErrors ] = useState([]);
   const { closeModal } = useModal();
+
+  const disableBool = () => {
+    if (!email ||
+      !firstname ||
+      !username ||
+      !lastname ||
+      !bio ||
+      !password ||
+      !confirmPassword ||
+      password !== confirmPassword) return true
+    if (password !== confirmPassword) return true;
+    return false;
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (password === confirmPassword) {
-      const data = await dispatch(signUp(username, email, password));
-      if (data) {
-        setErrors(data);
-      } else {
-        closeModal();
-      }
-    } else {
-      setErrors([
-        "Confirm Password field must be the same as the Password field",
-      ]);
+
+      const formData = new FormData();
+      formData.append("email", email);
+      formData.append("firstname", firstname);
+      formData.append("username", username);
+      formData.append("lastname", lastname);
+      formData.append("bio", bio);
+      formData.append("password", password);
+      formData.append("profile_pic", image);
+
+      await dispatch(signUp(formData))
+        .then(data => {
+          if (data) {
+            setErrors(data);
+          } else {
+            closeModal();
+          }
+        })
     }
   };
+
+  const disabled = disableBool();
 
   return (
     <div id='signup'>
       <div className="form-container">
         <h1 id="signup__h2">CASUAL INK</h1>
         <h2 id='signup__title'>Sign up to collect art by the world's leading artists</h2>
-        <form id='signup__form' enctype="multipart/form-data">
+        <form id='signup__form' encType="multipart/form-data">
           <ul id='signup__error-list'>
             {errors.map((error, idx) => (
               <li key={idx}>{error}</li>
@@ -131,7 +153,9 @@ function SignupFormPage() {
           </InputDiv>
           <InputDiv >
             <input
+              id='proPic'
               type='file'
+              onChange={(e) => setImage(e.target.files[ 0 ])}
             />
           </InputDiv>
         </form>

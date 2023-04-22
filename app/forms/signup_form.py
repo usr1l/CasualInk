@@ -3,7 +3,7 @@ from wtforms import StringField
 from wtforms.validators import DataRequired, Email, ValidationError
 from flask_wtf.file import FileField, FileAllowed, FileRequired
 from app.models import User
-from .AWS_helpers import ALLOWED_EXTENSIONS
+from .AWS_helpers import ALLOWED_EXTENSIONS, upload_file_to_AWS, get_unique_filename
 
 
 def user_exists(form, field):

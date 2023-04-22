@@ -50,7 +50,7 @@ def single_artwork_route(artwork_id):
             upload = upload_file_to_AWS(new_image)
 
             if "url" not in upload:
-                return {"image": "Image upload failed"}
+                return {"error": "Image upload failed"}
 
             if form.validate_on_submit():
                 single_artwork.title = form.data["title"]
@@ -88,7 +88,7 @@ def upload_an_artwork():
         upload = upload_file_to_AWS(image)
 
         if "url" not in upload:
-            return {"image": "Image upload failed"}
+            return {"error": "Image upload failed"}
 
         new_artwork = Artwork(
             title=form.data["title"],
