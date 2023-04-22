@@ -6,10 +6,12 @@ import ContentCard from "../ContentCard";
 
 const FeatureBanner = ({
   cardStyle,
-  heading,
-  subHeading,
   imgSrc,
-  children,
+  headline,
+  h1text,
+  h2text,
+  buttonText,
+  buttonId,
 }) => {
 
   const STYLES = [ '' ];
@@ -20,11 +22,11 @@ const FeatureBanner = ({
       <ImagePreview imgSrc={imgSrc} />
       <div className="banner-content">
         <ContentCard
-          headline={'Featured Collections'}
-          h1text={"Curator's Picks: Emerging"}
-          h2text={"The best works by rising talents on Artsy, all available now."}
-          buttonText={'Browse Works'}
-          buttonId={'banner-button'}
+          headline={headline}
+          h1text={h1text}
+          h2text={h2text}
+          buttonText={buttonText}
+          buttonId={buttonId}
         />
       </div>
     </div>

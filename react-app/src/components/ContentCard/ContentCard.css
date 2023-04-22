@@ -5,6 +5,7 @@
   height: 100%;
   width: 50%;
   padding: 40px;
+  align-items: center;
 }
 
 .content-card {
@@ -18,14 +19,14 @@
 }
 
 .content-card>h1 {
-  font-size: 26pt;
+  font-size: 28pt;
   font-weight: 400;
-  margin: 30px 0;
+  margin: 20px 0;
 }
 
 .content-card>h2 {
   font-size: 18pt;
   font-weight: 300;
   color: grey;
-  margin: 10px 0 40px 0;
+  margin: 10px 0 30px 0;
 }
