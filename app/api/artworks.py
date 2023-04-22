@@ -29,6 +29,7 @@ def single_artwork_route(artwork_id):
         if not single_artwork.check_owner(owner_id):
             return {"errors": "Forbidden."}, 400
         file_delete = remove_file_from_AWS(single_artwork.image)
+
         if file_delete:
             db.session.delete(single_artwork)
             db.session.commit()

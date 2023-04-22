@@ -1,0 +1,10 @@
+.showcard-wrapper {
+  max-height: 350px;
+  max-width: 300px;
+  border: 1px solid white;
+}
+
+.showcard-container {
+  max-height: 100%;
+  max-width: 100%;
+}

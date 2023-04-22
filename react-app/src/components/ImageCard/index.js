@@ -1,14 +1,14 @@
 import React from 'react';
-import './ContentCard.css'
+import './ImageCard.css';
 
-const ContentCard = ({
+const ImageCard = ({
   headline,
   h1text,
   h2text,
   children
 }) => {
   return (
-    <div className='content-card'>
+    <div className='image-card'>
       <div>{headline}</div>
       <h1>{h1text}</h1>
       <h2>{h2text}</h2>
@@ -17,4 +17,4 @@ const ContentCard = ({
   )
 };
 
-export default ContentCard;
+export default ImageCard;

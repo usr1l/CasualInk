@@ -5,10 +5,10 @@ import "./HorizontalShowcase.css";
 const HorizontalShowcase = ({ items }) => {
   return (
     <div className='horizontal-scroll-container'>
-      <div>Featured Artworks</div>
+      <h1 className='horizontal-scroll-header'>Featured Artworks</h1>
       <div className='scroll-container'>
         {items.map(item => (
-          <ArtShowCaseCard />
+          <ArtShowCaseCard item={item} />
         ))}
       </div>
     </div>
