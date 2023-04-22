@@ -3,12 +3,12 @@ import './IconLabel.css';
 
 const IconLabel = ({
   iconClass,
-  labelText
-
+  labelText,
+  iconLabelId
 }) => {
 
   return (
-    <div className="icon-label-component">
+    <div id={iconLabelId} className="icon-label-component">
       <div className="icon-label-item-image-container">
         <i className={`icon-label-item-image ${iconClass}`}></i>
       </div>

@@ -104,3 +104,7 @@ button.btn--dropdown:hover {
   color: var(--site-sage);
   transition: 0.5s;
 }
+
+#banner-button {
+  justify-content: flex-start;
+}

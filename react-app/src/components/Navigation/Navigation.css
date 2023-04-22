@@ -6,12 +6,9 @@
   right: 40px;
   border-radius: .25rem;
   box-sizing: border-box;
-  height: auto;
   width: 230px;
   background-color: white;
   align-items: left;
-  padding: 10px 0;
-  border: 1px solid lightgrey;
   align-items: center;
 }
 
@@ -22,21 +19,30 @@
   padding: 10px 20px;
   font-size: 12pt;
   font-weight: 300;
+  overflow: hidden;
+}
+
+.open {
+  max-height: 140px;
+  transition: max-height 0.5s ease;
+  border: 1px solid lightgrey;
 }
 
 .hidden {
-  display: none;
+  max-height: 0px;
+  overflow: hidden;
+  transition: max-height 0.5s ease;
 }
 
 .site-logo {
-  width: 40px;
-  height: 40px;
+  width: 45px;
+  height: 45px;
   font-size: 16px;
   border: 1px solid red;
 }
 
 #navbar {
-  height: 100px;
+  height: 110px;
   display: flex;
   flex-direction: column;
   position: sticky;
@@ -48,6 +54,7 @@
   background-color: white;
   width: 100vw;
   align-items: center;
+  padding: 10px 0 0 0;
 }
 
 #navbar-top,
@@ -101,7 +108,7 @@
 #navbar-icons,
 #navbar-shortcuts,
 #home-search-nav {
-  height: 40px;
+  height: 45px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -121,6 +128,14 @@
 #navbar-shortcuts {
   width: 300px;
   border: solid brown 1px;
+}
+
+#dropdown-bot-item {
+  padding-bottom: 10px;
+}
+
+#dropdown-top-item {
+  padding-top: 10px;
 }
 
 .signed-in-icons:hover {

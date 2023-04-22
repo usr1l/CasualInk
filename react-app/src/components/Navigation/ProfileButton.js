@@ -36,7 +36,7 @@ function ProfileButton({ user }) {
       .then(() => history.push("/"));
   };
 
-  const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
+  const ulClassName = "profile-dropdown" + (showMenu ? " open" : " hidden");
   const closeMenu = () => setShowMenu(false);
 
   return (
@@ -45,9 +45,9 @@ function ProfileButton({ user }) {
         <i class="fa-regular fa-user"></i>
       </button >
       <div className={ulClassName} ref={ulRef}>
-        <IconLabel iconClass={"fa-regular fa-user"} labelText={user.username} />
+        <IconLabel iconLabelId={'dropdown-top-item'} iconClass={"fa-regular fa-user"} labelText={user.username} />
         <IconLabel iconClass={"fa-regular fa-envelope"} labelText={user.email} />
-        <div className="icon-label-component">
+        <div id={"dropdown-bot-item"} className="icon-label-component">
           <div className="icon-label-item-image-container">
             <i class="fa-solid fa-arrow-right-from-bracket"></i>
           </div>

@@ -2,6 +2,9 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import HorizontalShowcase from '../HorizontalShowcase';
 import FeatureBanner from '../FeatureBanner';
+import image1 from "../static/displayimage2.jpg"
+import image2 from "../static/displayimage.jpg"
+import Button from '../Button';
 import "./LandingPage.css";
 
 const LandingPage = () => {
@@ -10,10 +13,15 @@ const LandingPage = () => {
   const artworks = Object.values(allArtworks)
 
   return (
-    <div id="landing-page-container">
-      <FeatureBanner />
-      <HorizontalShowcase items={artworks} />
-      {/* <HorizontalShowcase items={artworks} /> */}
+    <div id="landing-page">
+      <div id="landing-page-content-container">
+        <FeatureBanner imgSrc={image1} />
+        <div>
+          <Button />
+          <Button />
+        </div>
+        <HorizontalShowcase items={artworks} />
+      </div>
     </div>
   )
 };

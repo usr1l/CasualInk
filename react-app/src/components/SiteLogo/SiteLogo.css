@@ -1,5 +1,10 @@
 #site-logo {
   cursor: pointer;
-  height: 40px;
-  width: 40px;
+  max-height: 45px;
+  width: auto;
+}
+
+#site-logo>img {
+  max-height: 45px;
+  width: auto;
 }
