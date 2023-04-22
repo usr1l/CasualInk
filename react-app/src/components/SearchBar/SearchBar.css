@@ -1,4 +1,4 @@
-#search-bar,
+.search-bar,
 #navbar-search-bar {
   border: none;
   display: flex;
@@ -10,7 +10,7 @@
   margin: 0 5px;
 }
 
-#search-bar {
+.search-bar {
   border-bottom: 1px solid var(--site-gray);
   font-size: 13pt;
   letter-spacing: 1px;
@@ -30,14 +30,14 @@
   transition: 0.5s;
 }
 
-#search-bar:hover {
+.search-bar:hover {
   border-color: black;
   color: black;
   transition: 0.5s;
 }
 
 
-#search-bar:focus {
+.search-bar:focus {
   border-color: black;
   color: black;
   outline: none

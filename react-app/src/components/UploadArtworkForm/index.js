@@ -129,7 +129,7 @@ const UploadArtworkForm = () => {
                 />
               </InputDiv>
               <div id='create-group-button-div'>
-                <Button buttonStyle='btn--delete' buttonSize='btn--large'>Upload Artwork</Button>
+                <Button buttonStyle='btn--delete' onClick={onSubmit} buttonSize='btn--large'>Upload Artwork</Button>
               </div>
             </div>
           </form>

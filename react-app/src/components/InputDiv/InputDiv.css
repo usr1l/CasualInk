@@ -1,0 +1,16 @@
+.input-div {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  margin-bottom: 7px;
+}
+
+.input-label {
+  font-size: 10pt;
+  font-weight: 300;
+}
+
+.input-error-message {
+  height: 20px;
+  margin-bottom: 10px;
+}

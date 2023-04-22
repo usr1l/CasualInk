@@ -11,6 +11,7 @@ import UploadArtworkForm from "./components/UploadArtworkForm";
 import ArtworksPage from "./components/ArtworksPage";
 import ArtListingsPage from "./components/ArtListingsPage";
 import ShoppingCart from "./components/ShoppingCart";
+import SignupFormPage from "./components/SignupFormPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -38,6 +39,7 @@ function App() {
           <Route exact path="/collections" component={ArtListingsPage} />
           <Route exact path="/shopping-cart" component={ShoppingCart} />
           <Route exact path="/artworks/new" component={UploadArtworkForm} />
+          <Route exact path="/signup" component={SignupFormPage} />
         </Switch>
       )}
     </>

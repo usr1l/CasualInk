@@ -11,7 +11,8 @@ const InputDiv = ({
   labelStyle,
   extraStyles,
   label,
-  labelFor
+  labelFor,
+  error
 }) => {
   const checkDivStyle = divSTYLES.includes(divStyle) ? divStyle : divSTYLES[ 0 ];
   const checkLabelStyle = labelSTYLES.includes(labelStyle) ? labelStyle : labelSTYLES[ 0 ];
@@ -21,7 +22,7 @@ const InputDiv = ({
     <div className={`input-div ${checkDivStyle} ${checkExtraStyles}`}>
       <label className={`input-label ${checkLabelStyle}`} htmlFor={labelFor}>{label}</label>
       {children}
-      <div className='input-error-message'></div>
+      <div className='input-error-message'>{error}</div>
     </div>
   )
 }
