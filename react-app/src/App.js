@@ -48,7 +48,7 @@ function App() {
             <Route exact path="/artworks/new" component={UploadArtworkForm} />
           )}
           <Route exact path="/signup" component={SignupFormPage} />
-          <Route >Not Found</Route>
+          <Route>Not Found</Route>
         </Switch>
       )}
     </>

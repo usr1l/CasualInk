@@ -1,4 +1,5 @@
 import React from 'react';
+import ArtShowCaseCard from '../ArtShowCaseCard';
 import "./HorizontalShowcase.css";
 
 const HorizontalShowcase = ({ items }) => {
@@ -7,7 +8,7 @@ const HorizontalShowcase = ({ items }) => {
       <div>Featured Artworks</div>
       <div className='scroll-container'>
         {items.map(item => (
-          <div className='scroll-container-item'>{item.title}</div>
+          <ArtShowCaseCard />
         ))}
       </div>
     </div>

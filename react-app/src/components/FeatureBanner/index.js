@@ -1,7 +1,8 @@
 import React from "react";
-import './FeatureBanner.css'
 import ImagePreview from "../ImagePreview";
 import ContentCard from "../ContentCard";
+import Button from "../Button";
+import './FeatureBanner.css'
 
 
 const FeatureBanner = ({
@@ -25,9 +26,15 @@ const FeatureBanner = ({
           headline={headline}
           h1text={h1text}
           h2text={h2text}
-          buttonText={buttonText}
           buttonId={buttonId}
-        />
+        >
+          <Button
+            buttonId={buttonId}
+            buttonSize={'btn--splash'}
+            buttonStyle={'btn--login'}
+          >{buttonText}
+          </Button>
+        </ContentCard>
       </div>
     </div>
   )
