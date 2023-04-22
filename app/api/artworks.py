@@ -42,7 +42,7 @@ def single_artwork_route(artwork_id):
         form["csrf_token"].data = request.cookies("csrf_token")
         file_delete = remove_file_from_AWS(single_artwork.image)
         if not file_delete:
-            return {"Error": "Error deleting file image"}, 400
+            return {"error": "Error deleting file image"}, 400
 
         if form.data["image"]:
             new_image = form.data["image"]
@@ -103,5 +103,4 @@ def upload_an_artwork():
         )
         db.session.add(new_artwork)
         db.session.commit()
-
-    return new_artwork.to_safe_dict(), 201
+        return new_artwork.to_safe_dict(), 201

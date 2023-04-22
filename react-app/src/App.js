@@ -35,11 +35,22 @@ function App() {
       {isLoaded && (
         <Switch>
           <Route exact path="/" component={LandingPage} />
-          <Route exact path="/artworks" component={ArtworksPage} />
-          <Route exact path="/collections" component={ArtListingsPage} />
-          <Route exact path="/shopping-cart" component={ShoppingCart} />
-          <Route exact path="/artworks/new" component={UploadArtworkForm} />
-          <Route exact path="/signup" component={SignupFormPage} />
+          {user && (
+            <Route exact path="/artworks" component={ArtworksPage} />
+          )}
+          {user && (
+            <Route exact path="/collections" component={ArtListingsPage} />
+          )}
+          {user && (
+            <Route exact path="/shopping-cart" component={ShoppingCart} />
+          )}
+          {user && (
+            <Route exact path="/artworks/new" component={UploadArtworkForm} />
+          )}
+          {user && (
+            <Route exact path="/signup" component={SignupFormPage} />
+          )}
+          <Route >Not Found</Route>
         </Switch>
       )}
     </>

@@ -32,8 +32,19 @@ function SignupFormPage() {
     return false;
   };
 
+  const validate = () => {
+    const validationErrors = [];
+    return validationErrors;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // const validationErrors = validate();
+    // if (validationErrors.length > 0) return setErrors(validationErrors);
+    // if (data.statusCode >= 400) {
+    //   return setErrors([ data.message ]);
+    // };
+    // return;
     if (password === confirmPassword) {
 
       const formData = new FormData();
