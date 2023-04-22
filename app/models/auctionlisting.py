@@ -9,10 +9,10 @@ class AuctionListing(db.Model):
         __table_args__ = {"schema": SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    start_bid = db.Column(db.Numeric(11, 2), nullable=False)
+    start_bid = db.Column(db.String(50), nullable=False)
     list_date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     active = db.Column(db.Boolean, nullable=False, default=True)
-    current_bid = db.Column(db.Numeric(11, 2), nullable=False, default=0)
+    current_bid = db.Column(db.String(50), nullable=False, default=0)
     last_update = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     auction_deadline = db.Column(db.DateTime, nullable=False)
     artwork_id = db.Column(

@@ -15,7 +15,7 @@ def get_shopping_cart():
     if not shopping_cart:
         shopping_cart = ShoppingCart(owner_id=owner_id)
         db.session.add(shopping_cart)
-        db.commit()
+        db.session.commit()
 
     if request.method == 'DELETE':
         shopping_cart.delete_cart()

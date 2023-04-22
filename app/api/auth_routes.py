@@ -66,9 +66,8 @@ def sign_up():
         pro_pic = form.data["profile_pic"]
         pro_pic.filename = get_unique_filename(pro_pic.filename)
         upload = upload_file_to_AWS(pro_pic)
-        print("form-dataaaaaaaaaaaaaaaaa", form)
         if "url" not in upload:
-            return {"error": "Image upload failed"}
+            return {"errors": "Image upload failed"}
 
         user = User(
             username=form.data['username'],

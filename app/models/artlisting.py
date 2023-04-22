@@ -9,7 +9,7 @@ class ArtListing(db.Model):
         __table_args__ = {"schema": SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    price = db.Column(db.Numeric(11, 2), nullable=False)
+    price = db.Column(db.String(50), nullable=False)
     list_date = db.Column(db.Date, nullable=False, default=date.today)
     amount_available = db.Column(db.Integer, nullable=False)
     artwork_id = db.Column(

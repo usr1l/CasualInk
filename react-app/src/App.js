@@ -47,9 +47,7 @@ function App() {
           {user && (
             <Route exact path="/artworks/new" component={UploadArtworkForm} />
           )}
-          {user && (
-            <Route exact path="/signup" component={SignupFormPage} />
-          )}
+          <Route exact path="/signup" component={SignupFormPage} />
           <Route >Not Found</Route>
         </Switch>
       )}

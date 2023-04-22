@@ -11,11 +11,10 @@
 }
 
 #overlap-banner-hidden {
-  opacity: 0;
+  transform: translateX(100%);
   transition: 1s ease-in-out;
 }
 
 #overlap-banner {
-  opacity: 1;
   transition: 1s ease-in-out;
 }

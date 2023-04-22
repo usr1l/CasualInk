@@ -8,7 +8,7 @@ import './UploadArtworkForm.css'
 import { thunkUploadArtwork } from "../../store/artworks";
 
 const UploadArtworkForm = () => {
-  const artworkMaterials = [ "Oil", "Acrylic", "Multimedia", "Ballpoint Pen", "Charcoal", "Watercolor", "Pencil", "Color Pencil" ]
+  const artworkMaterials = [ "OIL", "ACRYLIC", "MULTIMEDIA", "BALLPOINT", "CHARCOAL", "WATERCOLOR", "PENCIL", "COLORPENCIL" ]
   const dispatch = useDispatch();
   const history = useHistory();
   const sessionUserId = useSelector(state => state.session.user.id);
@@ -52,7 +52,10 @@ const UploadArtworkForm = () => {
     formData.append("materials", materials);
     formData.append("image", image);
 
-    await dispatch(thunkUploadArtwork(formData))
+    const response = await dispatch(thunkUploadArtwork(formData))
+    if (response.errors) {
+      return setErrors(response.errors);
+    } else return history.push("/");
 
     // if (data.statusCode >= 400) {
     //   return setErrors([ data.message ]);

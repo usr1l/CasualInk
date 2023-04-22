@@ -5,8 +5,10 @@ import { signUp } from "../../store/session";
 import Button from "../Button";
 import "./SignupForm.css";
 import InputDiv from "../InputDiv";
+import { useHistory } from "react-router-dom";
 
 function SignupFormPage() {
+  const history = useHistory();
   const dispatch = useDispatch();
   const [ email, setEmail ] = useState("");
   const [ username, setUsername ] = useState("");
@@ -17,7 +19,6 @@ function SignupFormPage() {
   const [ confirmPassword, setConfirmPassword ] = useState("");
   const [ bio, setBio ] = useState("");
   const [ errors, setErrors ] = useState([]);
-  const { closeModal } = useModal();
 
   const disableBool = () => {
     if (!email ||
@@ -61,10 +62,11 @@ function SignupFormPage() {
           if (data) {
             setErrors(data);
           } else {
-            closeModal();
+            history.push("/");
           }
         })
     }
+    return;
   };
 
   const disabled = disableBool();

@@ -28,11 +28,11 @@ export const thunkUploadArtwork = (artworkData) => async (dispatch) => {
   });
 
   const data = await response.json();
+
   if (response.ok) {
-    const data = await response.json();
     dispatch(actionUploadArtwork(data));
     return data
-  } else return data.errors;
+  } else return data;
 };
 
 const actionUploadArtwork = (data) => {
@@ -53,7 +53,6 @@ const artworks = (state = initialState, action) => {
         isLoading: false
       };
     case UPLOAD_ARTWORK:
-      console.log("ACTION========================", action.payload)
       return state
     default:
       return state

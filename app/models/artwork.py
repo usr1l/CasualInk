@@ -7,11 +7,11 @@ class ArtWorkTypesEnum(enum.Enum):
     OIL = "Oil"
     ACRYLIC = "Acrylic"
     MULTIMEDIA = "Multimedia"
-    BALLPOINT_PEN = "Ballpoint Pen"
+    BALLPOINT = "Ballpoint Pen"
     CHARCOAL = "Charcoal"
     WATERCOLOR = "Watercolor"
     PENCIL = "Pencil"
-    COLOR_PENCIL = "Color Pencil"
+    COLORPENCIL = "Color Pencil"
 
     def __str__(self):
         return self.name
@@ -26,10 +26,10 @@ class Artwork(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(50), nullable=False, default='Untitled')
     artist_name = db.Column(db.String(50), nullable=False, default='Unknown')
-    year = db.Column(db.Date, nullable=False)
-    height = db.Column(db.Numeric(6, 2), nullable=False)
-    width = db.Column(db.Numeric(6, 2), nullable=False)
-    available = db.Column(db.Boolean, nullable=False, default=False)
+    year = db.Column(db.Integer, nullable=False, default=9999)
+    height = db.Column(db.String(50), nullable=False)
+    width = db.Column(db.String(50), nullable=False)
+    available = db.Column(db.Boolean, default=False)
     materials = db.Column(db.Enum(ArtWorkTypesEnum), nullable=False)
     image = db.Column(db.String(255))
     owner_id = db.Column(
@@ -91,7 +91,7 @@ class Artwork(db.Model):
             "year": self.year,
             "height": self.height,
             "width": self.width,
-            "materials": self.materials.value,
+            "materials": ArtWorkTypesEnum(self.materials).name,
             "available": self.available,
             "owner_id": self.owner_id,
             "image": self.image
