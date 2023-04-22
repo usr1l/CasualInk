@@ -42,14 +42,14 @@ function ProfileButton({ user }) {
   return (
     <div className="btn-mobile">
       <button className="btn signed-in-icons" onClick={openMenu}>
-        <i class="fa-regular fa-user"></i>
+        <i className="fa-regular fa-user"></i>
       </button >
       <div className={ulClassName} ref={ulRef}>
         <IconLabel iconLabelId={'dropdown-top-item'} iconClass={"fa-regular fa-user"} labelText={user.username} />
         <IconLabel iconClass={"fa-regular fa-envelope"} labelText={user.email} />
         <div id={"dropdown-bot-item"} className="icon-label-component">
           <div className="icon-label-item-image-container">
-            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            <i className="fa-solid fa-arrow-right-from-bracket"></i>
           </div>
           <Button buttonStyle={'btn--dropdown'} onClick={handleLogout}>Log Out</Button>
         </div>

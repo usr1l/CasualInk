@@ -38,11 +38,11 @@ function Navigation({ isLoaded }) {
 							{sessionUser ? (
 								<>
 									<Button >
-										<i class="fa-regular fa-paper-plane signed-in-icons"></i>
+										<i className="fa-regular fa-paper-plane signed-in-icons"></i>
 									</Button>
 									<Button
 										onClick={() => history.push("/shopping-cart")}>
-										<i class="fa-solid fa-cart-shopping signed-in-icons"></i>
+										<i className="fa-solid fa-cart-shopping signed-in-icons"></i>
 									</Button>
 									<ProfileButton className="signed-in-icons" user={sessionUser} />
 								</>
@@ -52,19 +52,20 @@ function Navigation({ isLoaded }) {
 										buttonStyle={'btn--demo'}
 										buttonSize={'btn--small'}
 										onClick={demoUser}
-									>Demo User</Button>
+									>Demo User
+									</Button>
 									<OpenModalButton
 										buttonText={'Log In'}
 										onButtonClick={closeMenu}
 										modalComponent={<LoginFormModal />}
 										modalCSSClass={'btn btn--login btn--small'}
 									/>
-									<OpenModalButton
-										buttonText={'Sign Up'}
-										onButtonClick={closeMenu}
-										modalComponent={<SignupFormModal />}
-										modalCSSClass={'btn btn--demo btn--small'}
-									/>
+									<Button
+										buttonStyle={'btn--demo'}
+										buttonSize={'btn--small'}
+										onClick={() => history.push('/signup')}
+									>Sign Up
+									</Button>
 								</>
 							)}
 						</div>

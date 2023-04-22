@@ -20,11 +20,11 @@ const LandingPage = () => {
       if (dataId === "1") {
         setBanner1('banner-slider focused')
         setBanner2('banner-slider')
-        setCurrBanner("overlap-banner");
+        setCurrBanner("overlap-banner-hidden");
       } else {
         setBanner1('banner-slider')
         setBanner2('banner-slider focused')
-        setCurrBanner("overlap-banner-hidden");
+        setCurrBanner("overlap-banner");
       };
     };
   };

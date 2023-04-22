@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
-
+import BottomNav from "./components/BottomNav";
 import { ModalProvider, Modal } from "./context/Modal";
 import configureStore from "./store";
 import * as sessionActions from "./store/session";
@@ -27,6 +27,7 @@ function Root() {
 				<BrowserRouter>
 					<App />
 					<Modal />
+					{/* <BottomNav navStyle={`site-footer`} /> */}
 				</BrowserRouter>
 			</Provider>
 		</ModalProvider>

@@ -1,10 +1,11 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
+from datetime import date
+from decimal import Decimal
 import json
 from app.models import Artwork, db
 from app.forms import ArtworkForm
-from decimal import Decimal
-from datetime import date
+from app.api import validation_errors_to_error_messages
 from app.forms import upload_file_to_AWS, get_unique_filename, remove_file_from_AWS
 
 artwork_routes = Blueprint("artworks", __name__)
@@ -22,27 +23,27 @@ def single_artwork_route(artwork_id):
     owner_id = current_user.id
     single_artwork = Artwork.query.get(artwork_id)
     if not single_artwork:
-        return {"error": "Artwork not found."}, 404
+        return {"errors": "Artwork not found."}, 404
 
     if request.method == 'DELETE':
         if not single_artwork.check_owner(owner_id):
-            return {"error": "Forbidden."}, 400
+            return {"errors": "Forbidden."}, 400
         file_delete = remove_file_from_AWS(single_artwork.image)
         if file_delete:
             db.session.delete(single_artwork)
             db.session.commit()
             return {"Success": "Artwork deleted."}, 202
         else:
-            return {"Error": "Error deleting file image"}, 400
+            return {"errors": "Error deleting file image"}, 400
 
     if request.method == "PUT":
         if not single_artwork.check_owner(owner_id):
-            return {"error": "Forbidden."}, 400
+            return {"errors": "Forbidden."}, 400
         form = ArtworkForm()
         form["csrf_token"].data = request.cookies("csrf_token")
         file_delete = remove_file_from_AWS(single_artwork.image)
         if not file_delete:
-            return {"Error": "Error deleting file image"}, 400
+            return {"errors": "Error deleting file image"}, 400
 
         if form.data["image"]:
             new_image = form.data["image"]
@@ -50,7 +51,7 @@ def single_artwork_route(artwork_id):
             upload = upload_file_to_AWS(new_image)
 
             if "url" not in upload:
-                return {"image": "Image upload failed"}
+                return {"errors": "Image upload failed"}
 
             if form.validate_on_submit():
                 single_artwork.title = form.data["title"]
@@ -82,20 +83,22 @@ def upload_an_artwork():
     form = ArtworkForm()
     form["csrf_token"].data = request.cookies["csrf_token"]
     owner_id = current_user.id
+
     if form.validate_on_submit():
+        print("HEREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE")
+        print("formdataaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              form.data["width"])
         image = form.data["image"]
         image.filename = get_unique_filename(image.filename)
         upload = upload_file_to_AWS(image)
-
         if "url" not in upload:
-            return {"image": "Image upload failed"}
-
+            return {"errors": "Image upload failed"}
         new_artwork = Artwork(
             title=form.data["title"],
             artist_name=form.data["artist_name"],
-            year=date(int(form.data["year"]), 1, 1),
-            height=Decimal(form.data["height"]),
-            width=Decimal(form.data["width"]),
+            year=form.data["year"],
+            height=f"{form.data['height']}",
+            width=f"{form.data['width']}",
             available=True if form.data["available"] == 'True' else False,
             materials=form.data["materials"],
             image=upload["url"],
@@ -103,5 +106,5 @@ def upload_an_artwork():
         )
         db.session.add(new_artwork)
         db.session.commit()
-
-    return new_artwork.to_safe_dict(), 201
+        return new_artwork.to_safe_dict(), 201
+    return {"errors": validation_errors_to_error_messages(form.errors)}, 400
