@@ -52,19 +52,20 @@ function Navigation({ isLoaded }) {
 										buttonStyle={'btn--demo'}
 										buttonSize={'btn--small'}
 										onClick={demoUser}
-									>Demo User</Button>
+									>Demo User
+									</Button>
 									<OpenModalButton
 										buttonText={'Log In'}
 										onButtonClick={closeMenu}
 										modalComponent={<LoginFormModal />}
 										modalCSSClass={'btn btn--login btn--small'}
 									/>
-									<OpenModalButton
-										buttonText={'Sign Up'}
-										onButtonClick={closeMenu}
-										modalComponent={<SignupFormModal />}
-										modalCSSClass={'btn btn--demo btn--small'}
-									/>
+									<Button
+										buttonStyle={'btn--demo'}
+										buttonSize={'btn--small'}
+										onClick={() => history.push('/signup')}
+									>Sign Up
+									</Button>
 								</>
 							)}
 						</div>
