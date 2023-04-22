@@ -1,95 +1,91 @@
-:root {
-  --text-color: #B5BAC1
-}
-
 #log-in {
   display: flex;
   flex-direction: column;
-  width: 500px;
-  height: 370px;
-  align-items: center;
-  background-color: #313338;
-  border-radius: .25rem;
-  justify-content: center;
+  width: 425px;
+  background-color: white;
   box-shadow: -2px 2px 10px -3px black;
+  padding: 25px;
+  height: 100%;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 100%;
+  height: 90%;
 
 }
 
 #log-in__h2 {
-  font-size: 12px;
-  font-weight: 100;
-  color: var(--text-color);
+  font-size: 16px;
+  font-weight: 400;
+  margin: 0;
+  color: black;
 }
 
 #log-in__title {
   font-weight: 400;
-  font-size: 16pt;
-  color: white;
-  margin-bottom: 10px;
+  font-size: 20pt;
+  margin: 20px 0;
 }
 
 #log-in__form {
   display: flex;
   flex-direction: column;
-  width: 440px;
+  width: 100%;
   align-self: center;
   align-items: center;
   box-sizing: border-box;
-  height: 180px;
-  justify-content: space-around;
+  height: 100%;
+  justify-content: space-between;
+  overflow: hidden;
 }
 
 #log-in__error-list {
   list-style: none;
   font-size: 10pt;
   align-content: left;
-  width: 440px;
+  width: 100%;
   height: 40px;
   margin: 0;
   padding: 0;
   letter-spacing: 1px;
   line-height: 18px;
-  color: rgb(194, 194, 194);
   margin-top: 5px;
 }
 
-#log-in__label {
-  align-self: start;
+.__label {
+  align-self: flex-start;
   margin-top: 0;
   height: 12px;
   font-size: 8pt;
   font-weight: 400;
-  letter-spacing: 1px;
-  color: var(--text-color);
-
 }
 
-.log-in__input {
-  box-sizing: border-box;
-  height: 36px;
-  width: 100%;
-  color: var(--text-color);
-  background-color: rgb(26, 32, 51);
-  border-radius: 0.25rem;
-  outline: none;
-  padding: 0;
-  font-size: 13pt;
+.__input {
   border: none;
-}
-
-.login-form-link {
-  all: unset;
   display: flex;
-  align-self: flex-start;
-  margin-left: 30px;
-  color: rgb(14, 171, 192);
-  margin-top: 6px;
-  font-size: 10px;
-  transition: 0.3s;
+  width: 100%;
+  height: 50px;
+  box-sizing: border-box;
+  transition: 0.5s;
+  border-bottom: 1px solid var(--site-gray);
+  font-size: 13pt;
+  letter-spacing: 1px;
+  box-sizing: border-box;
+  transition: 0.5s;
 }
 
-.login-form-link:hover {
-  color: rgb(67, 67, 187);
-  cursor: pointer;
-  transition: 0.3s;
+.__input:hover {
+  border-color: black;
+  color: black;
+  transition: 0.5s;
+}
+
+.__input:focus {
+  border-color: black;
+  color: black;
+  outline: none
 }
