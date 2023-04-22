@@ -4,7 +4,8 @@ import './Button.css';
 const STYLES = [
   'btn--primary',
   'btn--demo',
-  'btn--login'
+  'btn--login',
+  'btn--dropdown'
 ];
 const SIZES = [
   'btn--medium',
@@ -21,13 +22,14 @@ const Button = ({
   buttonStyle,
   buttonSize,
   disableButton,
+  buttonId,
   value
 }) => {
   const checkButtonStyle = STYLES.includes(buttonStyle) ? buttonStyle : STYLES[ 0 ];
   const checkButtonSize = SIZES.includes(buttonSize) ? buttonSize : SIZES[ 0 ];
 
   return (
-    <div className='btn-mobile'>
+    <div id={buttonId} className='btn-mobile'>
       <button
         className={`btn ${checkButtonStyle} ${checkButtonSize}`}
         onClick={onClick}

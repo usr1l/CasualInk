@@ -1,4 +1,21 @@
 .banner-container {
-  width: 100vw;
-  border: 20px solid purple;
+  width: 95%;
+  height: 410px;
+  display: flex;
+  flex-direction: row;
+  box-sizing: border-box;
+  align-items: center;
+  background-color: rgb(242, 250, 253);
+  overflow: hidden;
+  position: absolute;
+}
+
+#overlap-banner-hidden {
+  opacity: 0;
+  transition: 1s ease-in-out;
+}
+
+#overlap-banner {
+  opacity: 1;
+  transition: 1s ease-in-out;
 }

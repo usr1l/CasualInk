@@ -1,13 +1,10 @@
-.navbar-logo {
-  color: #fff;
-  justify-self: start;
-  margin-left: 20px;
-  margin-top: 0px;
+#site-logo {
   cursor: pointer;
-  display: flex;
-  align-items: center;
+  max-height: 45px;
+  width: auto;
 }
 
-#site-logo {
-  height: 55px;
+#site-logo>img {
+  max-height: 45px;
+  width: auto;
 }

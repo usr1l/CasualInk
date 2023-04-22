@@ -1,27 +1,33 @@
 import React from "react";
 import './FeatureBanner.css'
+import ImagePreview from "../ImagePreview";
+import ContentCard from "../ContentCard";
+
 
 const FeatureBanner = ({
   cardStyle,
-  iconClass,
-  iconId,
-  heading,
-  subHeading,
-  children
+  imgSrc,
+  headline,
+  h1text,
+  h2text,
+  buttonText,
+  buttonId,
 }) => {
 
-  const STYLES = [ '' ];
+  const STYLES = [ '', 'overlap-banner', 'overlap-banner-fadein', 'overlap-banner-fadeout', 'overlap-banner-hidden' ];
   const checkDivStyle = STYLES.includes(cardStyle) ? cardStyle : STYLES[ 0 ];
 
   return (
     <div className="banner-container" id={checkDivStyle}>
-      <div className="banner">
-        <i className={`${iconClass} banner-element`} id={iconId} />
-        <div className="banner-element">
-          <div className="banner-element-heading">{heading}</div>
-          <div className="banner-element-subheading">{subHeading}</div>
-        </div>
-        {children}
+      <ImagePreview imgSrc={imgSrc} />
+      <div className="banner-content">
+        <ContentCard
+          headline={headline}
+          h1text={h1text}
+          h2text={h2text}
+          buttonText={buttonText}
+          buttonId={buttonId}
+        />
       </div>
     </div>
   )

@@ -1,30 +1,48 @@
 .profile-dropdown {
-  list-style: none;
+  display: flex;
+  flex-direction: column;
   position: absolute;
-  top: 80px;
-  right: 20px;
-  border-radius: 6px;
-  height: auto;
-  width: auto;
-  box-shadow: -3px 3px 10px 1px #888888;
+  top: 50px;
+  right: 40px;
+  border-radius: .25rem;
+  box-sizing: border-box;
+  width: 230px;
   background-color: white;
   align-items: left;
-  padding: 0;
+  align-items: center;
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  font-size: 12pt;
+  font-weight: 300;
+  overflow: hidden;
+}
+
+.open {
+  max-height: 140px;
+  transition: max-height 0.5s ease;
+  border: 1px solid lightgrey;
 }
 
 .hidden {
-  display: none;
+  max-height: 0px;
+  overflow: hidden;
+  transition: max-height 0.5s ease;
 }
 
 .site-logo {
-  width: 40px;
-  height: 40px;
+  width: 45px;
+  height: 45px;
   font-size: 16px;
   border: 1px solid red;
 }
 
 #navbar {
-  height: 100px;
+  height: 110px;
   display: flex;
   flex-direction: column;
   position: sticky;
@@ -36,6 +54,7 @@
   background-color: white;
   width: 100vw;
   align-items: center;
+  padding: 10px 0 0 0;
 }
 
 #navbar-top,
@@ -48,7 +67,6 @@
   min-width: 400px;
   box-sizing: border-box;
   padding: 0 40px;
-  border: 1px solid green;
 }
 
 
@@ -70,21 +88,32 @@
   font-weight: 300;
   margin-right: 35px;
   color: black;
+  transition: 0.5s;
 }
 
+.signed-in-icons {
+  background: white;
+  font-size: 12pt;
+  transition: 0.5s;
+}
+
+.navbar-bot-navbar-item:hover,
 .navbar-bot-navlink-active {
-  color: grey;
+  color: var(--site-sage);
+  transition: 0.5s;
 }
 
+#site-logo,
 #navbar-icons-container,
 #navbar-icons,
 #navbar-shortcuts,
 #home-search-nav {
-  height: 40px;
+  height: 45px;
   display: flex;
   flex-direction: row;
   align-items: center;
   transition: 0.3s;
+  box-sizing: border-box;
 }
 
 #navbar-icons {
@@ -99,4 +128,17 @@
 #navbar-shortcuts {
   width: 300px;
   border: solid brown 1px;
+}
+
+#dropdown-bot-item {
+  padding-bottom: 10px;
+}
+
+#dropdown-top-item {
+  padding-top: 10px;
+}
+
+.signed-in-icons:hover {
+  color: var(--site-sage);
+  transition: 0.5s;
 }
