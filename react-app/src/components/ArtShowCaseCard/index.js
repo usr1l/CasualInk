@@ -4,7 +4,7 @@ import ImageCard from '../ImageCard';
 import "./ArtShowCaseCard.css";
 
 const ArtShowCaseCard = ({ item }) => {
-  console.log("ITEM", item)
+
   return (
     <div className='showcard-wrapper'>
       <div className='showcard-container'>
