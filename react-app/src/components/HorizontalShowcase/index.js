@@ -8,7 +8,9 @@ const HorizontalShowcase = ({ items }) => {
       <h1 className='horizontal-scroll-header'>Featured Artworks</h1>
       <div className='scroll-container'>
         {items.map(item => (
-          <ArtShowCaseCard item={item} />
+          <div className='scroll-container-item'>
+            <ArtShowCaseCard item={item} />
+          </div>
         ))}
       </div>
     </div>

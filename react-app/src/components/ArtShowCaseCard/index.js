@@ -6,19 +6,20 @@ import "./ArtShowCaseCard.css";
 const ArtShowCaseCard = ({ item }) => {
   console.log("ITEM", item)
   return (
-    <div className='scroll-container-item'>
-      <div className='showcard-wrapper'>
-        <div className='showcard-container'>
-          <ImagePreview
-            imgSrc={item.image}
-          />
-          <ImageCard
-            headline={item.name}
-            h1text={item.artist_name}
-            h2text={`${item.height} X ${item.width}`}
-          >
-          </ImageCard>
-        </div>
+    <div className='showcard-wrapper'>
+      <div className='showcard-container'>
+        <ImagePreview
+          imgSrc={item.image}
+          imgWrapperStyle={"img--artwork-preview"}
+        />
+        <ImageCard
+          headline={item.artist_name}
+          h1text={`${item.title}, ${item.year}`}
+          h2text={`${item.height} in. x ${item.width} in.`}
+          cardClass={'image-card'}
+        >
+          <div>{item.materials}</div>
+        </ImageCard>
       </div>
     </div>
   )

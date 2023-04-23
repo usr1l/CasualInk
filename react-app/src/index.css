@@ -1,7 +1,12 @@
 /* TODO Add site wide styles */
+:root {
+  --site-sage: rgb(47, 102, 32);
+  --site-gray: rgb(180, 180, 180);
+}
+
 ::-webkit-scrollbar {
   width: 10px;
-  height: 10px;
+  height: 5px;
 }
 
 /* scrollbar track */
@@ -11,19 +16,15 @@
 
 /* scrollbar */
 ::-webkit-scrollbar-thumb {
-  background: #888;
+  background: var(--site-gray);
   border-radius: 5px;
+  transition: 0.5s;
 }
 
-/* hover */
+/* ho */
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
-}
-
-
-:root {
-  --site-sage: rgb(47, 102, 32);
-  --site-gray: rgb(180, 180, 180);
+  background: black;
+  transition: 0.5s;
 }
 
 body {
