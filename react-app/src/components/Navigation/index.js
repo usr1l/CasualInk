@@ -35,9 +35,9 @@ function Navigation({ isLoaded }) {
 					<div id='navbar-shortcuts'>
 						{sessionUser ? (
 
-							<Link to={'/artworks/new'} className="navbar-bot-navbar-item" >Upload New Artwork</Link>
+							<Link to={'/curr/profile'} className="navbar-bot-navbar-item" >My Collection</Link>
 						) : (
-							<div className="navbar-bot-navbar-item" >Welcome to Casual Ink</div>
+							<div className="navbar-bot-navbar-item">Welcome to Casual Ink</div>
 						)}
 					</div>
 					{isLoaded && (

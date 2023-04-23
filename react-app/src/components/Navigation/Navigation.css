@@ -24,18 +24,19 @@
 
 .open {
   max-height: 140px;
-  transition: max-height 0.5s ease-in-out;
+  transition: max-height 0.7s ease-in-out;
   border: 1px solid lightgrey;
   overflow: hidden;
 }
 
 .hidden {
+  box-sizing: border-box;
   max-height: 0px;
   overflow: hidden;
   border: 1px solid lightgrey;
   border-top: none;
   border-bottom: none;
-  transition: max-height 0.5s ease-in-out;
+  transition: max-height 0.7s ease-in-out;
 }
 
 .site-logo {
