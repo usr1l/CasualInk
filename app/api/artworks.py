@@ -29,6 +29,7 @@ def single_artwork_route(artwork_id):
         if not single_artwork.check_owner(owner_id):
             return {"errors": "Forbidden."}, 400
         file_delete = remove_file_from_AWS(single_artwork.image)
+
         if file_delete:
             db.session.delete(single_artwork)
             db.session.commit()
@@ -85,9 +86,6 @@ def upload_an_artwork():
     owner_id = current_user.id
 
     if form.validate_on_submit():
-        print("HEREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE")
-        print("formdataaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-              form.data["width"])
         image = form.data["image"]
         image.filename = get_unique_filename(image.filename)
         upload = upload_file_to_AWS(image)

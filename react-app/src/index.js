@@ -27,7 +27,7 @@ function Root() {
 				<BrowserRouter>
 					<App />
 					<Modal />
-					{/* <BottomNav navStyle={`site-footer`} /> */}
+					<BottomNav navStyle={`site-footer`} />
 				</BrowserRouter>
 			</Provider>
 		</ModalProvider>

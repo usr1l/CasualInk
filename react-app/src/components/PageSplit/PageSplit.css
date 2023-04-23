@@ -1,0 +1,31 @@
+.page-split-half {
+  width: 45%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 20px;
+}
+
+.split-pages-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100vw;
+  margin-bottom: 30px;
+}
+
+h1.split-pages-header {
+  width: 90%;
+  font-size: 30pt;
+  font-weight: 600;
+  margin: 60px 0 40px 0;
+}
+
+.split-pages-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  min-height: 82vh;
+}

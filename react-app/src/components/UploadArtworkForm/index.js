@@ -4,14 +4,14 @@ import { useHistory, Link } from "react-router-dom";
 import Button from '../Button';
 import InputDiv from "../InputDiv";
 import BottomNav from "../BottomNav";
-import './UploadArtworkForm.css'
 import { thunkUploadArtwork } from "../../store/artworks";
+import PageSplit from "../PageSplit";
+import './UploadArtworkForm.css'
 
 const UploadArtworkForm = () => {
   const artworkMaterials = [ "OIL", "ACRYLIC", "MULTIMEDIA", "BALLPOINT", "CHARCOAL", "WATERCOLOR", "PENCIL", "COLORPENCIL" ]
   const dispatch = useDispatch();
   const history = useHistory();
-  const sessionUserId = useSelector(state => state.session.user.id);
   const [ title, setTitle ] = useState("");
   const [ artistName, setArtistName ] = useState("");
   const [ year, setYear ] = useState("");
@@ -56,123 +56,154 @@ const UploadArtworkForm = () => {
     if (response.errors) {
       return setErrors(response.errors);
     } else return history.push("/");
-
-    // if (data.statusCode >= 400) {
-    //   return setErrors([ data.message ]);
-    // };
-    // return;
   };
 
   const disabled = disableBool();
   return (
     <>
-      <div>
-        <div>
-          <h2>UPLOAD ART</h2>
-          <form encType="multipart/form-data" onSubmit={onSubmit}>
-            <div>
-              <InputDiv labelFor="title" label="What is the title of this piece?">
-                <input
-                  name="title"
-                  type="text"
-                  onChange={(e) => setTitle(e.target.value)}
-                  value={title}
-                  placeholder={'Or leave blank if there is no name'}
-                />
-              </InputDiv>
-              <InputDiv divStyle="" labelStyle="" labelFor="artistName" label="What is the artist's name?">
-                <input
-                  name="artistName"
-                  type="text"
-                  onChange={(e) => setArtistName(e.target.value)}
-                  value={artistName}
-                  placeholder="Leave blank if unknown"
-                />
-              </InputDiv>
-              <InputDiv label="What year was this created?">
-                <input
-                  onChange={(e) => setYear(e.target.value)}
-                  value={year}
-                  type="number"
-                  placeholder="Leave blank if unknown"
-                />
-              </InputDiv>
-              <InputDiv divStyle="" labelStyle="" labelFor="height" label='Height of this piece?'>
-                <input
-                  name="height"
-                  type="number"
-                  onChange={(e) => setHeight(e.target.value)}
-                  value={height}
-                  placeholder='What is the height? (h)*'
-                />
-              </InputDiv>
-              <InputDiv divStyle="" labelStyle="" labelFor="width" label='Width of this piece?'>
-                <input
-                  name="width"
-                  type="number"
-                  onChange={(e) => setWidth(e.target.value)}
-                  value={width}
-                  placeholder='What is the width? (w)*'
-                />
-              </InputDiv>
+      <div className="split-pages-page">
+        <h1 className="split-pages-header">UPLOAD NEW ARTWORK</h1>
+        <form className="split-pages-container" encType="multipart/form-data">
+          <PageSplit>
+            <InputDiv
+              labelFor="title"
+              label="What is the title of this piece?"
+              labelStyle={'__label'}
+            >
+              <input
+                name="title"
+                className='__input'
+                type="text"
+                onChange={(e) => setTitle(e.target.value)}
+                value={title}
+                placeholder={'Or leave blank if there is no name'}
+              />
+            </InputDiv>
+            <InputDiv
+              labelStyle={'__label'}
+              labelFor="artistName"
+              label="What is the artist's name?"
+            >
+              <input
+                name="artistName"
+                className='__input'
+                type="text"
+                onChange={(e) => setArtistName(e.target.value)}
+                value={artistName}
+                placeholder="Leave blank if unknown"
+              />
+            </InputDiv>
+            <InputDiv
+              labelStyle={'__label'}
+              label="What year was this created?"
+            >
+              <input
+                onChange={(e) => setYear(e.target.value)}
+                className='__input'
+                value={year}
+                type="number"
+                placeholder="Leave blank if unknown"
+              />
+            </InputDiv>
+            <InputDiv
+              labelStyle={'__label'}
+              labelFor="height"
+              label='Height of this piece? *'>
+              <input
+                name="height"
+                className='__input'
+                type="number"
+                onChange={(e) => setHeight(e.target.value)}
+                value={height}
+                placeholder='(inches)'
+              />
+            </InputDiv>
+            <InputDiv
+              labelStyle={'__label'}
+              labelFor="width"
+              label='Width of this piece? *'
+            >
+              <input
+                name="width"
+                className='__input'
+                type="number"
+                onChange={(e) => setWidth(e.target.value)}
+                value={width}
+                placeholder='(inches)'
+              />
+            </InputDiv>
+          </PageSplit>
+          <PageSplit>
+            <InputDiv
+              labelStyle={'__label'}
+              labelFor="available"
+              label='Is this available for sale/auction? *'
+            >
+              <select
+                name="available"
+                className='__input'
+                onChange={(e) => setAvailable(e.target.value)}
+                value={available}
+              >
+                <option value="" disabled>
+                  select:
+                </option>
+                <option value='True'>Yes</option>
+                <option value='False'>No</option>
+              </select>
+            </InputDiv>
+            <InputDiv
+              labelStyle={'__label'}
+              labelFor=""
+              label='Materials Used? *'>
+              <select
+                name="materials"
+                className='__input'
+                type="text"
+                onChange={(e) => setMaterials(e.target.value)}
+                value={materials}
+              >
+                <option value="" disabled>
+                  select:
+                </option>
+                {artworkMaterials.map(material => (
+                  <option key={`art-material-${material}`} value={material}>{material}</option>
+                ))}
+              </select>
+            </InputDiv>
+            <InputDiv
+              labelStyle={'__label'}
+              labelFor="image"
+              label='Upload an image. *'
+            >
+              <input
+                id="image"
+                className='__input'
+                type='file'
+                name="image"
+                onChange={(e) => setImage(e.target.files[ 0 ])}
+              />
+            </InputDiv>
+            <div id='create-group-button-div'>
             </div>
-            <div>
-              <InputDiv labelFor="available" label='Is this available for sale/auction? *'>
-                <select
-                  name="available"
-                  onChange={(e) => setAvailable(e.target.value)}
-                  value={available}
-                >
-                  <option value="" disabled>
-                    select:
-                  </option>
-                  <option value='True'>Yes</option>
-                  <option value='False'>No</option>
-                </select>
-              </InputDiv>
-              <InputDiv divStyle="" labelStyle="" labelFor="" label='Materials Used? *'>
-                <select
-                  name="materials"
-                  className=""
-                  type="text"
-                  onChange={(e) => setMaterials(e.target.value)}
-                  value={materials}
-                >
-                  <option value="" disabled>
-                    select:
-                  </option>
-                  {artworkMaterials.map(material => (
-                    <option key={`art-material-${material}`} value={material}>{material}</option>
-                  ))}
-                </select>
-              </InputDiv>
-              <InputDiv divStyle="" labelStyle="" labelFor="image" label='Upload an image. *'>
-                <input
-                  id="image"
-                  type='file'
-                  name="image"
-                  onChange={(e) => setImage(e.target.files[ 0 ])}
-                />
-              </InputDiv>
-              <div id='create-group-button-div'>
-                <Button
-                  buttonStyle='btn--delete'
-                  onClick={onSubmit}
-                  buttonSize='btn--large'
-                  disableButton={disabled}
-                >Upload Artwork
-                </Button>
-              </div>
-            </div>
-          </form>
-        </div>
+          </PageSplit>
+        </form>
       </div>
       <BottomNav>
-        {/* <Link to={'/'} className="page-return">
+        <Link to={'/'} className="page-return">
           <h3>
-            <i className="fa-solid fa-angle-left" />
+            <i className="fa-solid fa-angle-left" /> Back to Home
           </h3>
-        </Link> */}
+        </Link>
+        <div className="page-return">
+          <Button
+            buttonStyle='btn--login'
+            onClick={onSubmit}
+            buttonSize='btn--wide'
+            disableButton={disabled}
+          >Upload Artwork
+          </Button>
+        </div>
       </BottomNav>
     </>
   );

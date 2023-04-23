@@ -1,0 +1,26 @@
+.image-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 300px;
+  height: 110px;
+  border: 1px solid rgb(223, 223, 223);
+  box-sizing: border-box;
+  padding-left: 20px;
+}
+
+.image-card>h1,
+.image-card>h2,
+.image-card>div {
+  font-size: 11pt;
+  font-weight: 200;
+  margin: 1px 0;
+  color: grey;
+}
+
+.image-card>h2 {
+  color: black;
+  font-size: 12pt;
+  font-weight: 300;
+}

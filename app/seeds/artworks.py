@@ -13,7 +13,8 @@ def seed_artworks():
             "width": "65.5",
             "available": True,
             "materials": "OIL",
-            "owner_id": 1
+            "owner_id": 1,
+            "image": "https://images5.alphacoders.com/481/481903.png"
         },
         {
             "title": "Mona Lisa",
@@ -23,7 +24,8 @@ def seed_artworks():
             "width": "53.0",
             "available": True,
             "materials": "OIL",
-            "owner_id": 2
+            "owner_id": 2,
+            "image": "https://images5.alphacoders.com/481/481903.png"
         },
         {
             "title": "The Starry Night",
@@ -33,7 +35,8 @@ def seed_artworks():
             "width": "92.0",
             "available": True,
             "materials": "OIL",
-            "owner_id": 3
+            "owner_id": 3,
+            "image": "https://images5.alphacoders.com/481/481903.png"
         },
         {
             "title": "The Persistence of Memory",
@@ -43,7 +46,8 @@ def seed_artworks():
             "width": "33.0",
             "available": True,
             "materials": "OIL",
-            "owner_id": 1
+            "owner_id": 1,
+            "image": "https://images5.alphacoders.com/481/481903.png"
         },
         {
             "title": "Girl with a Pearl Earring",
@@ -53,7 +57,8 @@ def seed_artworks():
             "width": "40.0",
             "available": True,
             "materials": "OIL",
-            "owner_id": 2
+            "owner_id": 2,
+            "image": "https://images5.alphacoders.com/481/481903.png"
         },
         {
             "title": "The Scream",
@@ -63,7 +68,8 @@ def seed_artworks():
             "width": "73.5",
             "available": True,
             "materials": "OIL",
-            "owner_id": 3
+            "owner_id": 3,
+            "image": "https://images5.alphacoders.com/481/481903.png"
         },
         {
             "title": "Guernica",
@@ -73,7 +79,8 @@ def seed_artworks():
             "width": "776.0",
             "available": True,
             "materials": "OIL",
-            "owner_id": 3
+            "owner_id": 3,
+            "image": "https://images5.alphacoders.com/481/481903.png"
         },
         {
             "title": "The Last Supper",
@@ -83,7 +90,8 @@ def seed_artworks():
             "width": "880.0",
             "available": True,
             "materials": "OIL",
-            "owner_id": 1
+            "owner_id": 1,
+            "image": "https://images5.alphacoders.com/481/481903.png"
         },
         {
             "title": "The Birth of Venus",
@@ -93,17 +101,19 @@ def seed_artworks():
             "width": "172.5",
             "available": True,
             "materials": "OIL",
-            "owner_id": 2
+            "owner_id": 2,
+            "image": "https://images5.alphacoders.com/481/481903.png"
         },
         {
             "title": "The Night Watch",
             "artist_name": "Rembrandt van Rijn",
-            "year":1642,
+            "year": 1642,
             "height": "363.0",
             "width": "437.0",
             "available": True,
             "materials": "OIL",
-            "owner_id": 3
+            "owner_id": 3,
+            "image": "https://images5.alphacoders.com/481/481903.png"
         },
         {
             "title": "Water Lilies",
@@ -113,7 +123,8 @@ def seed_artworks():
             "width": "425.0",
             "available": True,
             "materials": "OIL",
-            "owner_id": 1
+            "owner_id": 1,
+            "image": "https://images5.alphacoders.com/481/481903.png"
         },
         {
             "title": "The Kiss",
@@ -123,7 +134,8 @@ def seed_artworks():
             "width": "180.0",
             "available": True,
             "materials": "OIL",
-            "owner_id": 2
+            "owner_id": 2,
+            "image": "https://images5.alphacoders.com/481/481903.png"
         },
         {
             "title": "American Gothic",
@@ -133,7 +145,8 @@ def seed_artworks():
             "width": "62.4",
             "available": True,
             "materials": "OIL",
-            "owner_id": 1
+            "owner_id": 1,
+            "image": "https://images5.alphacoders.com/481/481903.png"
         }
     ]
 

@@ -4,10 +4,11 @@
   width: 50%;
 }
 
-
 .img-preview {
   height: auto;
   width: 100%;
   display: flex;
   justify-content: center;
 }
+
+.image--artwork-preview {}

@@ -66,6 +66,7 @@ class Artwork(db.Model):
                     available=item["available"],
                     materials=item["materials"],
                     owner_id=item["owner_id"],
+                    image=item["image"]
                 )
                 for item in items
             ]
@@ -80,6 +81,7 @@ class Artwork(db.Model):
                 available=items["available"],
                 materials=items["materials"],
                 owner_id=items["owner_id"],
+                image=items["image"]
             )
             return new_item
 

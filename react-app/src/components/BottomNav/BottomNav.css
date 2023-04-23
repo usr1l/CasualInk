@@ -10,12 +10,38 @@
   justify-content: center;
 }
 
+.page-return>h3 {
+  font-size: 16pt;
+  color: white;
+  transition: 0.3s;
+  font-weight: 300;
+}
+
 .page-bottom-nav-wrapper {
   display: flex;
   justify-content: space-between;
-  width: 1100px;
+  width: 90%;
 }
 
 .site-footer {
   margin: 0;
+}
+
+.page-return>h3>i {
+  margin-right: 10px;
+  color: white;
+  transition: 0.3s;
+}
+
+.page-return {
+  text-decoration: none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.page-return>h3>i:hover,
+.page-return>h3:hover {
+  color: grey;
+  transition: 0.3s;
 }
