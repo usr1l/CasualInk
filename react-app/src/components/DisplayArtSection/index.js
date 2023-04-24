@@ -4,7 +4,9 @@ import "./DisplayArtSection.css";
 const DisplayArtSection = ({ items }) => {
   return (
     <div className='card-display-section'>
-
+      {items.map(item => (
+        <div>{item.title}</div>
+      ))}
     </div>
   )
 };
