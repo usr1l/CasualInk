@@ -53,7 +53,7 @@ const ProfilePage = () => {
         )}
         <PageContainer>
           <Switch >
-            <Route exact path={`/user/:userId/profile/`} >
+            <Route exact path={`/user/:userId/profile`} >
               <DisplayArtSection items={allArtworks} />
             </Route>
           </Switch>
