@@ -177,24 +177,24 @@ function SignupFormPage() {
             </InputDiv>
           </PageSplit>
         </form>
-        <BottomNav>
-          <Link to={'/'} className="page-return">
-            <h3>
-              <i className="fa-solid fa-angle-left" /> Back to Home
-            </h3>
-          </Link>
-          <div className="page-return">
-            <Button
-              buttonStyle={"btn--login"}
-              buttonSize={"btn--wide"}
-              onClick={handleSubmit}
-              disableButton={disabled}
-            >
-              Sign Up
-            </Button>
-          </div>
-        </BottomNav>
       </div>
+      <BottomNav>
+        <Link to={'/'} className="page-return">
+          <h3>
+            <i className="fa-solid fa-angle-left" /> Back to Home
+          </h3>
+        </Link>
+        <div className="page-return">
+          <Button
+            buttonStyle={"btn--login"}
+            buttonSize={"btn--wide"}
+            onClick={handleSubmit}
+            disableButton={disabled}
+          >
+            Sign Up
+          </Button>
+        </div>
+      </BottomNav>
     </>
   );
 }

@@ -2,11 +2,12 @@ import React from 'react';
 import ImagePreview from '../ImagePreview';
 import ImageCard from '../ImageCard';
 import "./ArtShowCaseCard.css";
+import { Link } from 'react-router-dom';
 
 const ArtShowCaseCard = ({ item }) => {
 
   return (
-    <div className='showcard-wrapper'>
+    <Link to={`/artworks/${item.id}`} className='showcard-wrapper'>
       <div className='showcard-container'>
         <ImagePreview
           imgSrc={item.image}
@@ -21,7 +22,7 @@ const ArtShowCaseCard = ({ item }) => {
           <div>{item.materials}</div>
         </ImageCard>
       </div>
-    </div>
+    </Link>
   )
 };
 

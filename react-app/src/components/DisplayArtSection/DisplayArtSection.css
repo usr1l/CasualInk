@@ -1,0 +1,7 @@
+.card-display-section {
+  width: 100%;
+  display: flex;
+  flex-flow: column wrap;
+  max-height: 100vh;
+  align-content: flex-start;
+}

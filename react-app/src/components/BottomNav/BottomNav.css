@@ -38,6 +38,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  min-width: 200px;
 }
 
 .page-return>h3>i:hover,

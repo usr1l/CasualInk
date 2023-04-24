@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import ProfileDescriptionCard from '../ProfileDescriptionCard';
-import "./ProfilePage.css";
 import { useSelector } from 'react-redux';
 import { useHistory, useParams, NavLink, Switch, Route, Link } from 'react-router-dom';
+import ProfileDescriptionCard from '../ProfileDescriptionCard';
 import DisplayArtSection from '../DisplayArtSection';
 import BottomNav from '../BottomNav';
 import Button from '../Button';
+import PageContainer from '../PageContainer';
+import "./ProfilePage.css";
 
 const ProfilePage = () => {
   const history = useHistory();
@@ -43,18 +44,20 @@ const ProfilePage = () => {
             </div>
             <div className="navbar-wrapper">
               <div className="navbar-container">
-                <NavLink to={`/user/${userId}/profile/collection`} className="navbar-item" activeClassName='navbar-navlink-active'>
+                <NavLink to={`/user/${userId}/profile/`} className="navbar-item" activeClassName='navbar-navlink-active'>
                   My Collection
                 </NavLink>
               </div>
             </div>
           </>
         )}
-        <Switch >
-          <Route exact path={`/user/:userId/profile/collection`} >
-            <DisplayArtSection items={allArtworks} />
-          </Route>
-        </Switch>
+        <PageContainer>
+          <Switch >
+            <Route exact path={`/user/:userId/profile/`} >
+              <DisplayArtSection items={allArtworks} />
+            </Route>
+          </Switch>
+        </PageContainer>
       </div>
       <BottomNav>
         <Link to={'/'} className="page-return">
