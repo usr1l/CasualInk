@@ -22,12 +22,18 @@ const actionGetArtworks = (artworks) => {
   };
 };
 
-export const actionGetSingleArtworkId = (artworkId) => {
-  return {
-    type: GET_SINGLE_ARTWORK_ID,
-    payload: artworkId
+export const thunkGetSingleArtworkId = (artworkId) => async (dispatch) => {
+
+  function actionGetSingleArtworkId(artworkId) {
+    return {
+      type: GET_SINGLE_ARTWORK_ID,
+      payload: artworkId
+    };
   };
+
+  dispatch(actionGetSingleArtworkId(artworkId));
 };
+
 
 export const thunkUploadArtwork = (artworkData) => async (dispatch) => {
   const response = await fetch("/api/artworks/new", {
