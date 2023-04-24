@@ -14,7 +14,7 @@ const ImageCard = ({
       <h2>{h1text}</h2>
       <div>{h2text}</div>
       {children}
-    </div >
+    </div>
   )
 };
 

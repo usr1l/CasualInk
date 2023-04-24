@@ -2,6 +2,7 @@ from app.models import db, environment, SCHEMA, Review
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from datetime import datetime, date
+from .helper_fns import normalize_data
 
 
 class User(db.Model, UserMixin):
@@ -70,6 +71,21 @@ class User(db.Model, UserMixin):
             "bio": self.bio,
             "join_date": self.join_date,
             "profile_pic": self.profile_pic
+        }
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "username": self.username,
+            "email": self.email,
+            "firstname": self.firstname,
+            "lastname": self.lastname,
+            "bio": self.bio,
+            "joinDate": self.join_date,
+            "profilePic": self.profile_pic,
+            "artworks": [artwork.to_safe_dict() for artwork in self.artworks],
+            "artListings": [art_listing.to_safe_dict() for art_listing in self.art_listings],
+            "auctionListings": [auction_listing.to_safe_dict() for auction_listing in self.auction_listings]
         }
 
     def __repr__(self):

@@ -5,3 +5,4 @@ from .artlisting import ArtListing
 from .auctionlisting import AuctionListing
 from .reviews import Review
 from .user import User
+from .helper_fns import normalize_data

@@ -1,0 +1,48 @@
+.profile-description-card-container {
+  all: unset;
+  display: flex;
+  width: 70%;
+  height: 100%;
+  background: white;
+  box-sizing: border-box;
+}
+
+.profile-description-card {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+img.profile-description-card-element {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+
+div.profile-description-card-element {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 15px;
+  letter-spacing: 1px;
+}
+
+div.profile-description-card-element-heading {
+  font-size: 30pt;
+  font-weight: 400;
+}
+
+div.profile-description-card-element-subheading {
+  font-size: 12pt;
+  color: grey;
+  font-weight: 300;
+}
+
+
+#membership-page-member-cards {
+  contain: strict;
+}

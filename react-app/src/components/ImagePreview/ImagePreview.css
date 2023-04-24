@@ -1,14 +1,20 @@
+.image--artwork-preview,
 .img-preview-wrapper {
   display: flex;
   height: auto;
+}
+
+.img-preview-wrapper {
   width: 50%;
 }
 
 .img-preview {
   height: auto;
-  width: 100%;
+  max-width: 100%;
   display: flex;
   justify-content: center;
 }
 
-.image--artwork-preview {}
+.image--artwork-preview {
+  width: 100%;
+}

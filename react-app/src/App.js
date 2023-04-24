@@ -12,6 +12,9 @@ import ArtworksPage from "./components/ArtworksPage";
 import ArtListingsPage from "./components/ArtListingsPage";
 import ShoppingCart from "./components/ShoppingCart";
 import SignupFormPage from "./components/SignupFormPage";
+import ProfilePage from "./components/ProfilePage";
+import NotAuthorizedPage from "./components/NotAuthorizedPage";
+import SingleArtworkPage from "./components/SingleArtworkPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -47,8 +50,20 @@ function App() {
           {user && (
             <Route exact path="/artworks/new" component={UploadArtworkForm} />
           )}
+          {user && (
+            <Route exact path="/user/:userId/profile" component={ProfilePage} />
+          )}
+          {user && (
+            <Route exact path="/not-authorized" component={NotAuthorizedPage} />
+          )}
+          {user && (
+            <Route exact path="/user/:userId/profile/" component={ProfilePage} />
+          )}
+          {user && (
+            <Route exact path="/artworks/:artworkId" component={SingleArtworkPage} />
+          )}
           <Route exact path="/signup" component={SignupFormPage} />
-          <Route>Not Found</Route>
+          <Route component={LandingPage} />
         </Switch>
       )}
     </>

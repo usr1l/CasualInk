@@ -1,0 +1,7 @@
+.display-card {
+  box-sizing: border-box;
+  width: 400px;
+  height: auto;
+  /* border: 1px solid black; */
+  text-decoration: none;
+}

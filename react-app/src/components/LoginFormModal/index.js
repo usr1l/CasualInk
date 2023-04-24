@@ -12,7 +12,7 @@ function LoginFormModal() {
   const [ password, setPassword ] = useState("");
   const [ errors, setErrors ] = useState([]);
   const [ disabled, setDisabled ] = useState(true);
-  const { closeModal } = useModal();
+  const { closeModal, modalContent, modalRef } = useModal();
 
   useEffect(() => {
     if (!email || !password) setDisabled(true)
@@ -28,6 +28,12 @@ function LoginFormModal() {
       closeModal()
     }
   };
+
+  useEffect(() => {
+    if (!modalContent) return;
+    document.addEventListener("click", closeModal);
+    return () => document.removeEventListener("click", closeModal);
+  }, [ modalContent ]);
 
   return (
     <div id='log-in'>

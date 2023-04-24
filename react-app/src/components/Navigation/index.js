@@ -3,20 +3,19 @@ import { Link, NavLink, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import OpenModalButton from '../OpenModalButton';
-import SignupFormModal from '../SignupFormModal';
 import LoginFormModal from '../LoginFormModal';
 import SiteLogo from '../SiteLogo';
 import { login } from '../../store/session';
-import './Navigation.css';
 import Button from '../Button';
 import SearchBar from '../SearchBar';
+import './Navigation.css';
 
 function Navigation({ isLoaded }) {
 	const sessionUser = useSelector(state => state.session.user);
 	const dispatch = useDispatch();
 	const history = useHistory();
-
 	const [ showMenu, setShowMenu ] = useState(false);
+
 	const demoUser = () => {
 		dispatch(login("demo@aa.io", "password"))
 			.then(() => history.push('/'));
@@ -34,10 +33,9 @@ function Navigation({ isLoaded }) {
 				<div id='navbar-icons-container'>
 					<div id='navbar-shortcuts'>
 						{sessionUser ? (
-
-							<Link to={'/artworks/new'} className="navbar-bot-navbar-item" >Upload New Artwork</Link>
+							<Link to={`/user/${sessionUser.id}/profile`} className="navbar-bot-navbar-item" >My Collection</Link>
 						) : (
-							<div className="navbar-bot-navbar-item" >Welcome to Casual Ink</div>
+							<div className="navbar-bot-navbar-item">Welcome to Casual Ink</div>
 						)}
 					</div>
 					{isLoaded && (

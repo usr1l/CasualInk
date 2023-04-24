@@ -4,6 +4,7 @@
   white-space: nowrap;
   padding: 20px 0;
   border-top: 1px solid rgb(218, 218, 218);
+  /* border-top: 1px solid black; */
 }
 
 .scroll-container-item {

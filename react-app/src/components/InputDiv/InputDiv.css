@@ -1,6 +1,6 @@
 .input-div {
   display: flex;
-  width: 100%;
+  width: 85%;
   flex-direction: column;
   margin-bottom: 7px;
 }

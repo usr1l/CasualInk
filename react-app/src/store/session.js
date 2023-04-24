@@ -1,3 +1,5 @@
+import normalizeFn from "../components/HelperFns/NormalizeFn";
+
 // constants
 const SET_USER = "session/SET_USER";
 const REMOVE_USER = "session/REMOVE_USER";
@@ -91,6 +93,9 @@ export const signUp = (signupData) => async (dispatch) => {
 export default function reducer(state = initialState, action) {
 	switch (action.type) {
 		case SET_USER:
+			action.payload.artListings = normalizeFn(action.payload.artListings)
+			action.payload.auctionListings = normalizeFn(action.payload.auctionListings)
+			action.payload.artworks = normalizeFn(action.payload.artworks)
 			return { user: action.payload };
 		case REMOVE_USER:
 			return { user: null };

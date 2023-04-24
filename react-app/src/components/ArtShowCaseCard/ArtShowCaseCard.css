@@ -2,6 +2,7 @@
   max-height: 400px;
   max-width: 300px;
   border: 1px solid white;
+  text-decoration: none;
 }
 
 .showcard-container {
