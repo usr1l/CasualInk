@@ -167,7 +167,10 @@ function SignupFormPage() {
                 required
               />
             </InputDiv>
-            <InputDiv >
+            <InputDiv
+              labelStyle={'__label'}
+              label={'Upload A Profile Image: '}
+            >
               <input
                 id='proPic'
                 className='__input'

@@ -19,4 +19,4 @@ class ArtworkForm(FlaskForm):
     materials = SelectField("Materials: ", choices=[c.name for c in ArtWorkTypesEnum],
                             validators=[DataRequired()])
     image = FileField("Image File", validators=[
-                      FileRequired(), FileAllowed(list(ALLOWED_EXTENSIONS))])
+        FileAllowed(list(ALLOWED_EXTENSIONS))])

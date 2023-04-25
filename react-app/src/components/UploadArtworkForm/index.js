@@ -9,7 +9,7 @@ import PageSplit from "../PageSplit";
 import './UploadArtworkForm.css'
 
 const UploadArtworkForm = () => {
-  const artworkMaterials = [ "OIL", "ACRYLIC", "MULTIMEDIA", "BALLPOINT", "CHARCOAL", "WATERCOLOR", "PENCIL", "COLORPENCIL" ]
+  const artworkMaterials = [ "OIL", "ACRYLIC", "MULTIMEDIA", "BALLPOINT", "CHARCOAL", "WATERCOLOR", "PENCIL", "COLORPENCIL", "PRINT" ]
   const dispatch = useDispatch();
   const history = useHistory();
   const params = useParams();

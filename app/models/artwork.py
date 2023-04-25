@@ -12,6 +12,7 @@ class ArtWorkTypesEnum(enum.Enum):
     WATERCOLOR = "Watercolor"
     PENCIL = "Pencil"
     COLORPENCIL = "Color Pencil"
+    PRINT = "Print"
 
     def __str__(self):
         return self.name
@@ -89,15 +90,31 @@ class Artwork(db.Model):
         return {
             "id": self.id,
             "title": self.title,
-            "artist_name": self.artist_name,
+            "artistName": self.artist_name,
             "year": self.year,
             "height": self.height,
             "width": self.width,
             "materials": ArtWorkTypesEnum(self.materials).name,
             "available": self.available,
-            "owner_id": self.owner_id,
+            "ownerId": self.owner_id,
             "image": self.image
         }
 
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "title": self.title,
+            "artistName": self.artist_name,
+            "year": self.year,
+            "height": self.height,
+            "width": self.width,
+            "materials": ArtWorkTypesEnum(self.materials).name,
+            "available": self.available,
+            "ownerId": self.owner_id,
+            "image": self.image,
+            "saleListing": list(self.for_sale_listing)[0].id if list(self.for_sale_listing) else None,
+            "auctionListing": list(self.for_auction_listing)[0].id if list(self.for_auction_listing) else None
+        }
+
     def __repr__(self):
-        return f"<Artwork {self.id}: {self.name}, Owner: {self.owner_id}>"
+        return f"<Artwork {self.id}: {self.title}, Owner: {self.owner_id}>"

@@ -1,8 +1,11 @@
 import normalizeFn from "../components/HelperFns/NormalizeFn.js";
+import { actionDeleteOwnerArtwork } from "./session.js";
 
 const GET_ARTWORKS = "artworks/GET_ARTWORKS";
 const UPLOAD_ARTWORK = "artworks/UPLOAD_ARTWORK";
 const GET_SINGLE_ARTWORK_ID = "artwork/GET_SINGLE_ARTWORK_ID";
+const EDIT_SINGLE_ARTWORK = "artwork/EDIT_SINGLE_ARTWORK";
+const DELETE_SINGLE_ARTWORK = "artwork/DELETE_SINGLE_ARTWORK"
 
 export const thunkGetArtworks = () => async (dispatch) => {
   const response = await fetch("/api/artworks/");
@@ -45,8 +48,8 @@ export const thunkUploadArtwork = (artworkData) => async (dispatch) => {
 
   if (response.ok) {
     dispatch(actionUploadArtwork(data));
-    return data
-  } else return data;
+  }
+  return data;
 };
 
 const actionUploadArtwork = (data) => {
@@ -56,9 +59,47 @@ const actionUploadArtwork = (data) => {
   };
 };
 
+export const thunkEditArtwork = ({ formData, artworkId }) => async (dispatch) => {
+  const res = await fetch(`/api/artworks/${artworkId}`, {
+    method: "PUT",
+    body: formData
+  });
+
+  const data = await res.json();
+  if (res.ok) dispatch(actionEditArtwork(data))
+  return data;
+};
+
+const actionEditArtwork = (data) => {
+  return {
+    type: EDIT_SINGLE_ARTWORK,
+    payload: data
+  };
+};
+
+export const thunkDeleteArtwork = (artworkId) => async (dispatch) => {
+  const response = await fetch(`/api/artworks/${artworkId}`, {
+    method: "DELETE"
+  });
+  const data = await response.json();
+  if (response.ok) {
+    dispatch(actionDeleteArtwork(artworkId))
+    dispatch(actionDeleteOwnerArtwork(artworkId))
+  };
+  return data;
+};
+
+const actionDeleteArtwork = (artworkId) => {
+  return {
+    type: DELETE_SINGLE_ARTWORK,
+    payload: artworkId
+  }
+};
+
 const initialState = { allArtworks: {}, singleArtworkId: null, isLoading: true }
 
 const artworks = (state = initialState, action) => {
+  let updatedState;
   switch (action.type) {
     case GET_ARTWORKS:
       return {
@@ -73,6 +114,24 @@ const artworks = (state = initialState, action) => {
         ...state,
         singleArtworkId: action.payload
       };
+    case EDIT_SINGLE_ARTWORK:
+      return {
+        ...state,
+        allArtworks: {
+          ...state.allArtworks,
+          [ action.payload.id ]: action.payload
+        }
+      };
+    case DELETE_SINGLE_ARTWORK:
+      updatedState = {
+        ...state,
+        allArtworks: {
+          ...state.allArtworks,
+          singleArtworkId: null
+        }
+      }
+      delete updatedState.allArtworks[ action.payload ]
+      return updatedState;
     default:
       return state;
   };

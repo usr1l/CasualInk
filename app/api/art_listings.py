@@ -20,7 +20,7 @@ def get_a_single_listing(artlisting_id):
     return single_listing.to_safe_dict(), 200
 
 
-# @artlisting_routes.route("/new", methods=["POST"])
-# @login_required
-# def create_a_new_listing():
-#     form = ArtlistingForm()
+@artlisting_routes.route("/new", methods=["POST"])
+@login_required
+def create_a_new_listing():
+    form = ArtlistingForm()

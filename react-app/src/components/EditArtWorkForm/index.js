@@ -4,12 +4,13 @@ import { useHistory, Link, useParams } from "react-router-dom";
 import Button from '../Button';
 import InputDiv from "../InputDiv";
 import BottomNav from "../BottomNav";
-import { thunkUploadArtwork } from "../../store/artworks";
+import { thunkEditArtwork } from "../../store/artworks";
 import PageSplit from "../PageSplit";
 import '../UploadArtworkForm/UploadArtworkForm.css';
+import ImagePreview from "../ImagePreview";
 
 const EditArtworkForm = () => {
-  const artworkMaterials = [ "OIL", "ACRYLIC", "MULTIMEDIA", "BALLPOINT", "CHARCOAL", "WATERCOLOR", "PENCIL", "COLORPENCIL" ]
+  const artworkMaterials = [ "OIL", "ACRYLIC", "MULTIMEDIA", "BALLPOINT", "CHARCOAL", "WATERCOLOR", "PENCIL", "COLORPENCIL", "PRINT" ]
   const dispatch = useDispatch();
   const history = useHistory();
   const { artworkId } = useParams();
@@ -27,13 +28,14 @@ const EditArtworkForm = () => {
   const artwork = useSelector(state => state.artworks.allArtworks[ artworkId ]);
 
   useEffect(() => {
-    if (!artwork) history.push("/not-found");
+    if (!artwork) return history.push("/not-found");
+    const available = `${artwork.available}`
     setTitle(artwork.title);
-    setArtistName(artwork.artist_name);
+    setArtistName(artwork.artistName);
     setYear(artwork.year);
     setHeight(artwork.height);
     setWidth(artwork.width);
-    setAvailable(artwork.available);
+    setAvailable(available.charAt(0).toUpperCase() + available.slice(1));
     setMaterials(artwork.materials);
     setIsLoaded(true);
   }, [ artwork ]);
@@ -52,25 +54,25 @@ const EditArtworkForm = () => {
     return validationErrors;
   };
 
-  const onSubmit = async (e) => {
-    // e.preventDefault();
+  const onSubmit = (e) => {
+    e.preventDefault();
     // const validationErrors = validate();
     // if (validationErrors.length > 0) return setErrors(validationErrors);
 
-    // const formData = new FormData();
-    // formData.append("title", title);
-    // formData.append("artist_name", artistName);
-    // formData.append("year", year);
-    // formData.append("height", height);
-    // formData.append("width", width);
-    // formData.append("available", available);
-    // formData.append("materials", materials);
-    // formData.append("image", image);
 
-    // const response = await dispatch(thunkUploadArtwork(formData))
-    // if (response.errors) {
-    //   return setErrors(response.errors);
-    // } else return history.push("/");
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("artist_name", artistName);
+    formData.append("year", year);
+    formData.append("height", height);
+    formData.append("width", width);
+    formData.append("available", available);
+    formData.append("materials", materials);
+    if (image) formData.append("image", image);
+    const res = dispatch(thunkEditArtwork({ formData: formData, artworkId: artworkId }))
+    if (res.errors) {
+      return setErrors(res.errors);
+    } else return history.push(`/artworks/${artworkId}`);
   };
 
   const disabled = disableBool();
@@ -171,7 +173,7 @@ const EditArtworkForm = () => {
                 </InputDiv>
                 <InputDiv
                   labelStyle={'__label'}
-                  labelFor=""
+                  labelFor="materials"
                   label='Materials Used? *'>
                   <select
                     name="materials"
@@ -191,7 +193,7 @@ const EditArtworkForm = () => {
                 <InputDiv
                   labelStyle={'__label'}
                   labelFor="image"
-                  label='Upload an image. *'
+                  label='Upload a new image: '
                 >
                   <input
                     id="image"
@@ -201,8 +203,11 @@ const EditArtworkForm = () => {
                     onChange={(e) => setImage(e.target.files[ 0 ])}
                   />
                 </InputDiv>
-                <div id='create-group-button-div'>
-                </div>
+                <ImagePreview
+                  imgSrc={artwork.image}
+                  imgWrapperStyle={'img--medium-wrapper'}
+                  imgClassName={'img--preview-medium'}
+                />
               </PageSplit>
             </form>
           </div>
@@ -218,7 +223,7 @@ const EditArtworkForm = () => {
                 onClick={onSubmit}
                 buttonSize='btn--wide'
                 disableButton={disabled}
-              >Upload Artwork
+              >Edit Artwork
               </Button>
             </div>
           </BottomNav>
