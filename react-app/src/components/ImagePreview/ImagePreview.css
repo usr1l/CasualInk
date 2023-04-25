@@ -8,6 +8,8 @@
   width: 50%;
 }
 
+
+.img--preview-medium,
 .img-preview {
   height: auto;
   max-width: 100%;
@@ -17,4 +19,13 @@
 
 .image--artwork-preview {
   width: 100%;
+}
+
+.img--medium-wrapper {
+  max-width: 200px;
+  max-height: 200px;
+}
+
+.img--preview-medium {
+  max-height: 100%;
 }

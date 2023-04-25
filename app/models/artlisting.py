@@ -19,7 +19,8 @@ class ArtListing(db.Model):
         db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False
     )
 
-    artwork = db.relationship("Artwork", back_populates="for_sale_listing")
+    artwork = db.relationship(
+        "Artwork", back_populates="for_sale_listing", single_parent=True)
 
     owner = db.relationship("User", back_populates="art_listings")
 

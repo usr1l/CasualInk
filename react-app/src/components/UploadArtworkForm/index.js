@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, Link } from "react-router-dom";
+import { useHistory, Link, useParams } from "react-router-dom";
 import Button from '../Button';
 import InputDiv from "../InputDiv";
 import BottomNav from "../BottomNav";
@@ -9,9 +9,10 @@ import PageSplit from "../PageSplit";
 import './UploadArtworkForm.css'
 
 const UploadArtworkForm = () => {
-  const artworkMaterials = [ "OIL", "ACRYLIC", "MULTIMEDIA", "BALLPOINT", "CHARCOAL", "WATERCOLOR", "PENCIL", "COLORPENCIL" ]
+  const artworkMaterials = [ "OIL", "ACRYLIC", "MULTIMEDIA", "BALLPOINT", "CHARCOAL", "WATERCOLOR", "PENCIL", "COLORPENCIL", "PRINT" ]
   const dispatch = useDispatch();
   const history = useHistory();
+  const params = useParams();
   const [ title, setTitle ] = useState("");
   const [ artistName, setArtistName ] = useState("");
   const [ year, setYear ] = useState("");
@@ -21,6 +22,7 @@ const UploadArtworkForm = () => {
   const [ materials, setMaterials ] = useState("");
   const [ image, setImage ] = useState("");
   const [ errors, setErrors ] = useState({});
+
 
   const disableBool = () => {
     if (!height ||

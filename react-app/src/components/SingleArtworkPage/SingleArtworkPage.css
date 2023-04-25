@@ -1,0 +1,5 @@
+.edit-buttons-container {
+  display: flex;
+  width: 520px;
+  justify-content: space-between;
+}

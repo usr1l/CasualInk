@@ -3,6 +3,7 @@ import normalizeFn from "../components/HelperFns/NormalizeFn";
 // constants
 const SET_USER = "session/SET_USER";
 const REMOVE_USER = "session/REMOVE_USER";
+const DELETE_OWNER_ARTWORK = "session/DELETE_OWNER_ARTWORK";
 
 const setUser = (user) => ({
 	type: SET_USER,
@@ -87,10 +88,18 @@ export const signUp = (signupData) => async (dispatch) => {
 		}
 	} else {
 		return [ "An error occurred. Please try again." ];
-	}
+	};
+};
+
+export const actionDeleteOwnerArtwork = (artworkId) => {
+	return {
+		type: DELETE_OWNER_ARTWORK,
+		payload: artworkId
+	};
 };
 
 export default function reducer(state = initialState, action) {
+	let updatedState;
 	switch (action.type) {
 		case SET_USER:
 			action.payload.artListings = normalizeFn(action.payload.artListings)
@@ -99,6 +108,18 @@ export default function reducer(state = initialState, action) {
 			return { user: action.payload };
 		case REMOVE_USER:
 			return { user: null };
+		case DELETE_OWNER_ARTWORK:
+			updatedState = {
+				...state,
+				user: {
+					...state.user,
+					artworks: {
+						...state.user.artworks
+					}
+				}
+			}
+			delete updatedState.user.artworks[ action.payload ]
+			return updatedState;
 		default:
 			return state;
 	}

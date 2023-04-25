@@ -5,6 +5,8 @@
   flex-direction: column;
   column-count: 2;
   box-sizing: border-box;
+  /* align-items: center; */
+  /* justify-content: center; */
   /* padding: 20px; */
 }
 
@@ -29,4 +31,10 @@ h1.split-pages-header {
   align-items: center;
   width: 100%;
   min-height: 80vh;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

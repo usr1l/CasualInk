@@ -14,7 +14,7 @@ const ArtShowCaseCard = ({ item }) => {
           imgWrapperStyle={"img--artwork-preview"}
         />
         <ImageCard
-          headline={item.artist_name}
+          headline={item.artistName}
           h1text={`${item.title}, ${item.year}`}
           h2text={`${item.height} in. x ${item.width} in.`}
           cardClass={'image-card'}

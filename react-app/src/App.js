@@ -15,6 +15,8 @@ import SignupFormPage from "./components/SignupFormPage";
 import ProfilePage from "./components/ProfilePage";
 import NotAuthorizedPage from "./components/NotAuthorizedPage";
 import SingleArtworkPage from "./components/SingleArtworkPage";
+import NotFoundPage from "./components/NotFoundPage";
+import EditArtworkForm from "./components/EditArtWorkForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -54,14 +56,13 @@ function App() {
             <Route exact path="/user/:userId/profile" component={ProfilePage} />
           )}
           {user && (
-            <Route exact path="/not-authorized" component={NotAuthorizedPage} />
-          )}
-          {user && (
-            <Route exact path="/user/:userId/profile/" component={ProfilePage} />
-          )}
-          {user && (
             <Route exact path="/artworks/:artworkId" component={SingleArtworkPage} />
           )}
+          {user && (
+            <Route exact path="/artworks/:artworkId/edit" component={EditArtworkForm} />
+          )}
+          <Route exact path="/not-authorized" component={NotAuthorizedPage} />
+          <Route exact path="/not-found" component={NotFoundPage} />
           <Route exact path="/signup" component={SignupFormPage} />
           <Route component={LandingPage} />
         </Switch>
