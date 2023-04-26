@@ -4,13 +4,14 @@
   white-space: nowrap;
   padding: 20px 0;
   border-top: 1px solid rgb(218, 218, 218);
+  align-items: flex-end;
   /* border-top: 1px solid black; */
 }
 
 .scroll-container-item {
   display: inline-block;
   padding: 10px;
-  margin: 0 20px;
+  margin: 0 5px 0 0;
   border-radius: 5px;
   box-sizing: border-box;
 }

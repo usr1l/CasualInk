@@ -223,7 +223,7 @@ const EditArtworkForm = () => {
                 onClick={onSubmit}
                 buttonSize='btn--wide'
                 disableButton={disabled}
-              >Edit Artwork
+              >Confirm
               </Button>
             </div>
           </BottomNav>

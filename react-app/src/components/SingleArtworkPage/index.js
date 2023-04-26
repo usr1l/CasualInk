@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { thunkDeleteArtwork, thunkGetSingleArtworkId } from '../../store/artworks';
 import OpenModalButton from "../OpenModalButton";
 import ConfirmDeleteModal from '../ConfirmDeleteModal';
+import SingleFullPageDiv from '../SingleFullPageDiv';
 
 const SingleArtworkPage = () => {
   const dispatch = useDispatch();
@@ -20,11 +21,12 @@ const SingleArtworkPage = () => {
   const allArtworks = useSelector(state => state.artworks.allArtworks);
   const artwork = allArtworks[ artworkId ];
 
+  const [ userStatus, setUserStatus ] = useState("user");
   const [ isLoaded, setIsLoaded ] = useState(false);
 
   useEffect(() => {
     if (!artwork && isLoaded === false) history.push("/not-found");
-  }, [ artwork ]);
+  }, [ artwork, isLoaded ]);
 
   useEffect(() => {
     if (artwork) {
@@ -34,33 +36,50 @@ const SingleArtworkPage = () => {
   }, [ dispatch, artwork ]);
 
 
+  const ownerState = (userStatus) => {
+    let response;
+    switch (userStatus) {
+      default:
+        response = "owner"
+        break;
+    };
+    return response;
+  };
+
   return (
     <>
       {isLoaded && !!artwork && (
         <>
-          <PageContainer>
-            <div className="split-pages-page">
-              <div className="split-pages-container">
-                <PageSplit
-                  pageSplitClass={"center"}
-                >
-                  <ImagePreview
-                    imgSrc={artwork.image}
-                  />
-                </PageSplit>
-                <PageSplit
-                  pageSplitClass={"center"}
-                >
-                  <div>
-                    <h1>{`${artwork.title}`}</h1>
-                    <h2>{`${artwork.artistName}, ${artwork.year}`}</h2>
-                    <div>{`${artwork.materials}`}</div>
-                    <div>{`${artwork.height} x ${artwork.width} in | ${artwork.height * 2.54} x ${artwork.width * 2.54} cm`}</div>
-                  </div>
-                </PageSplit>
+          <SingleFullPageDiv>
+            <PageContainer>
+              <div className="split-pages-page">
+                <div className="split-pages-container">
+                  <PageSplit
+                    pageSplitClass={"center"}
+                  >
+                    <ImagePreview
+                      imgSrc={artwork.image}
+                    />
+                  </PageSplit>
+                  <PageSplit
+                    pageSplitClass={"center"}
+                  >
+                    <div>
+                      <h1>{`${artwork.title}`}</h1>
+                      <h2>{`${artwork.artistName}, ${artwork.year}`}</h2>
+                      <div>{`${artwork.materials}`}</div>
+                      <div>{`${artwork.height} x ${artwork.width} in | ${artwork.height * 2.54} x ${artwork.width * 2.54} cm`}</div>
+                    </div>
+                    <OpenModalButton
+                      buttonText={'Default'}
+                      modalCSSClass={'btn btn--demo btn--splash'}
+                    />
+                  </PageSplit>
+                </div>
               </div>
-            </div>
-          </PageContainer>
+            </PageContainer>
+          </SingleFullPageDiv>
+          <div></div>
         </>
       )}
       <BottomNav>

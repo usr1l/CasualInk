@@ -25,7 +25,7 @@ def seed_artworks():
             "available": True,
             "materials": "OIL",
             "owner_id": 2,
-            "image": "https://images5.alphacoders.com/481/481903.png"
+            "image": "https://images.unsplash.com/photo-1587410131477-f01b22c59e1c?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjEyMDd9"
         },
         {
             "title": "The Starry Night",
@@ -36,7 +36,7 @@ def seed_artworks():
             "available": True,
             "materials": "OIL",
             "owner_id": 3,
-            "image": "https://images5.alphacoders.com/481/481903.png"
+            "image": "https://images.unsplash.com/photo-1587410131477-f01b22c59e1c?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjEyMDd9"
         },
         {
             "title": "The Persistence of Memory",
@@ -69,7 +69,7 @@ def seed_artworks():
             "available": True,
             "materials": "OIL",
             "owner_id": 3,
-            "image": "https://images5.alphacoders.com/481/481903.png"
+            "image": "https://images.unsplash.com/photo-1587410131477-f01b22c59e1c?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjEyMDd9"
         },
         {
             "title": "Guernica",
@@ -102,7 +102,7 @@ def seed_artworks():
             "available": True,
             "materials": "OIL",
             "owner_id": 2,
-            "image": "https://images5.alphacoders.com/481/481903.png"
+            "image": "https://images.unsplash.com/photo-1587410131477-f01b22c59e1c?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjEyMDd9"
         },
         {
             "title": "The Night Watch",

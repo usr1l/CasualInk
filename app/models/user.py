@@ -83,7 +83,7 @@ class User(db.Model, UserMixin):
             "bio": self.bio,
             "joinDate": self.join_date,
             "profilePic": self.profile_pic,
-            "artworks": [artwork.to_safe_dict() for artwork in self.artworks],
+            "artworks": [artwork.to_dict() for artwork in self.artworks],
             "artListings": [art_listing.to_safe_dict() for art_listing in self.art_listings],
             "auctionListings": [auction_listing.to_safe_dict() for auction_listing in self.auction_listings]
         }

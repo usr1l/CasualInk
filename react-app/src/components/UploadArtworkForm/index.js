@@ -12,7 +12,7 @@ const UploadArtworkForm = () => {
   const artworkMaterials = [ "OIL", "ACRYLIC", "MULTIMEDIA", "BALLPOINT", "CHARCOAL", "WATERCOLOR", "PENCIL", "COLORPENCIL", "PRINT" ]
   const dispatch = useDispatch();
   const history = useHistory();
-  const params = useParams();
+
   const [ title, setTitle ] = useState("");
   const [ artistName, setArtistName ] = useState("");
   const [ year, setYear ] = useState("");
@@ -55,9 +55,10 @@ const UploadArtworkForm = () => {
     formData.append("image", image);
 
     const response = await dispatch(thunkUploadArtwork(formData))
+    console.log(response.id)
     if (response.errors) {
       return setErrors(response.errors);
-    } else return history.push("/");
+    } else history.push(`/artworks/${response.id}`);
   };
 
   const disabled = disableBool();

@@ -1,5 +1,5 @@
 import normalizeFn from "../components/HelperFns/NormalizeFn.js";
-import { actionDeleteOwnerArtwork } from "./session.js";
+import { actionDeleteOwnerArtwork, actionUploadOwnerArtwork } from "./session.js";
 
 const GET_ARTWORKS = "artworks/GET_ARTWORKS";
 const UPLOAD_ARTWORK = "artworks/UPLOAD_ARTWORK";
@@ -48,6 +48,7 @@ export const thunkUploadArtwork = (artworkData) => async (dispatch) => {
 
   if (response.ok) {
     dispatch(actionUploadArtwork(data));
+    dispatch(actionUploadOwnerArtwork(data));
   }
   return data;
 };
@@ -108,7 +109,13 @@ const artworks = (state = initialState, action) => {
         isLoading: false
       };
     case UPLOAD_ARTWORK:
-      return state;
+      return {
+        ...state,
+        allArtworks: {
+          ...state.allArtworks,
+          [ action.payload.id ]: action.payload
+        }
+      };
     case GET_SINGLE_ARTWORK_ID:
       return {
         ...state,

@@ -28,14 +28,14 @@ def single_artwork_route(artwork_id):
     if request.method == 'DELETE':
         if not single_artwork.check_owner(owner_id):
             return {"errors": "Forbidden."}, 403
-        # file_delete = remove_file_from_AWS(single_artwork.image)
+        file_delete = remove_file_from_AWS(single_artwork.image)
 
-        # if file_delete:
-        db.session.delete(single_artwork)
-        db.session.commit()
-        return {"Success": "Artwork deleted."}, 202
-        # else:
-        #     return {"errors": "Error deleting file image"}, 400
+        if file_delete:
+            db.session.delete(single_artwork)
+            db.session.commit()
+            return {"Success": "Artwork deleted."}, 202
+        else:
+            return {"errors": "Error deleting file image"}, 400
 
     if request.method == "PUT":
         if not single_artwork.check_owner(owner_id):

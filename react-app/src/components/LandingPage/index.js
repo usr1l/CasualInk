@@ -5,6 +5,7 @@ import FeatureBanner from '../FeatureBanner';
 import image1 from "../static/displayimage2.jpg"
 import image2 from "../static/displayimage.jpg"
 import "./LandingPage.css";
+import SingleFullPageDiv from '../SingleFullPageDiv';
 
 const LandingPage = () => {
   const { allArtworks } = useSelector(state => state.artworks);
@@ -30,7 +31,8 @@ const LandingPage = () => {
   };
 
   return (
-    <div id="landing-page">
+    <SingleFullPageDiv>
+
       <div id="landing-page-content-container">
         <div id='feature-banner-container'>
           <FeatureBanner
@@ -57,7 +59,7 @@ const LandingPage = () => {
         </div>
         <HorizontalShowcase items={artworks} />
       </div>
-    </div>
+    </SingleFullPageDiv>
   )
 };
 

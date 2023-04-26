@@ -1,0 +1,7 @@
+.single-page-full {
+  min-height: 90vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

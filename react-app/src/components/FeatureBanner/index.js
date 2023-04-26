@@ -20,7 +20,9 @@ const FeatureBanner = ({
 
   return (
     <div className="banner-container" id={checkDivStyle}>
-      <ImagePreview imgSrc={imgSrc} />
+      <ImagePreview
+        imgWrapperStyle={'img-feature-banner'}
+        imgSrc={imgSrc} />
       <div className="banner-content">
         <ContentCard
           headline={headline}
