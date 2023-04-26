@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import HorizontalShowcase from '../HorizontalShowcase';
 import FeatureBanner from '../FeatureBanner';
@@ -30,11 +30,29 @@ const LandingPage = () => {
     };
   };
 
+  useEffect(() => {
+    const flipBanner = setInterval(() => {
+      if (currBanner === 'overlap-banner-hidden') {
+        setBanner1('banner-slider')
+        setBanner2('banner-slider focused')
+        setCurrBanner("overlap-banner")
+      };
+      if (currBanner === "overlap-banner") {
+        setBanner1('banner-slider focused')
+        setBanner2('banner-slider')
+        setCurrBanner("overlap-banner-hidden")
+      };
+    }, 5000);
+
+    return (() => {
+      clearInterval(flipBanner);
+    });
+  });
+
   return (
     <SingleFullPageDiv>
-
-      <div id="landing-page-content-container">
-        <div id='feature-banner-container'>
+      <div className="landing-page-content-container">
+        <div className='feature-banner-container'>
           <FeatureBanner
             imgSrc={image1}
             headline={'Featured Artwork'}

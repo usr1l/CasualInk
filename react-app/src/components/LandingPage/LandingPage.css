@@ -1,8 +1,8 @@
-#landing-page-content-container {
+.landing-page-content-container {
   width: 95%;
 }
 
-#feature-banner-container {
+.feature-banner-container {
   display: flex;
   justify-content: center;
   width: 100%;

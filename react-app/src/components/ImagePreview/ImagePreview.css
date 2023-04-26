@@ -14,21 +14,31 @@
 }
 
 .img-preview {
-  height: auto;
+  max-height: 100%;
   max-width: 100%;
   display: flex;
   justify-content: center;
 }
 
 .image--artwork-preview {
-  width: 100%;
+  max-height: 100%;
+  width: auto;
 }
 
 .img--medium-wrapper {
-  max-width: 200px;
-  max-height: 200px;
+  height: 150px;
+  width: auto;
 }
 
 .img--preview-medium {
   max-height: 100%;
+}
+
+
+.img-preview-wrapper-big {
+  display: flex;
+  max-width: 100%;
+  max-height: 90vh;
+  justify-content: center;
+  align-items: center;
 }

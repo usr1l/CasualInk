@@ -1,7 +1,7 @@
 import React from 'react';
 import './InputDiv.css';
 
-const divSTYLES = [];
+const divSTYLES = [ "", 'input--wide' ];
 const labelSTYLES = [];
 const extraSTYLES = [];
 

@@ -39,19 +39,6 @@
   justify-content: space-around;
 }
 
-#log-in__error-list {
-  list-style: none;
-  font-size: 10pt;
-  align-content: left;
-  width: 440px;
-  height: 40px;
-  margin: 0;
-  padding: 0;
-  letter-spacing: 1px;
-  line-height: 18px;
-  color: rgb(194, 194, 194);
-  margin-top: 5px;
-}
 
 #log-in__label {
   align-self: start;

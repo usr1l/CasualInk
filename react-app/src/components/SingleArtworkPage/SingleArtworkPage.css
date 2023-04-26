@@ -3,3 +3,21 @@
   width: 520px;
   justify-content: space-between;
 }
+
+
+.single-art-description-card {
+  margin: 0;
+}
+
+.single-art-description-card>h1 {
+  margin: 0;
+  font-size: 30pt;
+  font-weight: 500;
+}
+
+.single-art-description-card>h2 {
+  font-style: italic;
+  font-weight: 400;
+  margin: 0 0 40px;
+  color: grey;
+}

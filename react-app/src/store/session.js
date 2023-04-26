@@ -5,6 +5,7 @@ const SET_USER = "session/SET_USER";
 const REMOVE_USER = "session/REMOVE_USER";
 const DELETE_OWNER_ARTWORK = "session/DELETE_OWNER_ARTWORK";
 const UPLOAD_OWNER_ARTWORK = "session/UPLOAD_OWNER_ARTWORK";
+const EDIT_OWNER_ARTWORK = "session/EDIT_OWNER_ARTWORK";
 
 const setUser = (user) => ({
 	type: SET_USER,
@@ -106,6 +107,13 @@ export const actionUploadOwnerArtwork = (data) => {
 	};
 };
 
+export const actionOwnerEditArtwork = (data) => {
+	return {
+		type: EDIT_OWNER_ARTWORK,
+		payload: data
+	}
+}
+
 export default function reducer(state = initialState, action) {
 	let updatedState;
 	switch (action.type) {
@@ -129,6 +137,17 @@ export default function reducer(state = initialState, action) {
 			delete updatedState.user.artworks[ action.payload ]
 			return updatedState;
 		case UPLOAD_OWNER_ARTWORK:
+			return {
+				...state,
+				user: {
+					...state.user,
+					artworks: {
+						...state.user.artworks,
+						[ action.payload.id ]: action.payload
+					}
+				}
+			}
+		case EDIT_OWNER_ARTWORK:
 			return {
 				...state,
 				user: {

@@ -5,3 +5,13 @@
   flex-direction: column;
   align-items: center;
 }
+
+.single-page-small {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  min-height: 77vh;
+  max-height: auto;
+  /* align-items: start; */
+  margin: 20px 0 40px;
+}

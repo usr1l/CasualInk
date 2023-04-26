@@ -1,0 +1,5 @@
+.__input.input--long {
+  height: 120px;
+  resize: none;
+  overflow-y: scroll;
+}

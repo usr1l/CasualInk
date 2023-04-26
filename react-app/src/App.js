@@ -40,12 +40,8 @@ function App() {
       {isLoaded && (
         <Switch>
           <Route exact path="/" component={LandingPage} />
-          {user && (
-            <Route exact path="/artworks" component={ArtworksPage} />
-          )}
-          {user && (
-            <Route exact path="/collections" component={ArtListingsPage} />
-          )}
+          <Route exact path="/artworks" component={ArtworksPage} />
+          <Route exact path="/collections" component={ArtListingsPage} />
           {user && (
             <Route exact path="/shopping-cart" component={ShoppingCart} />
           )}

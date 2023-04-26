@@ -19,7 +19,7 @@ const ProfilePage = () => {
 
   useEffect(() => {
     if (currId != userId) history.push("/not-authorized");
-    if (currUser) setIsLoaded(true);
+    if (currUser && allArtworks) setIsLoaded(true);
   }, [ currUser ]);
 
   // edit later on, change so can access all user pages
@@ -34,7 +34,7 @@ const ProfilePage = () => {
           <>
             <div id='profile-page-banner'>
               <ProfileDescriptionCard
-                imgSrc={currUser.profilePic ? currUser : ""}
+                imgSrc={currUser.profilePic ? currUser.profilePic : ""}
                 cardStyle='membership-page-member-cards'
                 heading={`${currUser.firstname} ${currUser.lastname}`}
                 subHeading={`Member since ${currUser.joinDate.split(" ")[ 3 ]}`}

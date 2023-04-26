@@ -30,7 +30,7 @@ const SingleArtworkPage = () => {
 
   useEffect(() => {
     if (artwork) {
-      dispatch(thunkGetSingleArtworkId(artworkId))
+      dispatch(thunkGetSingleArtworkId(parseInt(artworkId)))
         .then(() => setIsLoaded(true));
     }
   }, [ dispatch, artwork ]);
@@ -50,34 +50,30 @@ const SingleArtworkPage = () => {
     <>
       {isLoaded && !!artwork && (
         <>
-          <SingleFullPageDiv>
-            <PageContainer>
-              <div className="split-pages-page">
-                <div className="split-pages-container">
-                  <PageSplit
-                    pageSplitClass={"center"}
-                  >
-                    <ImagePreview
-                      imgSrc={artwork.image}
-                    />
-                  </PageSplit>
-                  <PageSplit
-                    pageSplitClass={"center"}
-                  >
-                    <div>
-                      <h1>{`${artwork.title}`}</h1>
-                      <h2>{`${artwork.artistName}, ${artwork.year}`}</h2>
-                      <div>{`${artwork.materials}`}</div>
-                      <div>{`${artwork.height} x ${artwork.width} in | ${artwork.height * 2.54} x ${artwork.width * 2.54} cm`}</div>
-                    </div>
-                    <OpenModalButton
-                      buttonText={'Default'}
-                      modalCSSClass={'btn btn--demo btn--splash'}
-                    />
-                  </PageSplit>
-                </div>
+          <SingleFullPageDiv containerClass="single-page-small">
+            <PageSplit
+              pageSplitClass={"start"}
+            >
+              <ImagePreview
+                imgWrapperStyle={"img-preview-wrapper-big"}
+                imgSrc={artwork.image}
+                imgClassName={"img--preview-big"}
+              />
+            </PageSplit>
+            <PageSplit
+              pageSplitClass={"start"}
+            >
+              <div className='single-art-description-card'>
+                <h1>{`${artwork.title}`}</h1>
+                <h2>{`${artwork.artistName}, ${artwork.year}`}</h2>
+                <div>{`${artwork.materials}`}</div>
+                <div>{`${artwork.height} x ${artwork.width} in | ${parseFloat(artwork.height * 2.54).toFixed(2)} x ${parseFloat(artwork.width * 2.54).toFixed(2)} cm`}</div>
               </div>
-            </PageContainer>
+              <OpenModalButton
+                buttonText={'Default'}
+                modalCSSClass={'btn btn--demo btn--splash'}
+              />
+            </PageSplit>
           </SingleFullPageDiv>
           <div></div>
         </>

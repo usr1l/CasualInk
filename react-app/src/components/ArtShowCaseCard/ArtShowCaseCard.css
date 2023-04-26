@@ -1,6 +1,6 @@
 .showcard-wrapper {
-  max-height: 400px;
-  max-width: 300px;
+  max-height: auto;
+  max-width: 325px;
   /* border: 10px solid black; */
   text-decoration: none;
 }

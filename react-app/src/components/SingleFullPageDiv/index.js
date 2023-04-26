@@ -1,9 +1,12 @@
 import React from 'react';
 import "./SingleFullPageDiv.css";
 
-const SingleFullPageDiv = ({ children }) => {
+const SingleFullPageDiv = ({
+  children,
+  containerClass
+}) => {
   return (
-    <div className='single-page-full'>
+    <div className={`page-container ${containerClass}`}>
       {children}
     </div>
   )

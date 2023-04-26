@@ -13,6 +13,12 @@ class ArtWorkTypesEnum(enum.Enum):
     PENCIL = "Pencil"
     COLORPENCIL = "Color Pencil"
     PRINT = "Print"
+    PASTEL = "Pastel"
+    TEMPERA = "Tempera"
+    SILKSCREEN = "Silkscreen"
+    FRESCO = "Fresco"
+    MARBLE = "Marble"
+    WOODBLOCK = "Woodblock"
 
     def __str__(self):
         return self.name
@@ -33,6 +39,7 @@ class Artwork(db.Model):
     available = db.Column(db.Boolean, default=False)
     materials = db.Column(db.Enum(ArtWorkTypesEnum), nullable=False)
     image = db.Column(db.String(255))
+    description = db.Column(db.Text, nullable=False)
     owner_id = db.Column(
         db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False
     )
@@ -66,6 +73,7 @@ class Artwork(db.Model):
                     width=item["width"],
                     available=item["available"],
                     materials=item["materials"],
+                    description=item["description"],
                     owner_id=item["owner_id"],
                     image=item["image"]
                 )
@@ -81,6 +89,7 @@ class Artwork(db.Model):
                 width=items["width"],
                 available=items["available"],
                 materials=items["materials"],
+                description=items["description"],
                 owner_id=items["owner_id"],
                 image=items["image"]
             )
@@ -111,6 +120,7 @@ class Artwork(db.Model):
             "materials": ArtWorkTypesEnum(self.materials).name,
             "available": self.available,
             "ownerId": self.owner_id,
+            "description": self.description,
             "image": self.image,
             "saleListing": list(self.for_sale_listing)[0].id if list(self.for_sale_listing) else None,
             "auctionListing": list(self.for_auction_listing)[0].id if list(self.for_auction_listing) else None
