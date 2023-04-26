@@ -1,12 +1,9 @@
 .landing-page-content-container {
-  width: 95%;
+  width: 100%;
 }
 
 .feature-banner-container {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  height: 410px;
+  height: 450px;
 }
 
 #feature-banner-slider {

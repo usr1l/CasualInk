@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import HorizontalShowcase from '../HorizontalShowcase';
 import FeatureBanner from '../FeatureBanner';
 import image1 from "../static/displayimage2.jpg"
-import image2 from "../static/displayimage.jpg"
+import image2 from "../static/display-image4.jpg"
 import "./LandingPage.css";
 import SingleFullPageDiv from '../SingleFullPageDiv';
 
@@ -62,6 +62,7 @@ const LandingPage = () => {
             buttonId={'banner-button'}
           />
           <FeatureBanner
+            // cardStyle={"absolute"}
             imgSrc={image2}
             headline={'Featured Collections'}
             h1text={"Collect, Sell, and Auction"}

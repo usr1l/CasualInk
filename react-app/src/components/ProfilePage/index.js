@@ -7,6 +7,7 @@ import BottomNav from '../BottomNav';
 import Button from '../Button';
 import PageContainer from '../PageContainer';
 import "./ProfilePage.css";
+import NavBar from '../NavBar';
 
 const ProfilePage = () => {
   const history = useHistory();
@@ -42,13 +43,11 @@ const ProfilePage = () => {
               <div>
               </div>
             </div>
-            <div className="navbar-wrapper">
-              <div className="navbar-container">
-                <NavLink to={`/user/${userId}/profile/`} className="navbar-item" activeClassName='navbar-navlink-active'>
-                  My Collection
-                </NavLink>
-              </div>
-            </div>
+            <NavBar>
+              <NavLink to={`/user/${userId}/profile/`} className="navbar-item" activeClassName='navbar-navlink-active'>
+                My Collection
+              </NavLink>
+            </NavBar>
           </>
         )}
         <PageContainer>

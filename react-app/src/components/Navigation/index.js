@@ -77,16 +77,14 @@ function Navigation({ isLoaded }) {
 					)}
 				</div >
 			</div>
-			<div id='navbar-bot'>
-				<div id='navbar-bot-container'>
-					<div id='navbar-bot-navbar'>
-						<NavLink exact to={`/artworks`} className="navbar-bot-navbar-item" activeClassName='navbar-bot-navlink-active'>
-							Artworks
-						</NavLink>
-						<NavLink exact to={`/collections`} className="navbar-bot-navbar-item" activeClassName='navbar-bot-navlink-active'>
-							Collect
-						</NavLink>
-					</div>
+			<div className='navbar-bot'>
+				<div className='navbar-bot-container'>
+					<NavLink exact to={`/artworks`} className="navbar-bot-navbar-item" activeClassName='navbar-bot-navlink-active'>
+						Artworks
+					</NavLink>
+					<NavLink exact to={`/collections`} className="navbar-bot-navbar-item" activeClassName='navbar-bot-navlink-active'>
+						Collect
+					</NavLink>
 				</div>
 			</div>
 		</nav>

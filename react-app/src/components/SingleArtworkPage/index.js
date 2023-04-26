@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PageContainer from '../PageContainer';
 import "./SingleArtworkPage.css";
 import BottomNav from '../BottomNav';
-import { Link, useHistory, useParams } from 'react-router-dom';
+import { Link, NavLink, Route, Switch, useHistory, useParams } from 'react-router-dom';
 import Button from '../Button';
 import PageSplit from '../PageSplit';
 import ImagePreview from '../ImagePreview';
@@ -11,6 +11,8 @@ import { thunkDeleteArtwork, thunkGetSingleArtworkId } from '../../store/artwork
 import OpenModalButton from "../OpenModalButton";
 import ConfirmDeleteModal from '../ConfirmDeleteModal';
 import SingleFullPageDiv from '../SingleFullPageDiv';
+import NavBar from '../NavBar';
+import SaleListingPage from '../SaleListingPage';
 
 const SingleArtworkPage = () => {
   const dispatch = useDispatch();
@@ -75,7 +77,13 @@ const SingleArtworkPage = () => {
               />
             </PageSplit>
           </SingleFullPageDiv>
-          <div></div>
+          <NavBar>
+            <NavLink to={`/artworks/${artworkId}/artlistings/${artwork.saleListing}`} >
+            </NavLink>
+          </NavBar>
+          <Switch>
+            <Route path="/artworks/:artworkId/artlistings/:artlistingId" component={SaleListingPage} />
+          </Switch>
         </>
       )}
       <BottomNav>
