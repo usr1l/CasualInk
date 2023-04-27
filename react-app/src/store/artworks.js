@@ -3,10 +3,11 @@ import { actionDeleteOwnerArtwork, actionOwnerEditArtwork, actionUploadOwnerArtw
 
 const GET_ARTWORKS = "artworks/GET_ARTWORKS";
 const UPLOAD_ARTWORK = "artworks/UPLOAD_ARTWORK";
-const GET_SINGLE_ARTWORK_ID = "artwork/GET_SINGLE_ARTWORK_ID";
-const EDIT_SINGLE_ARTWORK = "artwork/EDIT_SINGLE_ARTWORK";
-const DELETE_SINGLE_ARTWORK = "artwork/DELETE_SINGLE_ARTWORK";
-const ADD_ARTWORK_ARTLISTING = "artwork/ADD_ARTWORK_ARTLISTING";
+const GET_SINGLE_ARTWORK_ID = "artworks/GET_SINGLE_ARTWORK_ID";
+const EDIT_SINGLE_ARTWORK = "artworks/EDIT_SINGLE_ARTWORK";
+const DELETE_SINGLE_ARTWORK = "artworks/DELETE_SINGLE_ARTWORK";
+const ADD_ARTWORK_ARTLISTING = "artworks/ADD_ARTWORK_ARTLISTING";
+const ADD_ARTWORK_AUCTIONLISTING = "artwork/ADD_ARTWORK_AUCTIONLISTING";
 
 export const thunkGetArtworks = () => async (dispatch) => {
   const response = await fetch("/api/artworks/");
@@ -111,6 +112,16 @@ export const actionArtworkAddArtlisting = (dataId, artworkId) => {
   }
 };
 
+export const actionArtworkAddAuctionlisting = (dataId, artworkId) => {
+  return {
+    type: ADD_ARTWORK_AUCTIONLISTING,
+    payload: {
+      dataId,
+      artworkId
+    }
+  }
+}
+
 const initialState = { allArtworks: {}, singleArtworkId: null, isLoading: true }
 
 const artworks = (state = initialState, action) => {
@@ -161,6 +172,17 @@ const artworks = (state = initialState, action) => {
           [ action.payload.artworkId ]: {
             ...state.allArtworks[ action.payload.artworkId ],
             artListing: action.payload.dataId
+          }
+        }
+      }
+    case ADD_ARTWORK_AUCTIONLISTING:
+      return {
+        ...state,
+        allArtworks: {
+          ...state.allArtworks,
+          [ action.payload.artworkId ]: {
+            ...state.allArtworks[ action.payload.artworkId ],
+            auctionListing: action.payload.dataId
           }
         }
       }

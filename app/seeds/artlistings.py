@@ -6,13 +6,13 @@ from datetime import date
 def seed_artlistings():
 
     art_listing_seed_data = [
-        {
-            "price": "10000000.00",
-            "list_date": date(2023, 1, 12),
-            "amount_available": 1,
-            "artwork_id": 1,
-            "owner_id": 1
-        },
+        # {
+        #     "price": "10000000.00",
+        #     "list_date": date(2023, 1, 12),
+        #     "amount_available": 1,
+        #     "artwork_id": 1,
+        #     "owner_id": 1
+        # },
         {
             "price": "8000000.00",
             "list_date": date(2023, 4, 5),

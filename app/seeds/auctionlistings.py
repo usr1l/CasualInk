@@ -5,7 +5,6 @@ from datetime import datetime
 
 def seed_auctionlistings():
     new_datetime = datetime(2024, 5, 1, 10, 20, 0)
-    print("=======================", new_datetime, datetime.utcnow())
 
     auction_seed_data = [
         {
