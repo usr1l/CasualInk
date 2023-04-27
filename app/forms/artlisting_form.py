@@ -7,3 +7,4 @@ class ArtlistingForm(FlaskForm):
     price = StringField("Price ($): ", validators=[DataRequired()])
     amount_available = IntegerField(
         "Amount Available: ", validators=[DataRequired()])
+    artwork_id = IntegerField("artwork id", validators=[DataRequired()])

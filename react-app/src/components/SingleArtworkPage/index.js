@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import PageContainer from '../PageContainer';
 import "./SingleArtworkPage.css";
 import BottomNav from '../BottomNav';
 import { Link, NavLink, Route, Switch, useHistory, useParams } from 'react-router-dom';
@@ -7,7 +6,7 @@ import Button from '../Button';
 import PageSplit from '../PageSplit';
 import ImagePreview from '../ImagePreview';
 import { useDispatch, useSelector } from 'react-redux';
-import artworks, { thunkDeleteArtwork, thunkGetSingleArtworkId } from '../../store/artworks';
+import { thunkDeleteArtwork, thunkGetSingleArtworkId } from '../../store/artworks';
 import OpenModalButton from "../OpenModalButton";
 import ConfirmDeleteModal from '../ConfirmDeleteModal';
 import SingleFullPageDiv from '../SingleFullPageDiv';
@@ -47,11 +46,13 @@ const SingleArtworkPage = () => {
     }
   }, [ dispatch, artwork ]);
 
+  // check for sale id
   useEffect(() => {
     if (artwork.artListing) setArtlistingBool(true);
     else setArtlistingBool(false);
   }, [ artwork, artwork.artListing ])
 
+  // check for auction id
   useEffect(() => {
     if (artwork.auctionListing) setAuctionlistingBool(true);
     else setAuctionlistingBool(false);
@@ -65,6 +66,12 @@ const SingleArtworkPage = () => {
         break;
     };
     return response;
+  };
+
+  // scroll to area on buttonclick
+  const scrollToEffect = (id) => {
+    const ele = document.getElementById(id);
+    if (ele) ele.scrollIntoView({ behavior: "smooth", block: "start" })
   };
 
   return (
@@ -86,6 +93,7 @@ const SingleArtworkPage = () => {
               <div className='single-art-description-card'>
                 <h1>{`${artwork.title}`}</h1>
                 <h2>{`${artwork.artistName}, ${artwork.year}`}</h2>
+                <h2>Owner: {artwork.owner.username}</h2>
                 <h3>Description</h3>
                 <div className='description-card-text'>{artwork.description}</div>
               </div>
@@ -98,7 +106,7 @@ const SingleArtworkPage = () => {
               {!ownerStatus && artwork.available && (!artlistingBool && !auctionlistingBool) && (
                 <Button
                   disableButton={true}
-                >Available for Sale, Inquire Owner for Price
+                >Available for Sale, Inquire Owner for Prices
                 </Button>
               )}
               {ownerStatus && !artwork.available && (
@@ -106,11 +114,38 @@ const SingleArtworkPage = () => {
                   disableButton={true}
                 >Update Availability to Create a New Listing</Button>
               )}
+              {artwork.available && artlistingBool && (
+                <button
+                  className='btn btn--demo btn--splash'
+                  onClick={() => {
+                    history.push(`/artworks/${artworkId}/artlistings/${artwork.artListing}`)
+                    scrollToEffect("target");
+                  }}
+                >
+                  Go To Sale Listing
+                </button>
+              )}
+              {ownerStatus && artwork.available && auctionlistingBool && (
+                <button
+                  className='btn btn--demo btn--splash'
+                // onClick={() => history.push(`/artworks/${artworkId}/artlistings/${artwork.artListing}`)}
+                >
+                  Go To Auction Listing
+                </button>
+              )}
+
+              {ownerStatus && artwork.available && (artlistingBool || auctionlistingBool) && (
+                <OpenModalButton
+                  buttonText={'Update Listing'}
+                  modalCSSClass={'btn btn--demo btn--splash'}
+                  modalComponent={<ListingModal artworkId={artworkId} />}
+                />
+              )}
               {ownerStatus && artwork.available && !artwork.artListing && !artwork.auctionListing && (
                 <OpenModalButton
                   buttonText={'Create A Listing'}
                   modalCSSClass={'btn btn--demo btn--splash'}
-                  modalComponent={<ListingModal />}
+                  modalComponent={<ListingModal artworkId={artworkId} />}
                 />
               )}
             </PageSplit>
@@ -127,7 +162,7 @@ const SingleArtworkPage = () => {
               </NavLink>
             )} */}
           </NavBar>
-          <SingleFullPageDiv containerClass="single-page-section">
+          <SingleFullPageDiv id="target" containerClass="single-page-section">
             <Switch>
               <Route path="/artworks/:artworkId/artlistings/:artlistingId" component={SaleListingPage} />
               {/* <Route path="/artworks/:artworkId/auctionlistings/:auctionlistingId" component={AuctionListingPage} /> */}

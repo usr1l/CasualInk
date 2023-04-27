@@ -3,10 +3,11 @@ import "./SingleFullPageDiv.css";
 
 const SingleFullPageDiv = ({
   children,
-  containerClass
+  containerClass,
+  id
 }) => {
   return (
-    <div className={`page-container ${containerClass}`}>
+    <div id={id} className={`page-container ${containerClass}`}>
       {children}
     </div>
   )
