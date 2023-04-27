@@ -10,9 +10,11 @@ class AuctionListing(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     start_bid = db.Column(db.String(50), nullable=False)
-    list_date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    list_date = db.Column(db.DateTime, nullable=False,
+                          default=datetime.utcnow())
     active = db.Column(db.Boolean, nullable=False, default=True)
-    current_bid = db.Column(db.String(50), nullable=False, default='0')
+    current_bid = db.Column(
+        db.String(50), nullable=False, default='0')
     last_update = db.Column(db.DateTime, nullable=False,
                             default=datetime.utcnow)
     auction_deadline = db.Column(db.DateTime, nullable=False)
@@ -35,8 +37,6 @@ class AuctionListing(db.Model):
             new_items = [
                 cls(
                     start_bid=item["start_bid"],
-                    list_date=item["list_date"],
-                    active=item["active"],
                     auction_deadline=item["auction_deadline"],
                     artwork_id=item["artwork_id"],
                     owner_id=item["owner_id"]
@@ -47,8 +47,6 @@ class AuctionListing(db.Model):
         if isinstance(items, dict):
             new_item = cls(
                 start_bid=items["start_bid"],
-                list_date=items["list_date"],
-                active=items["active"],
                 auction_deadline=items["auction_deadline"],
                 artwork_id=items["artwork_id"],
                 owner_id=items["owner_id"]
