@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 80519bcf87cb
+Revision ID: deceda70a1da
 Revises: 
-Create Date: 2023-04-25 22:35:05.665949
+Create Date: 2023-04-27 16:41:28.880242
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '80519bcf87cb'
+revision = 'deceda70a1da'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -40,7 +40,7 @@ def upgrade():
     sa.Column('height', sa.String(length=50), nullable=False),
     sa.Column('width', sa.String(length=50), nullable=False),
     sa.Column('available', sa.Boolean(), nullable=True),
-    sa.Column('materials', sa.Enum('OIL', 'ACRYLIC', 'MULTIMEDIA', 'BALLPOINT', 'CHARCOAL', 'WATERCOLOR', 'PENCIL', 'COLORPENCIL', 'PRINT', name='artworktypesenum'), nullable=False),
+    sa.Column('materials', sa.Enum('OIL', 'ACRYLIC', 'MULTIMEDIA', 'BALLPOINT', 'CHARCOAL', 'WATERCOLOR', 'PENCIL', 'COLORPENCIL', 'PRINT', 'PASTEL', 'TEMPERA', 'SILKSCREEN', 'FRESCO', 'MARBLE', 'WOODBLOCK', name='artworktypesenum'), nullable=False),
     sa.Column('image', sa.String(length=255), nullable=True),
     sa.Column('description', sa.Text(), nullable=False),
     sa.Column('owner_id', sa.Integer(), nullable=False),
