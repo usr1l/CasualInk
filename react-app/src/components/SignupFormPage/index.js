@@ -20,6 +20,7 @@ function SignupFormPage() {
   const [ confirmPassword, setConfirmPassword ] = useState("");
   const [ bio, setBio ] = useState("");
   const [ errors, setErrors ] = useState([]);
+  const [ validationErrors, setValidationErrors ] = useState({});
 
   const disableBool = () => {
     if (!email ||
@@ -35,18 +36,22 @@ function SignupFormPage() {
   };
 
   const validate = () => {
-    const validationErrors = [];
+    const validationErrors = {};
+    const emailRegex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,}$/;
+
+    if (username.length < 5) validationErrors.username = 'Username must be at least 5 characters long'
+    if (bio.length < 30) validationErrors.bio = 'Please provide a bio at least 30 words long'
+    if (!emailRegex.test(email)) validationErrors.email = "Email format not valid, please try again"
+
+    if (password.length < 6) validationErrors.password = 'Please set a password at least 6 characters long'
     return validationErrors;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // const validationErrors = validate();
-    // if (validationErrors.length > 0) return setErrors(validationErrors);
-    // if (data.statusCode >= 400) {
-    //   return setErrors([ data.message ]);
-    // };
-    // return;
+    const validationErrors = validate();
+    if (Object.keys(validationErrors).length > 0) return setValidationErrors(validationErrors);
+
     if (password === confirmPassword) {
 
       const formData = new FormData();
@@ -76,15 +81,16 @@ function SignupFormPage() {
     <>
       <div className="split-pages-page">
         <h1 className="split-pages-header">Sign up to collect art by the world's leading artists</h1>
-        <form className="split-pages-container" encType="multipart/form-data">
-          {/* <ul id='signup__error-list'>
+        <ul id='signup__error-list'>
           {errors.map((error, idx) => (
             <li key={idx}>{error}</li>
-            ))}
-          </ul> */}
+          ))}
+        </ul>
+        <form className="split-pages-container" encType="multipart/form-data">
           <PageSplit>
             <InputDiv
               labelStyle={'__label'}
+              error={validationErrors.email}
               label={'Enter your email: *'}
             >
               <input
@@ -121,6 +127,21 @@ function SignupFormPage() {
             </InputDiv>
             <InputDiv
               labelStyle={'__label'}
+              error={validationErrors.bio}
+              label={"Tell us a little about yourself: *"}
+            >
+              <textarea
+                className='__input input--long'
+                type="text"
+                value={bio}
+                onChange={(e) => setBio(e.target.value)}
+              />
+            </InputDiv>
+          </PageSplit>
+          <PageSplit>
+            <InputDiv
+              labelStyle={'__label'}
+              error={validationErrors.username}
               label={"What should others call you? *"}>
               <input
                 className='__input'
@@ -130,21 +151,9 @@ function SignupFormPage() {
                 required
               />
             </InputDiv>
-          </PageSplit>
-          <PageSplit>
-            <InputDiv
-              labelStyle={'__label'}
-              label={"Tell us a little about yourself: *"}
-            >
-              <input
-                className='__input'
-                type="text"
-                value={bio}
-                onChange={(e) => setBio(e.target.value)}
-              />
-            </InputDiv>
             <InputDiv
               label={'Password: *'}
+              error={validationErrors.password}
               labelStyle={'__label'}
             >
               <input

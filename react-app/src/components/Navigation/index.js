@@ -14,14 +14,11 @@ function Navigation({ isLoaded }) {
 	const sessionUser = useSelector(state => state.session.user);
 	const dispatch = useDispatch();
 	const history = useHistory();
-	const [ showMenu, setShowMenu ] = useState(false);
 
 	const demoUser = () => {
 		dispatch(login("demo@aa.io", "password"))
 			.then(() => history.push('/'));
 	};
-
-	const closeMenu = () => setShowMenu(false);
 
 	return (
 		<nav id='navbar'>
@@ -61,7 +58,6 @@ function Navigation({ isLoaded }) {
 									</Button>
 									<OpenModalButton
 										buttonText={'Log In'}
-										onButtonClick={closeMenu}
 										modalComponent={<LoginFormModal />}
 										modalCSSClass={'btn btn--login btn--small'}
 									/>
@@ -77,16 +73,14 @@ function Navigation({ isLoaded }) {
 					)}
 				</div >
 			</div>
-			<div id='navbar-bot'>
-				<div id='navbar-bot-container'>
-					<div id='navbar-bot-navbar'>
-						<NavLink exact to={`/artworks`} className="navbar-bot-navbar-item" activeClassName='navbar-bot-navlink-active'>
-							Artworks
-						</NavLink>
-						<NavLink exact to={`/collections`} className="navbar-bot-navbar-item" activeClassName='navbar-bot-navlink-active'>
-							Collect
-						</NavLink>
-					</div>
+			<div className='navbar-bot'>
+				<div className='navbar-bot-container'>
+					<NavLink exact to={`/artworks`} className="navbar-bot-navbar-item" activeClassName='navbar-bot-navlink-active'>
+						Artworks
+					</NavLink>
+					<NavLink exact to={`/collections`} className="navbar-bot-navbar-item" activeClassName='navbar-bot-navlink-active'>
+						Collect
+					</NavLink>
 				</div>
 			</div>
 		</nav>

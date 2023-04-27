@@ -1,0 +1,24 @@
+.small-form-modal {
+  width: 450px;
+  height: auto;
+  background-color: white;
+  padding: 30px 40px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.smaller {
+  width: 50%;
+  cursor: pointer;
+}
+
+h1.form-header {
+  padding: 20px 0;
+}
+
+.clicked {
+  color: black;
+  border-bottom: 1px solid black;
+}

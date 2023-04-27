@@ -5,27 +5,34 @@
 }
 
 .img-preview-wrapper {
+  width: auto;
+  max-height: 100%;
+}
+
+.img-feature-banner {
   width: 50%;
 }
 
-
-.img--preview-medium,
 .img-preview {
-  height: auto;
   max-width: 100%;
   display: flex;
   justify-content: center;
 }
 
 .image--artwork-preview {
-  width: 100%;
+  max-height: 100%;
+  width: auto;
 }
 
 .img--medium-wrapper {
-  max-width: 200px;
-  max-height: 200px;
+  height: 150px;
+  width: auto;
 }
 
 .img--preview-medium {
+  max-height: 100%;
+}
+
+.img-preview-wrapper-big {
   max-height: 100%;
 }

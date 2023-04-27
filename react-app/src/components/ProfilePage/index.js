@@ -7,6 +7,7 @@ import BottomNav from '../BottomNav';
 import Button from '../Button';
 import PageContainer from '../PageContainer';
 import "./ProfilePage.css";
+import NavBar from '../NavBar';
 
 const ProfilePage = () => {
   const history = useHistory();
@@ -19,7 +20,7 @@ const ProfilePage = () => {
 
   useEffect(() => {
     if (currId != userId) history.push("/not-authorized");
-    if (currUser) setIsLoaded(true);
+    if (currUser && allArtworks) setIsLoaded(true);
   }, [ currUser ]);
 
   // edit later on, change so can access all user pages
@@ -34,7 +35,7 @@ const ProfilePage = () => {
           <>
             <div id='profile-page-banner'>
               <ProfileDescriptionCard
-                imgSrc={currUser.profilePic ? currUser : ""}
+                imgSrc={currUser.profilePic ? currUser.profilePic : ""}
                 cardStyle='membership-page-member-cards'
                 heading={`${currUser.firstname} ${currUser.lastname}`}
                 subHeading={`Member since ${currUser.joinDate.split(" ")[ 3 ]}`}
@@ -42,13 +43,11 @@ const ProfilePage = () => {
               <div>
               </div>
             </div>
-            <div className="navbar-wrapper">
-              <div className="navbar-container">
-                <NavLink to={`/user/${userId}/profile/`} className="navbar-item" activeClassName='navbar-navlink-active'>
-                  My Collection
-                </NavLink>
-              </div>
-            </div>
+            <NavBar>
+              <NavLink to={`/user/${userId}/profile/`} className="navbar-item" activeClassName='navbar-navlink-active'>
+                My Collection
+              </NavLink>
+            </NavBar>
           </>
         )}
         <PageContainer>

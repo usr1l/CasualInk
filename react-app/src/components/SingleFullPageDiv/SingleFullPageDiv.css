@@ -1,0 +1,26 @@
+.single-page-full {
+  min-height: 90vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.single-page-small {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  min-height: 50vh;
+  max-height: 80vh;
+  margin: 40px 0 40px;
+}
+
+.single-page-section {
+  display: flex;
+  flex-direction: row;
+  padding: 40px 0 40px;
+  min-height: 10vh;
+  box-sizing: border-box;
+  justify-content: center;
+  margin: 40px 0;
+}

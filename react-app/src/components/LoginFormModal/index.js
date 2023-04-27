@@ -31,8 +31,15 @@ function LoginFormModal() {
 
   useEffect(() => {
     if (!modalContent) return;
-    document.addEventListener("click", closeModal);
-    return () => document.removeEventListener("click", closeModal);
+
+    const modalClose = (e) => {
+      if (!modalRef.current.contains(e.target)) {
+        closeModal()
+      };
+    };
+    document.addEventListener("click", modalClose);
+
+    return () => document.removeEventListener("click", modalClose);
   }, [ modalContent ]);
 
   return (
@@ -41,13 +48,14 @@ function LoginFormModal() {
         <h1 id="log-in__h2">CASUAL INK</h1>
         <h2 id='log-in__title'>Log in to collect art by the world's leading artists</h2>
         <form id='log-in__form'>
-          <ul id='log-in__error-list'>
+          <ul className='log-in__error-list'>
             {errors.map((error, idx) => (
               <li key={idx}>{error}</li>
             ))}
           </ul>
           <InputDiv
             label={'EMAIL'}
+            divStyle={'input--wide'}
             labelStyle={'__label'}
           >
             <input
@@ -60,6 +68,7 @@ function LoginFormModal() {
           </InputDiv>
           <InputDiv
             label={'PASSWORD'}
+            divStyle={'input--wide'}
             labelStyle={'__label'}
           >
             <input

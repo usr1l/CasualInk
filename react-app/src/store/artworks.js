@@ -1,11 +1,12 @@
 import normalizeFn from "../components/HelperFns/NormalizeFn.js";
-import { actionDeleteOwnerArtwork } from "./session.js";
+import { actionDeleteOwnerArtwork, actionOwnerEditArtwork, actionUploadOwnerArtwork } from "./session.js";
 
 const GET_ARTWORKS = "artworks/GET_ARTWORKS";
 const UPLOAD_ARTWORK = "artworks/UPLOAD_ARTWORK";
 const GET_SINGLE_ARTWORK_ID = "artwork/GET_SINGLE_ARTWORK_ID";
 const EDIT_SINGLE_ARTWORK = "artwork/EDIT_SINGLE_ARTWORK";
-const DELETE_SINGLE_ARTWORK = "artwork/DELETE_SINGLE_ARTWORK"
+const DELETE_SINGLE_ARTWORK = "artwork/DELETE_SINGLE_ARTWORK";
+const ADD_ARTWORK_ARTLISTING = "artwork/ADD_ARTWORK_ARTLISTING";
 
 export const thunkGetArtworks = () => async (dispatch) => {
   const response = await fetch("/api/artworks/");
@@ -48,6 +49,7 @@ export const thunkUploadArtwork = (artworkData) => async (dispatch) => {
 
   if (response.ok) {
     dispatch(actionUploadArtwork(data));
+    dispatch(actionUploadOwnerArtwork(data));
   }
   return data;
 };
@@ -66,7 +68,10 @@ export const thunkEditArtwork = ({ formData, artworkId }) => async (dispatch) =>
   });
 
   const data = await res.json();
-  if (res.ok) dispatch(actionEditArtwork(data))
+  if (res.ok) {
+    dispatch(actionEditArtwork(data))
+    dispatch(actionOwnerEditArtwork(data))
+  }
   return data;
 };
 
@@ -96,6 +101,16 @@ const actionDeleteArtwork = (artworkId) => {
   }
 };
 
+export const actionArtworkAddArtlisting = (dataId, artworkId) => {
+  return {
+    type: ADD_ARTWORK_ARTLISTING,
+    payload: {
+      dataId,
+      artworkId
+    }
+  }
+};
+
 const initialState = { allArtworks: {}, singleArtworkId: null, isLoading: true }
 
 const artworks = (state = initialState, action) => {
@@ -108,7 +123,13 @@ const artworks = (state = initialState, action) => {
         isLoading: false
       };
     case UPLOAD_ARTWORK:
-      return state;
+      return {
+        ...state,
+        allArtworks: {
+          ...state.allArtworks,
+          [ action.payload.id ]: action.payload
+        }
+      };
     case GET_SINGLE_ARTWORK_ID:
       return {
         ...state,
@@ -132,6 +153,17 @@ const artworks = (state = initialState, action) => {
       }
       delete updatedState.allArtworks[ action.payload ]
       return updatedState;
+    case ADD_ARTWORK_ARTLISTING:
+      return {
+        ...state,
+        allArtworks: {
+          ...state.allArtworks,
+          [ action.payload.artworkId ]: {
+            ...state.allArtworks[ action.payload.artworkId ],
+            artListing: action.payload.dataId
+          }
+        }
+      }
     default:
       return state;
   };

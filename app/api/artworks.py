@@ -1,7 +1,5 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
-from datetime import date
-from decimal import Decimal
 import json
 from app.models import Artwork, db
 from app.forms import ArtworkForm
@@ -28,14 +26,14 @@ def single_artwork_route(artwork_id):
     if request.method == 'DELETE':
         if not single_artwork.check_owner(owner_id):
             return {"errors": "Forbidden."}, 403
-        # file_delete = remove_file_from_AWS(single_artwork.image)
+        file_delete = remove_file_from_AWS(single_artwork.image)
 
-        # if file_delete:
-        db.session.delete(single_artwork)
-        db.session.commit()
-        return {"Success": "Artwork deleted."}, 202
-        # else:
-        #     return {"errors": "Error deleting file image"}, 400
+        if file_delete:
+            db.session.delete(single_artwork)
+            db.session.commit()
+            return {"Success": "Artwork deleted."}, 202
+        else:
+            return {"errors": "Error deleting file image"}, 400
 
     if request.method == "PUT":
         if not single_artwork.check_owner(owner_id):
@@ -62,6 +60,7 @@ def single_artwork_route(artwork_id):
                 single_artwork.height = f'{form.data["height"]}'
                 single_artwork.width = f'{form.data["width"]}'
                 single_artwork.available = True if form.data["available"] == 'True' else False
+                single_artwork.description = form.data["description"]
                 single_artwork.materials = form.data["materials"]
                 single_artwork.image = upload["url"]
                 db.session.commit()
@@ -76,6 +75,7 @@ def single_artwork_route(artwork_id):
                 single_artwork.height = f"{form.data['height']}"
                 single_artwork.width = f"{form.data['width']}"
                 single_artwork.available = True if form.data["available"] == 'True' else False
+                single_artwork.description = form.data["description"]
                 single_artwork.materials = form.data["materials"]
                 db.session.commit()
                 return single_artwork.to_dict(), 200
@@ -107,6 +107,7 @@ def upload_an_artwork():
             width=f"{form.data['width']}",
             available=True if form.data["available"] == 'True' else False,
             materials=form.data["materials"],
+            description=form.data["description"],
             image=upload["url"],
             owner_id=owner_id
         )

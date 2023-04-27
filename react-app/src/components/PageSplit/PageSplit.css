@@ -1,35 +1,31 @@
 .page-split-half {
   width: 45%;
-  height: auto;
   display: flex;
   flex-direction: column;
   column-count: 2;
   box-sizing: border-box;
-  /* align-items: center; */
-  /* justify-content: center; */
-  /* padding: 20px; */
 }
 
 .split-pages-container {
   display: flex;
-  flex-direction: row;
   justify-content: center;
-  width: 100vw;
-  margin-bottom: 30px;
+  width: 100%;
+  height: 100%;
 }
 
 h1.split-pages-header {
   width: 90%;
   font-size: 30pt;
   font-weight: 600;
-  margin: 60px 0 60px 0;
+  margin: 60px 0 20px 0;
 }
 
 .split-pages-page {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
+  max-width: 100%;
+  height: 100%;
   min-height: 80vh;
 }
 
@@ -37,4 +33,13 @@ h1.split-pages-header {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.start {
+  padding: 0 0 0 20px;
+}
+
+.end {
+  display: flex;
+  align-items: flex-end;
 }

@@ -1,7 +1,8 @@
 .display-card {
   box-sizing: border-box;
-  width: 400px;
+  width: 325px;
   height: auto;
   /* border: 1px solid black; */
   text-decoration: none;
+  margin-right: 15px;
 }

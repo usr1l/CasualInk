@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import HorizontalShowcase from '../HorizontalShowcase';
 import FeatureBanner from '../FeatureBanner';
 import image1 from "../static/displayimage2.jpg"
-import image2 from "../static/displayimage.jpg"
+import image2 from "../static/display-image4.jpg"
 import "./LandingPage.css";
+import SingleFullPageDiv from '../SingleFullPageDiv';
 
 const LandingPage = () => {
   const { allArtworks } = useSelector(state => state.artworks);
@@ -29,10 +30,29 @@ const LandingPage = () => {
     };
   };
 
+  useEffect(() => {
+    const flipBanner = setInterval(() => {
+      if (currBanner === 'overlap-banner-hidden') {
+        setBanner1('banner-slider')
+        setBanner2('banner-slider focused')
+        setCurrBanner("overlap-banner")
+      };
+      if (currBanner === "overlap-banner") {
+        setBanner1('banner-slider focused')
+        setBanner2('banner-slider')
+        setCurrBanner("overlap-banner-hidden")
+      };
+    }, 5000);
+
+    return (() => {
+      clearInterval(flipBanner);
+    });
+  });
+
   return (
-    <div id="landing-page">
-      <div id="landing-page-content-container">
-        <div id='feature-banner-container'>
+    <SingleFullPageDiv>
+      <div className="landing-page-content-container">
+        <div className='feature-banner-container'>
           <FeatureBanner
             imgSrc={image1}
             headline={'Featured Artwork'}
@@ -42,6 +62,7 @@ const LandingPage = () => {
             buttonId={'banner-button'}
           />
           <FeatureBanner
+            // cardStyle={"absolute"}
             imgSrc={image2}
             headline={'Featured Collections'}
             h1text={"Collect, Sell, and Auction"}
@@ -57,7 +78,7 @@ const LandingPage = () => {
         </div>
         <HorizontalShowcase items={artworks} />
       </div>
-    </div>
+    </SingleFullPageDiv>
   )
 };
 

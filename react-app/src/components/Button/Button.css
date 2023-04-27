@@ -31,7 +31,7 @@
 }
 
 .btn--demo {
-  border-radius: 1rem;
+  border-radius: 1.5rem;
   background-color: black;
   transition: 0.3s;
   color: white;
@@ -50,7 +50,7 @@
 }
 
 .btn--login {
-  border-radius: 1rem;
+  border-radius: 1.5rem;
   background-color: white;
   transition: 0.3s;
   color: black;

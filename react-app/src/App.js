@@ -17,6 +17,8 @@ import NotAuthorizedPage from "./components/NotAuthorizedPage";
 import SingleArtworkPage from "./components/SingleArtworkPage";
 import NotFoundPage from "./components/NotFoundPage";
 import EditArtworkForm from "./components/EditArtWorkForm";
+import SaleListingPage from "./components/SaleListingPage";
+import AuctionListingPage from "./components/AuctionListingPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -40,26 +42,28 @@ function App() {
       {isLoaded && (
         <Switch>
           <Route exact path="/" component={LandingPage} />
+          <Route exact path="/artworks" component={ArtworksPage} />
+          <Route exact path="/collections" component={ArtListingsPage} />
           {user && (
-            <Route exact path="/artworks" component={ArtworksPage} />
-          )}
-          {user && (
-            <Route exact path="/collections" component={ArtListingsPage} />
+            <Route exact path="/artworks/new" component={UploadArtworkForm} />
           )}
           {user && (
             <Route exact path="/shopping-cart" component={ShoppingCart} />
           )}
           {user && (
-            <Route exact path="/artworks/new" component={UploadArtworkForm} />
+            <Route exact path="/artworks/:artworkId/auctionlistings/:auctionlistingId" component={SingleArtworkPage} />
+          )}
+          {user && (
+            <Route exact path="/artworks/:artworkId/artlistings/:artlistingId" component={SingleArtworkPage} />
+          )}
+          {user && (
+            <Route exact path="/artworks/:artworkId/edit" component={EditArtworkForm} />
           )}
           {user && (
             <Route exact path="/user/:userId/profile" component={ProfilePage} />
           )}
           {user && (
             <Route exact path="/artworks/:artworkId" component={SingleArtworkPage} />
-          )}
-          {user && (
-            <Route exact path="/artworks/:artworkId/edit" component={EditArtworkForm} />
           )}
           <Route exact path="/not-authorized" component={NotAuthorizedPage} />
           <Route exact path="/not-found" component={NotFoundPage} />

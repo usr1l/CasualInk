@@ -63,21 +63,32 @@ def sign_up():
     form = SignUpForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        pro_pic = form.data["profile_pic"]
-        pro_pic.filename = get_unique_filename(pro_pic.filename)
-        upload = upload_file_to_AWS(pro_pic)
-        if "url" not in upload:
-            return {"errors": "Image upload failed"}
+        if form.data["profile_pic"]:
+            pro_pic = form.data["profile_pic"]
+            pro_pic.filename = get_unique_filename(pro_pic.filename)
+            upload = upload_file_to_AWS(pro_pic)
+            if "url" not in upload:
+                return {"errors": "Image upload failed"}
 
-        user = User(
-            username=form.data['username'],
-            email=form.data['email'],
-            password=form.data['password'],
-            firstname=form.data['firstname'],
-            lastname=form.data['lastname'],
-            bio=form.data['bio'],
-            profile_pic=upload["url"]
-        )
+            user = User(
+                username=form.data['username'],
+                email=form.data['email'],
+                password=form.data['password'],
+                firstname=form.data['firstname'],
+                lastname=form.data['lastname'],
+                bio=form.data['bio'],
+                profile_pic=upload["url"]
+            )
+        else:
+            user = User(
+                username=form.data['username'],
+                email=form.data['email'],
+                password=form.data['password'],
+                firstname=form.data['firstname'],
+                lastname=form.data['lastname'],
+                bio=form.data['bio']
+            )
+
         db.session.add(user)
         db.session.commit()
         login_user(user)

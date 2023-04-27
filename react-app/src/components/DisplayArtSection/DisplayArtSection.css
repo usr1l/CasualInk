@@ -2,6 +2,7 @@
   width: 100%;
   display: flex;
   flex-flow: column wrap;
-  max-height: 100vh;
+  max-height: 120vh;
   align-content: flex-start;
+  overflow-x: scroll;
 }

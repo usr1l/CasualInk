@@ -1,11 +1,14 @@
 .showcard-wrapper {
-  max-height: 400px;
-  max-width: 300px;
-  border: 1px solid white;
+  max-height: auto;
+  max-width: 325px;
+  /* border: 10px solid black; */
   text-decoration: none;
 }
 
 .showcard-container {
   max-height: 100%;
   max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 }

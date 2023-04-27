@@ -6,7 +6,7 @@
   right: 40px;
   border-radius: .25rem;
   box-sizing: border-box;
-  width: 230px;
+  width: 325px;
   background-color: white;
   align-items: left;
   align-items: center;
@@ -63,7 +63,7 @@
 }
 
 #navbar-top,
-#navbar-bot {
+.navbar-bot {
   display: flex;
   height: 50%;
   justify-content: space-between;
@@ -74,12 +74,7 @@
   padding: 0 40px;
 }
 
-
-#navbar-top {}
-
-#navbar-bot {}
-
-#navbar-bot-container {
+.navbar-bot-container {
   height: 100%;
   display: flex;
   align-items: center;
@@ -107,8 +102,6 @@
   color: var(--site-sage);
   transition: 0.5s;
 }
-
-
 
 
 #site-logo,
