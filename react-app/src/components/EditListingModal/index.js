@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import NavBar from '../NavBar';
-import "./ListingModal.css";
+import "../ListingModal/ListingModal.css";
 import InputDiv from '../InputDiv';
 import Button from '../Button';
-import { thunkAddArtlisting } from '../../store/artlistings';
+import { thunkAddArtlisting, thunkDeleteArtListing, thunkEditArtlisting } from '../../store/artlistings';
 import { useHistory, useParams } from 'react-router-dom';
 import { useModal } from '../../context/Modal';
 import { thunkAddAuctionlisting } from '../../store/auctionlistings';
 
-const ListingModal = ({
+const EditListingModal = ({
   artworkId,
+  artListingId
 }) => {
   const history = useHistory();
   const dispatch = useDispatch();
@@ -18,14 +19,23 @@ const ListingModal = ({
   const [ price, setPrice ] = useState();
   const [ amountAvailable, setAmountAvailable ] = useState();
 
-  const [ startBid, setStartBid ] = useState("");
-  const [ auctionDeadlineDate, setAuctionDeadlineDate ] = useState("")
-  const [ auctionDeadlineTime, setAuctionDeadlineTime ] = useState("")
+  // const [ startBid, setStartBid ] = useState("");
+  // const [ auctionDeadlineDate, setAuctionDeadlineDate ] = useState("")
+  // const [ auctionDeadlineTime, setAuctionDeadlineTime ] = useState("")
 
   const [ errors, setErrors ] = useState([]);
   const [ validationErrors, setValidationErrors ] = useState({});
-  const [ isLoaded, setIsLoaded ] = useState(false);
+  // const [ isLoaded, setIsLoaded ] = useState(false);
   const { closeModal, modalRef, modalContent } = useModal();
+
+  const artListing = useSelector(state => state.artlistings.allArtlistings[ artListingId ])
+  useEffect(() => {
+    if (artListing) {
+
+      setPrice(artListing.price)
+      setAmountAvailable(artListing.amount_available)
+    }
+  }, [ artListing ])
 
   useEffect(() => {
     setErrors([]);
@@ -52,14 +62,19 @@ const ListingModal = ({
     return validationErrors;
   };
 
-  const validateAuction = () => {
-    const validationErrors = {};
-    if (`${auctionDeadlineDate} ${auctionDeadlineTime}` <= new Date()) validationErrors.auctionDeadline = 'Please provide an auction deadline, must be in the future';
-    if ((parseFloat(startBid) < 0) ||
-      (!Number.isInteger(100 * parseFloat(startBid)))) validationErrors.startBid = "Invalid price: value must be greater than zero and have at most two decimal places";
-
-    return validationErrors
+  const deleteArtListing = (e) => {
+    e.preventDefault();
+    dispatch(thunkDeleteArtListing(artListing.id));
+    closeModal();
   };
+  // const validateAuction = () => {
+  //   const validationErrors = {};
+  //   if (`${auctionDeadlineDate} ${auctionDeadlineTime}` <= new Date()) validationErrors.auctionDeadline = 'Please provide an auction deadline, must be in the future';
+  //   if ((parseFloat(startBid) < 0) ||
+  //     (!Number.isInteger(100 * parseFloat(startBid)))) validationErrors.startBid = "Invalid price: value must be greater than zero and have at most two decimal places";
+
+  //   return validationErrors
+  // };
 
   const submitArtListing = async (e) => {
     e.preventDefault();
@@ -72,25 +87,26 @@ const ListingModal = ({
       "artwork_id": parseInt(artworkId)
     };
 
-    const res = await dispatch(thunkAddArtlisting(data));
+    // const res = await dispatch(thunkAddArtlisting(data));
+    const res = await dispatch(thunkEditArtlisting(data, artListing.id))
     if (res.errors) return setErrors(res.errors);
     else closeModal();
   };
 
-  const submitAuctionListing = async (e) => {
-    e.preventDefault();
-    const validationErrors = validateAuction();
-    if (Object.keys(validationErrors).length > 0) return setValidationErrors(validationErrors);
-    const data = {
-      "start_bid": startBid,
-      "auction_deadline": `${auctionDeadlineDate} ${auctionDeadlineTime}`,
-      "artwork_id": parseInt(artworkId)
-    };
+  // const submitAuctionListing = async (e) => {
+  //   e.preventDefault();
+  //   const validationErrors = validateAuction();
+  //   if (Object.keys(validationErrors).length > 0) return setValidationErrors(validationErrors);
+  //   const data = {
+  //     "start_bid": startBid,
+  //     "auction_deadline": `${auctionDeadlineDate} ${auctionDeadlineTime}`,
+  //     "artwork_id": parseInt(artworkId)
+  //   };
 
-    const res = await dispatch(thunkAddAuctionlisting(data));
-    if (res.errors) return setErrors(res.errors);
-    else closeModal();
-  }
+  //   const res = await dispatch(thunkAddAuctionlisting(data));
+  //   if (res.errors) return setErrors(res.errors);
+  //   else closeModal();
+  // }
 
   return (
     <div className='small-form-modal'>
@@ -110,44 +126,49 @@ const ListingModal = ({
         ))}
       </ul>
       <div className='form-container'>
-        {(listingType === "sale") ? (
-          <>
-            <h1 className='form-header'>Create New Sale Listing</h1>
-            <InputDiv
-              label="Price ($): "
-              divStyle={'input--wide'}
-              labelStyle={'__label'}
-              error={validationErrors.price}
-            >
-              <input
-                className='__input'
-                type="number"
-                value={price}
-                onChange={(e) => setPrice(e.target.value)}
-                required
-              />
-            </InputDiv>
-            <InputDiv
-              label="Amount Available for Sale: "
-              divStyle={'input--wide'}
-              labelStyle={'__label'}
-              error={validationErrors.amountAvailable}
-            >
-              <input
-                className='__input'
-                type="number"
-                value={amountAvailable}
-                onChange={(e) => setAmountAvailable(e.target.value)}
-                required
-              />
-            </InputDiv>
-            <Button
-              onClick={submitArtListing}
-              buttonStyle={'btn--demo'}
-              buttonSize={'btn--splash'}
-            >Create Sale Listing</Button>
-          </>
-        ) : (
+        {/* {(listingType === "sale") ? ( */}
+        <>
+          <h1 className='form-header'>Update New Sale Listing</h1>
+          <InputDiv
+            label="Price ($): "
+            divStyle={'input--wide'}
+            labelStyle={'__label'}
+            error={validationErrors.price}
+          >
+            <input
+              className='__input'
+              type="number"
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+              required
+            />
+          </InputDiv>
+          <InputDiv
+            label="Amount Available for Sale: "
+            divStyle={'input--wide'}
+            labelStyle={'__label'}
+            error={validationErrors.amountAvailable}
+          >
+            <input
+              className='__input'
+              type="number"
+              value={amountAvailable}
+              onChange={(e) => setAmountAvailable(e.target.value)}
+              required
+            />
+          </InputDiv>
+          <Button
+            onClick={submitArtListing}
+            buttonStyle={'btn--demo'}
+            buttonSize={'btn--splash'}
+          >Update Sale Listing</Button>
+          <Button
+            onClick={deleteArtListing}
+            buttonStyle={'btn--demo'}
+            buttonSize={'btn--splash'}
+          >Delete Sale Listing</Button>
+        </>
+        {/* ) : (
           <>
             <h1 className='form-header'>Create New Auction Listing</h1>
             <InputDiv
@@ -190,13 +211,13 @@ const ListingModal = ({
               buttonSize={'btn--splash'}
             >Create Auction Listing</Button>
           </>
-        )}
+        )} */}
       </div>
     </div>
   )
 };
 
-export default ListingModal;
+export default EditListingModal;
 
 // {(listingType === "sale") ? (
 // ) : (

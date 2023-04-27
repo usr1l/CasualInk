@@ -14,6 +14,7 @@ import NavBar from '../NavBar';
 import SaleListingPage from '../SaleListingPage';
 import AuctionListingPage from '../AuctionListingPage';
 import ListingModal from '../ListingModal';
+import EditListingModal from '../EditListingModal';
 
 const SingleArtworkPage = () => {
   const dispatch = useDispatch();
@@ -134,13 +135,20 @@ const SingleArtworkPage = () => {
                 </button>
               )}
 
-              {ownerStatus && artwork.available && (artlistingBool || auctionlistingBool) && (
+              {ownerStatus && artwork.available && artlistingBool && (
                 <OpenModalButton
                   buttonText={'Update Listing'}
                   modalCSSClass={'btn btn--demo btn--splash'}
-                  modalComponent={<ListingModal artworkId={artworkId} />}
+                  modalComponent={<EditListingModal props={artworkId} artListingId={artwork.artListing} type={"sale"} />}
                 />
               )}
+              {/* {ownerStatus && artwork.available && auctionlistingBool && (
+                <OpenModalButton
+                  buttonText={'Update Listing'}
+                  modalCSSClass={'btn btn--demo btn--splash'}
+                  modalComponent={<EditListingModal artworkId={artworkId} type={"auction"} />}
+                />
+              )} */}
               {ownerStatus && artwork.available && !artwork.artListing && !artwork.auctionListing && (
                 <OpenModalButton
                   buttonText={'Create A Listing'}
