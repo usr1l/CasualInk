@@ -30,6 +30,21 @@ CasualInk is for buying, selling, and auctioning off art pieces that you create,
 - Redux Developer Tools
 
 ## Features
+### Artworks
+- As an unregistered user, I should be able to view limited information about uploaded artwork
+- As a registered user, I should be able to view, create, edit and delete artworks others can see.
+
+### Art Pieces
+- Pages:
+  * /artists
+  * /artists/:artistId/artwork
+- As an unregistered user, I won't have access to this feature.
+- As a registered and logged in user:
+  * I want to be able to create listings/upload artwork for sale/auction.
+  * I want to be able to edit the listing information.
+  * I want to be able to view art listings from other people.
+  * I want to be able to delete my art listings.
+
 ### Shopping Cart
 - Pages:
   * /
@@ -42,17 +57,6 @@ CasualInk is for buying, selling, and auctioning off art pieces that you create,
   * I want to be able to add items to my shopping cart.
   * I want to be able to remove items from my shopping cart.
   * I want to be able to delete/remove all items from my shopping cart.
-
-### Art Pieces
-- Pages:
-  * /artists
-  * /artists/:artistId/artwork
-- As an unregistered user, I won't have access to this feature.
-- As a registered and logged in user:
-  * I want to be able to create listings/upload artwork for sale/auction.
-  * I want to be able to edit the listing information.
-  * I want to be able to view art listings from other people.
-  * I want to be able to delete my art listings.
 
 ### Reviews
 - As an unregistered user, I won't have access to this feature.
@@ -97,23 +101,23 @@ CasualInk is for buying, selling, and auctioning off art pieces that you create,
 ### Artwork
 - GET /api/owner/:ownerId
   * Get all artwork by a specific owner
-- POST /api/curr/artworks/new
+- POST /api/artworks/new
   * Upload a new artwork
 - PUT /api/artworks/:artworkId
   * Edit information for a specific artwork
-- DELETE /api/curr/artworks/:artworkId
+- DELETE /api/artworks/:artworkId
   * Delete an artwork from an owner
 
 ### ArtworkListings
 - GET /api/collections
   * Returns all listings for available artworks on sale
-- GET /api/collections/:artworkId
+- GET /api/artworks/:artworkId/artlistings/:artlistingId
   * Returns a single listing
-- POST /api/curr/collections/new
+- POST /api/artworks/:artworkId/artlistings/:artlistingId
   * Create a new listing item
-- PUT /api/collections/:artworkId
+- PUT /api/artworks/:artworkId/artlistings/:artlistingId
   * Edit information for a listing
-- DELETE /api/collections/:artworkId
+- DELETE /api/artworks/:artworkId/artlistings/:artlistingId
   * Delete a listing after the item is sold
 
 ## Wireframes

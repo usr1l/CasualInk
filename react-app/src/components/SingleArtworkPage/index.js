@@ -7,12 +7,14 @@ import Button from '../Button';
 import PageSplit from '../PageSplit';
 import ImagePreview from '../ImagePreview';
 import { useDispatch, useSelector } from 'react-redux';
-import { thunkDeleteArtwork, thunkGetSingleArtworkId } from '../../store/artworks';
+import artworks, { thunkDeleteArtwork, thunkGetSingleArtworkId } from '../../store/artworks';
 import OpenModalButton from "../OpenModalButton";
 import ConfirmDeleteModal from '../ConfirmDeleteModal';
 import SingleFullPageDiv from '../SingleFullPageDiv';
 import NavBar from '../NavBar';
 import SaleListingPage from '../SaleListingPage';
+import AuctionListingPage from '../AuctionListingPage';
+import ListingModal from '../ListingModal';
 
 const SingleArtworkPage = () => {
   const dispatch = useDispatch();
@@ -23,20 +25,37 @@ const SingleArtworkPage = () => {
   const allArtworks = useSelector(state => state.artworks.allArtworks);
   const artwork = allArtworks[ artworkId ];
 
-  const [ userStatus, setUserStatus ] = useState("user");
+  // for button conditional rendering
+  const [ artlistingBool, setArtlistingBool ] = useState(false);
+  const [ auctionlistingBool, setAuctionlistingBool ] = useState(false);
+  const [ ownerStatus, setOwnerStatus ] = useState(false);
+
+  // const [ userStatus, setUserStatus ] = useState("user");
   const [ isLoaded, setIsLoaded ] = useState(false);
 
   useEffect(() => {
-    if (!artwork && isLoaded === false) history.push("/not-found");
-  }, [ artwork, isLoaded ]);
+    if (!artwork) history.push("/not-found");
+  }, [ artwork ]);
 
   useEffect(() => {
     if (artwork) {
       dispatch(thunkGetSingleArtworkId(parseInt(artworkId)))
+        .then(() => currUser.id === artwork.ownerId ? setOwnerStatus(true) : setOwnerStatus(false))
+        .then(() => artwork.artListing ? setArtlistingBool(true) : setArtlistingBool(false))
+        .then(() => artwork.auctionListing ? setAuctionlistingBool(true) : setAuctionlistingBool(false))
         .then(() => setIsLoaded(true));
     }
   }, [ dispatch, artwork ]);
 
+  useEffect(() => {
+    if (artwork.artListing) setArtlistingBool(true);
+    else setArtlistingBool(false);
+  }, [ artwork, artwork.artListing ])
+
+  useEffect(() => {
+    if (artwork.auctionListing) setAuctionlistingBool(true);
+    else setAuctionlistingBool(false);
+  }, [ artwork, artwork.auctionListing ])
 
   const ownerState = (userStatus) => {
     let response;
@@ -54,12 +73,11 @@ const SingleArtworkPage = () => {
         <>
           <SingleFullPageDiv containerClass="single-page-small">
             <PageSplit
-              pageSplitClass={"start"}
+              pageSplitClass={"end"}
             >
               <ImagePreview
                 imgWrapperStyle={"img-preview-wrapper-big"}
                 imgSrc={artwork.image}
-                imgClassName={"img--preview-big"}
               />
             </PageSplit>
             <PageSplit
@@ -68,22 +86,53 @@ const SingleArtworkPage = () => {
               <div className='single-art-description-card'>
                 <h1>{`${artwork.title}`}</h1>
                 <h2>{`${artwork.artistName}, ${artwork.year}`}</h2>
-                <div>{`${artwork.materials}`}</div>
-                <div>{`${artwork.height} x ${artwork.width} in | ${parseFloat(artwork.height * 2.54).toFixed(2)} x ${parseFloat(artwork.width * 2.54).toFixed(2)} cm`}</div>
+                <h3>Description</h3>
+                <div className='description-card-text'>{artwork.description}</div>
               </div>
-              <OpenModalButton
-                buttonText={'Default'}
-                modalCSSClass={'btn btn--demo btn--splash'}
-              />
+              {!ownerStatus && !artwork.available && (
+                <Button
+                  disableButton={true}
+                >Art Not Listed For Sale/Auction
+                </Button>
+              )}
+              {!ownerStatus && artwork.available && (!artlistingBool && !auctionlistingBool) && (
+                <Button
+                  disableButton={true}
+                >Available for Sale, Inquire Owner for Price
+                </Button>
+              )}
+              {ownerStatus && !artwork.available && (
+                <Button
+                  disableButton={true}
+                >Update Availability to Create a New Listing</Button>
+              )}
+              {ownerStatus && artwork.available && !artwork.artListing && !artwork.auctionListing && (
+                <OpenModalButton
+                  buttonText={'Create A Listing'}
+                  modalCSSClass={'btn btn--demo btn--splash'}
+                  modalComponent={<ListingModal />}
+                />
+              )}
             </PageSplit>
           </SingleFullPageDiv>
           <NavBar>
-            <NavLink to={`/artworks/${artworkId}/artlistings/${artwork.saleListing}`} >
-            </NavLink>
+            {artwork.artListing && (
+              <NavLink to={`/artworks/${artworkId}/artlistings/${artwork.artListing}`} className="navbar-item" activeClassName='navbar-navlink-active'>
+                Sale Listing
+              </NavLink>
+            )}
+            {/* {artwork.auctionListing && (
+              <NavLink to={`/artworks/${artworkId}/auctionlistings/${artwork.auctionListing}`} className="navbar-item" activeClassName='navbar-navlink-active'>
+                Auction Listing
+              </NavLink>
+            )} */}
           </NavBar>
-          <Switch>
-            <Route path="/artworks/:artworkId/artlistings/:artlistingId" component={SaleListingPage} />
-          </Switch>
+          <SingleFullPageDiv containerClass="single-page-section">
+            <Switch>
+              <Route path="/artworks/:artworkId/artlistings/:artlistingId" component={SaleListingPage} />
+              {/* <Route path="/artworks/:artworkId/auctionlistings/:auctionlistingId" component={AuctionListingPage} /> */}
+            </Switch>
+          </SingleFullPageDiv>
         </>
       )}
       <BottomNav>

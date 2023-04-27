@@ -122,7 +122,8 @@ class Artwork(db.Model):
             "ownerId": self.owner_id,
             "description": self.description,
             "image": self.image,
-            "saleListing": list(self.for_sale_listing)[0].id if list(self.for_sale_listing) else None,
+            "owner": self.owner.to_simple_dict(),
+            "artListing": list(self.for_sale_listing)[0].id if list(self.for_sale_listing) else None,
             "auctionListing": list(self.for_auction_listing)[0].id if list(self.for_auction_listing) else None
         }
 

@@ -1,0 +1,26 @@
+.specs-box {
+  width: 500px;
+  height: auto;
+  border: 1px solid var(--site-gray);
+  box-sizing: border-box;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 20px;
+}
+
+.specs-box-element {
+  width: 100%;
+  margin: 5px 0;
+  display: flex;
+}
+
+.specs-box-element-label {
+  width: 130px;
+}
+
+.specs-box-element-text {
+  color: gray;
+}

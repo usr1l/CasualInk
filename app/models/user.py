@@ -69,7 +69,15 @@ class User(db.Model, UserMixin):
             "firstname": self.firstname,
             "lastname": self.lastname,
             "bio": self.bio,
-            "join_date": self.join_date,
+            "joinDate": self.join_date,
+            "profile_pic": self.profile_pic
+        }
+
+    def to_simple_dict(self):
+        return {
+            "username": self.username,
+            "firstname": self.firstname,
+            "joinDate": self.join_date,
             "profile_pic": self.profile_pic
         }
 

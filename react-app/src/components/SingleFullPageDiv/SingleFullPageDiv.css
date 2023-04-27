@@ -10,8 +10,17 @@
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  min-height: 77vh;
-  max-height: auto;
-  /* align-items: start; */
-  margin: 20px 0 40px;
+  min-height: 50vh;
+  max-height: 80vh;
+  margin: 40px 0 40px;
+}
+
+.single-page-section {
+  display: flex;
+  flex-direction: row;
+  padding: 40px 0 40px;
+  min-height: 30vh;
+  box-sizing: border-box;
+  justify-content: center;
+  margin: 40px 0;
 }

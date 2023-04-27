@@ -18,6 +18,7 @@ import SingleArtworkPage from "./components/SingleArtworkPage";
 import NotFoundPage from "./components/NotFoundPage";
 import EditArtworkForm from "./components/EditArtWorkForm";
 import SaleListingPage from "./components/SaleListingPage";
+import AuctionListingPage from "./components/AuctionListingPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -48,6 +49,9 @@ function App() {
           )}
           {user && (
             <Route exact path="/shopping-cart" component={ShoppingCart} />
+          )}
+          {user && (
+            <Route exact path="/artworks/:artworkId/auctionlistings/:auctionlistingId" component={SingleArtworkPage} />
           )}
           {user && (
             <Route exact path="/artworks/:artworkId/artlistings/:artlistingId" component={SingleArtworkPage} />

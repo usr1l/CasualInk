@@ -23,9 +23,21 @@
   color: grey;
 }
 
-.single-art-description-card>div {
+.single-art-description-card>h3 {
+  font-weight: 300;
+  font-size: 20pt;
+  margin-bottom: 30px;
+}
+
+.description-card-text {
+  max-width: 600px;
+  box-sizing: border-box;
+  padding: 20px;
+  border: 1px solid grey;
   font-weight: 300;
   font-size: 12pt;
   color: grey;
-  margin-bottom: 20px;
+  margin-bottom: 50px;
+  max-height: 200px;
+  overflow-y: scroll;
 }

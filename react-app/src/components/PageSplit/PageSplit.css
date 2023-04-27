@@ -36,5 +36,10 @@ h1.split-pages-header {
 }
 
 .start {
-  padding: 20px 0 0 50px;
+  padding: 0 0 0 20px;
+}
+
+.end {
+  display: flex;
+  align-items: flex-end;
 }

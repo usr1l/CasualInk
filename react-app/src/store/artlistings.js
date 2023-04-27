@@ -1,6 +1,7 @@
 import normalizeFn from "../components/HelperFns/NormalizeFn.js";
 
 const GET_ARTLISTINGS = "artlistings/GET_ARTLISTINGS";
+const GET_SINGLE_ARTLISTING_ID = "artwork/GET_SINGLE_ARTLISTING_ID";
 
 export const thunkGetArtlistings = () => async (dispatch) => {
   const response = await fetch("/api/artlistings/");
@@ -20,6 +21,18 @@ const actionGetArtlistings = (artlistings) => {
   };
 };
 
+export const thunkGetSingleArtlistingId = (artlistingId) => async (dispatch) => {
+
+  function actionGetSingleArtlistingId(artlistingId) {
+    return {
+      type: GET_SINGLE_ARTLISTING_ID,
+      payload: artlistingId
+    };
+  };
+
+  dispatch(actionGetSingleArtlistingId(artlistingId));
+};
+
 const initialState = { allArtlistings: {}, singleArtlistingId: null, isLoading: true }
 
 const artlistings = (state = initialState, action) => {
@@ -29,6 +42,11 @@ const artlistings = (state = initialState, action) => {
         ...state,
         allArtlistings: action.payload,
         isLoading: false
+      };
+    case GET_SINGLE_ARTLISTING_ID:
+      return {
+        ...state,
+        singleArtlistingId: action.payload
       };
     default:
       return state
