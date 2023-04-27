@@ -9,16 +9,26 @@ import { useHistory, useParams } from 'react-router-dom';
 import { useModal } from '../../context/Modal';
 
 const ListingModal = ({
-  artworkId
+  artworkId,
 }) => {
   const history = useHistory();
   const dispatch = useDispatch();
   const [ listingType, setListingType ] = useState("sale");
   const [ price, setPrice ] = useState();
   const [ amountAvailable, setAmountAvailable ] = useState();
+
+  const [ startBid, setStartBid ] = useState("");
+  const [ auctionDeadline, setAuctionDeadline ] = useState("")
+
   const [ errors, setErrors ] = useState([]);
   const [ validationErrors, setValidationErrors ] = useState({});
+  const [ isLoaded, setIsLoaded ] = useState(false);
   const { closeModal, modalRef, modalContent } = useModal();
+
+  useEffect(() => {
+    setErrors([]);
+    setValidationErrors({});
+  }, [ listingType ])
 
   useEffect(() => {
     if (!modalContent) return;
@@ -33,16 +43,25 @@ const ListingModal = ({
     return () => document.removeEventListener("click", modalClose);
   }, [ modalContent ]);
 
-  const validate = () => {
+  const validateSale = () => {
     const validationErrors = {};
     if ((parseFloat(price) < 0) || (!Number.isInteger(100 * parseFloat(price)))) validationErrors.price = "Invalid price: value must be greater than zero and have at most two decimal places"
     if ((amountAvailable < 0) || Number.isInteger(amountAvailable)) validationErrors.amountAvailable = "Invalid data: amount needs to be a positive integer"
     return validationErrors;
   };
 
+  const validateAuction = () => {
+    const validationErrors = {};
+    if (auctionDeadline <= new Date()) validationErrors.auctionDeadline = 'Please provide an auction deadline, must be in the future';
+    if ((parseFloat(startBid) < 0) ||
+      (!Number.isInteger(100 * parseFloat(startBid)))) validationErrors.startBid = "Invalid price: value must be greater than zero and have at most two decimal places";
+
+    return validationErrors
+  };
+
   const submitArtListing = async (e) => {
     e.preventDefault();
-    const validationErrors = validate();
+    const validationErrors = validateSale();
     if (Object.keys(validationErrors).length > 0) return setValidationErrors(validationErrors);
 
     const data = {
@@ -55,6 +74,19 @@ const ListingModal = ({
     if (res.errors) return setErrors(res.errors)
     else closeModal();
   };
+
+  // const submitAuctionListing = async (e) => {
+  //   e.preventDefault();
+  //   const validationErrors = validateSale();
+  //   if (Object.keys(validationErrors).length > 0) return setValidationErrors(validationErrors);
+  //   const data = {
+  //     "start_bid": startBid,
+  //     "auction_deadline": auctionDeadline,
+  //     "artword_id": artworkId
+  //   };
+
+  //   const res = await dispatch(thunkAddAuctionlisting(data));
+  // }
 
   return (
     <div className='small-form-modal'>
@@ -115,29 +147,28 @@ const ListingModal = ({
           <>
             <h1 className='form-header'>Create New Auction Listing</h1>
             <InputDiv
-              label="Price: "
+              label="Starting Bid: "
               divStyle={'input--wide'}
               labelStyle={'__label'}
+              error={validationErrors.startBid}
             >
               <input
                 className='__input'
                 type="number"
-                value={price}
-                onChange={(e) => setPrice(e.target.value)}
+                value={startBid}
+                onChange={(e) => setStartBid(e.target.value)}
                 required
               />
             </InputDiv>
-            <InputDiv
-              label="Amount Available for Sale: "
+            <InputDiv label="Starting Bid: "
               divStyle={'input--wide'}
               labelStyle={'__label'}
-            >
+              error={validationErrors.auctionDeadline}>
               <input
-                className='__input'
-                type="number"
-                value={amountAvailable}
-                onChange={(e) => setAmountAvailable(e.target.value)}
-                required
+                name='auctionDeadline'
+                type='date'
+                value={auctionDeadline}
+                onChange={(e) => setAuctionDeadline(e.target.value)}
               />
             </InputDiv>
             <Button >Create Auction Listing</Button>

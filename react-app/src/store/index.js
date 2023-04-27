@@ -4,11 +4,13 @@ import session from './session';
 import artworks from './artworks';
 import artlistings from './artlistings';
 import shoppingCart from './shoppingcarts';
+import auctionlistings from './auctionlistings';
 
 const rootReducer = combineReducers({
   session,
   artworks,
   artlistings,
+  auctionlistings,
   shoppingCart
 });
 
