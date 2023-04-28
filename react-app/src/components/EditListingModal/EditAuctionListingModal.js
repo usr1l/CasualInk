@@ -4,12 +4,12 @@ import NavBar from '../NavBar';
 import "../ListingModal/ListingModal.css";
 import InputDiv from '../InputDiv';
 import Button from '../Button';
-import { thunkAddArtlisting, thunkDeleteArtListing, thunkEditArtlisting } from '../../store/artlistings';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useModal } from '../../context/Modal';
-import { thunkAddAuctionlisting, thunkEditAuctionlisting } from '../../store/auctionlistings';
+import { thunkDeleteAuctionListing, thunkEditAuctionlisting } from '../../store/auctionlistings';
 import OpenModalButton from '../OpenModalButton';
 import getCurrTime from '../HelperFns/GetCurrTime';
+import ConfirmDeleteModal from '../ConfirmDeleteModal';
 
 const EditAuctionListingModal = ({
   auctionListingId
@@ -56,13 +56,7 @@ const EditAuctionListingModal = ({
   const validateAuction = () => {
     const validationErrors = {};
     const { currDateTime } = getCurrTime();
-    if (`${auctionDeadlineDate} ${auctionDeadlineTime}` <= currDateTime) {
-      validationErrors.auctionDeadline = 'Please provide an auction deadline, must be in the future';
-    };
-    console.log(`${auctionDeadlineDate} ${auctionDeadlineTime}` <= currDateTime)
-    console.log(`${auctionDeadlineDate} ${auctionDeadlineTime}`)
-    console.log(currDateTime)
-    console.log(validationErrors)
+    if (`${auctionDeadlineDate} ${auctionDeadlineTime}` <= currDateTime) validationErrors.auctionDeadline = 'Please provide an auction deadline, must be in the future';
     return validationErrors
   };
 
@@ -88,11 +82,11 @@ const EditAuctionListingModal = ({
           className={`navbar-item smaller clicked`}
         >Auction Listing</div>
       </NavBar>
-      <ul id='signup__error-list'>
+      {/* <ul id='signup__error-list'>
         {errors.map((error, idx) => (
           <li key={idx}>{error}</li>
         ))}
-      </ul>
+      </ul> */}
       <div className='form-container'>
         <h1 className='form-header'>Edit Auction Listing</h1>
         <InputDiv label="Auction Deadline: "
@@ -119,13 +113,12 @@ const EditAuctionListingModal = ({
           <Button
             onClick={submitAuctionListing}
             buttonStyle={'btn--demo'}
-            buttonSize={'btn--splash'}
           >Update Auction Listing</Button>
-          {/* <OpenModalButton
-            buttonText={'Delete Sale Listing'}
+          <OpenModalButton
+            buttonText={'Delete Auction Listing'}
             modalCSSClass={'btn btn--demo btn--medium'}
-            modalComponent={<ConfirmDeleteModal deleteFn={thunkDeleteArtListing} itemId={artListing} directTo={`/artworks/${artListing.artwork_id}`} />}
-          /> */}
+            modalComponent={<ConfirmDeleteModal deleteFn={thunkDeleteAuctionListing} itemId={auctionListing} directTo={`/artworks/${auctionListing.artwork_id}`} />}
+          />
         </div>
       </div>
     </div>

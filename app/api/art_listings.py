@@ -23,8 +23,6 @@ def get_a_single_listing(artlisting_id):
         return {"errors": "Artlisting not found."}, 404
 
     if request.method == "DELETE":
-        print("=============================",
-              owner_id, single_listing.owner_id)
         if not single_listing.check_owner(owner_id):
             return {"errors": "Forbidden."}, 403
         else:

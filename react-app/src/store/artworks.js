@@ -9,6 +9,7 @@ const DELETE_SINGLE_ARTWORK = "artworks/DELETE_SINGLE_ARTWORK";
 const ADD_ARTWORK_ARTLISTING = "artworks/ADD_ARTWORK_ARTLISTING";
 const ADD_ARTWORK_AUCTIONLISTING = "artworks/ADD_ARTWORK_AUCTIONLISTING";
 const DELETE_ARTWORK_ARTLISTING = "artworks/DELETE_ARTWORK_ARTLISTING";
+const DELETE_ARTWORK_AUCTIONLISTING = "artworks/DELETE_ARTWORK_AUCTIONLISTING";
 
 export const thunkGetArtworks = () => async (dispatch) => {
   const response = await fetch("/api/artworks/");
@@ -130,6 +131,13 @@ export const actionArtworkDeleteArtListing = (artworkId) => {
   };
 };
 
+export const actionArtworkDeleteAuctionListing = (artworkId) => {
+  return {
+    type: DELETE_ARTWORK_AUCTIONLISTING,
+    payload: artworkId
+  };
+};
+
 const initialState = { allArtworks: {}, singleArtworkId: null, isLoading: true };
 
 const artworks = (state = initialState, action) => {
@@ -202,6 +210,17 @@ const artworks = (state = initialState, action) => {
           [ action.payload ]: {
             ...state.allArtworks[ action.payload ],
             artListing: null
+          }
+        }
+      }
+    case DELETE_ARTWORK_AUCTIONLISTING:
+      return {
+        ...state,
+        allArtworks: {
+          ...state.allArtworks,
+          [ action.payload ]: {
+            ...state.allArtworks[ action.payload ],
+            auctionListing: null
           }
         }
       }

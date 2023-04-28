@@ -8,6 +8,7 @@ import { thunkAddArtlisting } from '../../store/artlistings';
 import { useHistory } from 'react-router-dom';
 import { useModal } from '../../context/Modal';
 import { thunkAddAuctionlisting } from '../../store/auctionlistings';
+import getCurrTime from '../HelperFns/GetCurrTime';
 
 const ListingModal = ({
   artworkId,
@@ -53,7 +54,8 @@ const ListingModal = ({
 
   const validateAuction = () => {
     const validationErrors = {};
-    if (`${auctionDeadlineDate} ${auctionDeadlineTime}` <= new Date()) validationErrors.auctionDeadline = 'Please provide an auction deadline, must be in the future';
+    const { currDateTime } = getCurrTime();
+    if (`${auctionDeadlineDate} ${auctionDeadlineTime}` <= currDateTime) validationErrors.auctionDeadline = 'Please provide an auction deadline, must be in the future';
     if ((parseFloat(startBid) < 0) ||
       (!Number.isInteger(100 * parseFloat(startBid)))) validationErrors.startBid = "Invalid price: value must be greater than zero and have at most two decimal places";
 
@@ -72,7 +74,6 @@ const ListingModal = ({
     };
 
     const res = await dispatch(thunkAddArtlisting(data));
-    console.log("res", res)
     if (res.errors) return setErrors(res.errors);
     else closeModal();
   };
@@ -104,11 +105,11 @@ const ListingModal = ({
           onClick={() => { setListingType("auction") }}
         >Auction Listing</div>
       </NavBar>
-      <ul id='signup__error-list'>
+      {/* <ul id='signup__error-list'>
         {errors.map((error, idx) => (
           <li key={idx}>{error}</li>
         ))}
-      </ul>
+      </ul> */}
       <div className='form-container'>
         {(listingType === "sale") ? (
           <>

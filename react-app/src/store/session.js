@@ -9,6 +9,7 @@ const EDIT_OWNER_ARTWORK = "session/EDIT_OWNER_ARTWORK";
 const CREATE_OWNER_ARTLISTING = "session/CREATE_OWNER_ARTLISTING";
 const CREATE_OWNER_AUCTIONLISTING = "session/CREATE_OWNER_AUCTIONLISTING";
 const DELETE_OWNER_ARTLISTING = "session/DELETE_OWNER_ARTLISTING";
+const DELETE_OWNER_AUCTIONLISTING = "session/DELETE_OWNER_AUCTIONLISTING";
 // const EDIT_OWNER_AUCTIONLISTING = "session/EDIT_OWNER_AUCTIONLISTING";
 
 const setUser = (user) => ({
@@ -153,6 +154,13 @@ export const actionOwnerEditAuctionListing = (data) => {
 	};
 };
 
+export const actionOwnerDeleteAuctionListing = (auctionlistingId) => {
+	return {
+		type: DELETE_OWNER_AUCTIONLISTING,
+		payload: auctionlistingId
+	};
+};
+
 export default function reducer(state = initialState, action) {
 	let updatedState;
 	switch (action.type) {
@@ -230,6 +238,18 @@ export default function reducer(state = initialState, action) {
 				}
 			}
 			delete updatedState.user.artListings[ action.payload ]
+		case DELETE_OWNER_AUCTIONLISTING:
+			updatedState = {
+				...state,
+				user: {
+					...state.user,
+					auctionListings: {
+						...state.user.auctionListings,
+					}
+				}
+			}
+			delete updatedState.user.auctionListings[ action.payload ]
+			return updatedState;
 		default:
 			return state;
 	}

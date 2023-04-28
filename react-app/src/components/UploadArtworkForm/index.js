@@ -38,14 +38,14 @@ const UploadArtworkForm = () => {
 
   const validate = () => {
     const validationErrors = {};
-    // const yearRegex = /^\d{4}$/;
+    const yearRegex = /^\d{4}$/;
 
-    // if (title.length > 80) validationErrors.title = 'Please provide a valid title (<80 char).';
-    // if (title.length > 80) validationErrors.artistName = 'Please provide a valid artist name (<60 char).';
-    // if (!yearRegex.test(year) || year > (new Date()).getFullYear()) validationErrors.year = 'Please provide a date in the past.'
-    // if (description.split(" ").length < 30) validationErrors.description = 'Please provide a description (30 words min.).';
-    // if ((height && parseFloat(height) < 0) || (!Number.isInteger(100 * parseFloat(height)))) validationErrors.height = "Invalid height: value must be greater than zero and have at most two decimal places"
-    // if ((width && parseFloat(width) < 0) || (!Number.isInteger(100 * parseFloat(width)))) validationErrors.width = "Invalid height: value must be greater than zero and have at most two decimal places"
+    if (title.length > 80) validationErrors.title = 'Please provide a valid title (<80 char).';
+    if (title.length > 80) validationErrors.artistName = 'Please provide a valid artist name (<60 char).';
+    if (!yearRegex.test(year) || year > (new Date()).getFullYear()) validationErrors.year = 'Please provide a date in the past.'
+    if (description.split(" ").length < 30) validationErrors.description = 'Please provide a description (30 words min.).';
+    if ((height && parseFloat(height) < 0) || (!Number.isInteger(100 * parseFloat(height)))) validationErrors.height = "Invalid height: value must be greater than zero and have at most two decimal places"
+    if ((width && parseFloat(width) < 0) || (!Number.isInteger(100 * parseFloat(width)))) validationErrors.width = "Invalid height: value must be greater than zero and have at most two decimal places"
     return validationErrors;
   };
 

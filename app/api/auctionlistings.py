@@ -15,7 +15,7 @@ def get_all_auctionlistings():
     return [listing.to_safe_dict() for listing in all_listings], 200
 
 
-@auctionlisting_routes.route("/<int:auctionlisting_id>", methods=["GET", "DELETE"])
+@auctionlisting_routes.route("/<int:auctionlisting_id>", methods=["GET", "DELETE", "PUT"])
 @login_required
 def get_auction_listing(auctionlisting_id):
     single_listing = AuctionListing.query.get(auctionlisting_id)

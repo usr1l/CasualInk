@@ -1,11 +1,12 @@
 import normalizeFn from "../components/HelperFns/NormalizeFn";
-import { actionArtworkAddAuctionlisting } from "./artworks";
-import { actionOwnerCreateAuctionListing, actionOwnerEditAuctionListing } from "./session";
+import { actionArtworkAddAuctionlisting, actionArtworkDeleteAuctionListing } from "./artworks";
+import { actionOwnerCreateAuctionListing, actionOwnerDeleteAuctionListing, actionOwnerEditAuctionListing } from "./session";
 
 
 const GET_AUCTION_LISTINGS = "auctionlistings/GET_AUCTION_LISTINGS";
 const CREATE_SINGLE_AUCTIONLISTING = "auctionlistings/CREATE_SINGLE_AUCTIONLISTING";
 const EDIT_SINGLE_AUCTIONLISTING = "auctionlistings/EDIT_SINGLE_AUCTIONLISTING";
+const DELETE_SINGLE_AUCTIONLISTING = "auctionlistings/DELETE_SINGLE_AUCTIONLISTING";
 
 export const thunkGetAuctionListings = () => async (dispatch) => {
   const response = await fetch("/api/auctionlistings/")
@@ -71,9 +72,31 @@ const actionEditAuctionListing = (data) => {
   };
 };
 
+export const thunkDeleteAuctionListing = (auctionListing) => async (dispatch) => {
+  const res = await fetch(`/api/auctionlistings/${auctionListing.id}`, {
+    method: "DELETE"
+  });
+
+  const resData = await res.json();
+  if (res.ok) {
+    dispatch(actionDeleteAuctionListing(auctionListing.id));
+    dispatch(actionArtworkDeleteAuctionListing(auctionListing.artwork_id));
+    dispatch(actionOwnerDeleteAuctionListing(auctionListing.id));
+  };
+  return resData;
+};
+
+const actionDeleteAuctionListing = (auctionlistingId) => {
+  return {
+    type: DELETE_SINGLE_AUCTIONLISTING,
+    payload: auctionlistingId
+  }
+}
+
 const initialState = { allAuctionlistings: {}, singleAuctionlistingId: null, isLoading: true }
 
 const auctionlistings = (state = initialState, action) => {
+  let updatedState;
   switch (action.type) {
     case GET_AUCTION_LISTINGS:
       return {
@@ -96,6 +119,16 @@ const auctionlistings = (state = initialState, action) => {
           [ action.payload.id ]: action.payload
         }
       }
+    case DELETE_SINGLE_AUCTIONLISTING:
+      updatedState = {
+        ...state,
+        allAuctionlistings: {
+          ...state.allAuctionlistings,
+          singleAuctionlistingId: null
+        }
+      };
+      delete updatedState.allAuctionlistings[ action.payload ]
+      return updatedState;
     default:
       return state
   }
