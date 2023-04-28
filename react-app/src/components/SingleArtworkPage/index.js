@@ -14,7 +14,8 @@ import NavBar from '../NavBar';
 import SaleListingPage from '../SaleListingPage';
 import AuctionListingPage from '../AuctionListingPage';
 import ListingModal from '../ListingModal';
-import EditListingModal from '../EditListingModal';
+import EditArtListingModal from '../EditListingModal/EditArtListingModal';
+import EditAuctionListingModal from '../EditListingModal/EditAuctionListingModal';
 
 const SingleArtworkPage = () => {
   const dispatch = useDispatch();
@@ -115,52 +116,61 @@ const SingleArtworkPage = () => {
                   disableButton={true}
                 >Update Availability to Create a New Listing</Button>
               )}
-              {artwork.available && artlistingBool && (
-                <button
-                  className='btn btn--demo btn--splash'
-                  onClick={() => {
-                    history.push(`/artworks/${artworkId}/artlistings/${artwork.artListing}`)
-                    scrollToEffect("target");
-                  }}
-                >
-                  Go To Sale Listing
-                </button>
-              )}
-              {ownerStatus && artwork.available && auctionlistingBool && (
-                <button
-                  className='btn btn--demo btn--splash'
-                // onClick={() => history.push(`/artworks/${artworkId}/artlistings/${artwork.artListing}`)}
-                >
-                  Go To Auction Listing
-                </button>
-              )}
-
-              {ownerStatus && artwork.available && artlistingBool && (
-                <OpenModalButton
-                  buttonText={'Update Listing'}
-                  modalCSSClass={'btn btn--demo btn--splash'}
-                  modalComponent={<EditListingModal props={artworkId} artListingId={artwork.artListing} type={"sale"} />}
-                />
-              )}
-              {/* {ownerStatus && artwork.available && auctionlistingBool && (
-                <OpenModalButton
-                  buttonText={'Update Listing'}
-                  modalCSSClass={'btn btn--demo btn--splash'}
-                  modalComponent={<EditListingModal artworkId={artworkId} type={"auction"} />}
-                />
-              )} */}
-              {ownerStatus && artwork.available && !artwork.artListing && !artwork.auctionListing && (
-                <OpenModalButton
-                  buttonText={'Create A Listing'}
-                  modalCSSClass={'btn btn--demo btn--splash'}
-                  modalComponent={<ListingModal artworkId={artworkId} />}
-                />
-              )}
+              <div>
+                {artwork.available && artlistingBool && (
+                  <button
+                    className='btn btn--demo btn--splash'
+                    onClick={() => {
+                      history.push(`/artworks/${artworkId}/artlistings/${artwork.artListing}`)
+                      scrollToEffect("target");
+                    }}
+                  >
+                    Go To Sale Listing
+                  </button>
+                )}
+                {artwork.available && auctionlistingBool && (
+                  <button
+                    className='btn btn--demo btn--splash'
+                    onClick={() => {
+                      history.push(`/artworks/${artworkId}/auctionlistings/${artwork.auctionListing}`)
+                      scrollToEffect("target");
+                    }}
+                  >
+                    Go To Auction Listing
+                  </button>
+                )}
+              </div>
+              <div>
+                {ownerStatus && artwork.available && artlistingBool && (
+                  <OpenModalButton
+                    buttonText={'Update Listing'}
+                    modalCSSClass={'btn btn--demo btn--splash'}
+                    modalComponent={<EditArtListingModal props={artworkId} artListingId={artwork.artListing} />}
+                  />
+                )}
+                {ownerStatus && artwork.available && auctionlistingBool && (
+                  <OpenModalButton
+                    buttonText={'Update Listing'}
+                    modalCSSClass={'btn btn--demo btn--splash'}
+                    modalComponent={<EditAuctionListingModal artworkId={artworkId} auctionListingId={artwork.auctionListing} type={"auction"} />}
+                  />
+                )}
+                {ownerStatus && artwork.available && !artwork.artListing && !artwork.auctionListing && (
+                  <OpenModalButton
+                    buttonText={'Create A Listing'}
+                    modalCSSClass={'btn btn--demo btn--splash'}
+                    modalComponent={<ListingModal artworkId={artworkId} />}
+                  />
+                )}
+              </div>
             </PageSplit>
           </SingleFullPageDiv>
           <NavBar>
             {artwork.artListing && (
-              <NavLink to={`/artworks/${artworkId}/artlistings/${artwork.artListing}`} className="navbar-item" activeClassName='navbar-navlink-active'>
+              <NavLink
+                to={`/artworks/${artworkId}/artlistings/${artwork.artListing}`}
+                className="navbar-item"
+                activeClassName='navbar-navlink-active'>
                 Sale Listing
               </NavLink>
             )}

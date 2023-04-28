@@ -24,7 +24,6 @@ const ListingModal = ({
 
   const [ errors, setErrors ] = useState([]);
   const [ validationErrors, setValidationErrors ] = useState({});
-  const [ isLoaded, setIsLoaded ] = useState(false);
   const { closeModal, modalRef, modalContent } = useModal();
 
   useEffect(() => {
@@ -197,8 +196,3 @@ const ListingModal = ({
 };
 
 export default ListingModal;
-
-// {(listingType === "sale") ? (
-// ) : (
-//   <div>Hi2</div>
-// )}

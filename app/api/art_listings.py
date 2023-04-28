@@ -34,7 +34,7 @@ def get_a_single_listing(artlisting_id):
         form = ArtlistingForm()
         form["csrf_token"].data = request.cookies["csrf_token"]
         if form.validate_on_submit():
-            single_listing.price = form.data["price"]
+            single_listing.price = f"{form.data['price']}"
             single_listing.amount_available = form.data["amount_available"]
             db.session.commit()
             return single_listing.to_safe_dict(), 200
