@@ -7,7 +7,9 @@ import Button from '../Button';
 import { thunkAddArtlisting, thunkDeleteArtListing, thunkEditArtlisting } from '../../store/artlistings';
 import { useHistory, useParams } from 'react-router-dom';
 import { useModal } from '../../context/Modal';
-import { thunkAddAuctionlisting } from '../../store/auctionlistings';
+import { thunkAddAuctionlisting, thunkEditAuctionlisting } from '../../store/auctionlistings';
+import OpenModalButton from '../OpenModalButton';
+import getCurrTime from '../HelperFns/GetCurrTime';
 
 const EditAuctionListingModal = ({
   auctionListingId
@@ -15,7 +17,6 @@ const EditAuctionListingModal = ({
   const history = useHistory();
   const dispatch = useDispatch();
 
-  const [ startBid, setStartBid ] = useState("");
   const [ auctionDeadlineDate, setAuctionDeadlineDate ] = useState("")
   const [ auctionDeadlineTime, setAuctionDeadlineTime ] = useState("")
 
@@ -23,6 +24,8 @@ const EditAuctionListingModal = ({
   const [ validationErrors, setValidationErrors ] = useState({});
 
   const { closeModal, modalRef, modalContent } = useModal();
+
+  const auctionListing = useSelector(state => state.auctionlistings.allAuctionlistings[ auctionListingId ])
 
   useEffect(() => {
     if (!modalContent) return;
@@ -37,25 +40,42 @@ const EditAuctionListingModal = ({
     return () => document.removeEventListener("click", modalClose);
   }, [ modalContent ]);
 
+  useEffect(() => {
+    if (auctionListing) {
+      const newDate = new Date(auctionListing.auction_deadline);
+      const newDateISO = newDate.toISOString();
+      const dateDeadline = newDateISO.split("T")[ 0 ];
+      const timeDeadlinePart = newDateISO.split("T")[ 1 ];
+      const timeDeadline = timeDeadlinePart.split(".")[ 0 ];
+      setAuctionDeadlineDate(dateDeadline);
+      setAuctionDeadlineTime(timeDeadline);
+    };
+  }, [ auctionListing ]);
+
+
   const validateAuction = () => {
     const validationErrors = {};
-    if (`${auctionDeadlineDate} ${auctionDeadlineTime}` <= new Date()) validationErrors.auctionDeadline = 'Please provide an auction deadline, must be in the future';
-    if ((parseFloat(startBid) < 0) ||
-      (!Number.isInteger(100 * parseFloat(startBid)))) validationErrors.startBid = "Invalid price: value must be greater than zero and have at most two decimal places";
-
+    const { currDateTime } = getCurrTime();
+    if (`${auctionDeadlineDate} ${auctionDeadlineTime}` <= currDateTime) {
+      validationErrors.auctionDeadline = 'Please provide an auction deadline, must be in the future';
+    };
+    console.log(`${auctionDeadlineDate} ${auctionDeadlineTime}` <= currDateTime)
+    console.log(`${auctionDeadlineDate} ${auctionDeadlineTime}`)
+    console.log(currDateTime)
+    console.log(validationErrors)
     return validationErrors
   };
+
 
   const submitAuctionListing = async (e) => {
     e.preventDefault();
     const validationErrors = validateAuction();
     if (Object.keys(validationErrors).length > 0) return setValidationErrors(validationErrors);
     const data = {
-      "start_bid": startBid,
       "auction_deadline": `${auctionDeadlineDate} ${auctionDeadlineTime}`,
     };
 
-    const res = await dispatch(thunkAddAuctionlisting(data));
+    const res = await dispatch(thunkEditAuctionlisting(data, auctionListing.id));
     if (res.errors) return setErrors(res.errors);
     else closeModal();
   }
@@ -74,21 +94,7 @@ const EditAuctionListingModal = ({
         ))}
       </ul>
       <div className='form-container'>
-        <h1 className='form-header'>Create New Auction Listing</h1>
-        <InputDiv
-          label="Starting Bid: "
-          divStyle={'input--wide'}
-          labelStyle={'__label'}
-          error={validationErrors.startBid}
-        >
-          <input
-            className='__input'
-            type="number"
-            value={startBid}
-            onChange={(e) => setStartBid(e.target.value)}
-            required
-          />
-        </InputDiv>
+        <h1 className='form-header'>Edit Auction Listing</h1>
         <InputDiv label="Auction Deadline: "
           divStyle={'input--wide'}
           labelStyle={'__label'}
@@ -109,11 +115,18 @@ const EditAuctionListingModal = ({
             onChange={(e) => setAuctionDeadlineTime(e.target.value)}
           />
         </InputDiv>
-        <Button
-          onClick={submitAuctionListing}
-          buttonStyle={'btn--demo'}
-          buttonSize={'btn--splash'}
-        >Create Auction Listing</Button>
+        <div className='edit-buttons-container-small'>
+          <Button
+            onClick={submitAuctionListing}
+            buttonStyle={'btn--demo'}
+            buttonSize={'btn--splash'}
+          >Update Auction Listing</Button>
+          {/* <OpenModalButton
+            buttonText={'Delete Sale Listing'}
+            modalCSSClass={'btn btn--demo btn--medium'}
+            modalComponent={<ConfirmDeleteModal deleteFn={thunkDeleteArtListing} itemId={artListing} directTo={`/artworks/${artListing.artwork_id}`} />}
+          /> */}
+        </div>
       </div>
     </div>
   )

@@ -26,12 +26,10 @@ const SingleArtworkPage = () => {
   const allArtworks = useSelector(state => state.artworks.allArtworks);
   const artwork = allArtworks[ artworkId ];
 
-  // for button conditional rendering
   const [ artlistingBool, setArtlistingBool ] = useState(false);
   const [ auctionlistingBool, setAuctionlistingBool ] = useState(false);
   const [ ownerStatus, setOwnerStatus ] = useState(false);
 
-  // const [ userStatus, setUserStatus ] = useState("user");
   const [ isLoaded, setIsLoaded ] = useState(false);
 
   useEffect(() => {
@@ -47,28 +45,6 @@ const SingleArtworkPage = () => {
         .then(() => setIsLoaded(true));
     }
   }, [ dispatch, artwork ]);
-
-  // // check for sale id
-  // useEffect(() => {
-  //   if (artwork.artListing) setArtlistingBool(true);
-  //   else setArtlistingBool(false);
-  // }, [ artwork ])
-
-  // // check for auction id
-  // useEffect(() => {
-  //   if (artwork.auctionListing) setAuctionlistingBool(true);
-  //   else setAuctionlistingBool(false);
-  // }, [ artwork ])
-
-  const ownerState = (userStatus) => {
-    let response;
-    switch (userStatus) {
-      default:
-        response = "owner"
-        break;
-    };
-    return response;
-  };
 
   // scroll to area on buttonclick
   const scrollToEffect = (id) => {

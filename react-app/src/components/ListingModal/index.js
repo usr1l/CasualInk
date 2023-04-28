@@ -72,6 +72,7 @@ const ListingModal = ({
     };
 
     const res = await dispatch(thunkAddArtlisting(data));
+    console.log("res", res)
     if (res.errors) return setErrors(res.errors);
     else closeModal();
   };
@@ -103,11 +104,11 @@ const ListingModal = ({
           onClick={() => { setListingType("auction") }}
         >Auction Listing</div>
       </NavBar>
-      {/* <ul id='signup__error-list'>
+      <ul id='signup__error-list'>
         {errors.map((error, idx) => (
           <li key={idx}>{error}</li>
         ))}
-      </ul> */}
+      </ul>
       <div className='form-container'>
         {(listingType === "sale") ? (
           <>

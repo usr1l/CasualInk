@@ -9,6 +9,7 @@ const EDIT_OWNER_ARTWORK = "session/EDIT_OWNER_ARTWORK";
 const CREATE_OWNER_ARTLISTING = "session/CREATE_OWNER_ARTLISTING";
 const CREATE_OWNER_AUCTIONLISTING = "session/CREATE_OWNER_AUCTIONLISTING";
 const DELETE_OWNER_ARTLISTING = "session/DELETE_OWNER_ARTLISTING";
+// const EDIT_OWNER_AUCTIONLISTING = "session/EDIT_OWNER_AUCTIONLISTING";
 
 const setUser = (user) => ({
 	type: SET_USER,
@@ -141,6 +142,13 @@ export const actionOwnerDeleteArtListing = (artlistingId) => {
 export const actionOwnerEditArtListing = (data) => {
 	return {
 		type: CREATE_OWNER_ARTLISTING,
+		payload: data
+	};
+};
+
+export const actionOwnerEditAuctionListing = (data) => {
+	return {
+		type: CREATE_OWNER_AUCTIONLISTING,
 		payload: data
 	};
 };

@@ -53,42 +53,42 @@ def seed_artlistings():
             "list_date": date(2023, 3, 12),
             "amount_available": 1,
             "artwork_id": 7,
-            "owner_id": 3
+            "owner_id": 1
         },
         {
             "price": "8500000.00",
             "list_date": date(2023, 3, 17),
             "amount_available": 1,
             "artwork_id": 8,
-            "owner_id": 1
+            "owner_id": 2
         },
         {
             "price": "10000000.00",
             "list_date": date(2023, 2, 22),
             "amount_available": 1,
             "artwork_id": 9,
-            "owner_id": 2
+            "owner_id": 3
         },
         {
             "price": "8000000.00",
             "list_date": date(2023, 1, 23),
             "amount_available": 1,
             "artwork_id": 10,
-            "owner_id": 3
+            "owner_id": 1
         },
         {
             "price": "7500000.00",
             "list_date": date(2023, 2, 23),
             "amount_available": 1,
             "artwork_id": 11,
-            "owner_id": 1
+            "owner_id": 2
         },
         {
             "price": "6000000.00",
             "list_date": date(2023, 4, 13),
             "amount_available": 1,
             "artwork_id": 12,
-            "owner_id": 2
+            "owner_id": 3
         },
         {
             "price": "7000000.00",

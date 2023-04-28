@@ -48,7 +48,7 @@ const EditArtListingModal = ({
   const validateSale = () => {
     const validationErrors = {};
     if ((parseFloat(price) < 0) || (!Number.isInteger(100 * parseFloat(price)))) validationErrors.price = "Invalid price: value must be greater than zero and have at most two decimal places"
-    if (!(amountAvailable > 0) || (!Number.isInteger(parseInt(amountAvailable)))) validationErrors.amountAvailable = "Invalid data: amount needs to be a positive integer"
+    if (!(amountAvailable > 0) || (!Number.isInteger(amountAvailable))) validationErrors.amountAvailable = "Invalid data: amount needs to be a positive integer"
     return validationErrors;
   };
 

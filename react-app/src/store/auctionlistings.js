@@ -1,10 +1,11 @@
 import normalizeFn from "../components/HelperFns/NormalizeFn";
 import { actionArtworkAddAuctionlisting } from "./artworks";
-import { actionOwnerCreateAuctionListing } from "./session";
+import { actionOwnerCreateAuctionListing, actionOwnerEditAuctionListing } from "./session";
 
 
 const GET_AUCTION_LISTINGS = "auctionlistings/GET_AUCTION_LISTINGS";
 const CREATE_SINGLE_AUCTIONLISTING = "auctionlistings/CREATE_SINGLE_AUCTIONLISTING";
+const EDIT_SINGLE_AUCTIONLISTING = "auctionlistings/EDIT_SINGLE_AUCTIONLISTING";
 
 export const thunkGetAuctionListings = () => async (dispatch) => {
   const response = await fetch("/api/auctionlistings/")
@@ -48,6 +49,28 @@ const actionAddAuctionlisting = (data) => {
   };
 };
 
+export const thunkEditAuctionlisting = (data, auctionListingId) => async (dispatch) => {
+  const response = await fetch(`/api/auctionlistings/${auctionListingId}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  });
+
+  const resData = await response.json();
+  if (response.ok) {
+    dispatch(actionEditAuctionListing(resData));
+    dispatch(actionOwnerEditAuctionListing(resData));
+  };
+  return resData;
+};
+
+const actionEditAuctionListing = (data) => {
+  return {
+    type: EDIT_SINGLE_AUCTIONLISTING,
+    payload: data
+  };
+};
+
 const initialState = { allAuctionlistings: {}, singleAuctionlistingId: null, isLoading: true }
 
 const auctionlistings = (state = initialState, action) => {
@@ -58,6 +81,14 @@ const auctionlistings = (state = initialState, action) => {
         allAuctionlistings: action.payload
       }
     case CREATE_SINGLE_AUCTIONLISTING:
+      return {
+        ...state,
+        allAuctionlistings: {
+          ...state.allAuctionlistings,
+          [ action.payload.id ]: action.payload
+        }
+      }
+    case EDIT_SINGLE_AUCTIONLISTING:
       return {
         ...state,
         allAuctionlistings: {
