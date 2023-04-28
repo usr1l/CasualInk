@@ -15,10 +15,31 @@ def get_all_auctionlistings():
     return [listing.to_safe_dict() for listing in all_listings], 200
 
 
-@auctionlisting_routes.route("/<int:auctionlisting_id>")
+@auctionlisting_routes.route("/<int:auctionlisting_id>", methods=["GET", "DELETE", "PUT"])
 @login_required
 def get_auction_listing(auctionlisting_id):
     single_listing = AuctionListing.query.get(auctionlisting_id)
+    if not single_listing:
+        return {"errors": "Auctionlisting not found."}, 404
+
+    if request.method == "DELETE":
+        # if not single_listing.check_owner(owner_id):
+        #     return {"errors": "Forbidden."}, 403
+        # else:
+        db.session.delete(single_listing)
+        db.session.commit()
+        return {"Success": "Listing deleted."}, 202
+
+    if request.method == "PUT":
+        form = AuctionListingForm()
+        form["csrf_token"].data = request.cookies["csrf_token"]
+        if form.validate_on_submit():
+            single_listing.auction_deadline = form.data["auction_deadline"]
+            db.session.commit()
+            return single_listing.to_safe_dict(), 200
+        else:
+            return {"errors": validation_errors_to_error_messages(form.errors)}, 401
+
     return single_listing.to_safe_dict(), 200
 
 

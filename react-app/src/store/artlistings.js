@@ -1,6 +1,6 @@
 import normalizeFn from "../components/HelperFns/NormalizeFn.js";
-import { actionArtworkAddArtlisting, thunkGetArtworks } from "./artworks.js";
-import { actionOwnerCreateArtlisting } from "./session.js";
+import { actionArtworkAddArtlisting, actionArtworkDeleteArtListing, thunkGetArtworks } from "./artworks.js";
+import { actionOwnerCreateArtlisting, actionOwnerDeleteArtListing, actionOwnerEditArtListing } from "./session.js";
 
 const GET_ARTLISTINGS = "artlistings/GET_ARTLISTINGS";
 const GET_SINGLE_ARTLISTING_ID = "artlistings/GET_SINGLE_ARTLISTING_ID";
@@ -70,7 +70,8 @@ export const thunkEditArtlisting = (data, artListingId) => async (dispatch) => {
 
   const resData = await res.json();
   if (res.ok) {
-    dispatch(actionEditArtListing(resData))
+    dispatch(actionEditArtListing(resData));
+    dispatch(actionOwnerEditArtListing(resData));
   };
   return resData;
 };
@@ -82,22 +83,24 @@ const actionEditArtListing = (data) => {
   }
 }
 
-export const thunkDeleteArtListing = (artListingId) => async (dispatch) => {
-  const res = await fetch(`/api/artlistings/${artListingId}`, {
+export const thunkDeleteArtListing = (artListing) => async (dispatch) => {
+  const res = await fetch(`/api/artlistings/${artListing.id}`, {
     method: "DELETE"
   });
 
   const resData = await res.json();
   if (res.ok) {
-    dispatch(actionDeleteArtListing(artListingId));
+    dispatch(actionDeleteArtListing(artListing.id));
+    dispatch(actionArtworkDeleteArtListing(artListing.artwork_id));
+    dispatch(actionOwnerDeleteArtListing(artListing.id));
   };
   return resData;
 };
 
-const actionDeleteArtListing = (artListingId) => {
+const actionDeleteArtListing = (artlistingId) => {
   return {
     type: DELETE_SINGLE_ARTLISTING,
-    payload: artListingId
+    payload: artlistingId
   };
 };
 
@@ -137,7 +140,8 @@ const artlistings = (state = initialState, action) => {
       updatedState = {
         ...state,
         allArtlistings: {
-          ...state.allArtlistings
+          ...state.allArtlistings,
+          singleArtlistingId: null
         }
       }
       delete updatedState.allArtlistings[ action.payload ]

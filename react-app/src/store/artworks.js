@@ -7,7 +7,9 @@ const GET_SINGLE_ARTWORK_ID = "artworks/GET_SINGLE_ARTWORK_ID";
 const EDIT_SINGLE_ARTWORK = "artworks/EDIT_SINGLE_ARTWORK";
 const DELETE_SINGLE_ARTWORK = "artworks/DELETE_SINGLE_ARTWORK";
 const ADD_ARTWORK_ARTLISTING = "artworks/ADD_ARTWORK_ARTLISTING";
-const ADD_ARTWORK_AUCTIONLISTING = "artwork/ADD_ARTWORK_AUCTIONLISTING";
+const ADD_ARTWORK_AUCTIONLISTING = "artworks/ADD_ARTWORK_AUCTIONLISTING";
+const DELETE_ARTWORK_ARTLISTING = "artworks/DELETE_ARTWORK_ARTLISTING";
+const DELETE_ARTWORK_AUCTIONLISTING = "artworks/DELETE_ARTWORK_AUCTIONLISTING";
 
 export const thunkGetArtworks = () => async (dispatch) => {
   const response = await fetch("/api/artworks/");
@@ -119,10 +121,24 @@ export const actionArtworkAddAuctionlisting = (dataId, artworkId) => {
       dataId,
       artworkId
     }
-  }
-}
+  };
+};
 
-const initialState = { allArtworks: {}, singleArtworkId: null, isLoading: true }
+export const actionArtworkDeleteArtListing = (artworkId) => {
+  return {
+    type: DELETE_ARTWORK_ARTLISTING,
+    payload: artworkId
+  };
+};
+
+export const actionArtworkDeleteAuctionListing = (artworkId) => {
+  return {
+    type: DELETE_ARTWORK_AUCTIONLISTING,
+    payload: artworkId
+  };
+};
+
+const initialState = { allArtworks: {}, singleArtworkId: null, isLoading: true };
 
 const artworks = (state = initialState, action) => {
   let updatedState;
@@ -183,6 +199,28 @@ const artworks = (state = initialState, action) => {
           [ action.payload.artworkId ]: {
             ...state.allArtworks[ action.payload.artworkId ],
             auctionListing: action.payload.dataId
+          }
+        }
+      }
+    case DELETE_ARTWORK_ARTLISTING:
+      return {
+        ...state,
+        allArtworks: {
+          ...state.allArtworks,
+          [ action.payload ]: {
+            ...state.allArtworks[ action.payload ],
+            artListing: null
+          }
+        }
+      }
+    case DELETE_ARTWORK_AUCTIONLISTING:
+      return {
+        ...state,
+        allArtworks: {
+          ...state.allArtworks,
+          [ action.payload ]: {
+            ...state.allArtworks[ action.payload ],
+            auctionListing: null
           }
         }
       }

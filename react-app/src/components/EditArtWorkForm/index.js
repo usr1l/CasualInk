@@ -65,7 +65,7 @@ const EditArtworkForm = () => {
     return validationErrors;
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     const validationErrors = validate();
     if (Object.keys(validationErrors).length > 0) return setValidationErrors(validationErrors);
@@ -81,7 +81,7 @@ const EditArtworkForm = () => {
     formData.append("materials", materials);
     formData.append("description", description);
     if (image) formData.append("image", image);
-    const res = dispatch(thunkEditArtwork({ formData: formData, artworkId: artworkId }))
+    const res = await dispatch(thunkEditArtwork({ formData: formData, artworkId: artworkId }))
     if (res.errors) {
       return setErrors(res.errors);
     } else return history.push(`/artworks/${artworkId}`);

@@ -49,7 +49,7 @@ const UploadArtworkForm = () => {
     return validationErrors;
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     const validationErrors = validate();
     if (Object.keys(validationErrors).length > 0) return setValidationErrors(validationErrors);
@@ -65,8 +65,7 @@ const UploadArtworkForm = () => {
     formData.append("description", description);
     if (image) formData.append("image", image);
 
-    const response = dispatch(thunkUploadArtwork(formData))
-
+    const response = await dispatch(thunkUploadArtwork(formData))
     if (response.errors) {
       return setErrors(response.errors);
     } else history.push(`/artworks/${response.id}`);
