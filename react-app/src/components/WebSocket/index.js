@@ -13,8 +13,8 @@ const Chat = () => {
   useEffect(() => {
     // open socket connection
     // create websocket
-    // socket = io.connect('https://casualink.onrender.com');
-    socket = io.connect('http://localhost:5000/');
+    if (process.env.REACT_APP_ENV === "production") socket = io.connect('https://casualink.onrender.com/');
+    else socket = io.connect('http://localhost:5000/');
 
     socket.on("chat", (chat) => {
       setMessages(messages => [ ...messages, chat ])
