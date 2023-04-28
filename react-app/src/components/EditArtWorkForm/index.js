@@ -41,7 +41,7 @@ const EditArtworkForm = () => {
     setMaterials(artwork.materials);
     setDescription(artwork.description);
     setIsLoaded(true);
-  }, [ artwork ]);
+  }, [ artwork, history ]);
 
   const disableBool = () => {
     if (!height ||

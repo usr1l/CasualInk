@@ -43,7 +43,7 @@ const EditArtListingModal = ({
     document.addEventListener("click", modalClose);
 
     return () => document.removeEventListener("click", modalClose);
-  }, [ modalContent ]);
+  }, [ modalContent, closeModal, modalRef ]);
 
   const validateSale = () => {
     const validationErrors = {};

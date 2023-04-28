@@ -40,7 +40,7 @@ function LoginFormModal() {
     document.addEventListener("click", modalClose);
 
     return () => document.removeEventListener("click", modalClose);
-  }, [ modalContent ]);
+  }, [ modalContent, modalRef, closeModal ]);
 
   return (
     <div id='log-in'>

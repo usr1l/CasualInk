@@ -238,6 +238,7 @@ export default function reducer(state = initialState, action) {
 				}
 			}
 			delete updatedState.user.artListings[ action.payload ]
+			return updatedState;
 		case DELETE_OWNER_AUCTIONLISTING:
 			updatedState = {
 				...state,

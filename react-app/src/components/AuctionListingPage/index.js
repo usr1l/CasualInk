@@ -16,7 +16,7 @@ const AuctionListingPage = () => {
 
   useEffect(() => {
     if (!artwork || !auctionlisting) history.push("/not-found");
-  }, [ artwork, auctionlisting ]);
+  }, [ artwork, auctionlisting, history ]);
 
   useEffect(() => {
     if (auctionlisting) {

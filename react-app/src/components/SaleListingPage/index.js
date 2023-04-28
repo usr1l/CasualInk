@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
-import SingleFullPageDiv from '../SingleFullPageDiv';
 import PageSplit from '../PageSplit';
 import { thunkGetSingleArtlistingId } from '../../store/artlistings';
 import "./SaleListingPage.css";
@@ -19,7 +18,7 @@ const SaleListingPage = () => {
 
   useEffect(() => {
     if (!artwork || !artlisting) history.push("/not-found");
-  }, [ artwork, artlisting ]);
+  }, [ artwork, artlisting, history ]);
 
   useEffect(() => {
     if (artlisting) {

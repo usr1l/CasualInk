@@ -17,8 +17,6 @@ import NotAuthorizedPage from "./components/NotAuthorizedPage";
 import SingleArtworkPage from "./components/SingleArtworkPage";
 import NotFoundPage from "./components/NotFoundPage";
 import EditArtworkForm from "./components/EditArtWorkForm";
-import SaleListingPage from "./components/SaleListingPage";
-import AuctionListingPage from "./components/AuctionListingPage";
 import { thunkGetAuctionListings } from "./store/auctionlistings";
 
 function App() {
