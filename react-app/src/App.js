@@ -18,6 +18,7 @@ import SingleArtworkPage from "./components/SingleArtworkPage";
 import NotFoundPage from "./components/NotFoundPage";
 import EditArtworkForm from "./components/EditArtWorkForm";
 import { thunkGetAuctionListings } from "./store/auctionlistings";
+import Chat from "./components/WebSocket";
 
 function App() {
   const dispatch = useDispatch();
@@ -42,6 +43,7 @@ function App() {
       {isLoaded && (
         <Switch>
           <Route exact path="/" component={LandingPage} />
+          <Route exact path="/chat" component={Chat} />
           <Route exact path="/artworks" component={ArtworksPage} />
           <Route exact path="/collections" component={ArtListingsPage} />
           {user && (
