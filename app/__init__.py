@@ -8,6 +8,7 @@ from .models import db, User
 from .api import user_routes, auth_routes, artwork_routes, artlisting_routes, shoppingcart_routes, auctionlisting_routes
 from .seeds import seed_commands
 from .config import Config
+from .websocket import socketio
 
 app = Flask(__name__, static_folder='../react-app/build', static_url_path='/')
 
@@ -33,6 +34,7 @@ app.register_blueprint(artlisting_routes, url_prefix='/api/artlistings')
 app.register_blueprint(shoppingcart_routes, url_prefix='/api/shoppingcart')
 app.register_blueprint(auctionlisting_routes,
                        url_prefix='/api/auctionlistings')
+socketio.init_app(app)
 db.init_app(app)
 Migrate(app, db)
 
@@ -94,3 +96,7 @@ def react_root(path):
 @app.errorhandler(404)
 def not_found(e):
     return app.send_static_file('index.html')
+
+
+if __name__ == "__main__":
+    socketio.run(app)

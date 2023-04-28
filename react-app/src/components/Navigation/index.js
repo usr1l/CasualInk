@@ -15,6 +15,7 @@ function Navigation({ isLoaded }) {
 	const dispatch = useDispatch();
 	const history = useHistory();
 
+
 	const demoUser = () => {
 		dispatch(login("demo@aa.io", "password"))
 			.then(() => history.push('/'));

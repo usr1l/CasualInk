@@ -34,17 +34,17 @@ const SingleArtworkPage = () => {
 
   useEffect(() => {
     if (!artwork) history.push("/not-found");
-  }, [ artwork ]);
+  }, [ artwork, history ]);
 
   useEffect(() => {
     if (artwork) {
-      dispatch(thunkGetSingleArtworkId(parseInt(artworkId)))
+      dispatch(thunkGetSingleArtworkId(parseInt(artwork.id)))
         .then(() => currUser.id === artwork.ownerId ? setOwnerStatus(true) : setOwnerStatus(false))
         .then(() => artwork.artListing ? setArtlistingBool(true) : setArtlistingBool(false))
         .then(() => artwork.auctionListing ? setAuctionlistingBool(true) : setAuctionlistingBool(false))
         .then(() => setIsLoaded(true));
     }
-  }, [ dispatch, artwork ]);
+  }, [ dispatch, artwork, currUser ]);
 
   // scroll to area on buttonclick
   const scrollToEffect = (id) => {

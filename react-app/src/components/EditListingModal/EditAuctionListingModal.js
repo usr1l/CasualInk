@@ -38,7 +38,7 @@ const EditAuctionListingModal = ({
     document.addEventListener("click", modalClose);
 
     return () => document.removeEventListener("click", modalClose);
-  }, [ modalContent ]);
+  }, [ modalContent, closeModal, modalRef ]);
 
   useEffect(() => {
     if (auctionListing) {

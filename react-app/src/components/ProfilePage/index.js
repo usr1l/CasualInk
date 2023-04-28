@@ -19,9 +19,9 @@ const ProfilePage = () => {
   const [ isLoaded, setIsLoaded ] = useState(false);
 
   useEffect(() => {
-    if (currId != userId) history.push("/not-authorized");
+    if (currId !== parseInt(userId)) history.push("/not-authorized");
     if (currUser && allArtworks) setIsLoaded(true);
-  }, [ currUser ]);
+  }, [ currUser, history ]);
 
   // edit later on, change so can access all user pages
   // let currUser;
