@@ -10,7 +10,7 @@ import { useModal } from '../../context/Modal';
 import { thunkAddAuctionlisting } from '../../store/auctionlistings';
 
 const EditAuctionListingModal = ({
-  artworkId
+  auctionListingId
 }) => {
   const history = useHistory();
   const dispatch = useDispatch();
@@ -53,7 +53,6 @@ const EditAuctionListingModal = ({
     const data = {
       "start_bid": startBid,
       "auction_deadline": `${auctionDeadlineDate} ${auctionDeadlineTime}`,
-      "artwork_id": parseInt(artworkId)
     };
 
     const res = await dispatch(thunkAddAuctionlisting(data));

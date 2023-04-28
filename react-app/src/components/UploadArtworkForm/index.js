@@ -38,18 +38,18 @@ const UploadArtworkForm = () => {
 
   const validate = () => {
     const validationErrors = {};
-    const yearRegex = /^\d{4}$/;
+    // const yearRegex = /^\d{4}$/;
 
-    if (title.length > 80) validationErrors.title = 'Please provide a valid title (<80 char).';
-    if (title.length > 80) validationErrors.artistName = 'Please provide a valid artist name (<60 char).';
-    if (!yearRegex.test(year) || year > (new Date()).getFullYear()) validationErrors.year = 'Please provide a date in the past.'
-    if (description.split(" ").length < 30) validationErrors.description = 'Please provide a description (30 words min.).';
-    if ((height && parseFloat(height) < 0) || (!Number.isInteger(100 * parseFloat(height)))) validationErrors.height = "Invalid height: value must be greater than zero and have at most two decimal places"
-    if ((width && parseFloat(width) < 0) || (!Number.isInteger(100 * parseFloat(width)))) validationErrors.width = "Invalid height: value must be greater than zero and have at most two decimal places"
+    // if (title.length > 80) validationErrors.title = 'Please provide a valid title (<80 char).';
+    // if (title.length > 80) validationErrors.artistName = 'Please provide a valid artist name (<60 char).';
+    // if (!yearRegex.test(year) || year > (new Date()).getFullYear()) validationErrors.year = 'Please provide a date in the past.'
+    // if (description.split(" ").length < 30) validationErrors.description = 'Please provide a description (30 words min.).';
+    // if ((height && parseFloat(height) < 0) || (!Number.isInteger(100 * parseFloat(height)))) validationErrors.height = "Invalid height: value must be greater than zero and have at most two decimal places"
+    // if ((width && parseFloat(width) < 0) || (!Number.isInteger(100 * parseFloat(width)))) validationErrors.width = "Invalid height: value must be greater than zero and have at most two decimal places"
     return validationErrors;
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     const validationErrors = validate();
     if (Object.keys(validationErrors).length > 0) return setValidationErrors(validationErrors);
@@ -65,8 +65,8 @@ const UploadArtworkForm = () => {
     formData.append("description", description);
     if (image) formData.append("image", image);
 
-    const response = dispatch(thunkUploadArtwork(formData))
-
+    const response = await dispatch(thunkUploadArtwork(formData))
+    console.log("RES", response.id)
     if (response.errors) {
       return setErrors(response.errors);
     } else history.push(`/artworks/${response.id}`);

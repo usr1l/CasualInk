@@ -23,7 +23,7 @@ const SaleListingPage = () => {
 
   useEffect(() => {
     if (artlisting) {
-      dispatch(thunkGetSingleArtlistingId(parseInt(artlistingId)))
+      dispatch(thunkGetSingleArtlistingId(parseInt(artlisting.id)))
         .then(() => setIsLoaded(true));
     }
   }, [ dispatch, artlisting ]);
@@ -31,7 +31,7 @@ const SaleListingPage = () => {
 
   return (
     <>
-      {isLoaded && (
+      {isLoaded && !!artlisting && (
         <>
           <PageSplit
             pageSplitClass={"center"}

@@ -48,17 +48,17 @@ const SingleArtworkPage = () => {
     }
   }, [ dispatch, artwork ]);
 
-  // check for sale id
-  useEffect(() => {
-    if (artwork.artListing) setArtlistingBool(true);
-    else setArtlistingBool(false);
-  }, [ artwork, artwork.artListing ])
+  // // check for sale id
+  // useEffect(() => {
+  //   if (artwork.artListing) setArtlistingBool(true);
+  //   else setArtlistingBool(false);
+  // }, [ artwork ])
 
-  // check for auction id
-  useEffect(() => {
-    if (artwork.auctionListing) setAuctionlistingBool(true);
-    else setAuctionlistingBool(false);
-  }, [ artwork, artwork.auctionListing ])
+  // // check for auction id
+  // useEffect(() => {
+  //   if (artwork.auctionListing) setAuctionlistingBool(true);
+  //   else setAuctionlistingBool(false);
+  // }, [ artwork ])
 
   const ownerState = (userStatus) => {
     let response;
@@ -95,8 +95,8 @@ const SingleArtworkPage = () => {
               <div className='single-art-description-card'>
                 <h1>{`${artwork.title}`}</h1>
                 <h2>{`${artwork.artistName}, ${artwork.year}`}</h2>
-                <h2>Owner: {artwork.owner.username}</h2>
-                <h3>Description</h3>
+                <h3>Owner: {artwork.owner.username}</h3>
+                <h4>Description</h4>
                 <div className='description-card-text'>{artwork.description}</div>
               </div>
               {!ownerStatus && !artwork.available && (
@@ -116,7 +116,7 @@ const SingleArtworkPage = () => {
                   disableButton={true}
                 >Update Availability to Create a New Listing</Button>
               )}
-              <div>
+              <div className='edit-buttons-container'>
                 {artwork.available && artlistingBool && (
                   <button
                     className='btn btn--demo btn--splash'
@@ -139,20 +139,18 @@ const SingleArtworkPage = () => {
                     Go To Auction Listing
                   </button>
                 )}
-              </div>
-              <div>
                 {ownerStatus && artwork.available && artlistingBool && (
                   <OpenModalButton
                     buttonText={'Update Listing'}
                     modalCSSClass={'btn btn--demo btn--splash'}
-                    modalComponent={<EditArtListingModal props={artworkId} artListingId={artwork.artListing} />}
+                    modalComponent={<EditArtListingModal artListingId={artwork.artListing} />}
                   />
                 )}
                 {ownerStatus && artwork.available && auctionlistingBool && (
                   <OpenModalButton
                     buttonText={'Update Listing'}
                     modalCSSClass={'btn btn--demo btn--splash'}
-                    modalComponent={<EditAuctionListingModal artworkId={artworkId} auctionListingId={artwork.auctionListing} type={"auction"} />}
+                    modalComponent={<EditAuctionListingModal auctionListingId={artwork.auctionListing} />}
                   />
                 )}
                 {ownerStatus && artwork.available && !artwork.artListing && !artwork.auctionListing && (
@@ -174,16 +172,19 @@ const SingleArtworkPage = () => {
                 Sale Listing
               </NavLink>
             )}
-            {/* {artwork.auctionListing && (
-              <NavLink to={`/artworks/${artworkId}/auctionlistings/${artwork.auctionListing}`} className="navbar-item" activeClassName='navbar-navlink-active'>
+            {artwork.auctionListing && (
+              <NavLink
+                to={`/artworks/${artworkId}/auctionlistings/${artwork.auctionListing}`}
+                className="navbar-item"
+                activeClassName='navbar-navlink-active'>
                 Auction Listing
               </NavLink>
-            )} */}
+            )}
           </NavBar>
           <SingleFullPageDiv id="target" containerClass="single-page-section">
             <Switch>
               <Route path="/artworks/:artworkId/artlistings/:artlistingId" component={SaleListingPage} />
-              {/* <Route path="/artworks/:artworkId/auctionlistings/:auctionlistingId" component={AuctionListingPage} /> */}
+              <Route path="/artworks/:artworkId/auctionlistings/:auctionlistingId" component={AuctionListingPage} />
             </Switch>
           </SingleFullPageDiv>
         </>
@@ -200,7 +201,10 @@ const SingleArtworkPage = () => {
               <OpenModalButton
                 buttonText={'Delete Artwork'}
                 modalCSSClass={'btn btn--demo btn--splash'}
-                modalComponent={<ConfirmDeleteModal deleteFn={thunkDeleteArtwork} itemId={artworkId} directTo={`/user/${currUser.id}/profile`} />}
+                modalComponent={<ConfirmDeleteModal
+                  deleteFn={thunkDeleteArtwork}
+                  itemId={artworkId}
+                  directTo={`/user/${currUser.id}/profile`} />}
               />
               <Button
                 buttonStyle='btn--login'

@@ -6,10 +6,14 @@ import InputDiv from '../InputDiv';
 import Button from '../Button';
 import { thunkDeleteArtListing, thunkEditArtlisting } from '../../store/artlistings';
 import { useModal } from '../../context/Modal';
+import { useHistory } from 'react-router-dom';
+import OpenModalButton from '../OpenModalButton';
+import ConfirmDeleteModal from '../ConfirmDeleteModal';
 
 const EditArtListingModal = ({
   artListingId
 }) => {
+  const history = useHistory();
   const dispatch = useDispatch();
   const [ price, setPrice ] = useState("");
   const [ amountAvailable, setAmountAvailable ] = useState("");
@@ -48,13 +52,6 @@ const EditArtListingModal = ({
     return validationErrors;
   };
 
-  const deleteArtListing = (e) => {
-    e.preventDefault();
-    const res = dispatch(thunkDeleteArtListing(artListing.id));
-    if (res.errors) setErrors(res.errors)
-    else closeModal();
-  };
-
   const submitArtListing = async (e) => {
     e.preventDefault();
     const validationErrors = validateSale();
@@ -77,11 +74,11 @@ const EditArtListingModal = ({
           className={`navbar-item smaller clicked`}
         >Sale Listing</div>
       </NavBar>
-      <ul id='signup__error-list'>
+      {/* <ul id='signup__error-list'>
         {errors.map((error, idx) => (
           <li key={idx}>{error}</li>
         ))}
-      </ul>
+      </ul> */}
       <div className='form-container'>
         <h1 className='form-header'>Update Sale Listing</h1>
         <InputDiv
@@ -112,17 +109,16 @@ const EditArtListingModal = ({
             required
           />
         </InputDiv>
-        <div>
+        <div className='edit-buttons-container-small'>
           <Button
             onClick={submitArtListing}
             buttonStyle={'btn--demo'}
-            buttonSize={'btn--splash'}
           >Update Sale Listing</Button>
-          <Button
-            onClick={deleteArtListing}
-            buttonStyle={'btn--demo'}
-            buttonSize={'btn--splash'}
-          >Delete Sale Listing</Button>
+          <OpenModalButton
+            buttonText={'Delete Sale Listing'}
+            modalCSSClass={'btn btn--demo btn--medium'}
+            modalComponent={<ConfirmDeleteModal deleteFn={thunkDeleteArtListing} itemId={artListing} directTo={`/artworks/${artListing.artwork_id}`} />}
+          />
         </div>
       </div>
     </div>

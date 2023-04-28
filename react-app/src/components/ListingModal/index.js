@@ -5,7 +5,7 @@ import "./ListingModal.css";
 import InputDiv from '../InputDiv';
 import Button from '../Button';
 import { thunkAddArtlisting } from '../../store/artlistings';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useModal } from '../../context/Modal';
 import { thunkAddAuctionlisting } from '../../store/auctionlistings';
 
@@ -103,11 +103,11 @@ const ListingModal = ({
           onClick={() => { setListingType("auction") }}
         >Auction Listing</div>
       </NavBar>
-      <ul id='signup__error-list'>
+      {/* <ul id='signup__error-list'>
         {errors.map((error, idx) => (
           <li key={idx}>{error}</li>
         ))}
-      </ul>
+      </ul> */}
       <div className='form-container'>
         {(listingType === "sale") ? (
           <>
