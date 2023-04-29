@@ -8,7 +8,7 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  margin: 20px;
+  margin: 20px 0;
 }
 
 .specs-box-element {
@@ -23,4 +23,45 @@
 
 .specs-box-element-text {
   color: gray;
+
+}
+
+.specs-box-element-expand {
+  font-size: 14pt;
+  font-weight: 200;
+}
+
+.checkout-box {
+  height: auto;
+  width: 500px;
+  border-top: 1px solid lightgray;
+  margin-bottom: 40px;
+}
+
+.specs-box-element-expand {
+  border-bottom: 1px solid lightgray;
+  min-height: 50px;
+  justify-content: center;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+.click {
+  cursor: pointer;
+}
+
+.expand-element {
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  color: grey;
+  font-size: 13pt;
+  font-weight: 200;
+  border-bottom: 1px solid lightgray;
+  background-color: rgb(247, 247, 247);
+  box-shadow: inset 0px 3px 3px -3px rgba(0, 0, 0, 0.2), inset 0px -3px 3px -3px rgba(0, 0, 0, 0.2);
+  padding: 0 10px;
 }

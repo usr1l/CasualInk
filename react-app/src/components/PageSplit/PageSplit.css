@@ -43,3 +43,7 @@ h1.split-pages-header {
   display: flex;
   align-items: flex-end;
 }
+
+.center-align {
+  display: flex;
+}

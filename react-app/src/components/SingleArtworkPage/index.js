@@ -139,30 +139,34 @@ const SingleArtworkPage = () => {
               </div>
             </PageSplit>
           </SingleFullPageDiv>
-          <NavBar>
-            {artwork.artListing && (
-              <NavLink
-                to={`/artworks/${artworkId}/artlistings/${artwork.artListing}`}
-                className="navbar-item"
-                activeClassName='navbar-navlink-active'>
-                Sale Listing
-              </NavLink>
-            )}
-            {artwork.auctionListing && (
-              <NavLink
-                to={`/artworks/${artworkId}/auctionlistings/${artwork.auctionListing}`}
-                className="navbar-item"
-                activeClassName='navbar-navlink-active'>
-                Auction Listing
-              </NavLink>
-            )}
-          </NavBar>
-          <SingleFullPageDiv id="target" containerClass="single-page-section">
-            <Switch>
-              <Route path="/artworks/:artworkId/artlistings/:artlistingId" component={SaleListingPage} />
-              <Route path="/artworks/:artworkId/auctionlistings/:auctionlistingId" component={AuctionListingPage} />
-            </Switch>
-          </SingleFullPageDiv>
+          {artwork.available && (
+            <>
+              <NavBar>
+                {artwork.artListing && (
+                  <NavLink
+                    to={`/artworks/${artworkId}/artlistings/${artwork.artListing}`}
+                    className="navbar-item"
+                    activeClassName='navbar-navlink-active'>
+                    Sale Listing
+                  </NavLink>
+                )}
+                {artwork.auctionListing && (
+                  <NavLink
+                    to={`/artworks/${artworkId}/auctionlistings/${artwork.auctionListing}`}
+                    className="navbar-item"
+                    activeClassName='navbar-navlink-active'>
+                    Auction Listing
+                  </NavLink>
+                )}
+              </NavBar>
+              <SingleFullPageDiv id="target" containerClass="single-page-section">
+                <Switch>
+                  <Route path="/artworks/:artworkId/artlistings/:artlistingId" component={SaleListingPage} />
+                  <Route path="/artworks/:artworkId/auctionlistings/:auctionlistingId" component={AuctionListingPage} />
+                </Switch>
+              </SingleFullPageDiv>
+            </>
+          )}
         </>
       )}
       <BottomNav>
