@@ -27,10 +27,12 @@ const EditArtworkForm = () => {
   const [ errors, setErrors ] = useState([]);
   const [ validationErrors, setValidationErrors ] = useState({});
 
+  const userId = useSelector(state => state.session.user.id);
   const artwork = useSelector(state => state.artworks.allArtworks[ artworkId ]);
 
   useEffect(() => {
-    if (!artwork) return history.push("/not-found");
+    if (!artwork) history.push("/not-found");
+    if (artwork.ownerId !== userId) history.push("/not-authorized")
     const available = `${artwork.available}`
     setTitle(artwork.title);
     setArtistName(artwork.artistName);
