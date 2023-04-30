@@ -33,7 +33,6 @@ const SaleListingPage = () => {
     }
   }, [ dispatch, artlisting ]);
 
-
   return (
     <>
       {isLoaded && !!artlisting && (
@@ -56,6 +55,10 @@ const SaleListingPage = () => {
               <div className='specs-box-element'>
                 <div className='specs-box-element-label'>Price ($)</div>
                 <div className='specs-box-element-text'>{`${artlisting.price}`}</div>
+              </div>
+              <div className='specs-box-element'>
+                <div className='specs-box-element-label'>List Date</div>
+                <div className='specs-box-element-text'>{`${artlisting.list_date.slice(0, 16)}`}</div>
               </div>
             </div>
             <div className='specs-box'>

@@ -1,6 +1,7 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
 import json
+from datetime import datetime
 from app.models import AuctionListing, db
 from app.forms import AuctionListingForm
 from app.api import validation_errors_to_error_messages
@@ -35,6 +36,7 @@ def get_auction_listing(auctionlisting_id):
         form["csrf_token"].data = request.cookies["csrf_token"]
         if form.validate_on_submit():
             single_listing.auction_deadline = form.data["auction_deadline"]
+            single_listing.last_update = datetime.utcnow()
             db.session.commit()
             return single_listing.to_safe_dict(), 200
         else:

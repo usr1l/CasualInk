@@ -16,7 +16,7 @@ class AuctionListing(db.Model):
     current_bid = db.Column(
         db.String(50), nullable=False, default='0')
     last_update = db.Column(db.DateTime, nullable=False,
-                            default=datetime.utcnow)
+                            default=datetime.utcnow())
     auction_deadline = db.Column(db.DateTime, nullable=False)
     artwork_id = db.Column(
         db.Integer, db.ForeignKey(add_prefix_for_prod("artworks.id")), nullable=False
