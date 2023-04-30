@@ -6,8 +6,6 @@
   min-width: 250px;
   width: 100%;
   height: 115px;
-  /* border: 1px solid rgb(212, 212, 212); */
-  /* border: 1px solid black; */
   box-sizing: border-box;
   margin-bottom: 10px;
 }
@@ -15,7 +13,7 @@
 .image-card>h1,
 .image-card>h2,
 .image-card>div {
-  font-size: 10pt;
+  font-size: 11pt;
   font-weight: 200;
   margin: 1px 0;
   color: grey;

@@ -54,8 +54,9 @@ class ArtListing(db.Model):
             "id": self.id,
             "price": self.price,
             "amount_available": self.amount_available,
+            "list_date": self.list_date,
             "artwork_id": self.artwork_id,
-            "owner_id": self.owner_id,
+            "owner_id": self.owner_id
         }
 
     def to_dict(self):
@@ -63,8 +64,9 @@ class ArtListing(db.Model):
             "id": self.id,
             "price": self.price,
             "amount_available": self.amount_available,
+            "list_date": self.list_date,
             "artwork_id": self.artwork_id,
-            "owner_id": self.owner_id,
+            "owner_id": self.owner_id
         }
 
     def __repr__(self):

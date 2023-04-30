@@ -51,7 +51,7 @@ const LandingPage = () => {
 
   return (
     <SingleFullPageDiv>
-      <div className="landing-page-content-container">
+      <div className="page-content-container">
         <div className='feature-banner-container'>
           <FeatureBanner
             imgSrc={image1}

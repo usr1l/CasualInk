@@ -14,7 +14,7 @@ const ImagePreview = ({
 
   return (
     <div className={imgWrapperStyle ? imgWrapperStyle : `img-preview-wrapper`}>
-      <img src={imgSrc} className={`img-preview ${checkImgStyle}`} alt={altTag}></img>
+      <img src={imgSrc} className={`img-preview ${checkImgStyle}`} alt={altTag ? altTag : "image"}></img>
     </div>
   )
 }

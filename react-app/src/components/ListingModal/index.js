@@ -15,13 +15,15 @@ const ListingModal = ({
 }) => {
   const history = useHistory();
   const dispatch = useDispatch();
+  const { currTime, currDate } = getCurrTime();
+
   const [ listingType, setListingType ] = useState("sale");
   const [ price, setPrice ] = useState();
   const [ amountAvailable, setAmountAvailable ] = useState();
 
   const [ startBid, setStartBid ] = useState("");
-  const [ auctionDeadlineDate, setAuctionDeadlineDate ] = useState("")
-  const [ auctionDeadlineTime, setAuctionDeadlineTime ] = useState("")
+  const [ auctionDeadlineDate, setAuctionDeadlineDate ] = useState(currDate);
+  const [ auctionDeadlineTime, setAuctionDeadlineTime ] = useState(currTime);
 
   const [ errors, setErrors ] = useState([]);
   const [ validationErrors, setValidationErrors ] = useState({});
@@ -169,21 +171,23 @@ const ListingModal = ({
               divStyle={'input--wide'}
               labelStyle={'__label'}
               error={validationErrors.auctionDeadline}>
-              <input
-                name='auctionDeadlineDate'
-                className='__input'
-                type='date'
-                value={auctionDeadlineDate}
-                onChange={(e) => setAuctionDeadlineDate(e.target.value)}
-              />
-              <input
-                name="auctionDeadlineTime"
-                className='__input'
-                type='time'
-                value={auctionDeadlineTime}
-                step={1}
-                onChange={(e) => setAuctionDeadlineTime(e.target.value)}
-              />
+              <div className='date-time'>
+                <input
+                  name='auctionDeadlineDate'
+                  className='__input'
+                  type='date'
+                  value={auctionDeadlineDate}
+                  onChange={(e) => setAuctionDeadlineDate(e.target.value)}
+                />
+                <input
+                  name="auctionDeadlineTime"
+                  className='__input'
+                  type='time'
+                  value={auctionDeadlineTime}
+                  step={1}
+                  onChange={(e) => setAuctionDeadlineTime(e.target.value)}
+                />
+              </div>
             </InputDiv>
             <Button
               onClick={submitAuctionListing}
