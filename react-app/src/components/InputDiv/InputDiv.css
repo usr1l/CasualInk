@@ -37,6 +37,7 @@
   font-size: 13pt;
   letter-spacing: 1px;
   box-sizing: border-box;
+  transition: 0.5s;
 }
 
 .input-error-message {
@@ -57,4 +58,22 @@
   line-height: 18px;
   justify-content: center;
   color: red;
+}
+
+
+.__input:hover {
+  border-color: black;
+  color: black;
+  transition: 0.5s;
+}
+
+.__input:focus {
+  border-color: black;
+  color: black;
+  outline: none
+}
+
+
+.date-time {
+  display: flex;
 }

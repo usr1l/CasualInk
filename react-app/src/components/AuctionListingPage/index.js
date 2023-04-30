@@ -7,6 +7,7 @@ import AuctionBidInput from '../AuctionBidInput';
 import CountdownTimer from '../CountdownTimer';
 import "./AuctionListingPage.css";
 import Button from '../Button';
+import getCurrTime from '../HelperFns/GetCurrTime';
 
 const AuctionListingPage = () => {
 
@@ -15,12 +16,24 @@ const AuctionListingPage = () => {
   const history = useHistory();
 
   const artwork = useSelector(state => state.artworks.allArtworks[ artworkId ]);
-  const auctionlisting = useSelector(state => state.auctionlistings.allAuctionlistings[ auctionlistingId ])
+  const auctionlisting = useSelector(state => state.auctionlistings.allAuctionlistings[ auctionlistingId ]);
+  const userId = useSelector(state => state.session.user.id);
 
   const [ isLoaded, setIsLoaded ] = useState(false);
+  const [ deadlineBool, setDeadlineBool ] = useState(false);
   const [ disclaimerBool, setDisclaimerBool ] = useState(false);
   const [ taxBool, setTaxBool ] = useState(false);
 
+  const listing = auctionlisting ? auctionlisting : {};
+
+  const {
+    current_bid,
+    auction_deadline,
+    last_update,
+    list_date,
+    start_bid,
+    active
+  } = listing;
 
   useEffect(() => {
     if (!artwork || !auctionlisting) history.push("/not-found");
@@ -34,14 +47,17 @@ const AuctionListingPage = () => {
     }
   }, [ dispatch, auctionlisting ]);
 
-  const {
-    current_bid,
-    auction_deadline,
-    last_update,
-    list_date,
-    start_bid,
-    active
-  } = auctionlisting;
+  useEffect(() => {
+    const { currDateTime } = getCurrTime();
+    const currDate = new Date(currDateTime);
+    if (auction_deadline) {
+      const deadlineDate = new Date(auction_deadline.slice(0, 25));
+      if (currDate - deadlineDate <= 0) {
+        setDeadlineBool(true);
+      } else setDeadlineBool(false);
+    };
+  }, [ active, auction_deadline ])
+
 
   return (
     <>
@@ -131,24 +147,32 @@ const AuctionListingPage = () => {
               </div>
             </div>
             <h1>Bid</h1>
-            {active ? (
+            <CountdownTimer
+              endDate={auction_deadline.slice(0, 25)}
+              label={"Time Remaining"}
+            />
+            <br />
+            {active && deadlineBool && (userId !== artwork.ownerId) && (
+              <div id="bid-container">
+                <AuctionBidInput auctionListing={auctionlisting} userId={userId}></AuctionBidInput>
+              </div>
+            )}
+            {(!active || !deadlineBool) && (
               <>
-                <CountdownTimer
-                  endDate={auction_deadline.slice(0, 25)}
-                  label={"Time Remaining"}
-                />
-                <br />
-                <div id="bid-container">
-                  <AuctionBidInput auctionListing={auctionlisting}></AuctionBidInput>
-                </div>
+                {userId !== artwork.ownerId ? (
+                  <Button
+                    buttonSize={"btn--wide"}
+                    disableButton={true}
+                  >Currently no active auction. Check back later.
+                  </Button>
+                ) : (
+                  <Button
+                    buttonSize={"btn--wide"}
+                    disableButton={true}
+                  >Auction expired. Create a new auction.
+                  </Button>
+                )}
               </>
-            ) : (
-              <Button
-                buttonSize={"btn--wide"}
-                buttonStyle={"btn--demo"}
-                disableButton={true}
-              >Currently no active auction. Check back later.
-              </Button>
             )}
           </PageSplit>
         </>

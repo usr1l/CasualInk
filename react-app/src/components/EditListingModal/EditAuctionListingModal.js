@@ -20,6 +20,7 @@ const EditAuctionListingModal = ({
   const [ auctionDeadlineDate, setAuctionDeadlineDate ] = useState("")
   const [ auctionDeadlineTime, setAuctionDeadlineTime ] = useState("")
 
+  const [ inputDisableBool, setInputDisableBool ] = useState(false);
   const [ errors, setErrors ] = useState([]);
   const [ validationErrors, setValidationErrors ] = useState({});
 
@@ -49,6 +50,11 @@ const EditAuctionListingModal = ({
       const timeDeadline = timeDeadlinePart.split(".")[ 0 ];
       setAuctionDeadlineDate(dateDeadline);
       setAuctionDeadlineTime(timeDeadline);
+      const { currDateTime } = getCurrTime();
+      const currDate = new Date(currDateTime);
+      const deadlineDate = new Date(auctionListing.auction_deadline.slice(0, 25));
+      if (deadlineDate - currDate > 0) setInputDisableBool(false)
+      else setInputDisableBool(true)
     };
   }, [ auctionListing ]);
 
@@ -93,26 +99,31 @@ const EditAuctionListingModal = ({
           divStyle={'input--wide'}
           labelStyle={'__label'}
           error={validationErrors.auctionDeadline}>
-          <input
-            name='auctionDeadlineDate'
-            className='__input'
-            type='date'
-            value={auctionDeadlineDate}
-            onChange={(e) => setAuctionDeadlineDate(e.target.value)}
-          />
-          <input
-            name="auctionDeadlineTime"
-            className='__input'
-            type='time'
-            value={auctionDeadlineTime}
-            step={1}
-            onChange={(e) => setAuctionDeadlineTime(e.target.value)}
-          />
+          <div className='date-time'>
+            <input
+              name='auctionDeadlineDate'
+              className='__input'
+              type='date'
+              value={auctionDeadlineDate}
+              onChange={(e) => setAuctionDeadlineDate(e.target.value)}
+              disabled={inputDisableBool}
+            />
+            <input
+              name="auctionDeadlineTime"
+              className='__input'
+              type='time'
+              value={auctionDeadlineTime}
+              step={1}
+              onChange={(e) => setAuctionDeadlineTime(e.target.value)}
+              disabled={inputDisableBool}
+            />
+          </div>
         </InputDiv>
         <div className='edit-buttons-container-small'>
           <Button
             onClick={submitAuctionListing}
             buttonStyle={'btn--demo'}
+            disableButton={inputDisableBool}
           >Update Auction Listing</Button>
           <OpenModalButton
             buttonText={'Delete Auction Listing'}

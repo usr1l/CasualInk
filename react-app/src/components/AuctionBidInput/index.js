@@ -20,8 +20,8 @@ const AuctionBidInput = ({ auctionListing }) => {
   } = auctionListing;
 
   const minBid = () => {
-    if (current_bid === "0") return parseFloat(start_bid) * 1.05;
-    return parseFloat(current_bid * 1.05);
+    if (current_bid === "0") return (parseFloat(start_bid) * 1.06).toFixed(2);
+    return parseFloat(current_bid * 1.06).toFixed(2);
   };
 
   const user = useSelector(state => state.session.user);
@@ -71,7 +71,7 @@ const AuctionBidInput = ({ auctionListing }) => {
         Submit Bid
       </Button>
     </>
-  )
+  );
 };
 
 
