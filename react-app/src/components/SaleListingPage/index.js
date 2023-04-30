@@ -12,6 +12,8 @@ const SaleListingPage = () => {
   const { artworkId, artlistingId } = useParams();
   const dispatch = useDispatch();
   const history = useHistory();
+
+  const userId = useSelector(state => state.session.user.id)
   const artwork = useSelector(state => state.artworks.allArtworks[ artworkId ]);
   const artlisting = useSelector(state => state.artlistings.allArtlistings[ artlistingId ]);
 
@@ -36,9 +38,7 @@ const SaleListingPage = () => {
     <>
       {isLoaded && !!artlisting && (
         <>
-          <PageSplit
-            pageSplitClass={"center-align"}
-          >
+          <PageSplit>
             <h1>Details</h1>
             <div className='specs-box'>
               <div className='specs-box-element'>
@@ -54,8 +54,8 @@ const SaleListingPage = () => {
                 <div className='specs-box-element-text'>{`${artwork.height} x ${artwork.width} in | ${parseFloat(artwork.height * 2.54).toFixed(2)} x ${parseFloat(artwork.width * 2.54).toFixed(2)} cm`}</div>
               </div>
               <div className='specs-box-element'>
-                <div className='specs-box-element-label'>Price</div>
-                <div className='specs-box-element-text'>{`$ ${artlisting.price}`}</div>
+                <div className='specs-box-element-label'>Price ($)</div>
+                <div className='specs-box-element-text'>{`${artlisting.price}`}</div>
               </div>
             </div>
             <div className='specs-box'>
@@ -66,9 +66,7 @@ const SaleListingPage = () => {
               />
             </div>
           </PageSplit>
-          <PageSplit
-            pageSplitClass={"center-align"}
-          >
+          <PageSplit>
             <h1>Checkout</h1>
             <div className='checkout-box'>
               <div className='checkout-page-element'>
@@ -80,7 +78,15 @@ const SaleListingPage = () => {
                   )}
                 </div>
                 {taxBool && (
-                  <div className='expand-element'>text</div>
+                  <div className='expand-element'>
+                    Taxes and other fees probably won't apply.
+                    <br />
+                    <br />
+                    Item won't be shipped, so high chance it might get lost during shipping.
+                    <br />
+                    <br />
+                    Shipping fee: 5%
+                  </div>
                 )}
                 <div className='specs-box-element-expand column click' onClick={() => setDisclaimerBool(!disclaimerBool)}>
                   {disclaimerBool ? (
@@ -90,7 +96,7 @@ const SaleListingPage = () => {
                   )}
                 </div>
                 {disclaimerBool && (
-                  <div className='expand-element'>text</div>
+                  <div className='expand-element'>No payment information is stored, but still refrain from entering real information.</div>
                 )}
                 <div className='specs-box-element-expand column click' onClick={() => setPaymentInfo(!paymentInfo)}>
                   {paymentInfo ? (
@@ -100,16 +106,39 @@ const SaleListingPage = () => {
                   )}
                 </div>
                 {paymentInfo && (
-                  <div className='expand-element'>text</div>
+                  <div className='expand-element column'>
+                    <div className='specs-box-element'>
+                      <div className='specs-box-element-label'>Price ($)</div>
+                      <div className='specs-box-element-text right'>{parseInt(artlisting.price)}</div>
+                    </div>
+                    <div className='specs-box-element'>
+                      <div className='specs-box-element-label'>Tax (5%)</div>
+                      <div className='specs-box-element-text right'>{artlisting.price * 0.05}</div>
+                    </div>
+                    <div className='specs-box-element'>
+                      <div className='specs-box-element-label'>Total ($)</div>
+                      <div className='specs-box-element-text right'>{artlisting.price * 1.05}</div>
+                    </div>
+                  </div>
                 )}
               </div>
             </div>
-            <Button
-              buttonSize={'btn--wide'}
-              buttonStyle={'btn--demo'}
-            >
-              Checkout
-            </Button>
+            {userId !== artwork.ownerId && (artlisting.amount_available > 0) && (
+              <Button
+                buttonSize={'btn--wide'}
+                buttonStyle={'btn--demo'}
+              >
+                Checkout
+              </Button>
+            )}
+            {(artlisting.amount_available < 1) && (
+              <Button
+                buttonSize={"btn--wide"}
+                disableButton={true}
+              >
+                Currently out of stock
+              </Button>
+            )}
           </PageSplit>
         </>
       )}

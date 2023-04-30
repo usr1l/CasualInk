@@ -1,5 +1,5 @@
 .specs-box {
-  width: 500px;
+  width: 550px;
   height: auto;
   border: 1px solid var(--site-gray);
   box-sizing: border-box;
@@ -8,7 +8,7 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  margin: 20px 0;
+  margin-bottom: 30px;
 }
 
 .specs-box-element {
@@ -18,7 +18,7 @@
 }
 
 .specs-box-element-label {
-  width: 130px;
+  width: 150px;
 }
 
 .specs-box-element-text {
@@ -33,7 +33,7 @@
 
 .checkout-box {
   height: auto;
-  width: 500px;
+  width: 550px;
   border-top: 1px solid lightgray;
   margin-bottom: 40px;
 }
@@ -53,15 +53,21 @@
   cursor: pointer;
 }
 
+
+.right {
+  margin-left: auto;
+}
+
+
 .expand-element {
   min-height: 50px;
   display: flex;
   align-items: center;
   color: grey;
-  font-size: 13pt;
+  font-size: 12pt;
   font-weight: 200;
   border-bottom: 1px solid lightgray;
   background-color: rgb(247, 247, 247);
   box-shadow: inset 0px 3px 3px -3px rgba(0, 0, 0, 0.2), inset 0px -3px 3px -3px rgba(0, 0, 0, 0.2);
-  padding: 0 10px;
+  padding: 10px 15px;
 }

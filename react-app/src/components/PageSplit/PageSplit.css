@@ -46,4 +46,5 @@ h1.split-pages-header {
 
 .center-align {
   display: flex;
+  align-items: center;
 }
