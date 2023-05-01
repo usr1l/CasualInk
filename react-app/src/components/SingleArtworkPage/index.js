@@ -170,9 +170,9 @@ const SingleArtworkPage = () => {
         </>
       )}
       <BottomNav>
-        <Link to={'/'} className="page-return">
+        <Link to={'/artworks'} className="page-return">
           <h3>
-            <i className="fa-solid fa-angle-left" /> Back to Home
+            <i className="fa-solid fa-angle-left" /> Back to Artworks
           </h3>
         </Link>
         <div className="page-return">

@@ -6,6 +6,8 @@ import { thunkGetSingleArtlistingId } from '../../store/artlistings';
 import ProfileDescriptionCard from '../ProfileDescriptionCard';
 import Button from "../Button";
 import "./SaleListingPage.css";
+import OpenModalButton from '../OpenModalButton';
+import PurchaseModal from '../PurchaseModal';
 
 
 const SaleListingPage = () => {
@@ -127,12 +129,13 @@ const SaleListingPage = () => {
               </div>
             </div>
             {userId !== artwork.ownerId && (artlisting.amount_available > 0) && (
-              <Button
-                buttonSize={'btn--wide'}
-                buttonStyle={'btn--demo'}
-              >
-                Checkout
-              </Button>
+              <div className='btn-mobile'>
+                <OpenModalButton
+                  modalCSSClass={"btn btn--wide btn--demo"}
+                  modalComponent={<PurchaseModal />}
+                  buttonText={"Checkout"}
+                />
+              </div>
             )}
             {(artlisting.amount_available < 1) && (
               <Button
