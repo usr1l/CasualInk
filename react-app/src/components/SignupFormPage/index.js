@@ -61,7 +61,7 @@ function SignupFormPage() {
       formData.append("lastname", lastname);
       formData.append("bio", bio);
       formData.append("password", password);
-      formData.append("profile_pic", image);
+      // formData.append("profile_pic", image);
 
       await dispatch(signUp(formData))
         .then(data => {
@@ -176,7 +176,7 @@ function SignupFormPage() {
                 required
               />
             </InputDiv>
-            <InputDiv
+            {/* <InputDiv
               labelStyle={'__label'}
               label={'Upload A Profile Image: '}
             >
@@ -186,7 +186,7 @@ function SignupFormPage() {
                 type='file'
                 onChange={(e) => setImage(e.target.files[ 0 ])}
               />
-            </InputDiv>
+            </InputDiv> */}
           </PageSplit>
         </form>
       </div>

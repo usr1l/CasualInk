@@ -42,6 +42,7 @@ const EditArtworkForm = () => {
     setAvailable(available.charAt(0).toUpperCase() + available.slice(1));
     setMaterials(artwork.materials);
     setDescription(artwork.description);
+    setImage(artwork.image);
     setIsLoaded(true);
   }, [ artwork, history ]);
 
@@ -230,7 +231,7 @@ const EditArtworkForm = () => {
                     placeholder="Leave blank if unknown"
                   />
                 </InputDiv>
-                <InputDiv
+                {/* <InputDiv
                   labelStyle={'__label'}
                   labelFor="image"
                   label='Upload a new image: '
@@ -241,6 +242,19 @@ const EditArtworkForm = () => {
                     type='file'
                     name="image"
                     onChange={(e) => setImage(e.target.files[ 0 ])}
+                  />
+                </InputDiv> */}
+                <InputDiv
+                  labelStyle={'__label'}
+                  labelFor="image"
+                  label='Upload an image. *'
+                >
+                  <input
+                    id="image"
+                    className='__input'
+                    type='text'
+                    name="image"
+                    onChange={(e) => setImage(e.target.value)}
                   />
                 </InputDiv>
                 <ImagePreview

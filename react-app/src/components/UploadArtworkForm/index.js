@@ -211,8 +211,7 @@ const UploadArtworkForm = () => {
                 placeholder="Leave blank if unknown"
               />
             </InputDiv>
-
-            <InputDiv
+            {/* <InputDiv
               labelStyle={'__label'}
               labelFor="image"
               label='Upload an image. *'
@@ -223,6 +222,19 @@ const UploadArtworkForm = () => {
                 type='file'
                 name="image"
                 onChange={(e) => setImage(e.target.files[ 0 ])}
+              />
+            </InputDiv> */}
+            <InputDiv
+              labelStyle={'__label'}
+              labelFor="image"
+              label='Upload an image. *'
+            >
+              <input
+                id="image"
+                className='__input'
+                type='text'
+                name="image"
+                onChange={(e) => setImage(e.target.value)}
               />
             </InputDiv>
             <div id='create-group-button-div'>
