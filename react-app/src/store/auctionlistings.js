@@ -93,6 +93,7 @@ const actionDeleteAuctionListing = (auctionlistingId) => {
   }
 }
 
+
 const initialState = { allAuctionlistings: {}, singleAuctionlistingId: null, isLoading: true }
 
 const auctionlistings = (state = initialState, action) => {

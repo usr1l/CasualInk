@@ -14,12 +14,6 @@ const AuctionBidInput = ({ auctionListing }) => {
 
   const {
     current_bid,
-    active,
-    artwork_id,
-    auction_deadline,
-    last_update,
-    list_date,
-    owner_id,
     start_bid
   } = auctionListing;
 
@@ -28,11 +22,8 @@ const AuctionBidInput = ({ auctionListing }) => {
     return parseFloat(current_bid * 1.06).toFixed(2);
   };
 
-  const user = useSelector(state => state.session.user);
-
   const [ bidError, setBidError ] = useState("")
   const [ newBidPrice, setNewBidPrice ] = useState(minBid());
-
 
   const validateBidPrice = () => {
     let bidError = "";
@@ -44,6 +35,9 @@ const AuctionBidInput = ({ auctionListing }) => {
     return bidError;
   };
 
+  const sendBidData = (newBidPrice) => {
+    socket.emit("auction_bid", { "current_bid": newBidPrice });
+  };
 
   const thunkCreateBid = (newBidPrice) => async (dispatch) => {
     const res = await fetch(`/api/auctionlistings/${auctionListing.id}/bid`, {
@@ -56,32 +50,35 @@ const AuctionBidInput = ({ auctionListing }) => {
     if (res.ok) {
       dispatch(actionEditAuctionListing(data));
       dispatch(actionOwnerEditAuctionListing(data));
+      setBidError("");
     };
 
     return data;
   };
 
-
-  const handleBid = async (e) => {
+  const handleBid = (e) => {
     e.preventDefault();
     const bidError = validateBidPrice();
     if (bidError) return setBidError(bidError);
 
-    const res = await dispatch(thunkCreateBid(newBidPrice));
-
+    sendBidData(Math.ceil(parseFloat(newBidPrice)));
   };
+
+  useEffect(() => {
+    setNewBidPrice(minBid());
+  }, [ current_bid ])
 
   useEffect(() => {
     if (process.env.REACT_APP_ENV === "production") socket = io.connect('https://casualink.onrender.com/');
     else socket = io.connect('http://localhost:5000/');
 
-    // socket.on("chat", (chat) => {
-    //   setMessages(messages => [ ...messages, chat ])
-    // })
-    // // when component unmounts, disconnect
-    // return (() => {
-    //   socket.disconnect()
-    // })
+    socket.on("update_bid", (current_bid) => {
+      dispatch(thunkCreateBid(current_bid));
+    });
+    // when component unmounts, disconnect
+    return (() => {
+      socket.disconnect()
+    })
   }, [])
 
   return (

@@ -15,13 +15,19 @@ else:
 socketio = SocketIO(cors_allowed_origins=origins)
 
 
-@socketio.on("connect")
-def handle_connect():
-    print('Client connected')
+# @socketio.on("connect")
+# def handle_connect():
+#     print('Client connected')
 
-# handle chat messages
+# # handle chat messages
 
 
-@socketio.on("chat")
-def handle_chat(data):
-    emit("chat", data, broadcast=True)
+# @socketio.on("chat")
+# def handle_chat(data):
+#     emit("chat", data, broadcast=True)
+
+
+@socketio.on("auction_bid")
+def handle_bid(data):
+    current_bid = data["current_bid"]
+    emit("update_bid", current_bid, broadcast=True)
