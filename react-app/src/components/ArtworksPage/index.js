@@ -34,7 +34,7 @@ const ArtworksPage = () => {
       {isLoaded && (
         <PageContainer>
           <div className='page-content-container'>
-            <h1>Recent Uploads</h1>
+            <h1 className='horizontal-scroll-header'>Recent Uploads</h1>
             <div className='artwork-showcase-container'>
               {currUser ? (
                 <>
@@ -66,7 +66,7 @@ const ArtworksPage = () => {
                 </>
               )}
             </div>
-            <h1>All Artworks</h1>
+            <h1 className='horizontal-scroll-header'>All Artworks</h1>
             <DisplayArtSection items={allArtworks} />
           </div>
         </PageContainer>

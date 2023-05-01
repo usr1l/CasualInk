@@ -2,10 +2,10 @@ import React from 'react';
 import ArtShowCaseCard from '../ArtShowCaseCard';
 import "./HorizontalShowcase.css";
 
-const HorizontalShowcase = ({ items }) => {
+const HorizontalShowcase = ({ items, caption }) => {
   return (
     <div className='horizontal-scroll-container'>
-      <h1 className='horizontal-scroll-header'>Featured Artworks</h1>
+      <h1 className='horizontal-scroll-header'>{caption}</h1>
       <div className='scroll-container'>
         {items.map(item => (
           <div className='scroll-container-item'>
