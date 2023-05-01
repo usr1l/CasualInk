@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { io } from 'socket.io-client';
 import "./AuctionBidInput.css";
 import InputDiv from "../InputDiv";
 import Button from "../Button";
+import { actionEditAuctionListing } from "../../store/auctionlistings";
+import { actionOwnerEditAuctionListing } from "../../store/session";
 
 let socket;
 
 const AuctionBidInput = ({ auctionListing }) => {
+  const dispatch = useDispatch();
+
   const {
     current_bid,
     active,
@@ -29,11 +33,42 @@ const AuctionBidInput = ({ auctionListing }) => {
   const [ bidError, setBidError ] = useState("")
   const [ newBidPrice, setNewBidPrice ] = useState(minBid());
 
+
   const validateBidPrice = () => {
+    let bidError = "";
     if ((newBidPrice && parseFloat(newBidPrice) < 0) ||
       (!Number.isInteger(100 * parseFloat(newBidPrice))) ||
-      (parseFloat(current_bid) * 1.05 > newBidPrice)
-    ) setBidError("Invalid bid: value must 5% greater than the current bid")
+      ((parseFloat(current_bid) ? parseFloat(current_bid) : parseFloat(start_bid)) * 1.05 > newBidPrice)
+    ) bidError = "Invalid bid: value must 5% greater than the current bid";
+
+    return bidError;
+  };
+
+
+  const thunkCreateBid = (newBidPrice) => async (dispatch) => {
+    const res = await fetch(`/api/auctionlistings/${auctionListing.id}/bid`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ "current_bid": newBidPrice })
+    });
+    const data = await res.json();
+
+    if (res.ok) {
+      dispatch(actionEditAuctionListing(data));
+      dispatch(actionOwnerEditAuctionListing(data));
+    };
+
+    return data;
+  };
+
+
+  const handleBid = async (e) => {
+    e.preventDefault();
+    const bidError = validateBidPrice();
+    if (bidError) return setBidError(bidError);
+
+    const res = await dispatch(thunkCreateBid(newBidPrice));
+
   };
 
   useEffect(() => {
@@ -67,6 +102,7 @@ const AuctionBidInput = ({ auctionListing }) => {
       <Button
         buttonSize={'btn--wide'}
         buttonStyle={'btn--demo'}
+        onClick={handleBid}
       >
         Submit Bid
       </Button>

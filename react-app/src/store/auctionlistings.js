@@ -65,7 +65,7 @@ export const thunkEditAuctionlisting = (data, auctionListingId) => async (dispat
   return resData;
 };
 
-const actionEditAuctionListing = (data) => {
+export const actionEditAuctionListing = (data) => {
   return {
     type: EDIT_SINGLE_AUCTIONLISTING,
     payload: data

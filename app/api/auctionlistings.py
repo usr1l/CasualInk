@@ -45,6 +45,21 @@ def get_auction_listing(auctionlisting_id):
     return single_listing.to_safe_dict(), 200
 
 
+@auctionlisting_routes.route("/<int:auctionlisting_id>/bid", methods=["POST"])
+@login_required
+def create_bid(auctionlisting_id):
+    single_listing = AuctionListing.query.get(auctionlisting_id)
+    if not single_listing:
+        return {"errors": "Auctionlisting not found."}, 404
+
+    data = json.loads(request.data)
+    single_listing.current_bid = data["current_bid"]
+    single_listing.last_update = datetime.utcnow()
+
+    db.session.commit()
+    return single_listing.to_safe_dict(), 200
+
+
 @auctionlisting_routes.route("/new", methods=["POST"])
 @login_required
 def create_auction_listing():
