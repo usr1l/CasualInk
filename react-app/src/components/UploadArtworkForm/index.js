@@ -78,7 +78,7 @@ const UploadArtworkForm = () => {
       <div className="split-pages-page">
         <h1 className="split-pages-header">UPLOAD NEW ARTWORK</h1>
         <ul className='log-in__error-list'>
-          {errors.isArray() && errors.map((error, idx) => (
+          {errors.isArray && errors.map((error, idx) => (
             <li key={idx}>{error}</li>
           ))}
         </ul>
