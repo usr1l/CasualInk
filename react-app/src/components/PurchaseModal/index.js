@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import "./PurchaseModal.css";
 import InputDiv from '../InputDiv';
 import Button from '../Button';
+import getCurrTime from '../HelperFns/GetCurrTime';
 
 const PurchaseModal = () => {
   const [ cardNumber, setCardNumber ] = useState("");
@@ -10,7 +11,17 @@ const PurchaseModal = () => {
 
   const [ validationErrors, setValidationErrors ] = useState({});
 
-  // const handleCheckout = () => {
+  const validate = () => {
+    const errors = {};
+    const { currDate } = getCurrTime();
+
+    if (cardNumber.length !== 10 || !Number.isInteger(parseFloat(cardNumber))) errors.cardNumber = "Card number must be 10 digits long";
+    if (csv.length !== 10 || !Number.isInteger(parseFloat(csv))) errors.csv = "CSV number must be 3 digits long";
+    if (expiryDate <= currDate) errors.expiryDate = "Invalid expiry date";
+
+    return errors;
+  };
+  // const handleCheckout =   () => {
   //   if
   // };
 
@@ -22,6 +33,7 @@ const PurchaseModal = () => {
           labelStyle={'__label'}
           divStyle={'input--wide'}
           label={'Card Number: *'}
+          error={validationErrors.cardNumber}
         >
           <input
             className='__input'
@@ -34,27 +46,25 @@ const PurchaseModal = () => {
         <InputDiv label="Expiry Date: *"
           divStyle={'input--wide'}
           labelStyle={'__label'}
-        // error={validationErrors.auctionDeadline}
+          error={validationErrors.expiryDate}
         >
           <input
             className='__input'
             type='month'
             value={expiryDate}
             onChange={(e) => setExpiryDate(e.target.value)}
-          // disabled={inputDisableBool}
           />
         </InputDiv>
         <InputDiv label="CSV: *"
           divStyle={'input--wide'}
           labelStyle={'__label'}
-        // error={validationErrors.auctionDeadline}
+          error={validationErrors.csv}
         >
           <input
             className='__input'
             type='text'
             value={csv}
             onChange={(e) => setcsv(e.target.value)}
-          // disabled={inputDisableBool}
           />
         </InputDiv>
       </div>

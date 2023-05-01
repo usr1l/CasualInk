@@ -67,6 +67,7 @@ const UploadArtworkForm = () => {
 
     const response = await dispatch(thunkUploadArtwork(formData))
     if (response.errors) {
+      console.log("==========================", response, response.errors)
       return setErrors(response.errors);
     } else history.push(`/artworks/${response.id}`);
   };
@@ -77,7 +78,7 @@ const UploadArtworkForm = () => {
       <div className="split-pages-page">
         <h1 className="split-pages-header">UPLOAD NEW ARTWORK</h1>
         <ul className='log-in__error-list'>
-          {errors.map((error, idx) => (
+          {errors.isArray() && errors.map((error, idx) => (
             <li key={idx}>{error}</li>
           ))}
         </ul>
