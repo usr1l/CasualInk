@@ -4,6 +4,9 @@ from sqlalchemy import Enum
 
 
 class ArtWorkTypesEnum(enum.Enum):
+    if environment == "production":
+        __table_args__ = {"schema": SCHEMA}
+
     OIL = "Oil"
     ACRYLIC = "Acrylic"
     MULTIMEDIA = "Multimedia"
