@@ -15,6 +15,9 @@ function Navigation({ isLoaded }) {
 	const dispatch = useDispatch();
 	const history = useHistory();
 
+	const comingSoon = () => {
+		return window.alert("Feature coming soon!")
+	};
 
 	const demoUser = () => {
 		dispatch(login("demo@aa.io", "password"))
@@ -40,11 +43,12 @@ function Navigation({ isLoaded }) {
 						<div id='navbar-icons'>
 							{sessionUser ? (
 								<>
-									<Button >
+									<Button
+										onClick={comingSoon}>
 										<i className="fa-regular fa-paper-plane signed-in-icons"></i>
 									</Button>
 									<Button
-										onClick={() => history.push("/shopping-cart")}>
+										onClick={comingSoon}>
 										<i className="fa-solid fa-cart-shopping signed-in-icons"></i>
 									</Button>
 									<ProfileButton className="signed-in-icons" user={sessionUser} />
