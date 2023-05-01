@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Button from "../Button";
 import icon from "../static/casual-ink.png"
 import { useDispatch } from "react-redux";
@@ -10,7 +10,7 @@ const ConfirmDeleteModal = ({ itemId, deleteFn, directTo }) => {
 
   const dispatch = useDispatch();
   const history = useHistory();
-  const { closeModal } = useModal();
+  const { closeModal, modalRef, modalContent } = useModal();
 
   const handleCancel = async (e) => {
     e.preventDefault();
@@ -33,7 +33,9 @@ const ConfirmDeleteModal = ({ itemId, deleteFn, directTo }) => {
 
   return (
     <div className="delete-modal-background">
-      <i onClick={closeModal} className="fa-solid fa-xmark"></i>
+      <div className="modal-icons">
+        <i onClick={closeModal} className="fa-solid fa-xmark pointer"></i>
+      </div>
       <img src={icon} id='icon' alt={'casual-ink'} />
       <div className="delete-modal-label">
         This action is irreversible.
@@ -43,8 +45,8 @@ const ConfirmDeleteModal = ({ itemId, deleteFn, directTo }) => {
         Do you wish to continue?
       </div>
       <div className="delete-modal-buttons">
-        <Button buttonStyle='' buttonSize='' onClick={handleCancel}>Cancel</Button>
-        <Button buttonStyle='' buttonSize='' onClick={handleDelete}>Confirm</Button>
+        <Button buttonStyle='btn--demo' onClick={handleCancel}>Cancel</Button>
+        <Button buttonStyle='btn--login' onClick={handleDelete}>Confirm</Button>
       </div>
     </div>
   )

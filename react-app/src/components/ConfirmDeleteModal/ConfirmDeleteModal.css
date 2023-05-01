@@ -1,9 +1,13 @@
 .delete-modal-background {
+  background-color: white;
   height: auto;
-  width: 550px;
+  width: 420px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 30px;
+  box-sizing: border-box;
+  justify-content: center;
 }
 
 .delete-modal-label {
@@ -17,7 +21,22 @@
 .delete-modal-buttons {
   display: flex;
   flex-direction: row;
-  margin-bottom: 40px;
-  width: 400px;
+  width: 100%;
   justify-content: space-between;
+}
+
+.modal-icons {
+  display: flex;
+  flex-direction: row-reverse;
+  width: 100%;
+  height: 40px;
+}
+
+#icon {
+  max-height: 80px;
+  width: auto;
+}
+
+.pointer {
+  cursor: pointer;
 }

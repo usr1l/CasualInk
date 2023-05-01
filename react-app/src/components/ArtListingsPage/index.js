@@ -14,6 +14,7 @@ const ArtListingsPage = () => {
   const [ listings, setListings ] = useState([]);
 
   useEffect(() => {
+
     const auctionlistingsValues = allAuctionlistings ? Object.values(allAuctionlistings) : [];
     const artlistingsValues = allArtlistings ? Object.values(allArtlistings) : [];
 
@@ -21,27 +22,26 @@ const ArtListingsPage = () => {
     const artlistings = [];
 
     for (const listing of auctionlistingsValues) {
-      auctionslist.push(allArtworks[ listing.artwork_id ]);
+      if (listing) auctionslist.push(allArtworks[ listing.artwork_id ]);
     };
 
     for (const listing of artlistingsValues) {
-      artlistings.push(allArtworks[ listing.artwork_id ]);
+      if (listing) artlistings.push(allArtworks[ listing.artwork_id ]);
     };
 
     setAuctions(auctionslist);
     setListings(artlistings);
     setIsLoaded(true);
 
-  }, [ allArtworks ]);
+  }, [ allArtlistings, allAuctionlistings ]);
 
   return (
     <>
       {isLoaded && (
         <PageContainer>
           <div className='page-content-container'>
-            <HorizontalShowcase items={listings} caption={"Collect Artwork"}></HorizontalShowcase>
-
-            <HorizontalShowcase items={auctions} caption={"Auction Listings"}></HorizontalShowcase>
+            <HorizontalShowcase items={listings} caption={"Collect Artwork"} />
+            <HorizontalShowcase items={auctions} caption={"Auction Listings"} />
           </div>
         </PageContainer>
       )}
