@@ -13,6 +13,7 @@ const FeatureBanner = ({
   h2text,
   buttonText,
   buttonId,
+  onButtonClick
 }) => {
 
   const STYLES = [ '', 'overlap-banner', 'overlap-banner-fadein', 'overlap-banner-fadeout', 'overlap-banner-hidden' ];
@@ -34,6 +35,7 @@ const FeatureBanner = ({
             buttonId={buttonId}
             buttonSize={'btn--splash'}
             buttonStyle={'btn--login'}
+            onClick={onButtonClick}
           >{buttonText}
           </Button>
         </ContentCard>
