@@ -35,6 +35,7 @@ export const authenticate = () => async (dispatch) => {
 			return;
 		}
 
+		console.log("DATAAAAAA", data)
 		dispatch(setUser(data));
 	}
 };
@@ -83,8 +84,10 @@ export const signUp = (signupData) => async (dispatch) => {
 		body: signupData
 	});
 
+
 	if (response.ok) {
 		const data = await response.json();
+		console.log("DATAAAAAA", data)
 
 		dispatch(setUser(data));
 		return null;
@@ -166,9 +169,9 @@ export default function reducer(state = initialState, action) {
 	switch (action.type) {
 		case SET_USER:
 			console.log(action.payload);
-			action.payload.artListings = normalizeFn(action.payload.artListings)
-			action.payload.auctionListings = normalizeFn(action.payload.auctionListings)
-			action.payload.artworks = normalizeFn(action.payload.artworks)
+			// action.payload.artListings = normalizeFn(action.payload.artListings)
+			// action.payload.auctionListings = normalizeFn(action.payload.auctionListings)
+			// action.payload.artworks = normalizeFn(action.payload.artworks)
 			return { user: action.payload };
 		case REMOVE_USER:
 			return { user: null };
