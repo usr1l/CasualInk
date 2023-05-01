@@ -34,7 +34,7 @@ def upload_file_to_AWS(file, acl="public-read"):
         )
     except Exception as e:
         # in case the our s3 upload fails
-        return {"errors": str(e)}
+        return {"errors": [str(e)]}
 
     return {"url": f"{S3_LOCATION}{file.filename}"}
 
@@ -50,5 +50,5 @@ def remove_file_from_AWS(image_url):
             Key=key
         )
     except Exception as e:
-        return {"errors": str(e)}
+        return {"errors": [str(e)]}
     return True

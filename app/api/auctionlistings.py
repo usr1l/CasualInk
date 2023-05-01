@@ -21,15 +21,15 @@ def get_all_auctionlistings():
 def get_auction_listing(auctionlisting_id):
     single_listing = AuctionListing.query.get(auctionlisting_id)
     if not single_listing:
-        return {"errors": "Auctionlisting not found."}, 404
+        return {"errors": ["Auctionlisting not found."]}, 404
 
     if request.method == "DELETE":
         if not single_listing.check_owner(single_listing.owner_id):
-            return {"errors": "Forbidden."}, 403
+            return {"errors": ["Forbidden."]}, 403
         else:
             db.session.delete(single_listing)
             db.session.commit()
-            return {"Success": "Listing deleted."}, 202
+            return {"Success": ["Listing deleted."]}, 202
 
     if request.method == "PUT":
         form = AuctionListingForm()
@@ -50,7 +50,7 @@ def get_auction_listing(auctionlisting_id):
 def create_bid(auctionlisting_id):
     single_listing = AuctionListing.query.get(auctionlisting_id)
     if not single_listing:
-        return {"errors": "Auctionlisting not found."}, 404
+        return {"errors": ["Auctionlisting not found."]}, 404
 
     data = json.loads(request.data)
     single_listing.current_bid = data["current_bid"]
