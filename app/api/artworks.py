@@ -21,23 +21,23 @@ def single_artwork_route(artwork_id):
     owner_id = current_user.id
     single_artwork = Artwork.query.get(artwork_id)
     if not single_artwork:
-        return {"errors": "Artwork not found."}, 404
+        return {"errors": ["Artwork not found."]}, 404
 
     if request.method == 'DELETE':
         if not single_artwork.check_owner(owner_id):
-            return {"errors": "Forbidden."}, 403
+            return {"errors": ["Forbidden."]}, 403
         file_delete = remove_file_from_AWS(single_artwork.image)
 
         if file_delete:
             db.session.delete(single_artwork)
             db.session.commit()
-            return {"Success": "Artwork deleted."}, 202
+            return {"Success": ["Artwork deleted."]}, 202
         else:
-            return {"errors": "Error deleting file image"}, 400
+            return {"errors": ["Error deleting file image"]}, 400
 
     if request.method == "PUT":
         if not single_artwork.check_owner(owner_id):
-            return {"errors": "Forbidden."}, 403
+            return {"errors": ["Forbidden."]}, 403
         form = ArtworkForm()
         form["csrf_token"].data = request.cookies["csrf_token"]
         if form.data["image"]:
@@ -45,14 +45,14 @@ def single_artwork_route(artwork_id):
             if form.validate_on_submit():
                 file_delete = remove_file_from_AWS(single_artwork.image)
                 if not file_delete:
-                    return {"errors": "Error deleting file image"}, 400
+                    return {"errors": ["Error deleting file image"]}, 400
 
                 new_image = form.data["image"]
                 new_image.filename = get_unique_filename(new_image.filename)
                 upload = upload_file_to_AWS(new_image)
 
                 if "url" not in upload:
-                    return {"errors": "Image upload failed"}
+                    return {"errors": ["Image upload failed"]}
 
                 single_artwork.title = form.data["title"]
                 single_artwork.artist_name = form.data["artist_name"]
@@ -98,7 +98,7 @@ def upload_an_artwork():
         image.filename = get_unique_filename(image.filename)
         upload = upload_file_to_AWS(image)
         if "url" not in upload:
-            return {"errors": "Image upload failed"}
+            return {"errors": ["Image upload failed"]}
         new_artwork = Artwork(
             title=form.data["title"],
             artist_name=form.data["artist_name"],

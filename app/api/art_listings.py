@@ -20,15 +20,15 @@ def get_a_single_listing(artlisting_id):
     owner_id = current_user.id
     single_listing = ArtListing.query.get(artlisting_id)
     if not single_listing:
-        return {"errors": "Artlisting not found."}, 404
+        return {"errors": ["Artlisting not found."]}, 404
 
     if request.method == "DELETE":
         if not single_listing.check_owner(owner_id):
-            return {"errors": "Forbidden."}, 403
+            return {"errors": ["Forbidden."]}, 403
         else:
             db.session.delete(single_listing)
             db.session.commit()
-            return {"Success": "Listing deleted."}, 202
+            return {"Success": ["Listing deleted."]}, 202
 
     if request.method == "PUT":
         form = ArtlistingForm()
