@@ -8,25 +8,26 @@ import { Link } from 'react-router-dom';
 
 const ArtworksPage = () => {
   const allArtworksObj = useSelector(state => state.artworks.allArtworks);
-  const allArtworks = Object.values(allArtworksObj);
   const currUser = useSelector(state => state.session.user);
+  const allArtworks = Object.values(allArtworksObj);
 
   const [ isLoaded, setIsLoaded ] = useState(false);
   const [ recentUploads, setRecentUploads ] = useState([]);
 
-  const artworksOrder = allArtworks.sort((a, b) => {
-    return b.id - a.id;
-  });
 
   useEffect(() => {
-    const uploads = [];
+    const recentList = [];
 
-    for (let i = 0; i < 5; i++) {
-      uploads.push(artworksOrder[ i ]);
-      setRecentUploads(uploads)
+    let i = allArtworks.length - 1;
+    while (recentList.length < 5) {
+      if (allArtworks[ i ]) recentList.push(allArtworks[ i ]);
+      if (i > 0) i -= 1;
+      else return;
     };
 
+    setRecentUploads(recentList);
     setIsLoaded(true);
+
   }, [ allArtworksObj ]);
 
   return (
@@ -34,12 +35,12 @@ const ArtworksPage = () => {
       {isLoaded && (
         <PageContainer>
           <div className='page-content-container'>
-            <h1>Recent Uploads</h1>
+            <h1 className='horizontal-scroll-header'>Recent Uploads</h1>
             <div className='artwork-showcase-container'>
               {currUser ? (
                 <>
                   {recentUploads.map(artwork => (
-                    <Link to={`/artworks/${artwork.id}`} className='artwork-showcase-container-item'>
+                    <Link to={`/artworks/${artwork.id}`} key={`${artwork.title}-${artwork.id}`} className='artwork-showcase-container-item'>
                       <div className='showcase-image-container'>
                         <ImagePreview
                           imgSrc={artwork.image}
@@ -53,7 +54,7 @@ const ArtworksPage = () => {
               ) : (
                 <>
                   {recentUploads.map(artwork => (
-                    <div className='artwork-showcase-container-item'>
+                    <div key={`${artwork.title}-${artwork.id}`} className='artwork-showcase-container-item'>
                       <div className='showcase-image-container'>
                         <ImagePreview
                           imgSrc={artwork.image}
@@ -66,7 +67,7 @@ const ArtworksPage = () => {
                 </>
               )}
             </div>
-            <h1>All Artworks</h1>
+            <h1 className='horizontal-scroll-header'>All Artworks</h1>
             <DisplayArtSection items={allArtworks} />
           </div>
         </PageContainer>

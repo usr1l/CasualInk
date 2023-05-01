@@ -6,8 +6,11 @@ import image1 from "../static/displayimage2.jpg"
 import image2 from "../static/display-image4.jpg"
 import "./LandingPage.css";
 import SingleFullPageDiv from '../SingleFullPageDiv';
+import { useHistory } from 'react-router-dom';
 
 const LandingPage = () => {
+  const history = useHistory();
+
   const { allArtworks } = useSelector(state => state.artworks);
   const artworks = Object.values(allArtworks);
 
@@ -60,9 +63,9 @@ const LandingPage = () => {
             h2text={"Explore works by talented and emerging artists."}
             buttonText={'Browse Works'}
             buttonId={'banner-button'}
+            onButtonClick={() => history.push("/artworks")}
           />
           <FeatureBanner
-            // cardStyle={"absolute"}
             imgSrc={image2}
             headline={'Featured Collections'}
             h1text={"Collect, Sell, and Auction"}
@@ -70,13 +73,14 @@ const LandingPage = () => {
             buttonText={'Browse Works'}
             cardStyle={currBanner}
             buttonId={'banner-button'}
+            onButtonClick={() => history.push("/collections")}
           />
         </div>
         <div id='feature-banner-slider'>
           <div data-id='1' id='banner-slider1' className={banner1} onClick={onClick}></div>
           <div data-id='2' id='banner-slider2' className={banner2} onClick={onClick}></div>
         </div>
-        <HorizontalShowcase items={artworks} />
+        <HorizontalShowcase caption={"Featured Artwork"} items={artworks} />
       </div>
     </SingleFullPageDiv>
   )

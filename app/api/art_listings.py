@@ -11,7 +11,7 @@ artlisting_routes = Blueprint("artlistings", __name__)
 @artlisting_routes.route("/")
 def get_all_artlistings():
     all_listings = ArtListing.query.all()
-    return [listing.to_safe_dict() for listing in all_listings], 200
+    return [listing.to_dict() for listing in all_listings], 200
 
 
 @artlisting_routes.route("/<int:artlisting_id>", methods=["GET", "PUT", "DELETE"])
