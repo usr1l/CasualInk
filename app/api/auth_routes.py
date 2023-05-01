@@ -64,6 +64,7 @@ def sign_up():
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         if form.data["profile_pic"]:
+            print("===============================", form.data["profile_pic"])
             pro_pic = form.data["profile_pic"]
             pro_pic.filename = get_unique_filename(pro_pic.filename)
             upload = upload_file_to_AWS(pro_pic)
