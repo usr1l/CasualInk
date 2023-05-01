@@ -168,10 +168,9 @@ export default function reducer(state = initialState, action) {
 	let updatedState;
 	switch (action.type) {
 		case SET_USER:
-			console.log(action.payload);
-			// action.payload.artListings = normalizeFn(action.payload.artListings)
-			// action.payload.auctionListings = normalizeFn(action.payload.auctionListings)
-			// action.payload.artworks = normalizeFn(action.payload.artworks)
+			action.payload.artListings = action.payload.artListings.length ? normalizeFn(action.payload.artListings) : {};
+			action.payload.auctionListings = action.payload.auctionListings ? normalizeFn(action.payload.auctionListings) : {};
+			action.payload.artworks = action.payload.artworks ? normalizeFn(action.payload.artworks) : {};
 			return { user: action.payload };
 		case REMOVE_USER:
 			return { user: null };
