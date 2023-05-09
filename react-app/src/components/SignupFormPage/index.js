@@ -95,7 +95,7 @@ function SignupFormPage() {
             >
               <input
                 className='__input'
-                type="text"
+                type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
@@ -183,6 +183,7 @@ function SignupFormPage() {
               <input
                 id='proPic'
                 className='__input'
+                accept="image/*"
                 type='file'
                 onChange={(e) => setImage(e.target.files[ 0 ])}
               />
