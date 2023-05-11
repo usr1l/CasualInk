@@ -1,3 +1,5 @@
+import os
+from gevent import monkey
 from .websocket import socketio
 from .config import Config
 from .seeds import seed_commands
@@ -8,8 +10,6 @@ from flask_wtf.csrf import CSRFProtect, generate_csrf
 from flask_migrate import Migrate
 from flask_cors import CORS
 from flask import Flask, render_template, request, session, redirect
-import os
-from gevent import monkey
 monkey.patch_all()
 
 
