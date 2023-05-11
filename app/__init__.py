@@ -1,14 +1,17 @@
-import os
-from flask import Flask, render_template, request, session, redirect
-from flask_cors import CORS
-from flask_migrate import Migrate
-from flask_wtf.csrf import CSRFProtect, generate_csrf
-from flask_login import LoginManager
-from .models import db, User
-from .api import user_routes, auth_routes, artwork_routes, artlisting_routes, shoppingcart_routes, auctionlisting_routes
-from .seeds import seed_commands
-from .config import Config
 from .websocket import socketio
+from .config import Config
+from .seeds import seed_commands
+from .api import user_routes, auth_routes, artwork_routes, artlisting_routes, shoppingcart_routes, auctionlisting_routes
+from .models import db, User
+from flask_login import LoginManager
+from flask_wtf.csrf import CSRFProtect, generate_csrf
+from flask_migrate import Migrate
+from flask_cors import CORS
+from flask import Flask, render_template, request, session, redirect
+import os
+from gevent import monkey
+monkey.patch_all()
+
 
 app = Flask(__name__, static_folder='../react-app/build', static_url_path='/')
 
@@ -34,7 +37,7 @@ app.register_blueprint(artlisting_routes, url_prefix='/api/artlistings')
 app.register_blueprint(shoppingcart_routes, url_prefix='/api/shoppingcart')
 app.register_blueprint(auctionlisting_routes,
                        url_prefix='/api/auctionlistings')
-socketio.init_app(app)
+socketio.init_app(app, async_mode='gevent')
 db.init_app(app)
 Migrate(app, db)
 
