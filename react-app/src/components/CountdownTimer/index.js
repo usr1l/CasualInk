@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import "./CountdownTimer.css";
+import Widget from '../Widget';
 
 const CountdownTimer = ({
   endDate,
@@ -63,6 +64,11 @@ const CountdownTimer = ({
 
   return (
     <div className='specs-box-element'>
+      {/* <Widget label={"Seconds"} component={seconds}></Widget>
+      <Widget label={"Seconds"} component={seconds}></Widget>
+      <Widget label={"Seconds"} component={seconds}></Widget>
+      <Widget label={"Seconds"} component={seconds}></Widget>
+      <Widget label={"Seconds"} component={seconds}></Widget> */}
       <div className='specs-box-element-label'>{label}</div>
       <div className='specs-box-element-text'>{days} Days : {hours} Hours : {minutes} Minutes : {seconds} Seconds</div>
     </div>

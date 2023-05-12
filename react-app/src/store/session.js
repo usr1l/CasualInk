@@ -35,7 +35,6 @@ export const authenticate = () => async (dispatch) => {
 			return;
 		}
 
-		console.log("DATAAAAAA", data)
 		dispatch(setUser(data));
 	}
 };
@@ -87,7 +86,6 @@ export const signUp = (signupData) => async (dispatch) => {
 
 	if (response.ok) {
 		const data = await response.json();
-		console.log("DATAAAAAA", data)
 
 		dispatch(setUser(data));
 		return null;

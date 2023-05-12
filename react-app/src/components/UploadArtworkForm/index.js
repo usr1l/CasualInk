@@ -67,7 +67,6 @@ const UploadArtworkForm = () => {
 
     const response = await dispatch(thunkUploadArtwork(formData))
     if (response.errors) {
-      console.log("==========================", response, response.errors)
       return setErrors(response.errors);
     } else history.push(`/artworks/${response.id}`);
   };

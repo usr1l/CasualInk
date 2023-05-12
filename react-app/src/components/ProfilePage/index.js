@@ -13,9 +13,7 @@ const ProfilePage = () => {
   const history = useHistory();
   const { userId } = useParams();
   const currUser = useSelector(state => state.session.user);
-  console.log(currUser.artworks, "ARRAY RIGHT")
   const allArtworks = Object.values(currUser.artworks);
-  console.log(allArtworks, "ALL")
   const currId = currUser.id;
 
   const [ isLoaded, setIsLoaded ] = useState(false);
