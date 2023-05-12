@@ -10,10 +10,13 @@ def seed_users():
         username='marnie', firstname="Marnie", lastname="Marns", bio="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Amet est placerat in egestas erat imperdiet. Feugiat sed lectus vestibulum mattis ullamcorper. Faucibus scelerisque eleifend donec pretium vulputate sapien nec sagittis aliquam. Convallis convallis tellus id interdum velit laoreet id donec ultrices. Lacus vel facilisis volutpat est velit egestas dui. Quis risus sed vulputate odio ut enim. Faucibus in ornare quam viverra orci. Urna molestie at elementum eu facilisis sed. Neque egestas congue quisque egestas diam in. Orci eu lobortis elementum nibh tellus.", email='marnie@aa.io', password='password')
     bobbie = User(
         username='bobbie', firstname="Bobbie", lastname="Bobbs", bio="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Amet est placerat in egestas erat imperdiet. Feugiat sed lectus vestibulum mattis ullamcorper. Faucibus scelerisque eleifend donec pretium vulputate sapien nec sagittis aliquam. Convallis convallis tellus id interdum velit laoreet id donec ultrices. Lacus vel facilisis volutpat est velit egestas dui. Quis risus sed vulputate odio ut enim. Faucibus in ornare quam viverra orci. Urna molestie at elementum eu facilisis sed. Neque egestas congue quisque egestas diam in. Orci eu lobortis elementum nibh tellus.", email='bobbie@aa.io', password='password')
+    shuai = User(
+        username='shuai', firstname="Zui", lastname="Shuai", bio="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Amet est placerat in egestas erat imperdiet. Feugiat sed lectus vestibulum mattis ullamcorper. Faucibus scelerisque eleifend donec pretium vulputate sapien nec sagittis aliquam. Convallis convallis tellus id interdum velit laoreet id donec ultrices. Lacus vel facilisis volutpat est velit egestas dui. Quis risus sed vulputate odio ut enim. Faucibus in ornare quam viverra orci. Urna molestie at elementum eu facilisis sed. Neque egestas congue quisque egestas diam in. Orci eu lobortis elementum nibh tellus.", email='shuai@aa.io', password='password')
 
     db.session.add(demo)
     db.session.add(marnie)
     db.session.add(bobbie)
+    db.session.add(shuai)
     db.session.commit()
 
 
@@ -25,7 +28,8 @@ def seed_users():
 # it will reset the primary keys for you as well.
 def undo_users():
     if environment == "production":
-        db.session.execute(f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
+        db.session.execute(
+            f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
     else:
         db.session.execute(text("DELETE FROM users"))
 
