@@ -1,5 +1,5 @@
 # CasualInk
-CasualInk is for buying, selling, and auctioning off art pieces that you create, or own.
+CasualInk is a clone of Artsy, a website that provides a platform for people to list artwork for sale/auction. Visitors can view, bid on, and buy artwork that they like. CasualInk is built on a backend comprised of Python Flask and a PostgreSQL database
 
 ## Technologies Used
 
