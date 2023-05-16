@@ -22,7 +22,7 @@
   padding: 40px 0 40px;
   min-height: 10vh;
   box-sizing: border-box;
-  justify-content: center;
+  justify-content: flex-end;
   margin: 20px 0 40px;
   min-width: 1400px;
 }
