@@ -57,6 +57,7 @@ const ArtworksPage = () => {
                     <div key={`${artwork.title}-${artwork.id}`} className='artwork-showcase-container-item'>
                       <div className='showcase-image-container'>
                         <ImagePreview
+                          imgClassName={"image--artwork-preview"}
                           imgSrc={artwork.image}
                         />
                       </div>

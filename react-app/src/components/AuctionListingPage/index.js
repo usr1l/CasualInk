@@ -152,9 +152,9 @@ const AuctionListingPage = () => {
               label={"Time Remaining"}
             />
             <br />
-            {active && deadlineBool && (userId !== artwork.ownerId) && (
+            {active && deadlineBool && (
               <div id="bid-container">
-                <AuctionBidInput auctionListing={auctionlisting} userId={userId}></AuctionBidInput>
+                <AuctionBidInput auctionListing={auctionlisting} userBool={userId !== artwork.ownerId}></AuctionBidInput>
               </div>
             )}
             {(!active || !deadlineBool) && (

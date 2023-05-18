@@ -129,13 +129,25 @@ const SaleListingPage = () => {
               </div>
             </div>
             {userId !== artwork.ownerId && (artlisting.amount_available > 0) && (
-              <div className='btn-mobile'>
-                <OpenModalButton
-                  modalCSSClass={"btn btn--wide btn--demo"}
-                  modalComponent={<PurchaseModal />}
-                  buttonText={"Checkout"}
-                />
-              </div>
+              <>
+                <div className='btn-mobile'>
+                  <OpenModalButton
+                    modalCSSClass={"btn btn--wide btn--demo"}
+                    modalComponent={<PurchaseModal />}
+                    buttonText={"Buy Now"}
+                  />
+                </div>
+                <br />
+                <div className='btn-mobile'>
+                  <Button
+                    buttonSize={"btn--wide"}
+                    buttonStyle={"btn--demo"}
+                  >
+                    Add to Cart
+                  </Button>
+                </div>
+                <br />
+              </>
             )}
             {(artlisting.amount_available < 1) && (
               <Button
