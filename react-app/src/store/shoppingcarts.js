@@ -17,6 +17,20 @@ const actionSetShoppingCart = (data) => {
   };
 };
 
+export const thunkCartAddItem = (artlistingId) => async (dispatch) => {
+  const response = await fetch('/api/shoppingcart/curr', {
+    method: "PUT",
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      "listing": artlistingId,
+      "amount": 1
+    })
+  });
+
+  const data = await response.json();
+  console.log(data);
+};
+
 const initialState = { shoppingCart: {}, isLoading: true }
 
 const shoppingCart = (state = initialState, action) => {

@@ -49,33 +49,35 @@ const PurchaseModal = () => {
             required
           />
         </InputDiv>
-        <InputDiv label="Expiry Date: *"
-          divStyle={'input--wide'}
-          labelStyle={'__label'}
-          error={validationErrors.expiryDate}
-        >
-          <input
-            className='__input'
-            type='month'
-            value={expiryDate}
-            onChange={(e) => setExpiryDate(e.target.value)}
-          />
-        </InputDiv>
-        <InputDiv label="CSV: *"
-          divStyle={'input--wide'}
-          labelStyle={'__label'}
-          error={validationErrors.csv}
-        >
-          <input
-            className='__input'
-            type='text'
-            value={csv}
-            onChange={(e) => setcsv(e.target.value)}
-          />
-        </InputDiv>
+        <div className='date-time'>
+          <InputDiv label="Expiry Date: *"
+            divStyle={'input--wide'}
+            labelStyle={'__label'}
+            error={validationErrors.expiryDate}
+          >
+            <input
+              className='__input'
+              type='month'
+              value={expiryDate}
+              onChange={(e) => setExpiryDate(e.target.value)}
+            />
+          </InputDiv>
+          <InputDiv label="CSV: *"
+            divStyle={'input--wide'}
+            labelStyle={'__label'}
+            error={validationErrors.csv}
+          >
+            <input
+              className='__input'
+              type='text'
+              value={csv}
+              onChange={(e) => setcsv(e.target.value)}
+            />
+          </InputDiv>
+        </div>
       </div>
       <Button
-        buttonSize={"btn--splash"}
+        buttonSize={"btn--wide"}
         buttonStyle={"btn--demo"}
         onClick={handleCheckout}
       >

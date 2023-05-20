@@ -6,6 +6,10 @@
   box-sizing: border-box;
 }
 
+.full {
+  width: 50%;
+}
+
 .split-pages-container {
   display: flex;
   justify-content: center;

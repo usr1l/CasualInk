@@ -8,6 +8,7 @@ import Button from "../Button";
 import "./SaleListingPage.css";
 import OpenModalButton from '../OpenModalButton';
 import PurchaseModal from '../PurchaseModal';
+import { thunkCartAddItem } from '../../store/shoppingcarts';
 
 
 const SaleListingPage = () => {
@@ -18,11 +19,13 @@ const SaleListingPage = () => {
   const userId = useSelector(state => state.session.user.id)
   const artwork = useSelector(state => state.artworks.allArtworks[ artworkId ]);
   const artlisting = useSelector(state => state.artlistings.allArtlistings[ artlistingId ]);
+  const shoppingCart = useSelector(state => state.shoppingCart.shoppingCart.items);
 
   const [ isLoaded, setIsLoaded ] = useState(false);
   const [ taxBool, setTaxBool ] = useState(false);
   const [ disclaimerBool, setDisclaimerBool ] = useState(false);
   const [ paymentInfo, setPaymentInfo ] = useState(false);
+  const [ inCartBool, setInCartBool ] = useState(false);
 
   useEffect(() => {
     if (!artwork || !artlisting) history.push("/not-found");
@@ -34,6 +37,12 @@ const SaleListingPage = () => {
         .then(() => setIsLoaded(true));
     }
   }, [ dispatch, artlisting ]);
+
+  useEffect(() => {
+    if (shoppingCart)
+      setInCartBool(artworkId in shoppingCart)
+    else setInCartBool(false);
+  }, [ shoppingCart ])
 
   return (
     <>
@@ -139,12 +148,22 @@ const SaleListingPage = () => {
                 </div>
                 <br />
                 <div className='btn-mobile'>
-                  <Button
-                    buttonSize={"btn--wide"}
-                    buttonStyle={"btn--demo"}
-                  >
-                    Add to Cart
-                  </Button>
+                  {!inCartBool ? (
+                    <Button
+                      buttonSize={"btn--wide"}
+                      buttonStyle={"btn--demo"}
+                      onClick={() => dispatch(thunkCartAddItem(artlistingId))}
+                    >
+                      Add to Cart
+                    </Button>
+                  ) : (
+                    <Button
+                      buttonSize={"btn--wide"}
+                      disableButton={true}
+                    >
+                      Added to cart
+                    </Button>
+                  )}
                 </div>
                 <br />
               </>

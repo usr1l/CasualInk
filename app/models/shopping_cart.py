@@ -20,20 +20,15 @@ class ShoppingCart(db.Model):
         return json.loads(self._items)
 
     @items.setter
-    def items(self, listing_ids, item_amount):
+    def items(self, data):
         cart = json.loads(self._items)
-        if isinstance(listing_ids, list):
-            for listing_id in listing_ids:
-                if listing_id in cart:
-                    cart[listing_id] = cart[listing_id] + \
-                        item_amount[listing_id]
-                else:
-                    cart[listing_id] = item_amount[listing_id]
+        if f"{data['listing']}" in cart:
+            cart[f"{data['listing']}"] = cart[f"{data['listing']}"] + \
+                data["amount"]
+            if cart[f"{data['listing']}"] == 0:
+                del cart[f"{data['listing']}"]
         else:
-            if listing_ids in cart:
-                cart[listing_ids] = cart[listing_ids] + item_amount
-            else:
-                cart[listing_ids] = item_amount
+            cart[f"{data['listing']}"] = data["amount"]
         self._items = json.dumps(cart)
 
     def check_owner(self, user_id):
