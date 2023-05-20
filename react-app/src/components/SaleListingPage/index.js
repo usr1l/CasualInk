@@ -152,7 +152,7 @@ const SaleListingPage = () => {
                     <Button
                       buttonSize={"btn--wide"}
                       buttonStyle={"btn--demo"}
-                      onClick={() => dispatch(thunkCartAddItem(artlistingId))}
+                      onClick={() => dispatch(thunkCartAddItem(artworkId))}
                     >
                       Add to Cart
                     </Button>

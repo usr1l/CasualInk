@@ -28,7 +28,8 @@ export const thunkCartAddItem = (artlistingId) => async (dispatch) => {
   });
 
   const data = await response.json();
-  console.log(data);
+  if (response.ok) dispatch(actionSetShoppingCart(data));
+  return data;
 };
 
 const initialState = { shoppingCart: {}, isLoading: true }
