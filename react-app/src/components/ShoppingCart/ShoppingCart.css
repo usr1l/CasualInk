@@ -22,6 +22,7 @@
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
+  border: 1px solid var(--site-gray);
 }
 
 .cart-item img {
@@ -30,7 +31,6 @@
   object-fit: cover;
   border-radius: 5px;
 }
-
 
 .quantity-control button {
   background-color: #000;
@@ -42,4 +42,8 @@
 
 .remove-button {
   margin-left: 20px;
+}
+
+.border {
+  border: 1px solid var(--site-gray);
 }

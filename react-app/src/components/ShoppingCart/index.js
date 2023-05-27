@@ -66,6 +66,8 @@ const ShoppingCart = () => {
                   <img src={artwork.image} alt={"image"} />
                   <div className="item-details">
                     <div>{artwork.title}</div>
+                    <div>{artworks[ artwork.id ].artistName}</div>
+                    {console.log(artwork)}
                     <div>$ {artwork.price}</div>
                   </div>
                   <Button buttonStyle={'btn--remove'} >Remove</Button>
@@ -77,7 +79,7 @@ const ShoppingCart = () => {
           <PageSplit>
             <div className='cart-container'>
               <h1>Enter Payment Information</h1>
-              <div className='window'>
+              <div className='window border'>
                 <InputDiv
                   labelStyle={'__label'}
                   divStyle={'input--wide'}
