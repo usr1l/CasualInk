@@ -20,7 +20,7 @@ const ShoppingCart = () => {
       const artworkCart = artworkIds.forEach(artworkId => {
         const art = artworks[ artworkId ];
         const listing = artlistings[ art.artListing ];
-        cartObject.push({ "id": art.id, "title": art.title, "image": art.image, "price": listing.price, "artist": art.artistName })
+        cartObject.push({ "id": art.id, "title": art.title, "image": art.image, "price": listing.price, "artist": art.artistName, "materials": art.materials })
       });
       setCartItems(cartObject);
       setIsLoaded(true);
@@ -67,8 +67,9 @@ const ShoppingCart = () => {
                   <div className="item-details">
                     <div>{artwork.title}</div>
                     <div>{artworks[ artwork.id ].artistName}</div>
-                    {console.log(artwork)}
+                    {console.log(artworks[ artwork.id ])}
                     <div>$ {artwork.price}</div>
+                    <div>{artwork.materials}</div>
                   </div>
                   <Button buttonStyle={'btn--remove'} >Remove</Button>
                 </div>
