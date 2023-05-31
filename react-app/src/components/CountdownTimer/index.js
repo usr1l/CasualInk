@@ -58,8 +58,8 @@ const CountdownTimer = ({
 
   return (
     <>
-      <div className='specs-box-element-label'>{label}</div>
-      <div className='specs-box-element'>
+      <div className='specs-box-element-label-shift'>{label}</div>
+      <div className='specs-box-element-shift'>
         <Widget label={"Days"} component={days}></Widget>
         <Widget label={"Hours"} component={hours}></Widget>
         <Widget label={"Minutes"} component={minutes}></Widget>

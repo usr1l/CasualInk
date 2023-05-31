@@ -33,6 +33,17 @@
   max-height: 100%;
 }
 
+.img--preview-shift {
+  max-height: 100%;
+}
+
 .img-preview-wrapper-big {
   max-height: 100%;
+}
+
+@media screen and (max-width: 1400px) {
+  .img--preview-shift {
+    max-width: 650px;
+    margin-bottom: 40px;
+  }
 }

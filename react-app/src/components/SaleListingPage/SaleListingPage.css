@@ -21,6 +21,16 @@
   width: 160px;
 }
 
+.specs-box-element-shift {
+  width: 100%;
+  margin: 5px 0;
+  display: flex;
+}
+
+.specs-box-element-label-shift {
+  width: 160px;
+}
+
 .specs-box-element-text {
   color: gray;
 }
@@ -57,11 +67,9 @@
   cursor: pointer;
 }
 
-
 .right {
   margin-left: auto;
 }
-
 
 .expand-element {
   min-height: 50px;
@@ -74,4 +82,13 @@
   background-color: rgb(247, 247, 247);
   box-shadow: inset 0px 3px 3px -3px rgba(0, 0, 0, 0.2), inset 0px -3px 3px -3px rgba(0, 0, 0, 0.2);
   padding: 10px 15px;
+}
+
+@media screen and (max-width: 1400px) {
+
+  .specs-box-element-shift,
+  .specs-box-element-label-shift {
+    display: flex;
+    justify-content: center;
+  }
 }

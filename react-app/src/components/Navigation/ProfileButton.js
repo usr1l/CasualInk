@@ -47,6 +47,8 @@ function ProfileButton({ user }) {
       <div className={ulClassName} ref={ulRef}>
         <IconLabel iconLabelId={'dropdown-top-item'} iconClass={"fa-regular fa-user"} labelText={user.username} />
         <IconLabel iconClass={"fa-regular fa-envelope"} labelText={user.email} />
+        <div className=""></div>
+        <IconLabel ></IconLabel>
         <div id={"dropdown-bot-item"} className="icon-label-component">
           <div className="icon-label-item-image-container">
             <i className="fa-solid fa-arrow-right-from-bracket"></i>

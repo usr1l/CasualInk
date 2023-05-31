@@ -64,17 +64,25 @@ const ShoppingCart = () => {
               {cartItems.map((artwork) => (
                 <div key={`shoppingcart-${artwork.id}`} className="cart-item">
                   <img src={artwork.image} alt={"image"} />
-                  <div className="item-details">
-                    <div>{artwork.title}</div>
-                    <div>{artworks[ artwork.id ].artistName}</div>
-                    {console.log(artworks[ artwork.id ])}
-                    <div>$ {artwork.price}</div>
-                    <div>{artwork.materials}</div>
+                  <div id='sc-item-info'>
+                    <div className="item-labels">
+                      <div>Title</div>
+                      <div>Artist Name</div>
+                      <div>Price</div>
+                      <div>Materials</div>
+                    </div>
+                    <div className="item-details">
+                      <div>{artwork.title}</div>
+                      <div>{artworks[ artwork.id ].artistName}</div>
+                      <div>{artwork.materials}</div>
+                      <div>$ {artwork.price}</div>
+                    </div>
                   </div>
-                  <Button buttonStyle={'btn--remove'} >Remove</Button>
+                  <div className='item-remove'>
+                    <Button buttonStyle={'btn--remove'} >Remove</Button>
+                  </div>
                 </div>
               ))}
-              {/* <h2>Total: ${total}</h2> */}
             </div>
           </PageSplit>
           <PageSplit>

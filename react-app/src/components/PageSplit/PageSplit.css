@@ -52,3 +52,32 @@ h1.split-pages-header {
   display: flex;
   align-items: center;
 }
+
+@media screen and (max-width: 1400px) {
+  .split-pages-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 40px;
+    min-width: 650px;
+  }
+
+  .split-pages-page {
+    justify-content: center;
+    width: 100%;
+    display: flex;
+  }
+
+  .page-split-half {
+    width: 80%;
+    display: flex;
+    align-items: center;
+    min-width: 650px;
+  }
+
+  h1.split-pages-header {
+    display: flex;
+    justify-content: center;
+  }
+
+}

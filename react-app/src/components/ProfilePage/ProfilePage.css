@@ -17,6 +17,7 @@
   height: 100%;
   align-items: center;
   width: 100%;
+  min-width: 700px;
 }
 
 .navbar-wrapper {
@@ -45,4 +46,10 @@
 .navbar-navlink-active {
   color: black;
   border-bottom: 1px black solid;
+}
+
+@media screen and (max-width: 1400px) {
+  #navbar-shortcuts {
+    display: none;
+  }
 }

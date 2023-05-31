@@ -1,7 +1,7 @@
 import React from 'react';
 import './ImagePreview.css';
 
-const imgSTYLES = [ 'img--preview-medium', "img--preview-big" ];
+const imgSTYLES = [ 'img--preview-medium', "img--preview-big", "img--preview-shift" ];
 
 const ImagePreview = ({
   imgWrapperStyle,
