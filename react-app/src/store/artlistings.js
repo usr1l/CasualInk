@@ -7,6 +7,7 @@ const GET_SINGLE_ARTLISTING_ID = "artlistings/GET_SINGLE_ARTLISTING_ID";
 const CREATE_SINGLE_ARTLISTING = "artlistings/CREATE_SINGLE_ARTLISTING";
 const EDIT_SINGLE_ARTLISTING = "artlistings/EDIT_SINGLE_ARTLISTING";
 const DELETE_SINGLE_ARTLISTING = "artlistings/DELETE_SINGLE_ARTLISTING";
+const CHECKOUT_ITEM = "artlistings/CHECKOUT_ITEM";
 
 export const thunkGetArtlistings = () => async (dispatch) => {
   const response = await fetch("/api/artlistings/");
@@ -102,6 +103,10 @@ const actionDeleteArtListing = (artlistingId) => {
     type: DELETE_SINGLE_ARTLISTING,
     payload: artlistingId
   };
+};
+
+export const actionCheckoutItem = () => {
+
 };
 
 const initialState = { allArtlistings: {}, singleArtlistingId: null, isLoading: true }

@@ -29,3 +29,24 @@ def get_shopping_cart():
         return shopping_cart.to_safe_dict(), 201
 
     return shopping_cart.to_safe_dict(), 200
+
+
+@shoppingcart_routes.route("/checkout<int:artwork_id>", methods=["PUT", "POST"])
+@login_required
+def checkout_cart(artwork_id):
+
+    owner_id = current_user.id
+    shopping_cart = ShoppingCart.query.filter(
+        ShoppingCart.owner_id == owner_id).one_or_none()
+    if not shopping_cart:
+        shopping_cart = ShoppingCart(owner_id=owner_id)
+        db.session.add(shopping_cart)
+        db.session.commit()
+    res = None
+    if request.method == "PUT":
+        res = shopping_cart.checkout_item(artwork_id)
+
+    if request.method == "POST":
+        res = shopping_cart.checkout_cart()
+
+    return res, 201

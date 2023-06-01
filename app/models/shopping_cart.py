@@ -1,4 +1,4 @@
-from app.models import db, environment, SCHEMA, add_prefix_for_prod
+from app.models import db, environment, SCHEMA, add_prefix_for_prod, Artwork, ArtListing
 import json
 
 
@@ -36,6 +36,26 @@ class ShoppingCart(db.Model):
 
     def delete_cart(self):
         self._items = json.dumps({})
+
+    def checkout_item(self, artwork_id):
+        artlisting = ArtListing.query.filter_by(artwork_id)
+        if artlisting.amount_available <= 0:
+            return {"errors": ["Item unavailable"]}
+        artlisting.amount_available -= 1
+        db.session.commit()
+        return {"success": "Checkout successful."}
+
+    def checkout_cart(self):
+        cart = json.loads(self._items)
+        for key in cart:
+            artlisting = ArtListing.query.filter(ArtListing.artwork_id == key)
+            if artlisting.amount_available <= 0:
+                return {'errors': ['Item unavailable']}
+            artlisting.amount_available -= cart[key]
+
+        self.delete_cart()
+        db.session.commit()
+        return {"success": "Checkout successful."}
 
     def to_safe_dict(self):
         return {

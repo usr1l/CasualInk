@@ -4,11 +4,13 @@ import './IconLabel.css';
 const IconLabel = ({
   iconClass,
   labelText,
-  iconLabelId
+  iconLabelId,
+  wrapperClass,
+  onClick
 }) => {
 
   return (
-    <div id={iconLabelId} className="icon-label-component">
+    <div onClick={onClick} id={iconLabelId} className={`icon-label-component ${wrapperClass}`}>
       <div className="icon-label-item-image-container">
         <i className={`icon-label-item-image ${iconClass}`}></i>
       </div>

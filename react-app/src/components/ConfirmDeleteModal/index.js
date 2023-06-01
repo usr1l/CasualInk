@@ -22,8 +22,10 @@ const ConfirmDeleteModal = ({ itemId, deleteFn, directTo }) => {
     const data = await dispatch(deleteFn(itemId));
 
     if (!data.errors) {
-      history.push(`${directTo}`);
+      if (directTo) history.push(`${directTo}`);
+      else window.location.reload();
       closeModal();
+      return;
     };
 
     return data.errors;

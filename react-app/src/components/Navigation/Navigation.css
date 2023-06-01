@@ -23,7 +23,7 @@
 }
 
 .open {
-  max-height: 140px;
+  max-height: 300px;
   transition: max-height 0.7s ease-in-out;
   border: 1px solid lightgrey;
   overflow: hidden;
@@ -148,4 +148,13 @@
 .signed-in-icons:hover {
   color: var(--site-sage);
   transition: 0.5s;
+}
+
+.separator {
+  height: 1px;
+  width: 80%;
+  background: black;
+  margin: 10px 0;
+  background-color: var(--site-gray);
+
 }

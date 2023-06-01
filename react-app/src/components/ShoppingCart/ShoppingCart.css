@@ -85,3 +85,25 @@
   display: flex;
   margin-left: auto;
 }
+
+.payment-info {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 20px 40px;
+}
+
+.payment-info-element {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  height: 35px;
+  color: black;
+}
+
+@media screen and (max-width: 1400px) {
+  .cart-container {
+    min-height: 500px;
+  }
+}
