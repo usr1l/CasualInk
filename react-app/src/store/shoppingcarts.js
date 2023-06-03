@@ -8,7 +8,7 @@ export const thunkSetShoppingCart = () => async (dispatch) => {
 
   const data = await response.json();
   if (response.ok) {
-    dispatch(actionSetShoppingCart(data))
+    dispatch(actionSetShoppingCart(data));
   };
   return data;
 };
@@ -48,8 +48,8 @@ export const thunkCheckoutItem = (artworkId) => async (dispatch) => {
     headers: { 'Content-Type': 'application/json' },
   });
 
-  const data = response.json()
-  if (response.ok) dispatch(actionCheckoutItem(artworkId))
+  const data = response.json();
+  if (response.ok) dispatch(actionCheckoutItem(artworkId));
 };
 
 export const thunkDeleteCart = () => async (dispatch) => {
@@ -67,7 +67,7 @@ const actionDeleteCart = () => {
   return {
     type: "DELETE_CART",
     payload: {}
-  }
+  };
 };
 
 const initialState = { shoppingCart: {}, isLoading: true }

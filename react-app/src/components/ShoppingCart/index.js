@@ -8,7 +8,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import InputDiv from '../InputDiv';
 import getCurrTime from '../HelperFns/GetCurrTime';
 import OpenModalButton from '../OpenModalButton';
-import PurchaseModal from '../PurchaseModal';
 import shoppingCart, { thunkCheckoutItem, thunkCheckoutCart, thunkDeleteCart } from '../../store/shoppingcarts';
 import ConfirmDeleteModal from '../ConfirmDeleteModal';
 
@@ -66,12 +65,10 @@ const ShoppingCart = () => {
 
   useEffect(() => {
     if (cartItems) {
-
       let costTotal = 0
       for (const item of cartItems) {
         costTotal += parseFloat(item.price)
       };
-
       setTotal(costTotal * 1.05);
     };
   }, [ cartItems, total ])
@@ -81,7 +78,6 @@ const ShoppingCart = () => {
       {isLoaded && (
         <>
           {cartItems.length ? (
-
             < div className='split-pages-container'>
               <PageSplit pageSplitClass={"full"}>
                 <div className="cart-container">
@@ -213,13 +209,16 @@ const ShoppingCart = () => {
                       <div>{total}</div>
                     </div>
                   </div>
-                </div>
-                <div className='btn-mobile'>
-                  <Button
-                    buttonSize={"btn--wide"}
-                    buttonStyle={"btn--demo"}
-                    onClick={handleCheckout}
-                  >Checkout</Button>
+                  <br />
+                  <br />
+                  <div className='btn-mobile'>
+                    <Button
+                      buttonSize={"btn--wide"}
+                      buttonStyle={"btn--demo"}
+                      onClick={handleCheckout}
+                    >Checkout</Button>
+                  </div>
+                  <br />
                 </div>
               </PageSplit >
             </div >

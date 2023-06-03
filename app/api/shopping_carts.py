@@ -1,6 +1,6 @@
+import json
 from flask import Blueprint, request
 from flask_login import login_required, current_user
-import json
 from app.models import ShoppingCart, db
 
 shoppingcart_routes = Blueprint("shopping_carts", __name__)
@@ -31,7 +31,7 @@ def get_shopping_cart():
     return shopping_cart.to_safe_dict(), 200
 
 
-@shoppingcart_routes.route("/checkout<int:artwork_id>", methods=["PUT", "POST"])
+@shoppingcart_routes.route("/checkout/<int:artwork_id>", methods=["PUT", "POST"])
 @login_required
 def checkout_cart(artwork_id):
 

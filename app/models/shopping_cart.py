@@ -1,4 +1,5 @@
-from app.models import db, environment, SCHEMA, add_prefix_for_prod, Artwork, ArtListing
+from app.models import db, environment, SCHEMA, add_prefix_for_prod
+from app.models.artlisting import ArtListing
 import json
 
 
