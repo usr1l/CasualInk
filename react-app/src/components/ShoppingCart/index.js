@@ -12,16 +12,16 @@ import shoppingCart, { thunkCheckoutItem, thunkCheckoutCart, thunkDeleteCart } f
 import ConfirmDeleteModal from '../ConfirmDeleteModal';
 
 const ShoppingCart = () => {
-  const shoppingCart = useSelector(state => state.shoppingCart.shoppingCart.items);
+  const { shoppingCart } = useSelector(state => state.shoppingCart);
   const artworks = useSelector(state => state.artworks.allArtworks);
   const artlistings = useSelector(state => state.artlistings.allArtlistings);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (shoppingCart) {
+    if (shoppingCart.items) {
       const cartObject = [];
-      const artworkIds = Object.keys(shoppingCart);
+      const artworkIds = Object.keys(shoppingCart.items);
       artworkIds.forEach(artworkId => {
         const art = artworks[ artworkId ];
         const listing = artlistings[ art.artListing ];
@@ -58,7 +58,7 @@ const ShoppingCart = () => {
     const errors = validate();
     if (Object.keys(errors).length > 0) return setValidationErrors(errors);
     else {
-      dispatch(thunkCheckoutCart(shoppingCart));
+      dispatch(thunkCheckoutCart(shoppingCart.id));
       window.alert("Purchase Confirmed");
     };
   };
@@ -89,8 +89,8 @@ const ShoppingCart = () => {
                         <div className="item-labels">
                           <div>Title</div>
                           <div>Artist Name</div>
-                          <div>Price</div>
                           <div>Materials</div>
+                          <div>Price</div>
                         </div>
                         <div className="item-details">
                           <div>{artwork.title}</div>

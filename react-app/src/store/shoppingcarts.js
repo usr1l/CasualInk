@@ -1,4 +1,4 @@
-import { actionCheckoutItem } from "./artlistings";
+import { actionCheckoutItem, thunkGetArtlistings } from "./artlistings";
 
 const SET_CART = "shoppingcart/GET_CART";
 const DELETE_CART = "shoppingcart/DELETE_CART";
@@ -35,21 +35,25 @@ export const thunkCartAddItem = (artlistingId) => async (dispatch) => {
   return data;
 };
 
-export const thunkCheckoutCart = () => async (dispatch) => {
-  const response = await fetch('/api/shoppingcart/checkout', {
-    method: "POST",
-    headers: { 'Content-Type': 'application/json' },
-  });
+export const thunkCheckoutCart = (shoppingCartId) => async (dispatch) => {
+  const response = await fetch(`/api/shoppingcart/${shoppingCartId}`);
+
+  const data = await response.json();
+  if (response.ok) {
+    dispatch(thunkGetArtlistings());
+    dispatch(actionDeleteCart());
+  };
+
+  return data;
 };
 
-export const thunkCheckoutItem = (artworkId) => async (dispatch) => {
-  const response = await fetch(`/api/shoppingcart/checkout/${artworkId}`, {
-    method: "POST",
-    headers: { 'Content-Type': 'application/json' },
-  });
+export const thunkCheckoutItem = (artlistingId) => async (dispatch) => {
+  const response = await fetch(`/api/shoppingcart/checkout/${artlistingId}`);
 
   const data = response.json();
-  if (response.ok) dispatch(actionCheckoutItem(artworkId));
+  if (response.ok) dispatch(actionCheckoutItem(artlistingId));
+
+  return data;
 };
 
 export const thunkDeleteCart = () => async (dispatch) => {

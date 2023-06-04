@@ -38,18 +38,20 @@ class ShoppingCart(db.Model):
     def delete_cart(self):
         self._items = json.dumps({})
 
-    def checkout_item(self, artwork_id):
-        artlisting = ArtListing.query.filter_by(artwork_id)
+    def checkout_item(self, artlisting_id):
+        artlisting = ArtListing.query.get(artlisting_id)
+        print(artlisting, "artlisting")
         if artlisting.amount_available <= 0:
             return {"errors": ["Item unavailable"]}
         artlisting.amount_available -= 1
         db.session.commit()
         return {"success": "Checkout successful."}
 
-    def checkout_cart(self):
+    def checkout(self):
         cart = json.loads(self._items)
         for key in cart:
-            artlisting = ArtListing.query.filter(ArtListing.artwork_id == key)
+            artlisting = ArtListing.query.filter(
+                ArtListing.artwork_id == key).one_or_none()
             if artlisting.amount_available <= 0:
                 return {'errors': ['Item unavailable']}
             artlisting.amount_available -= cart[key]

@@ -105,8 +105,11 @@ const actionDeleteArtListing = (artlistingId) => {
   };
 };
 
-export const actionCheckoutItem = () => {
-
+export const actionCheckoutItem = (artlistingId) => {
+  return {
+    type: CHECKOUT_ITEM,
+    payload: artlistingId
+  };
 };
 
 const initialState = { allArtlistings: {}, singleArtlistingId: null, isLoading: true }
@@ -150,6 +153,19 @@ const artlistings = (state = initialState, action) => {
         }
       }
       delete updatedState.allArtlistings[ action.payload ]
+      return updatedState;
+    }
+    case CHECKOUT_ITEM: {
+      updatedState = {
+        ...state,
+        allArtlistings: {
+          ...state.allArtlistings,
+          [ action.payload ]: {
+            ...state.allArtlistings[ action.payload ]
+          }
+        }
+      }
+      updatedState.allArtlistings[ action.payload ].amount_available = updatedState.allArtlistings[ action.payload ].amount_available - 1;
       return updatedState;
     }
     default:

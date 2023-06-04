@@ -4,14 +4,17 @@ import Button from '../Button';
 import { useModal } from "../../context/Modal";
 import getCurrTime from '../HelperFns/GetCurrTime';
 import "./PurchaseModal.css";
+import { useDispatch } from 'react-redux';
+import { thunkCheckoutItem } from '../../store/shoppingcarts';
 
-const PurchaseModal = () => {
+const PurchaseModal = ({ artlistingId }) => {
   const { closeModal } = useModal();
   const [ cardNumber, setCardNumber ] = useState("");
   const [ expiryDate, setExpiryDate ] = useState("");
   const [ csv, setcsv ] = useState("");
-
   const [ validationErrors, setValidationErrors ] = useState({});
+
+  const dispatch = useDispatch();
 
   const validate = () => {
     const errors = {};
@@ -23,12 +26,15 @@ const PurchaseModal = () => {
 
     return errors;
   };
+
   const handleCheckout = (e) => {
     e.preventDefault();
     const errors = validate();
     if (Object.keys(errors).length > 0) return setValidationErrors(errors);
+    dispatch(thunkCheckoutItem(artlistingId));
     closeModal();
     window.alert("Purchase Confirmed");
+    window.location.reload();
   };
 
   return (

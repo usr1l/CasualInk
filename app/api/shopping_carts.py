@@ -31,22 +31,22 @@ def get_shopping_cart():
     return shopping_cart.to_safe_dict(), 200
 
 
-@shoppingcart_routes.route("/checkout/<int:artwork_id>", methods=["PUT", "POST"])
+@shoppingcart_routes.route("/<int:shoppingcart_id>")
 @login_required
-def checkout_cart(artwork_id):
+def checkout_cart(shoppingcart_id):
+    shopping_cart = ShoppingCart.query.filter(
+        ShoppingCart.id == shoppingcart_id).one_or_none()
+    return shopping_cart.checkout(), 200
+
+
+@shoppingcart_routes.route("/checkout/<int:artlisting_id>")
+@login_required
+def checkout_item(artlisting_id):
 
     owner_id = current_user.id
     shopping_cart = ShoppingCart.query.filter(
         ShoppingCart.owner_id == owner_id).one_or_none()
-    if not shopping_cart:
-        shopping_cart = ShoppingCart(owner_id=owner_id)
-        db.session.add(shopping_cart)
-        db.session.commit()
-    res = None
-    if request.method == "PUT":
-        res = shopping_cart.checkout_item(artwork_id)
 
-    if request.method == "POST":
-        res = shopping_cart.checkout_cart()
+    res = shopping_cart.checkout_item(artlisting_id)
 
     return res, 201

@@ -64,6 +64,10 @@ const SaleListingPage = () => {
                 <div className='specs-box-element-text'>{`${artwork.height} x ${artwork.width} in | ${parseFloat(artwork.height * 2.54).toFixed(2)} x ${parseFloat(artwork.width * 2.54).toFixed(2)} cm`}</div>
               </div>
               <div className='specs-box-element'>
+                <div className='specs-box-element-label'>Amount Available</div>
+                <div className='specs-box-element-text'>{`${artlisting.amount_available}`}</div>
+              </div>
+              <div className='specs-box-element'>
                 <div className='specs-box-element-label'>Price ($)</div>
                 <div className='specs-box-element-text'>{`${artlisting.price}`}</div>
               </div>
@@ -142,7 +146,7 @@ const SaleListingPage = () => {
                 <div className='btn-mobile'>
                   <OpenModalButton
                     modalCSSClass={"btn btn--wide btn--demo"}
-                    modalComponent={<PurchaseModal />}
+                    modalComponent={<PurchaseModal artlistingId={artlistingId} />}
                     buttonText={"Buy Now"}
                   />
                 </div>
