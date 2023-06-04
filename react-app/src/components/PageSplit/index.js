@@ -6,7 +6,7 @@ const PageSplit = ({
   children
 }) => {
   return (
-    <div className={`page-split-half ${pageSplitClass}`}>
+    <div className={`page-split-half ${pageSplitClass ? pageSplitClass : ""}`}>
       {children}
     </div>
   )

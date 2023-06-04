@@ -6,7 +6,7 @@ const Widget = ({
   component
 }) => {
   return (
-    <div className="widget-container">
+    <div className="widget-container center column">
       <div>{label}</div>
       <div>{component}</div>
     </div>

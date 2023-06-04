@@ -28,6 +28,7 @@ function SignupFormModal() {
 				setErrors(data);
 			} else {
 				closeModal();
+				history.push("/");
 			}
 		} else {
 			setErrors([

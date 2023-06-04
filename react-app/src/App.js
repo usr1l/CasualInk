@@ -47,9 +47,9 @@ function App() {
           {user && (
             <Route exact path="/artworks/new" component={UploadArtworkForm} />
           )}
-          {/* {user && (
+          {user && (
             <Route exact path="/shopping-cart" component={ShoppingCart} />
-          )} */}
+          )}
           {user && (
             <Route exact path="/artworks/:artworkId/auctionlistings/:auctionlistingId" component={SingleArtworkPage} />
           )}

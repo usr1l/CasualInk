@@ -9,7 +9,7 @@ import { actionOwnerEditAuctionListing } from "../../store/session";
 
 let socket;
 
-const AuctionBidInput = ({ auctionListing }) => {
+const AuctionBidInput = ({ auctionListing, userBool }) => {
   const dispatch = useDispatch();
 
   const {
@@ -18,19 +18,19 @@ const AuctionBidInput = ({ auctionListing }) => {
   } = auctionListing;
 
   const minBid = () => {
-    if (current_bid === "0") return (parseFloat(start_bid) * 1.06).toFixed(2);
-    return parseFloat(current_bid * 1.06).toFixed(2);
+    if (current_bid === "0") return (Math.ceil(parseFloat(start_bid) * 1.05));
+    return Math.ceil(parseFloat(current_bid * 1.05));
   };
 
-  const [ bidError, setBidError ] = useState("")
+  const [ bidError, setBidError ] = useState("");
   const [ newBidPrice, setNewBidPrice ] = useState(minBid());
 
   const validateBidPrice = () => {
     let bidError = "";
     if ((newBidPrice && parseFloat(newBidPrice) < 0) ||
-      (!Number.isInteger(100 * parseFloat(newBidPrice))) ||
-      ((parseFloat(current_bid) ? parseFloat(current_bid) : parseFloat(start_bid)) * 1.05 > newBidPrice)
-    ) bidError = "Invalid bid: value must 5% greater than the current bid";
+      (!Number.isInteger(parseFloat(newBidPrice))) ||
+      ((current_bid ? current_bid : start_bid) * 1.05 > newBidPrice)
+    ) bidError = "Bid value must be 5% greater than the current bid. (Rounded to dollar)";
 
     return bidError;
   };
@@ -66,7 +66,7 @@ const AuctionBidInput = ({ auctionListing }) => {
 
   useEffect(() => {
     setNewBidPrice(minBid());
-  }, [ current_bid ])
+  }, [ current_bid ]);
 
   useEffect(() => {
     if (process.env.REACT_APP_ENV === "production") socket = io.connect('https://casualink.onrender.com/');
@@ -75,34 +75,42 @@ const AuctionBidInput = ({ auctionListing }) => {
     socket.on("update_bid", (current_bid) => {
       dispatch(thunkCreateBid(current_bid));
     });
-    // when component unmounts, disconnect
+
     return (() => {
       socket.disconnect()
     })
-  }, [])
+  }, []);
 
   return (
     <>
-      <InputDiv
-        labelStyle={'__label'}
-        error={bidError}
-        label={'Enter Bid: *'}
-      >
-        <input
-          className='__input'
-          type="number"
-          value={newBidPrice}
-          onChange={(e) => setNewBidPrice(e.target.value)}
-          required
-        />
-      </InputDiv>
-      <Button
-        buttonSize={'btn--wide'}
-        buttonStyle={'btn--demo'}
-        onClick={handleBid}
-      >
-        Submit Bid
-      </Button>
+      {userBool ? (
+        <>
+          <InputDiv
+            labelStyle={'__label'}
+            error={bidError}
+            label={'Enter Bid: *'}
+          >
+            <input
+              className='__input'
+              type="number"
+              value={newBidPrice}
+              onChange={(e) => setNewBidPrice(e.target.value)}
+              required
+            />
+          </InputDiv>
+          <Button
+            buttonSize={'btn--wide'}
+            buttonStyle={'btn--demo'}
+            onClick={handleBid}
+          >
+            Submit Bid
+          </Button>
+        </>
+      ) : (
+        <Button disableButton={true}>
+          Auction is currently live.
+        </Button>
+      )}
     </>
   );
 };

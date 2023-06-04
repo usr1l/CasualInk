@@ -1,4 +1,5 @@
 from app.models import db, environment, SCHEMA, add_prefix_for_prod
+from app.models.artlisting import ArtListing
 import json
 
 
@@ -20,20 +21,15 @@ class ShoppingCart(db.Model):
         return json.loads(self._items)
 
     @items.setter
-    def items(self, listing_ids, item_amount):
+    def items(self, data):
         cart = json.loads(self._items)
-        if isinstance(listing_ids, list):
-            for listing_id in listing_ids:
-                if listing_id in cart:
-                    cart[listing_id] = cart[listing_id] + \
-                        item_amount[listing_id]
-                else:
-                    cart[listing_id] = item_amount[listing_id]
+        if f"{data['listing']}" in cart:
+            cart[f"{data['listing']}"] = cart[f"{data['listing']}"] + \
+                data["amount"]
+            if cart[f"{data['listing']}"] == 0:
+                del cart[f"{data['listing']}"]
         else:
-            if listing_ids in cart:
-                cart[listing_ids] = cart[listing_ids] + item_amount
-            else:
-                cart[listing_ids] = item_amount
+            cart[f"{data['listing']}"] = data["amount"]
         self._items = json.dumps(cart)
 
     def check_owner(self, user_id):
@@ -41,6 +37,28 @@ class ShoppingCart(db.Model):
 
     def delete_cart(self):
         self._items = json.dumps({})
+
+    def checkout_item(self, artlisting_id):
+        artlisting = ArtListing.query.get(artlisting_id)
+        print(artlisting, "artlisting")
+        if artlisting.amount_available <= 0:
+            return {"errors": ["Item unavailable"]}
+        artlisting.amount_available -= 1
+        db.session.commit()
+        return {"success": "Checkout successful."}
+
+    def checkout(self):
+        cart = json.loads(self._items)
+        for key in cart:
+            artlisting = ArtListing.query.filter(
+                ArtListing.artwork_id == key).one_or_none()
+            if artlisting.amount_available <= 0:
+                return {'errors': ['Item unavailable']}
+            artlisting.amount_available -= cart[key]
+
+        self.delete_cart()
+        db.session.commit()
+        return {"success": "Checkout successful."}
 
     def to_safe_dict(self):
         return {

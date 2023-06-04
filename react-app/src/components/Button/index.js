@@ -5,7 +5,8 @@ const STYLES = [
   'btn--primary',
   'btn--demo',
   'btn--login',
-  'btn--dropdown'
+  'btn--dropdown',
+  'btn--remove'
 ];
 const SIZES = [
   'btn--medium',

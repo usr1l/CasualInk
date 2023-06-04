@@ -7,6 +7,7 @@ const GET_SINGLE_ARTLISTING_ID = "artlistings/GET_SINGLE_ARTLISTING_ID";
 const CREATE_SINGLE_ARTLISTING = "artlistings/CREATE_SINGLE_ARTLISTING";
 const EDIT_SINGLE_ARTLISTING = "artlistings/EDIT_SINGLE_ARTLISTING";
 const DELETE_SINGLE_ARTLISTING = "artlistings/DELETE_SINGLE_ARTLISTING";
+const CHECKOUT_ITEM = "artlistings/CHECKOUT_ITEM";
 
 export const thunkGetArtlistings = () => async (dispatch) => {
   const response = await fetch("/api/artlistings/");
@@ -104,6 +105,13 @@ const actionDeleteArtListing = (artlistingId) => {
   };
 };
 
+export const actionCheckoutItem = (artlistingId) => {
+  return {
+    type: CHECKOUT_ITEM,
+    payload: artlistingId
+  };
+};
+
 const initialState = { allArtlistings: {}, singleArtlistingId: null, isLoading: true }
 
 const artlistings = (state = initialState, action) => {
@@ -145,6 +153,19 @@ const artlistings = (state = initialState, action) => {
         }
       }
       delete updatedState.allArtlistings[ action.payload ]
+      return updatedState;
+    }
+    case CHECKOUT_ITEM: {
+      updatedState = {
+        ...state,
+        allArtlistings: {
+          ...state.allArtlistings,
+          [ action.payload ]: {
+            ...state.allArtlistings[ action.payload ]
+          }
+        }
+      }
+      updatedState.allArtlistings[ action.payload ].amount_available = updatedState.allArtlistings[ action.payload ].amount_available - 1;
       return updatedState;
     }
     default:

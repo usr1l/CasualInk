@@ -32,3 +32,10 @@
   height: 100%;
   overflow: hidden;
 }
+
+
+@media screen and (max-width: 1330px) {
+  .artwork-showcase-container {
+    overflow-x: scroll;
+  }
+}

@@ -77,8 +77,18 @@ const LandingPage = () => {
           />
         </div>
         <div id='feature-banner-slider'>
-          <div data-id='1' id='banner-slider1' className={banner1} onClick={onClick}></div>
-          <div data-id='2' id='banner-slider2' className={banner2} onClick={onClick}></div>
+          <div
+            data-id='1'
+            id='banner-slider1'
+            className={banner1}
+            onClick={onClick}
+          ></div>
+          <div
+            data-id='2'
+            id='banner-slider2'
+            className={banner2}
+            onClick={onClick}
+          ></div>
         </div>
         <HorizontalShowcase caption={"Featured Artwork"} items={artworks} />
       </div>

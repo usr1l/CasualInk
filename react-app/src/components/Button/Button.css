@@ -109,5 +109,21 @@ button.btn--dropdown:hover {
 
 #banner-button {
   justify-content: flex-start;
+}
 
+
+.btn--remove {
+  background: white;
+  color: black;
+  font-size: 12pt;
+  transition: 0.3s ease-in-out;
+  border-radius: 0.25em;
+  border: 2px solid black;
+}
+
+
+.btn--remove.btn--medium:hover {
+  background: var(--site-sage);
+  color: white;
+  transition: 0.3s ease-in-out;
 }

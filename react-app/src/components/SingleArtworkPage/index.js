@@ -62,6 +62,7 @@ const SingleArtworkPage = () => {
             >
               <ImagePreview
                 imgWrapperStyle={"img-preview-wrapper-big"}
+                imgClassName={"img--preview-shift"}
                 imgSrc={artwork.image}
               />
             </PageSplit>

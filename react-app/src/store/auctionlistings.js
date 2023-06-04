@@ -2,7 +2,6 @@ import normalizeFn from "../components/HelperFns/NormalizeFn";
 import { actionArtworkAddAuctionlisting, actionArtworkDeleteAuctionListing } from "./artworks";
 import { actionOwnerCreateAuctionListing, actionOwnerDeleteAuctionListing, actionOwnerEditAuctionListing } from "./session";
 
-
 const GET_AUCTION_LISTINGS = "auctionlistings/GET_AUCTION_LISTINGS";
 const CREATE_SINGLE_AUCTIONLISTING = "auctionlistings/CREATE_SINGLE_AUCTIONLISTING";
 const EDIT_SINGLE_AUCTIONLISTING = "auctionlistings/EDIT_SINGLE_AUCTIONLISTING";
@@ -92,7 +91,6 @@ const actionDeleteAuctionListing = (auctionlistingId) => {
     payload: auctionlistingId
   }
 }
-
 
 const initialState = { allAuctionlistings: {}, singleAuctionlistingId: null, isLoading: true }
 

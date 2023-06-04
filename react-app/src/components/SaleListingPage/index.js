@@ -8,6 +8,7 @@ import Button from "../Button";
 import "./SaleListingPage.css";
 import OpenModalButton from '../OpenModalButton';
 import PurchaseModal from '../PurchaseModal';
+import { thunkCartAddItem } from '../../store/shoppingcarts';
 
 
 const SaleListingPage = () => {
@@ -18,11 +19,13 @@ const SaleListingPage = () => {
   const userId = useSelector(state => state.session.user.id)
   const artwork = useSelector(state => state.artworks.allArtworks[ artworkId ]);
   const artlisting = useSelector(state => state.artlistings.allArtlistings[ artlistingId ]);
+  const shoppingCart = useSelector(state => state.shoppingCart.shoppingCart.items);
 
   const [ isLoaded, setIsLoaded ] = useState(false);
   const [ taxBool, setTaxBool ] = useState(false);
   const [ disclaimerBool, setDisclaimerBool ] = useState(false);
   const [ paymentInfo, setPaymentInfo ] = useState(false);
+  const [ inCartBool, setInCartBool ] = useState(false);
 
   useEffect(() => {
     if (!artwork || !artlisting) history.push("/not-found");
@@ -34,6 +37,12 @@ const SaleListingPage = () => {
         .then(() => setIsLoaded(true));
     }
   }, [ dispatch, artlisting ]);
+
+  useEffect(() => {
+    if (shoppingCart)
+      setInCartBool(artworkId in shoppingCart)
+    else setInCartBool(false);
+  }, [ shoppingCart ])
 
   return (
     <>
@@ -53,6 +62,10 @@ const SaleListingPage = () => {
               <div className='specs-box-element'>
                 <div className='specs-box-element-label'>Size</div>
                 <div className='specs-box-element-text'>{`${artwork.height} x ${artwork.width} in | ${parseFloat(artwork.height * 2.54).toFixed(2)} x ${parseFloat(artwork.width * 2.54).toFixed(2)} cm`}</div>
+              </div>
+              <div className='specs-box-element'>
+                <div className='specs-box-element-label'>Amount Available</div>
+                <div className='specs-box-element-text'>{`${artlisting.amount_available}`}</div>
               </div>
               <div className='specs-box-element'>
                 <div className='specs-box-element-label'>Price ($)</div>
@@ -129,13 +142,35 @@ const SaleListingPage = () => {
               </div>
             </div>
             {userId !== artwork.ownerId && (artlisting.amount_available > 0) && (
-              <div className='btn-mobile'>
-                <OpenModalButton
-                  modalCSSClass={"btn btn--wide btn--demo"}
-                  modalComponent={<PurchaseModal />}
-                  buttonText={"Checkout"}
-                />
-              </div>
+              <>
+                <div className='btn-mobile'>
+                  <OpenModalButton
+                    modalCSSClass={"btn btn--wide btn--demo"}
+                    modalComponent={<PurchaseModal artlistingId={artlistingId} />}
+                    buttonText={"Buy Now"}
+                  />
+                </div>
+                <br />
+                <div className='btn-mobile'>
+                  {!inCartBool ? (
+                    <Button
+                      buttonSize={"btn--wide"}
+                      buttonStyle={"btn--demo"}
+                      onClick={() => dispatch(thunkCartAddItem(artworkId))}
+                    >
+                      Add to Cart
+                    </Button>
+                  ) : (
+                    <Button
+                      buttonSize={"btn--wide"}
+                      disableButton={true}
+                    >
+                      Added to cart
+                    </Button>
+                  )}
+                </div>
+                <br />
+              </>
             )}
             {(artlisting.amount_available < 1) && (
               <Button

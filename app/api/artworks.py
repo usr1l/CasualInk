@@ -1,6 +1,6 @@
+import json
 from flask import Blueprint, request
 from flask_login import login_required, current_user
-import json
 from app.models import Artwork, db
 from app.forms import ArtworkForm
 from app.api import validation_errors_to_error_messages
