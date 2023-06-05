@@ -23,6 +23,7 @@ const ProfilePage = () => {
     if (currUser && allArtworks) setIsLoaded(true);
   }, [ currUser, history ]);
 
+
   // edit later on, change so can access all user pages
   // let currUser;
   // if (currId === userId) currUser = useSelector(state => state.session.user)
@@ -55,6 +56,9 @@ const ProfilePage = () => {
             <Route exact path={`/user/:userId/profile`} >
               <DisplayArtSection items={allArtworks} />
             </Route>
+          </Switch>
+          <Switch>
+            {/* <Route exact path={`/user/:userId`} */}
           </Switch>
         </PageContainer>
       </div>

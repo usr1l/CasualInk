@@ -18,6 +18,7 @@ import SingleArtworkPage from "./components/SingleArtworkPage";
 import NotFoundPage from "./components/NotFoundPage";
 import EditArtworkForm from "./components/EditArtWorkForm";
 import { thunkGetAuctionListings } from "./store/auctionlistings";
+import { thunkLoadAllUsers } from "./store/users";
 
 function App() {
   const dispatch = useDispatch();
@@ -28,6 +29,7 @@ function App() {
     dispatch(thunkGetArtworks())
       .then(() => dispatch(thunkGetArtlistings()))
       .then(() => dispatch(thunkGetAuctionListings()))
+      .then(() => dispatch(thunkLoadAllUsers()))
       .then(() => dispatch(authenticate()))
       .then(() => setIsLoaded(true));
   }, [ dispatch ]);
