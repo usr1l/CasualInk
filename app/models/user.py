@@ -81,7 +81,7 @@ class User(db.Model, UserMixin):
             "profile_pic": self.profile_pic
         }
 
-    def to_list_dict(self):
+    def to_dict(self):
         return {
             "id": self.id,
             "username": self.username,
@@ -96,20 +96,20 @@ class User(db.Model, UserMixin):
             "auctionListings": [auction_listing.to_safe_dict()["id"] for auction_listing in self.auction_listings]
         }
 
-    def to_dict(self):
-        return {
-            "id": self.id,
-            "username": self.username,
-            "email": self.email,
-            "firstname": self.firstname,
-            "lastname": self.lastname,
-            "bio": self.bio,
-            "joinDate": self.join_date,
-            "profilePic": self.profile_pic,
-            "artworks": [artwork.to_dict() for artwork in self.artworks],
-            "artListings": [art_listing.to_safe_dict() for art_listing in self.art_listings],
-            "auctionListings": [auction_listing.to_safe_dict() for auction_listing in self.auction_listings]
-        }
+    # def to_dict(self):
+    #     return {
+    #         "id": self.id,
+    #         "username": self.username,
+    #         "email": self.email,
+    #         "firstname": self.firstname,
+    #         "lastname": self.lastname,
+    #         "bio": self.bio,
+    #         "joinDate": self.join_date,
+    #         "profilePic": self.profile_pic,
+    #         "artworks": [artwork.to_dict() for artwork in self.artworks],
+    #         "artListings": [art_listing.to_safe_dict() for art_listing in self.art_listings],
+    #         "auctionListings": [auction_listing.to_safe_dict() for auction_listing in self.auction_listings]
+    #     }
 
     def __repr__(self):
         return f"<User {self.id}, {self.firstname} {self.lastname}>"

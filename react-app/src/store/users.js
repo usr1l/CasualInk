@@ -6,13 +6,12 @@ export const thunkLoadAllUsers = () => async (dispatch) => {
   const response = await fetch('/api/users/');
 
   const data = await response.json();
-  const userData = normalizeFn(data);
-  console.log(data)
   if (response.ok) {
+    const userData = normalizeFn(data);
     dispatch(actionLoadAllUsers(userData));
   };
 
-  return userData;
+  return data;
 };
 
 const actionLoadAllUsers = (userData) => {
@@ -22,17 +21,19 @@ const actionLoadAllUsers = (userData) => {
   }
 };
 
-const initialState = { allUsers: {}, singleUser: null, isLoading: false };
+// export const thunkLoadSingleUser = () => async(dispatch)
+
+const initialState = { allUsers: {}, singleUser: null, isLoading: true };
 
 const users = (state = initialState, action) => {
-  switch (action.payload) {
+  switch (action.type) {
     case LOAD_USERS:
       return {
         ...state,
         allUsers: {
           ...action.payload
         },
-        isLoading: true
+        isLoading: false
       }
     default:
       return state;

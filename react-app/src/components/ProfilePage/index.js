@@ -12,22 +12,25 @@ import NavBar from '../NavBar';
 const ProfilePage = () => {
   const history = useHistory();
   const { userId } = useParams();
-  const currUser = useSelector(state => state.session.user);
-  const allArtworks = Object.values(currUser.artworks);
+  const artworks = useSelector(state => state.artworks.allArtworks);
+  const currUser = useSelector(state => state.users.allUsers[ userId ]);
+  const userArtworks = currUser.artworks;
   const currId = currUser.id;
 
   const [ isLoaded, setIsLoaded ] = useState(false);
+  const [ allArtworks, setAllArtworks ] = useState([]);
 
   useEffect(() => {
-    if (currId !== parseInt(userId)) history.push("/not-authorized");
-    if (currUser && allArtworks) setIsLoaded(true);
-  }, [ currUser, history ]);
+    if (currUser) {
+      setIsLoaded(true);
+      const art = [];
+      for (const key of userArtworks) {
+        art.push(artworks[ key ]);
+      };
+      setAllArtworks(art);
+    };
+  }, [ currUser, artworks, userArtworks ]);
 
-
-  // edit later on, change so can access all user pages
-  // let currUser;
-  // if (currId === userId) currUser = useSelector(state => state.session.user)
-  // else currUser =
 
   return (
     <>
