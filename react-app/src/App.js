@@ -62,7 +62,13 @@ function App() {
             <Route exact path="/artworks/:artworkId/edit" component={EditArtworkForm} />
           )}
           {user && (
-            <Route exact path="/user/:userId/profile" component={ProfilePage} />
+            <Route exact path="/user/:userId/reviews" component={ProfilePage} />
+          )}
+          {user && (
+            <Route exact path="/user/:userId/artworks" component={ProfilePage} />
+          )}
+          {user && (
+            <Route exact path="/user/:userId/" component={ProfilePage} />
           )}
           {user && (
             <Route exact path="/artworks/:artworkId" component={SingleArtworkPage} />

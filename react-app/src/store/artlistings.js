@@ -49,7 +49,7 @@ export const thunkAddArtlisting = (data) => async (dispatch) => {
   const resData = await res.json();
   if (res.ok) {
     dispatch(actionAddArtlisting(resData));
-    dispatch(actionOwnerCreateArtlisting(resData));
+    dispatch(actionOwnerCreateArtlisting(resData.id));
     dispatch(actionArtworkAddArtlisting(resData.id, resData.artwork_id));
   };
   return resData;
@@ -72,7 +72,7 @@ export const thunkEditArtlisting = (data, artListingId) => async (dispatch) => {
   const resData = await res.json();
   if (res.ok) {
     dispatch(actionEditArtListing(resData));
-    dispatch(actionOwnerEditArtListing(resData));
+    // dispatch(actionOwnerEditArtListing(resData));
   };
   return resData;
 };

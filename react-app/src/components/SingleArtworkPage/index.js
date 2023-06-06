@@ -185,7 +185,7 @@ const SingleArtworkPage = () => {
                 modalComponent={<ConfirmDeleteModal
                   deleteFn={thunkDeleteArtwork}
                   itemId={artworkId}
-                  directTo={`/user/${currUser.id}/profile`} />}
+                  directTo={`/user/${currUser.id}/`} />}
               />
               <Button
                 buttonStyle='btn--login'

@@ -36,7 +36,7 @@ export const thunkAddAuctionlisting = (data) => async (dispatch) => {
   const resData = await response.json();
   if (response.ok) {
     dispatch(actionAddAuctionlisting(resData));
-    dispatch(actionOwnerCreateAuctionListing(resData));
+    dispatch(actionOwnerCreateAuctionListing(resData.id));
     dispatch(actionArtworkAddAuctionlisting(resData.id, resData.artwork_id));
   };
   return resData;
@@ -59,7 +59,7 @@ export const thunkEditAuctionlisting = (data, auctionListingId) => async (dispat
   const resData = await response.json();
   if (response.ok) {
     dispatch(actionEditAuctionListing(resData));
-    dispatch(actionOwnerEditAuctionListing(resData));
+    // dispatch(actionOwnerEditAuctionListing(resData));
   };
   return resData;
 };

@@ -8,6 +8,8 @@ import Button from '../Button';
 import PageContainer from '../PageContainer';
 import "./ProfilePage.css";
 import NavBar from '../NavBar';
+import ReviewPage from '../ReviewPage';
+import AboutPage from '../AboutPage';
 
 const ProfilePage = () => {
   const history = useHistory();
@@ -48,20 +50,29 @@ const ProfilePage = () => {
               </div>
             </div>
             <NavBar>
-              <NavLink to={`/user/${userId}/profile/`} className="navbar-item" activeClassName='navbar-navlink-active'>
+              <NavLink exact to={`/user/${userId}/`} className="navbar-item" activeClassName='navbar-navlink-active'>
+                About
+              </NavLink>
+              <NavLink exact to={`/user/${userId}/artworks`} className="navbar-item" activeClassName='navbar-navlink-active'>
                 My Collection
+              </NavLink>
+              <NavLink exact to={`/user/${userId}/reviews`} className="navbar-item" activeClassName='navbar-navlink-active'>
+                Reviews
               </NavLink>
             </NavBar>
           </>
         )}
         <PageContainer>
           <Switch >
-            <Route exact path={`/user/:userId/profile`} >
+            <Route exact path={`/user/:userId/`}>
+              <AboutPage></AboutPage>
+            </Route>
+            <Route exact path={`/user/:userId/reviews`}>
+              <ReviewPage></ReviewPage>
+            </Route>
+            <Route exact path={`/user/:userId/artworks`} >
               <DisplayArtSection items={allArtworks} />
             </Route>
-          </Switch>
-          <Switch>
-            {/* <Route exact path={`/user/:userId`} */}
           </Switch>
         </PageContainer>
       </div>

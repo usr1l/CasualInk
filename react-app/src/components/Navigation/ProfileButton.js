@@ -48,7 +48,7 @@ function ProfileButton({ user }) {
         <IconLabel iconLabelId={'dropdown-top-item'} iconClass={"fa-regular fa-user"} labelText={user.username} />
         <IconLabel iconClass={"fa-regular fa-envelope"} labelText={user.email} />
         <div className="separator"></div>
-        <IconLabel iconClass={"fa-solid fa-pencil"} wrapperClass={"click"} labelText={"My Collection"} onClick={() => history.push(`/user/${user.id}/profile`)}></IconLabel>
+        <IconLabel iconClass={"fa-solid fa-pencil"} wrapperClass={"click"} labelText={"My Collection"} onClick={() => history.push(`/user/${user.id}/`)}></IconLabel>
         <div id={"dropdown-bot-item"} className="icon-label-component">
           <div className="icon-label-item-image-container">
             <i className="fa-solid fa-arrow-right-from-bracket"></i>

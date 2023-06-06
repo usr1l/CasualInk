@@ -49,7 +49,7 @@ const AuctionBidInput = ({ auctionListing, userBool }) => {
 
     if (res.ok) {
       dispatch(actionEditAuctionListing(data));
-      dispatch(actionOwnerEditAuctionListing(data));
+      // dispatch(actionOwnerEditAuctionListing(data));
       setBidError("");
     };
 

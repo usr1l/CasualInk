@@ -5,7 +5,7 @@ const SET_USER = "session/SET_USER";
 const REMOVE_USER = "session/REMOVE_USER";
 const DELETE_OWNER_ARTWORK = "session/DELETE_OWNER_ARTWORK";
 const UPLOAD_OWNER_ARTWORK = "session/UPLOAD_OWNER_ARTWORK";
-const EDIT_OWNER_ARTWORK = "session/EDIT_OWNER_ARTWORK";
+// const EDIT_OWNER_ARTWORK = "session/EDIT_OWNER_ARTWORK";
 const CREATE_OWNER_ARTLISTING = "session/CREATE_OWNER_ARTLISTING";
 const CREATE_OWNER_AUCTIONLISTING = "session/CREATE_OWNER_AUCTIONLISTING";
 const DELETE_OWNER_ARTLISTING = "session/DELETE_OWNER_ARTLISTING";
@@ -102,23 +102,23 @@ export const signUp = (signupData) => async (dispatch) => {
 export const actionDeleteOwnerArtwork = (artworkId) => {
 	return {
 		type: DELETE_OWNER_ARTWORK,
-		payload: artworkId
+		payload: parseInt(artworkId)
 	};
 };
 
-export const actionUploadOwnerArtwork = (data) => {
+export const actionUploadOwnerArtwork = (id) => {
 	return {
 		type: UPLOAD_OWNER_ARTWORK,
-		payload: data
+		payload: id
 	};
 };
 
-export const actionOwnerEditArtwork = (data) => {
-	return {
-		type: EDIT_OWNER_ARTWORK,
-		payload: data
-	};
-};
+// export const actionOwnerEditArtwork = (data) => {
+// 	return {
+// 		type: EDIT_OWNER_ARTWORK,
+// 		payload: data
+// 	};
+// };
 
 export const actionOwnerCreateArtlisting = (data) => {
 	return {
@@ -141,19 +141,19 @@ export const actionOwnerDeleteArtListing = (artlistingId) => {
 	};
 };
 
-export const actionOwnerEditArtListing = (data) => {
-	return {
-		type: CREATE_OWNER_ARTLISTING,
-		payload: data
-	};
-};
+// export const actionOwnerEditArtListing = (data) => {
+// 	return {
+// 		type: CREATE_OWNER_ARTLISTING,
+// 		payload: data
+// 	};
+// };
 
-export const actionOwnerEditAuctionListing = (data) => {
-	return {
-		type: CREATE_OWNER_AUCTIONLISTING,
-		payload: data
-	};
-};
+// export const actionOwnerEditAuctionListing = (data) => {
+// 	return {
+// 		type: CREATE_OWNER_AUCTIONLISTING,
+// 		payload: data
+// 	};
+// };
 
 export const actionOwnerDeleteAuctionListing = (auctionlistingId) => {
 	return {
@@ -177,80 +177,67 @@ export default function reducer(state = initialState, action) {
 				...state,
 				user: {
 					...state.user,
-					artworks: {
-						...state.user.artworks
-					}
+					artworks: [ ...state.user.artworks ]
 				}
 			}
-			delete updatedState.user.artworks[ action.payload ]
+			console.log("here")
+			console.log(updatedState.user.artworks.indexOf(action.payload), action.payload)
+			updatedState.user.artworks.splice(updatedState.user.artworks.indexOf(action.payload), updatedState.user.artworks.indexOf(action.payload) + 1)
 			return updatedState;
 		case UPLOAD_OWNER_ARTWORK:
 			return {
 				...state,
 				user: {
 					...state.user,
-					artworks: {
-						...state.user.artworks,
-						[ action.payload.id ]: action.payload
-					}
+					artworks: [ ...state.user.artworks, action.payload ]
 				}
 			}
-		case EDIT_OWNER_ARTWORK:
-			return {
-				...state,
-				user: {
-					...state.user,
-					artworks: {
-						...state.user.artworks,
-						[ action.payload.id ]: action.payload
-					}
-				}
-			}
+		// case EDIT_OWNER_ARTWORK:
+		// 	return {
+		// 		...state,
+		// 		user: {
+		// 			...state.user,
+		// 			artworks: {
+		// 				...state.user.artworks,
+		// 				[ action.payload.id ]: action.payload
+		// 			}
+		// 		}
+		// 	}
 		case CREATE_OWNER_ARTLISTING:
 			return {
 				...state,
 				user: {
 					...state.user,
-					artListings: {
-						...state.user.artListings,
-						[ action.payload.id ]: action.payload
-					}
+					artListings: [ ...state.user.artListings, action.payload ]
 				}
-			}
+			};
 		case CREATE_OWNER_AUCTIONLISTING:
 			return {
 				...state,
 				user: {
 					...state.user,
-					auctionListings: {
-						...state.user.auctionListings,
-						[ action.payload.id ]: action.payload
-					}
+					auctionListings: [ ...state.user.auctionListings, action.payload ]
 				}
-			}
+			};
 		case DELETE_OWNER_ARTLISTING:
 			updatedState = {
 				...state,
 				user: {
 					...state.user,
-					artListings: {
-						...state.user.artListings,
-					}
+					artListings: [ ...state.user.artListings ]
 				}
-			}
-			delete updatedState.user.artListings[ action.payload ]
+			};
+			updatedState.user.artListings.splice(updatedState.user.artListings.indexOf(action.payload), updatedState.user.artListings.indexOf(action.payload) + 1);
 			return updatedState;
 		case DELETE_OWNER_AUCTIONLISTING:
 			updatedState = {
 				...state,
 				user: {
 					...state.user,
-					auctionListings: {
-						...state.user.auctionListings,
-					}
+					auctionListings: [ ...state.user.auctionListings ]
 				}
 			}
-			delete updatedState.user.auctionListings[ action.payload ]
+			updatedState.user.auctionListings.splice(updatedState.user.auctionListings.indexOf(action.payload), updatedState.user.auctionListings.indexOf(action.payload) + 1)
 			return updatedState;
 		default:
 			return state;
