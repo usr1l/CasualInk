@@ -4,7 +4,7 @@ import os
 from .websocket import socketio
 from .config import Config
 from .seeds import seed_commands
-from .api import user_routes, auth_routes, artwork_routes, artlisting_routes, shoppingcart_routes, auctionlisting_routes
+from .api import user_routes, auth_routes, artwork_routes, artlisting_routes, shoppingcart_routes, auctionlisting_routes, review_routes
 from .models import db, User
 from flask_login import LoginManager
 from flask_wtf.csrf import CSRFProtect, generate_csrf
@@ -37,6 +37,7 @@ app.register_blueprint(artlisting_routes, url_prefix='/api/artlistings')
 app.register_blueprint(shoppingcart_routes, url_prefix='/api/shoppingcart')
 app.register_blueprint(auctionlisting_routes,
                        url_prefix='/api/auctionlistings')
+app.register_blueprint(review_routes, url_prefix='/api/reviews')
 socketio.init_app(app, async_mode='gevent')
 db.init_app(app)
 Migrate(app, db)

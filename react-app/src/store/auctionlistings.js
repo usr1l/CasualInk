@@ -59,7 +59,6 @@ export const thunkEditAuctionlisting = (data, auctionListingId) => async (dispat
   const resData = await response.json();
   if (response.ok) {
     dispatch(actionEditAuctionListing(resData));
-    // dispatch(actionOwnerEditAuctionListing(resData));
   };
   return resData;
 };

@@ -39,21 +39,22 @@ const ProfilePage = () => {
       <div id="profile-page-container">
         {isLoaded && (
           <>
-            <div id='profile-page-banner'>
+            <div id='profile-page-banner' style={{ display: "flex", alignItems: "center" }}>
               <ProfileDescriptionCard
                 imgSrc={currUser.profilePic ? currUser.profilePic : ""}
                 cardStyle='membership-page-member-cards'
                 heading={`${currUser.firstname} ${currUser.lastname}`}
                 subHeading={`Member since ${currUser.joinDate.split(" ")[ 3 ]}`}
               />
-              <div>
+              <div style={{ height: "80%", width: "85%" }}>
+                <p style={{ height: "100%", fontWeight: "100", fontSize: "9pt", padding: "10px", boxSizing: "border-box", overflowY: "scroll" }}>
+                  <h3 style={{ margin: "0 0 10px", fontWeight: "300", fontSize: "12pt" }}>Bio:</h3>
+                  {currUser.bio}
+                </p>
               </div>
             </div>
             <NavBar>
               <NavLink exact to={`/user/${userId}/`} className="navbar-item" activeClassName='navbar-navlink-active'>
-                About
-              </NavLink>
-              <NavLink exact to={`/user/${userId}/artworks`} className="navbar-item" activeClassName='navbar-navlink-active'>
                 My Collection
               </NavLink>
               <NavLink exact to={`/user/${userId}/reviews`} className="navbar-item" activeClassName='navbar-navlink-active'>
@@ -64,13 +65,13 @@ const ProfilePage = () => {
         )}
         <PageContainer>
           <Switch >
-            <Route exact path={`/user/:userId/`}>
+            {/* <Route exact path={`/user/:userId/`}>
               <AboutPage></AboutPage>
-            </Route>
+            </Route> */}
             <Route exact path={`/user/:userId/reviews`}>
-              <ReviewPage></ReviewPage>
+              <ReviewPage reviewsList={currUser.reviews}></ReviewPage>
             </Route>
-            <Route exact path={`/user/:userId/artworks`} >
+            <Route exact path={`/user/:userId/`} >
               <DisplayArtSection items={allArtworks} />
             </Route>
           </Switch>

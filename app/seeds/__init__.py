@@ -5,6 +5,8 @@ from .artworks import seed_artworks, unseed_artworks
 from .users import seed_users, undo_users
 from .shoppingcart import seed_shopping_carts, unseed_shopping_carts
 from .auctionlistings import seed_auctionlistings, unseed_auctionlistings
+from .reviews import seed_review_data, unseed_review_data
+
 # Creates a seed group to hold our commands
 # So we can type `flask seed --help`
 seed_commands = AppGroup('seed')
@@ -22,9 +24,11 @@ def seed():
         unseed_artlistings()
         unseed_artworks()
         unseed_shopping_carts()
+        unseed_review_data()
         undo_users()
     seed_users()
     seed_shopping_carts()
+    seed_review_data()
     seed_artworks()
     seed_artlistings()
     seed_auctionlistings()
@@ -38,5 +42,6 @@ def undo():
     unseed_artlistings()
     unseed_artworks()
     unseed_shopping_carts()
+    unseed_review_data()
     undo_users()
     # Add other undo functions here

@@ -39,7 +39,7 @@ class User(db.Model, UserMixin):
             secondary=f"{SCHEMA}.reviews",
             primaryjoin=Review.reviewer_id == id,
             secondaryjoin=Review.receiver_id == id,
-            overlaps="reveiver",
+            overlaps="receiver",
         )
     else:
         reviews = db.relationship(
@@ -47,7 +47,7 @@ class User(db.Model, UserMixin):
             secondary="reviews",
             primaryjoin=Review.reviewer_id == id,
             secondaryjoin=Review.receiver_id == id,
-            overlaps="reveiver",
+            overlaps="receiver",
         )
 
     @property
@@ -93,7 +93,8 @@ class User(db.Model, UserMixin):
             "profilePic": self.profile_pic,
             "artworks": [artwork.to_dict()["id"] for artwork in self.artworks],
             "artListings": [art_listing.to_safe_dict()["id"] for art_listing in self.art_listings],
-            "auctionListings": [auction_listing.to_safe_dict()["id"] for auction_listing in self.auction_listings]
+            "auctionListings": [auction_listing.to_safe_dict()["id"] for auction_listing in self.auction_listings],
+            "reviews": [review.to_safe_dict()["id"] for review in self.reviews]
         }
 
     # def to_dict(self):

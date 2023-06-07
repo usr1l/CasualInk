@@ -5,12 +5,10 @@ const SET_USER = "session/SET_USER";
 const REMOVE_USER = "session/REMOVE_USER";
 const DELETE_OWNER_ARTWORK = "session/DELETE_OWNER_ARTWORK";
 const UPLOAD_OWNER_ARTWORK = "session/UPLOAD_OWNER_ARTWORK";
-// const EDIT_OWNER_ARTWORK = "session/EDIT_OWNER_ARTWORK";
 const CREATE_OWNER_ARTLISTING = "session/CREATE_OWNER_ARTLISTING";
 const CREATE_OWNER_AUCTIONLISTING = "session/CREATE_OWNER_AUCTIONLISTING";
 const DELETE_OWNER_ARTLISTING = "session/DELETE_OWNER_ARTLISTING";
 const DELETE_OWNER_AUCTIONLISTING = "session/DELETE_OWNER_AUCTIONLISTING";
-// const EDIT_OWNER_AUCTIONLISTING = "session/EDIT_OWNER_AUCTIONLISTING";
 
 const setUser = (user) => ({
 	type: SET_USER,
@@ -53,6 +51,7 @@ export const login = (email, password) => async (dispatch) => {
 
 	if (response.ok) {
 		const data = await response.json();
+		console.log(data)
 		dispatch(setUser(data));
 		return null;
 	} else if (response.status < 500) {
@@ -113,12 +112,7 @@ export const actionUploadOwnerArtwork = (id) => {
 	};
 };
 
-// export const actionOwnerEditArtwork = (data) => {
-// 	return {
-// 		type: EDIT_OWNER_ARTWORK,
-// 		payload: data
-// 	};
-// };
+
 
 export const actionOwnerCreateArtlisting = (data) => {
 	return {
@@ -137,28 +131,15 @@ export const actionOwnerCreateAuctionListing = (data) => {
 export const actionOwnerDeleteArtListing = (artlistingId) => {
 	return {
 		type: DELETE_OWNER_ARTLISTING,
-		payload: artlistingId
+		payload: parseInt(artlistingId)
 	};
 };
 
-// export const actionOwnerEditArtListing = (data) => {
-// 	return {
-// 		type: CREATE_OWNER_ARTLISTING,
-// 		payload: data
-// 	};
-// };
-
-// export const actionOwnerEditAuctionListing = (data) => {
-// 	return {
-// 		type: CREATE_OWNER_AUCTIONLISTING,
-// 		payload: data
-// 	};
-// };
 
 export const actionOwnerDeleteAuctionListing = (auctionlistingId) => {
 	return {
 		type: DELETE_OWNER_AUCTIONLISTING,
-		payload: auctionlistingId
+		payload: parseInt(auctionlistingId)
 	};
 };
 
@@ -166,9 +147,6 @@ export default function reducer(state = initialState, action) {
 	let updatedState;
 	switch (action.type) {
 		case SET_USER:
-			// action.payload.artListings = normalizeFn(action.payload.artListings)
-			// action.payload.auctionListings = normalizeFn(action.payload.auctionListings)
-			// action.payload.artworks = normalizeFn(action.payload.artworks)
 			return { user: action.payload };
 		case REMOVE_USER:
 			return { user: null };
@@ -180,8 +158,6 @@ export default function reducer(state = initialState, action) {
 					artworks: [ ...state.user.artworks ]
 				}
 			}
-			console.log("here")
-			console.log(updatedState.user.artworks.indexOf(action.payload), action.payload)
 			updatedState.user.artworks.splice(updatedState.user.artworks.indexOf(action.payload), updatedState.user.artworks.indexOf(action.payload) + 1)
 			return updatedState;
 		case UPLOAD_OWNER_ARTWORK:
@@ -192,17 +168,6 @@ export default function reducer(state = initialState, action) {
 					artworks: [ ...state.user.artworks, action.payload ]
 				}
 			}
-		// case EDIT_OWNER_ARTWORK:
-		// 	return {
-		// 		...state,
-		// 		user: {
-		// 			...state.user,
-		// 			artworks: {
-		// 				...state.user.artworks,
-		// 				[ action.payload.id ]: action.payload
-		// 			}
-		// 		}
-		// 	}
 		case CREATE_OWNER_ARTLISTING:
 			return {
 				...state,

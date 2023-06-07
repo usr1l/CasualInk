@@ -19,6 +19,7 @@ import NotFoundPage from "./components/NotFoundPage";
 import EditArtworkForm from "./components/EditArtWorkForm";
 import { thunkGetAuctionListings } from "./store/auctionlistings";
 import { thunkLoadAllUsers } from "./store/users";
+import { thunkLoadAllReviews } from "./store/reviews";
 
 function App() {
   const dispatch = useDispatch();
@@ -30,6 +31,7 @@ function App() {
       .then(() => dispatch(thunkGetArtlistings()))
       .then(() => dispatch(thunkGetAuctionListings()))
       .then(() => dispatch(thunkLoadAllUsers()))
+      .then(() => dispatch(thunkLoadAllReviews()))
       .then(() => dispatch(authenticate()))
       .then(() => setIsLoaded(true));
   }, [ dispatch ]);
@@ -65,11 +67,11 @@ function App() {
             <Route exact path="/user/:userId/reviews" component={ProfilePage} />
           )}
           {user && (
-            <Route exact path="/user/:userId/artworks" component={ProfilePage} />
-          )}
-          {user && (
             <Route exact path="/user/:userId/" component={ProfilePage} />
           )}
+          {/* {user && (
+            <Route exact path="/user/:userId/" component={ProfilePage} />
+          )} */}
           {user && (
             <Route exact path="/artworks/:artworkId" component={SingleArtworkPage} />
           )}

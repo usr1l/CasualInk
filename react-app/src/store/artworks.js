@@ -73,7 +73,6 @@ export const thunkEditArtwork = ({ formData, artworkId }) => async (dispatch) =>
   const data = await res.json();
   if (res.ok) {
     dispatch(actionEditArtwork(data))
-    // dispatch(actionOwnerEditArtwork(data))
   }
   return data;
 };

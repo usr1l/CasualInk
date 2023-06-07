@@ -6,6 +6,7 @@ import artworks from './artworks';
 import artlistings from './artlistings';
 import shoppingCart from './shoppingcarts';
 import auctionlistings from './auctionlistings';
+import reviews from './reviews';
 
 const rootReducer = combineReducers({
   session,
@@ -13,7 +14,8 @@ const rootReducer = combineReducers({
   artlistings,
   auctionlistings,
   shoppingCart,
-  users
+  users,
+  reviews
 });
 
 
