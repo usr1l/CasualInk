@@ -33,7 +33,6 @@ const ProfilePage = () => {
     };
   }, [ currUser, artworks, userArtworks ]);
 
-
   return (
     <>
       <div id="profile-page-container">
@@ -55,7 +54,7 @@ const ProfilePage = () => {
             </div>
             <NavBar>
               <NavLink exact to={`/user/${userId}/`} className="navbar-item" activeClassName='navbar-navlink-active'>
-                My Collection
+                Collection
               </NavLink>
               <NavLink exact to={`/user/${userId}/reviews`} className="navbar-item" activeClassName='navbar-navlink-active'>
                 Reviews
@@ -69,7 +68,7 @@ const ProfilePage = () => {
               <AboutPage></AboutPage>
             </Route> */}
             <Route exact path={`/user/:userId/reviews`}>
-              <ReviewPage reviewsList={currUser.reviews}></ReviewPage>
+              <ReviewPage reviewsList={currUser.reviews} name={`${currUser.username}`} user={parseInt(userId)}></ReviewPage>
             </Route>
             <Route exact path={`/user/:userId/`} >
               <DisplayArtSection items={allArtworks} />

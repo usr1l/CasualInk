@@ -18,7 +18,7 @@ const ProfileDescriptionCard = ({
   return (
     <div className="profile-description-card-container" id={checkDivStyle}>
       <div className="profile-description-card">
-        <img src={imgSrc ? imgSrc : profileIcon} className={`${profileClass} profile-description-card-element`} id={profileId} />
+        <img src={imgSrc ? imgSrc : profileIcon} className={`profile-description-card-element ${profileClass}`} id={profileId} />
         <div className="profile-description-card-element">
           <div className="profile-description-card-element-heading">{heading}</div>
           <div className="profile-description-card-element-subheading">{subHeading}</div>

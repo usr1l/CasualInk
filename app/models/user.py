@@ -37,16 +37,16 @@ class User(db.Model, UserMixin):
         reviews = db.relationship(
             "Review",
             secondary=f"{SCHEMA}.reviews",
-            primaryjoin=Review.reviewer_id == id,
-            secondaryjoin=Review.receiver_id == id,
+            primaryjoin=Review.receiver_id == id,
+            secondaryjoin=Review.reviewer_id == id,
             overlaps="receiver",
         )
     else:
         reviews = db.relationship(
             "Review",
             secondary="reviews",
-            primaryjoin=Review.reviewer_id == id,
-            secondaryjoin=Review.receiver_id == id,
+            primaryjoin=Review.receiver_id == id,
+            secondaryjoin=Review.reviewer_id == id,
             overlaps="receiver",
         )
 

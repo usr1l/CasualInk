@@ -10,20 +10,21 @@ class Review(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     review = db.Column(db.Text, nullable=False)
-    created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-    updated_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    created_at = db.Column(db.DateTime, nullable=False,
+                           default=datetime.utcnow)
+    updated_at = db.Column(db.DateTime, nullable=False,
+                           default=datetime.utcnow)
     reviewer_id = db.Column(
         db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False
     )
     receiver_id = db.Column(
         db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False
     )
-
-    reviewer = db.relationship(
-        "User", foreign_keys=[reviewer_id], back_populates="reviews"
-    )
     receiver = db.relationship(
         "User", foreign_keys=[receiver_id], back_populates="reviews"
+    )
+    reviewer = db.relationship(
+        "User", foreign_keys=[reviewer_id], back_populates="reviews"
     )
 
     @classmethod
@@ -31,18 +32,18 @@ class Review(db.Model):
         if isinstance(items, list):
             new_items = [
                 cls(
-                  review=item["review"],
-                  reviewer_id=item["reviewer_id"],
-                  receiver_id=item["receiver_id"]
+                    review=item["review"],
+                    reviewer_id=item["reviewer_id"],
+                    receiver_id=item["receiver_id"]
                 )
                 for item in items
             ]
             return new_items
         if isinstance(items, dict):
             new_item = cls(
-                  review=items["review"],
-                  reviewer_id=items["reviewer_id"],
-                  receiver_id=items["receiver_id"]
+                review=items["review"],
+                reviewer_id=items["reviewer_id"],
+                receiver_id=items["receiver_id"]
             )
             return new_item
 
@@ -52,7 +53,7 @@ class Review(db.Model):
             "review": self.review,
             "created_at": self.created_at,
             "updated_at": self.updated_at,
-            "reviewer_id": self.receiver_id,
+            "reviewer_id": self.reviewer_id,
             "receiver_id": self.receiver_id
         }
 

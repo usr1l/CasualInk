@@ -40,7 +40,6 @@ class ShoppingCart(db.Model):
 
     def checkout_item(self, artlisting_id):
         artlisting = ArtListing.query.get(artlisting_id)
-        print(artlisting, "artlisting")
         if artlisting.amount_available <= 0:
             return {"errors": ["Item unavailable"]}
         artlisting.amount_available -= 1
@@ -59,6 +58,13 @@ class ShoppingCart(db.Model):
         self.delete_cart()
         db.session.commit()
         return {"success": "Checkout successful."}
+
+    def remove_item(self, artwork_id):
+        cart = json.loads(self._items)
+        del cart[f"{artwork_id}"]
+        self._items = json.dumps(cart)
+        db.session.commit()
+        return {"success": "Item removed."}
 
     def to_safe_dict(self):
         return {
