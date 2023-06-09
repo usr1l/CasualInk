@@ -50,3 +50,14 @@ def checkout_item(artlisting_id):
     res = shopping_cart.checkout_item(artlisting_id)
 
     return res, 201
+
+
+@shoppingcart_routes.route("/remove/<int:artwork_id>", methods=['DELETE'])
+@login_required
+def remove_item(artwork_id):
+    owner_id = current_user.id
+    shopping_cart = ShoppingCart.query.filter(
+        ShoppingCart.owner_id == owner_id).one_or_none()
+    if request.method == 'DELETE':
+        res = shopping_cart.remove_item(artwork_id)
+        return res, 201

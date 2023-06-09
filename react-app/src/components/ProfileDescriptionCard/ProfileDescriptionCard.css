@@ -46,3 +46,8 @@ div.profile-description-card-element-subheading {
 #membership-page-member-cards {
   contain: strict;
 }
+
+.small-icon {
+  height: 47px;
+  width: 47px;
+}

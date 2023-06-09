@@ -52,7 +52,7 @@ export const thunkUploadArtwork = (artworkData) => async (dispatch) => {
 
   if (response.ok) {
     dispatch(actionUploadArtwork(data));
-    dispatch(actionUploadOwnerArtwork(data));
+    dispatch(actionUploadOwnerArtwork(data.id));
   }
   return data;
 };
@@ -73,7 +73,6 @@ export const thunkEditArtwork = ({ formData, artworkId }) => async (dispatch) =>
   const data = await res.json();
   if (res.ok) {
     dispatch(actionEditArtwork(data))
-    dispatch(actionOwnerEditArtwork(data))
   }
   return data;
 };

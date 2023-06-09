@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import InputDiv from '../InputDiv';
 import getCurrTime from '../HelperFns/GetCurrTime';
 import OpenModalButton from '../OpenModalButton';
-import shoppingCart, { thunkCheckoutItem, thunkCheckoutCart, thunkDeleteCart } from '../../store/shoppingcarts';
+import shoppingCart, { thunkCheckoutItem, thunkCheckoutCart, thunkDeleteCart, thunkRemoveCartItem } from '../../store/shoppingcarts';
 import ConfirmDeleteModal from '../ConfirmDeleteModal';
 
 const ShoppingCart = () => {
@@ -25,7 +25,7 @@ const ShoppingCart = () => {
       artworkIds.forEach(artworkId => {
         const art = artworks[ artworkId ];
         const listing = artlistings[ art.artListing ];
-        cartObject.push({ "id": art.id, "title": art.title, "image": art.image, "price": listing.price, "artist": art.artistName, "materials": art.materials })
+        cartObject.push({ "id": art.id, "title": art.title, "image": art.image, "price": listing.price, "artist": art.artistName, "materials": art.materials, "artlisting": listing.id })
       });
       setCartItems(cartObject);
       setIsLoaded(true);
@@ -61,6 +61,14 @@ const ShoppingCart = () => {
       dispatch(thunkCheckoutCart(shoppingCart.id));
       window.alert("Purchase Confirmed");
     };
+  };
+
+  const handleRemoveItem = (id) => {
+    dispatch(thunkRemoveCartItem(id))
+    const newCart = [ ...cartItems ];
+    delete newCart[ id ];
+    console.log(newCart)
+    setCartItems(newCart);
   };
 
   useEffect(() => {
@@ -100,7 +108,7 @@ const ShoppingCart = () => {
                         </div>
                       </div>
                       <div className='item-remove'>
-                        <Button buttonStyle={'btn--remove'} >Remove</Button>
+                        <Button buttonStyle={'btn--remove'} onClick={() => handleRemoveItem(artwork.id)}>Remove</Button>
                       </div>
                     </div>
                   ))}

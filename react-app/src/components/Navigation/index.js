@@ -34,7 +34,7 @@ function Navigation({ isLoaded }) {
 				<div id='navbar-icons-container'>
 					<div id='navbar-shortcuts'>
 						{sessionUser ? (
-							<Link to={`/user/${sessionUser.id}/profile`} className="navbar-bot-navbar-item" >My Collection</Link>
+							<Link to={`/user/${sessionUser.id}/`} className="navbar-bot-navbar-item" >My Collection</Link>
 						) : (
 							<div className="navbar-bot-navbar-item">Welcome to Casual Ink</div>
 						)}
