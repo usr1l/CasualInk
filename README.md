@@ -43,7 +43,7 @@ Link to GitHub Repo: https://github.com/usr1l/CasualInk
 ![This is an image](./README/static/auctionitem.gif)
 
 ### Shopping Cart
-
+![This is an image](./README/static/shopcart.PNG)
 
 ### Reviews
 

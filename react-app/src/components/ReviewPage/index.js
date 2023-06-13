@@ -36,10 +36,8 @@ const ReviewPage = ({ reviewsList, name, user }) => {
   const handleReview = (comment, receiverId) => {
     if (comment.length < 1) return setCommentError('Invalid comment');
     const res = dispatch(thunkCreateReview({ comment, receiverId }));
-    if (res.ok) {
-      setComment('');
-      setCommentError('');
-    };
+    setComment('');
+    setCommentError('');
   };
 
   return (
