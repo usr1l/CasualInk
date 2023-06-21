@@ -4,6 +4,8 @@ import ImageCard from '../ImageCard';
 import "./ArtDisplayCard.css";
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { useModal } from '../../context/Modal';
+import LoginFormModal from '../LoginFormModal';
 
 const ArtDisplayCard = ({
   item,
@@ -12,6 +14,7 @@ const ArtDisplayCard = ({
   imgWrapperStyle,
   cardClass
 }) => {
+  const { setModalContent } = useModal();
   const currUser = useSelector(state => state.session.user)
 
   return (
@@ -36,7 +39,7 @@ const ArtDisplayCard = ({
               </div>
             </Link>
           ) : (
-            <div to={`/artworks/${item.id}`} className={cardWrapperClass ? cardWrapperClass : 'showcard-wrapper'}>
+            <div onClick={() => setModalContent(<LoginFormModal />)} to={`/artworks/${item.id}`} className={cardWrapperClass ? cardWrapperClass : 'showcard-wrapper'}>
               <div className={cardContainerClass ? cardContainerClass : 'showcard-container'}>
                 <ImagePreview
                   imgSrc={item.image}

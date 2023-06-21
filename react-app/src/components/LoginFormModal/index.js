@@ -5,8 +5,10 @@ import { useModal } from "../../context/Modal";
 import Button from "../Button"
 import InputDiv from "../InputDiv";
 import "./LoginForm.css";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 function LoginFormModal() {
+  const history = useHistory();
   const dispatch = useDispatch();
   const [ email, setEmail ] = useState("");
   const [ password, setPassword ] = useState("");
@@ -25,8 +27,8 @@ function LoginFormModal() {
     if (data) {
       setErrors(data);
     } else {
-      window.location.reload();
       closeModal();
+      history.push('/');
     }
   };
 

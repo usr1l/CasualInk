@@ -67,7 +67,6 @@ const ShoppingCart = () => {
     dispatch(thunkRemoveCartItem(id))
     const newCart = [ ...cartItems ];
     delete newCart[ id ];
-    console.log(newCart)
     setCartItems(newCart);
   };
 
