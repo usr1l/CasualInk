@@ -91,7 +91,7 @@ function Navigation({ isLoaded }) {
 				<div style={{
 					"boxSizing": "border-box",
 					"height": "90%",
-					"width": "200px",
+					"width": "180px",
 
 				}}>
 					<div id='links'>

@@ -31,10 +31,17 @@ const PurchaseModal = ({ artlistingId }) => {
     e.preventDefault();
     const errors = validate();
     if (Object.keys(errors).length > 0) return setValidationErrors(errors);
+    setValidationErrors({});
     dispatch(thunkCheckoutItem(artlistingId));
     closeModal();
     window.alert("Purchase Confirmed");
     window.location.reload();
+  };
+
+  const demoData = () => {
+    setCardNumber("3251235234");
+    setExpiryDate("2028-01");
+    setcsv("552")
   };
 
   return (
@@ -88,6 +95,14 @@ const PurchaseModal = ({ artlistingId }) => {
         onClick={handleCheckout}
       >
         Buy Now
+      </Button>
+      <br />
+      <Button
+        buttonSize={"btn--wide"}
+        buttonStyle={"btn--demo"}
+        onClick={demoData}
+      >
+        Enter Demo Data
       </Button>
     </div>
   );
