@@ -7,13 +7,13 @@ const SearchBar = () => {
 
   return (
     <div id="navbar-search-bar">
-      <input
+      {/* <input
         className="search-bar"
         placeholder='Search feature coming soon'
         value={searchContext}
         onChange={e => setSearchContext(e.target.value)}>
       </input>
-      <i id='search-icon' className="fa-solid fa-magnifying-glass"></i>
+      <i id='search-icon' className="fa-solid fa-magnifying-glass"></i> */}
     </div>
   )
 };

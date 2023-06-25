@@ -8,6 +8,7 @@
   box-sizing: border-box;
   transition: 0.5s;
   margin: 0 5px;
+  border-bottom: 1px solid var(--site-gray);
 }
 
 .search-bar {

@@ -5,8 +5,12 @@ import ImagePreview from '../ImagePreview';
 import { useSelector } from 'react-redux';
 import DisplayArtSection from '../DisplayArtSection';
 import { Link } from 'react-router-dom';
+import { useModal } from '../../context/Modal';
+import LoginFormModal from '../LoginFormModal';
 
 const ArtworksPage = () => {
+  const { setModalContent } = useModal();
+
   const allArtworksObj = useSelector(state => state.artworks.allArtworks);
   const currUser = useSelector(state => state.session.user);
   const allArtworks = Object.values(allArtworksObj);
@@ -54,7 +58,7 @@ const ArtworksPage = () => {
               ) : (
                 <>
                   {recentUploads.map(artwork => (
-                    <div key={`${artwork.title}-${artwork.id}`} className='artwork-showcase-container-item'>
+                    <div onClick={() => setModalContent(<LoginFormModal />)} key={`${artwork.title}-${artwork.id}`} className='artwork-showcase-container-item click'>
                       <div className='showcase-image-container'>
                         <ImagePreview
                           imgClassName={"image--artwork-preview"}

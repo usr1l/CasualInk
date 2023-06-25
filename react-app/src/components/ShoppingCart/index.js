@@ -32,6 +32,8 @@ const ShoppingCart = () => {
     };
   }, [ shoppingCart, artworks, artlistings ]);
 
+
+
   const [ isLoaded, setIsLoaded ] = useState(false);
   const [ cartItems, setCartItems ] = useState([]);
   const [ disclaimerBool, setDisclaimerBool ] = useState(false);
@@ -63,11 +65,16 @@ const ShoppingCart = () => {
     };
   };
 
+  const demoData = () => {
+    setCardNumber("3251235234");
+    setExpiryDate("2028-01");
+    setcsv("552")
+  };
+
   const handleRemoveItem = (id) => {
     dispatch(thunkRemoveCartItem(id))
     const newCart = [ ...cartItems ];
     delete newCart[ id ];
-    console.log(newCart)
     setCartItems(newCart);
   };
 
@@ -158,6 +165,13 @@ const ShoppingCart = () => {
                         />
                       </InputDiv>
                     </div>
+                    <Button
+                      buttonSize={"btn--wide"}
+                      buttonStyle={"btn--demo"}
+                      onClick={demoData}
+                    >
+                      Enter Demo Data
+                    </Button>
                   </div>
                   <br />
                   <div className='checkout-page-element'>
@@ -225,6 +239,7 @@ const ShoppingCart = () => {
                       buttonStyle={"btn--demo"}
                       onClick={handleCheckout}
                     >Checkout</Button>
+
                   </div>
                   <br />
                 </div>

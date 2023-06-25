@@ -11,7 +11,7 @@ const DisplayArtSection = ({ items }) => {
       <div className='card-display-section'>
         {items.map(item => (
           <ArtDisplayCard
-            cardWrapperClass={"display-card"}
+            cardWrapperClass={"display-card click"}
             item={item}
           />
         ))}

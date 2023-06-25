@@ -200,14 +200,14 @@ const UploadArtworkForm = () => {
             <InputDiv
               labelStyle={'__label'}
               error={validationErrors.year}
-              label="What year was this created?"
+              label="What year was this created? *"
             >
               <input
                 onChange={(e) => setYear(e.target.value)}
                 className='__input'
                 value={year}
                 type="number"
-                placeholder="Leave blank if unknown"
+                placeholder="Estimate if unknown"
               />
             </InputDiv>
 

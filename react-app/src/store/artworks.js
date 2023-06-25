@@ -1,5 +1,6 @@
 import normalizeFn from "../components/HelperFns/NormalizeFn.js";
 import { actionDeleteOwnerArtwork, actionOwnerEditArtwork, actionUploadOwnerArtwork } from "./session.js";
+import { actionUploadUserArtwork } from "./users.js";
 
 const GET_ARTWORKS = "artworks/GET_ARTWORKS";
 const UPLOAD_ARTWORK = "artworks/UPLOAD_ARTWORK";
@@ -53,6 +54,7 @@ export const thunkUploadArtwork = (artworkData) => async (dispatch) => {
   if (response.ok) {
     dispatch(actionUploadArtwork(data));
     dispatch(actionUploadOwnerArtwork(data.id));
+    dispatch(actionUploadUserArtwork(data.id, data.ownerId));
   }
   return data;
 };
