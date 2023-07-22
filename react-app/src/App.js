@@ -69,9 +69,6 @@ function App() {
           {user && (
             <Route exact path="/user/:userId/" component={ProfilePage} />
           )}
-          {/* {user && (
-            <Route exact path="/user/:userId/" component={ProfilePage} />
-          )} */}
           {user && (
             <Route exact path="/artworks/:artworkId" component={SingleArtworkPage} />
           )}
