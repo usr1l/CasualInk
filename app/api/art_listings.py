@@ -7,13 +7,15 @@ from app.api import validation_errors_to_error_messages
 
 artlisting_routes = Blueprint("artlistings", __name__)
 
-
+# get route: all art listings
 @artlisting_routes.route("/")
 def get_all_artlistings():
     all_listings = ArtListing.query.all()
     return [listing.to_dict() for listing in all_listings], 200
 
-
+# get route: get single art listing
+# put route: edit single art listing
+# delete route: delete single art listing
 @artlisting_routes.route("/<int:artlisting_id>", methods=["GET", "PUT", "DELETE"])
 @login_required
 def get_a_single_listing(artlisting_id):
@@ -43,7 +45,7 @@ def get_a_single_listing(artlisting_id):
 
     return single_listing.to_safe_dict(), 200
 
-
+# post route: create a new art listing
 @artlisting_routes.route("/new", methods=["POST"])
 @login_required
 def create_a_new_listing():
