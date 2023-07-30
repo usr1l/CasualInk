@@ -10,12 +10,15 @@ from app.api import validation_errors_to_error_messages
 auctionlisting_routes = Blueprint("auctionlistings", __name__)
 
 
+# get route: get all auction listings
 @auctionlisting_routes.route("/")
 def get_all_auctionlistings():
     all_listings = AuctionListing.query.all()
     return [listing.to_safe_dict() for listing in all_listings], 200
 
 
+# get: get single auction listing
+# delete: delete single auction listing
 @auctionlisting_routes.route("/<int:auctionlisting_id>", methods=["GET", "DELETE", "PUT"])
 @login_required
 def get_auction_listing(auctionlisting_id):

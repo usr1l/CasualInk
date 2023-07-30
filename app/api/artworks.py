@@ -8,13 +8,15 @@ from app.forms import upload_file_to_AWS, get_unique_filename, remove_file_from_
 
 artwork_routes = Blueprint("artworks", __name__)
 
-
+# get route: get all artworks
 @artwork_routes.route("/")
 def get_all_artworks():
     all_artworks = Artwork.query.all()
     return [artwork.to_dict() for artwork in all_artworks], 200
 
-
+# get route: get single artwork
+# put route: edit single artwork details
+# delete route: delete single artwork
 @artwork_routes.route("/<int:artwork_id>", methods=["GET", "PUT", "DELETE"])
 @login_required
 def single_artwork_route(artwork_id):
@@ -85,7 +87,7 @@ def single_artwork_route(artwork_id):
 
     return single_artwork.to_dict(), 200
 
-
+# post route: upload new artwork
 @artwork_routes.route("/new", methods=["POST"])
 @login_required
 def upload_an_artwork():

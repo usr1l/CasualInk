@@ -20,5 +20,6 @@ class ArtworkForm(FlaskForm):
                             validators=[DataRequired()])
     description = StringField("description", validators=[
                               DataRequired(message="Description required.")])
+    # image file, allowed extensions .jpg, etc
     image = FileField("Image File", validators=[
         FileAllowed(list(ALLOWED_EXTENSIONS))])
