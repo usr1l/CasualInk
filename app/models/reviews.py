@@ -10,6 +10,7 @@ class Review(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     review = db.Column(db.Text, nullable=False)
+    # set a default time
     created_at = db.Column(db.DateTime, nullable=False,
                            default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, nullable=False,
@@ -27,7 +28,9 @@ class Review(db.Model):
         "User", foreign_keys=[reviewer_id], back_populates="reviews"
     )
 
+    # class method, available on class object
     @classmethod
+    # cls is the first for class methods
     def create(cls, items):
         if isinstance(items, list):
             new_items = [
@@ -47,6 +50,7 @@ class Review(db.Model):
             )
             return new_item
 
+
     def to_safe_dict(self):
         return {
             "id": self.id,
@@ -57,5 +61,6 @@ class Review(db.Model):
             "receiver_id": self.receiver_id
         }
 
+    # this displays when we print the instance
     def __repr__(self):
         return f"<Review {self.id} from User {self.reviewer_id} to User {self.receiver_id}>"
