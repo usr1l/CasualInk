@@ -7,6 +7,7 @@ import Button from "../Button";
 import { actionEditAuctionListing } from "../../store/auctionlistings";
 import { actionOwnerEditAuctionListing } from "../../store/session";
 
+// initiate socket outside component
 let socket;
 
 const AuctionBidInput = ({ auctionListing, userBool }) => {
@@ -39,6 +40,7 @@ const AuctionBidInput = ({ auctionListing, userBool }) => {
     socket.emit("auction_bid", { "current_bid": newBidPrice });
   };
 
+  // function for creating a new bid
   const thunkCreateBid = (newBidPrice) => async (dispatch) => {
     const res = await fetch(`/api/auctionlistings/${auctionListing.id}/bid`, {
       method: "POST",
@@ -69,6 +71,7 @@ const AuctionBidInput = ({ auctionListing, userBool }) => {
   }, [ current_bid ]);
 
   useEffect(() => {
+    // production environment safe guard for connect address
     if (process.env.REACT_APP_ENV === "production") socket = io.connect('https://casualink.onrender.com/');
     else socket = io.connect('http://localhost:5000/');
 
