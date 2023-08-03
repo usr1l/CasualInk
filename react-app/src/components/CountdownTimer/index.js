@@ -7,6 +7,7 @@ const CountdownTimer = ({
   label
 }) => {
 
+  // calculate remaining time for timer
   const remainingTime = () => {
     const timeRemaining = new Date(endDate) - new Date();
     const seconds = Math.floor((timeRemaining / 1000) % 60);
@@ -29,6 +30,7 @@ const CountdownTimer = ({
   const [ hours, setHours ] = useState(0);
   const [ days, setDays ] = useState(0);
 
+  // interval set to 990 to account for slight delay
   useEffect(() => {
     const countDown = setInterval(() => {
       const { timeRemaining, seconds, minutes, hours, days } = remainingTime();
@@ -40,6 +42,8 @@ const CountdownTimer = ({
         setDays(days);
       };
 
+      // don't allow negatives
+
       if (timeRemaining <= 0) {
         setTimeRemaining(0);
         setSeconds(0);
@@ -49,6 +53,7 @@ const CountdownTimer = ({
       };
     }, 990);
 
+    // end countdown if time is at 0
     if (timeRemaining <= 0) {
       return () => clearInterval(countDown);
     };
