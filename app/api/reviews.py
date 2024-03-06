@@ -31,14 +31,3 @@ def get_user_reviews(receiver_id):
         db.session.add(new_review)
         db.session.commit()
         return new_review.to_safe_dict(), 201
-        # @review_routes.route("/")
-        # @login_required
-        # def get_all_reviews():
-        #     reviews = Review.query.all()
-        #     return reviews.to_safe_dict()
-
-        # @review_routes.route("/")
-        # @login_required
-        # def get_all_reviews():
-        #     reviews = Review.query.all()
-        #     return reviews.to_safe_dict()
