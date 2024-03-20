@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Button from "../Button";
 import icon from "../static/casual-ink.png"
 import { useDispatch } from "react-redux";
@@ -10,7 +10,7 @@ const ConfirmDeleteModal = ({ itemId, deleteFn, directTo }) => {
 
   const dispatch = useDispatch();
   const history = useHistory();
-  const { closeModal, modalRef, modalContent } = useModal();
+  const { closeModal } = useModal();
 
   const handleCancel = async (e) => {
     e.preventDefault();

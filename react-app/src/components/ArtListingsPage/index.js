@@ -33,7 +33,7 @@ const ArtListingsPage = () => {
     setListings(artlistings);
     setIsLoaded(true);
 
-  }, [ allArtlistings, allAuctionlistings ]);
+  }, [ allArtlistings, allAuctionlistings, allArtworks ]);
 
   return (
     <>

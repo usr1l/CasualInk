@@ -1,3 +1,5 @@
 FLASK_APP=app
 FLASK_ENV=development
 FLASK_DEBUG=True
+SECRET_KEY=DFDSodofansdjfn32r3orAOSDNAOSJND3O3O3
+DATABASE_URL=sqlite:///dev.db
