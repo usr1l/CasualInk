@@ -1,16 +1,16 @@
-# from gevent import monkey
-# monkey.patch_all()
+from gevent import monkey
+monkey.patch_all()
 import os
-from .websocket import socketio
-from .config import Config
-from .seeds import seed_commands
-from .api import user_routes, auth_routes, artwork_routes, artlisting_routes, shoppingcart_routes, auctionlisting_routes, review_routes
-from .models import db, User
-from flask_login import LoginManager
-from flask_wtf.csrf import CSRFProtect, generate_csrf
-from flask_migrate import Migrate
+from flask import Flask, render_template, request, redirect
 from flask_cors import CORS
-from flask import Flask, render_template, request, session, redirect
+from flask_migrate import Migrate
+from flask_wtf.csrf import CSRFProtect, generate_csrf
+from flask_login import LoginManager
+from .models import db, User
+from .api import user_routes, auth_routes, artwork_routes, artlisting_routes, shoppingcart_routes, auctionlisting_routes, review_routes
+from .seeds import seed_commands
+from .config import Config
+from .websocket import socketio
 
 
 app = Flask(__name__, static_folder='../react-app/build', static_url_path='/')
