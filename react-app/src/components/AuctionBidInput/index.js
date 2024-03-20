@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { io } from 'socket.io-client';
 import "./AuctionBidInput.css";
 import InputDiv from "../InputDiv";
 import Button from "../Button";
 import { actionEditAuctionListing } from "../../store/auctionlistings";
-import { actionOwnerEditAuctionListing } from "../../store/session";
 
 // initiate socket outside component
 let socket;
@@ -81,7 +80,7 @@ const AuctionBidInput = ({ auctionListing, userBool }) => {
     return (() => {
       socket.disconnect()
     })
-  }, []);
+  }, [ dispatch ]);
 
   return (
     <>

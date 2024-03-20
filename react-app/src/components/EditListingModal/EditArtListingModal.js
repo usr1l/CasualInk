@@ -13,7 +13,6 @@ import ConfirmDeleteModal from '../ConfirmDeleteModal';
 const EditArtListingModal = ({
   artListingId
 }) => {
-  const history = useHistory();
   const dispatch = useDispatch();
   const [ price, setPrice ] = useState(0);
   const [ amountAvailable, setAmountAvailable ] = useState(0);

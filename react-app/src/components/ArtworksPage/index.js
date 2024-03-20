@@ -32,7 +32,7 @@ const ArtworksPage = () => {
     setRecentUploads(recentList);
     setIsLoaded(true);
 
-  }, [ allArtworksObj ]);
+  }, [ allArtworksObj, allArtworks ]);
 
   return (
     <>

@@ -1,6 +1,5 @@
 import React from 'react';
 import "./AboutPage.css";
-import PageContainer from '../PageContainer';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Button from '../Button';
